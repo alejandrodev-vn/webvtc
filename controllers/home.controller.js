@@ -7,6 +7,8 @@ const GiaoDich = require('../models/giaodich.model')
 const GoiDichVu = require('../models/goidichvu.model')
 const TinhThanh = require('../models/tinhThanh.model')
 const QuanHuyen = require('../models/quanHuyen.model')
+const tinhThanhService = require('../services/tinhthanh.service');
+
 module.exports.index = (req, res, next)=> {
 
     res.send('Hello')
@@ -55,10 +57,20 @@ module.exports.postUsers = async (req, res, next)=> {
 }
 module.exports.getTinhThanh = async (req, res, next)=> {
     try{
-        const tinhthanh = await TinhThanh.find({})
+        const tinhthanh = await tinhThanhService.getAll()
         console.log(tinhthanh)
     }   
     catch(err){
         console.log(err)
     }
+}
+
+module.exports.addTinhThanh = (req, res, next) => {
+    let {name} = req.body;
+    tinhThanhService.addTinhThanh(name);
+}
+
+module.exports.deleteTinhThanh = (req, res, next) => {
+    let {id} = req.body;
+    tinhThanhService.deleteTinhThanhById(id);
 }
