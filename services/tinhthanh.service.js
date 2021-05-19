@@ -1,4 +1,4 @@
-const tinhThanhModel = require('../models/tinhThanh.model')
+const tinhThanhModel = require('../models/provinces.model')
 
 exports.getAll = async () => {
     return await tinhThanhModel.find({});

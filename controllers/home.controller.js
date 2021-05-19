@@ -5,10 +5,9 @@ const CTSDoanhNghiep = require('../models/ctsdoanhnghiep.model')
 const CTS = require('../models/cts.model')
 const GiaoDich = require('../models/giaodich.model')
 const GoiDichVu = require('../models/goidichvu.model')
-const TinhThanh = require('../models/tinhThanh.model')
-const QuanHuyen = require('../models/quanHuyen.model')
 const tinhThanhService = require('../services/tinhthanh.service');
-
+const TinhThanh = require('../models/provinces.model')
+const QuanHuyen = require('../models/districts.model')
 module.exports.index = (req, res, next)=> {
 
     res.send('Hello')
