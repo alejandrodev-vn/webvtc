@@ -4,8 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const homeRouter = require('./routes/home.route');
-// var usersRouter = require('./routes/users');
+
 
 const app = express();
 
@@ -22,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //connection database
 const { connection } = require('./database')
 
+const homeRouter = require('./routes/home.route');
+// var usersRouter = require('./routes/users');
 
 app.use('/', homeRouter);
 
