@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
 
-const GiaoDichCaNhanSchema = new Schema({
-  userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+const CTSCaNhanSchema = new Schema({
   email: {type: String},
   soDienThoai: {type: String},
   hoTenNguoiDK: {type: String, required: true},
@@ -18,17 +17,22 @@ const GiaoDichCaNhanSchema = new Schema({
   chucVu: {type: String},
   tinhThanh: {type: String, required: true},
   quanHuyen: {type: String, required: true},
+  goiCTSId:{type:mongoose.Schema.Types.ObjectId, required: true},
+  thoiHan:{type: Date, required: true},
+  giaCuoc:{type: Number},
+  nguoiThucHien:{type: String, required: true},
+  fileHoSo:{type:String}
 
 }, {timestamps: true});
 // a setter
-GiaoDichCaNhanSchema.path('hoTenNguoiDK').set(function (input) {
+CTSCaNhanSchema.path('hoTenNguoiDK').set(function (input) {
   return input.charAt(0).toUpperCase() + input.slice(1);
 });
-GiaoDichCaNhanSchema.path('noiCapCMT').set(function (input) {
+CTSCaNhanSchema.path('noiCapCMT').set(function (input) {
   return input.charAt(0).toUpperCase() + input.slice(1);
 });
-GiaoDichCaNhanSchema.path('tenCongTy').set(function (input) {
+CTSCaNhanSchema.path('tenCongTy').set(function (input) {
   return input.charAt(0).toUpperCase() + input.slice(1);
 });
 
-module.exports = mongoose.model('GiaoDichCaNhan', GiaoDichCaNhanSchema);
+module.exports = mongoose.model('CTSCaNhan', CTSCaNhanSchema);
