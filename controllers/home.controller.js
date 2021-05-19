@@ -12,64 +12,98 @@ module.exports.index = (req, res, next)=> {
 
     res.send('Hello')
 }
-module.exports.getUsers = async (req, res, next)=> {
-    try{
-        const users = await User.find({})
-        console.log(users)
-    }   
-    catch(err){
-        console.log(err)
-    }
-}
-module.exports.postUsers = async (req, res, next)=> {
-    try{
-        const bcrypt = require("bcrypt");      
-        var salt = bcrypt.genSaltSync(10);
-        const hoTen = req.body.hoTen
-        const email = req.body.email
-        const username = req.body.username
-        const password = req.body.password
-        const soDienThoai = req.body.soDienThoai
-        const gender = req.body.gender
+// module.exports.getUsers = async (req, res, next)=> {
+//     try{
+//         const users = await User.find({})
+//         console.log(users)
+//     }   
+//     catch(err){
+//         console.log(err)
+//     }
+// }
+// module.exports.postUsers = async (req, res, next)=> {
+//     try{
+//         const bcrypt = require("bcrypt");      
+//         var salt = bcrypt.genSaltSync(10);
+//         const hoTen = req.body.hoTen
+//         const email = req.body.email
+//         const username = req.body.username
+//         const password = req.body.password
+//         const soDienThoai = req.body.soDienThoai
+//         const gender = req.body.gender
     
-        const passwordHashed = bcrypt.hashSync(password, salt);
-        try{
-            let newUser = new User({
-                hoTen,
-                email,
-                username,
-                password:passwordHashed,
-                soDienThoai,
-                gender,
-                avatar:'avatar',
-            })
-            await newUser.save();
-        }
-        catch(err){
-            console.log(err)
-        }
-       res.status(200).redirect('/users')
-    }
-    catch(err){
-        console.log(err)
-    }
-}
-module.exports.getTinhThanh = async (req, res, next)=> {
+//         const passwordHashed = bcrypt.hashSync(password, salt);
+//         try{
+//             let newUser = new User({
+//                 hoTen,
+//                 email,
+//                 username,
+//                 password:passwordHashed,
+//                 soDienThoai,
+//                 gender,
+//                 avatar:'avatar',
+//             })
+//             await newUser.save();
+//         }
+//         catch(err){
+//             console.log(err)
+//         }
+//        res.status(200).redirect('/users')
+//     }
+//     catch(err){
+//         console.log(err)
+//     }
+// }
+module.exports.getAllTinhThanh = async (req, res, next)=> {
     try{
         const tinhthanh = await tinhThanhService.getAll()
-        console.log(tinhthanh)
+        res.json(tinhthanh)
     }   
     catch(err){
         console.log(err)
     }
 }
+module.exports.getTinhThanhById = async (req, res, next)=> {
+    try{
+        const id = req.params.id
+        const tinhThanh = await tinhThanhService.getTinhThanhById(id)
+        res.json(tinhThanh)
+    }   
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.addTinhThanh = async (req, res, next) => {
+    try{
+        let { name } = req.body;
+        await tinhThanhService.addTinhThanh(name);
+        res.redirect('/provinces')
+    }
+    catch(err){
+        console.log(err)
+    }
 
-module.exports.addTinhThanh = (req, res, next) => {
-    let {name} = req.body;
-    tinhThanhService.addTinhThanh(name);
+}
+module.exports.updateTinhThanh = async (req, res, next) => {
+    try{
+        const id = req.params.id;
+        let values = req.body;
+        await tinhThanhService.updateTinhThanhById(id, values);
+        res.redirect('/provinces')
+    }
+    catch(err){
+        console.log(err)
+    }
+
 }
 
-module.exports.deleteTinhThanh = (req, res, next) => {
-    let {id} = req.body;
-    tinhThanhService.deleteTinhThanhById(id);
+module.exports.deleteTinhThanh = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await tinhThanhService.deleteTinhThanhById(id);
+        res.redirect('/provinces')
+    } catch (err) {
+        console.log(err)
+    }
+ 
 }
