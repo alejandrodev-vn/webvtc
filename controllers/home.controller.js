@@ -53,3 +53,12 @@ module.exports.postUsers = async (req, res, next)=> {
         console.log(err)
     }
 }
+module.exports.getTinhThanh = async (req, res, next)=> {
+    try{
+        const tinhthanh = await TinhThanh.find({})
+        console.log(tinhthanh)
+    }   
+    catch(err){
+        console.log(err)
+    }
+}
