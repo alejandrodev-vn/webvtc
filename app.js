@@ -19,6 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//connection database
+const { connection } = require('./database')
+
 
 app.use('/', homeRouter);
 
