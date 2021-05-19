@@ -1,12 +1,18 @@
 const User = require('../models/users.model')
-const Province = require('../models/provincesModel')
+const LoaiCTS = require('../models/loaicts.model')
+const CTSCaNhan = require('../models/ctscanhan.model')
+const CTSDoanhNghiep = require('../models/ctsdoanhnghiep.model')
+const CTS = require('../models/cts.model')
+const GiaoDich = require('../models/giaodich.model')
+const GoiDichVu = require('../models/goidichvu.model')
+const TinhThanh = require('../models/tinhThanh.model')
+const QuanHuyen = require('../models/quanHuyen.model')
 module.exports.index = (req, res, next)=> {
 
     res.send('Hello')
 }
 module.exports.getUsers = async (req, res, next)=> {
     try{
-        const { connection } = require('../database')
         const users = await User.find({})
         console.log(users)
     }   
@@ -47,10 +53,10 @@ module.exports.postUsers = async (req, res, next)=> {
         console.log(err)
     }
 }
-module.exports.getProvinces = async (req, res, next)=> {
+module.exports.getTinhThanh = async (req, res, next)=> {
     try{
-        const provinces = await Province.find({})
-        console.log(provinces)
+        const tinhthanh = await TinhThanh.find({})
+        console.log(tinhthanh)
     }   
     catch(err){
         console.log(err)
