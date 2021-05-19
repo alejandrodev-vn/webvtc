@@ -1,4 +1,5 @@
 const User = require('../models/users.model')
+const Province = require('../models/provincesModel')
 module.exports.index = (req, res, next)=> {
 
     res.send('Hello')
@@ -42,6 +43,15 @@ module.exports.postUsers = async (req, res, next)=> {
         }
        res.status(200).redirect('/users')
     }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.getProvinces = async (req, res, next)=> {
+    try{
+        const provinces = await Province.find({})
+        console.log(provinces)
+    }   
     catch(err){
         console.log(err)
     }
