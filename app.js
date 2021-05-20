@@ -22,9 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 const { connection } = require('./database')
 
 const homeRouter = require('./routes/home.route');
-// var usersRouter = require('./routes/users');
+const tinhThanhAPI = require('./routes/api/tinhthanh.api');
 
 app.use('/', homeRouter);
+app.use('/api', tinhThanhAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
