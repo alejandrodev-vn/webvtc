@@ -69,6 +69,7 @@ module.exports.updateTinhThanh = async (req, res, next) => {
     try{
         const id = req.params.id;
         let values = req.body;
+       
         await tinhThanhService.updateTinhThanhById(id, values);
         res.redirect('/provinces')
     }

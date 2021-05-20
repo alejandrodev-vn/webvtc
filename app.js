@@ -24,7 +24,7 @@ const { connection } = require('./database')
 const homeRouter = require('./routes/home.route');
 const tinhThanhAPI = require('./routes/api/tinhthanh.api');
 
-app.use('/', homeRouter);
+app.use(homeRouter);
 app.use('/api', tinhThanhAPI);
 
 // catch 404 and forward to error handler
