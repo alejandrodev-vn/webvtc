@@ -54,25 +54,6 @@ module.exports.index = (req, res, next)=> {
 //         console.log(err)
 //     }
 // }
-module.exports.getAllTinhThanh = async (req, res, next)=> {
-    try{
-        const tinhthanh = await tinhThanhService.getAll()
-        res.json(tinhthanh)
-    }   
-    catch(err){
-        console.log(err)
-    }
-}
-module.exports.getTinhThanhById = async (req, res, next)=> {
-    try{
-        const id = req.params.id
-        const tinhThanh = await tinhThanhService.getTinhThanhById(id)
-        res.json(tinhThanh)
-    }   
-    catch(err){
-        console.log(err)
-    }
-}
 module.exports.addTinhThanh = async (req, res, next) => {
     try{
         let { name } = req.body;
