@@ -21,7 +21,8 @@ const CTSCaNhanSchema = new Schema({
   thoiHan:{type: Date, required: true},
   giaCuoc:{type: Number},
   nguoiThucHien:{type: String, required: true},
-  fileHoSo:{type:String}
+  fileHoSo:{type:String},
+  trangThai:{type: Number, required: true, default:0}
 
 }, {timestamps: true});
 // a setter
