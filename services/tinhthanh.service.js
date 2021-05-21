@@ -41,30 +41,20 @@ exports.addTinhThanh = async (name) => {
 
 }
 exports.updateTinhThanhById = async (id, values) => {
-    try{
-        return await tinhThanhModel.findByIdAndUpdate({_id:id},values)
-        
-     
-    }
-    catch(err){
-        console.log(err)
-    }
-
+    await tinhThanhModel.findByIdAndUpdate({_id:id},values, function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
 }
 
 
 exports.deleteTinhThanhById = async (id) => {
-    try{
-        await tinhThanhModel.findByIdAndDelete({_id: id}, (err) => {
-            if(err){
-                console.log('Delete fail!');
-            }else{
-                console.log('Delete success!');
-            }
-        })
-    }
-    catch(err){
-        console.log(err)
-    }
-  
+    await tinhThanhModel.findByIdAndDelete({_id: id}, (err) => {
+        if(err){
+            console.log('Delete fail!');
+        }else{
+            console.log('Delete success!');
+        }
+    })
 }

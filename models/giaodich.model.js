@@ -6,12 +6,7 @@ const GiaoDichSchema = new Schema({
   userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   tenGD: {type: String, required: true},
   loaiCTSId: {type: mongoose.Schema.Types.ObjectId, ref:'LoaiCTS'},
-  username: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  soDienThoai: {type: String, required: true},
-  gender: {type: String, required: true},
-  avatar: {type: String},
-  role: {type: String, default:0}
+  goiDichVuId: {type: mongoose.Schema.Types.ObjectId, ref:'GoiDich'}
 
 }, {timestamps: true});
 // a setter

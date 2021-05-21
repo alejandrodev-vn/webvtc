@@ -21,12 +21,12 @@ exports.getgoidichvuById = async (id) => {
     }
 }
 
-exports.addgoidichvu = async (name, gia) => {
+exports.addgoidichvu = async (name, gia, time) => {
     try{
         let dichvuMoi = new goidichvuModel({
             tenGoiDichVu: name,
-
-
+            gia: gia,
+            thoiHan: time   
             //gia: gia
         })
     
