@@ -4,8 +4,6 @@ const CTSCaNhan = require('../models/ctscanhan.model')
 const CTSDoanhNghiep = require('../models/ctsdoanhnghiep.model')
 const CTS = require('../models/cts.model')
 const GiaoDich = require('../models/giaodich.model')
-const GoiDichVu = require('../models/goidichvu.model')
-const tinhThanhService = require('../services/tinhthanh.service');
 const TinhThanh = require('../models/provinces.model')
 const QuanHuyen = require('../models/districts.model')
 module.exports.index = (req, res, next)=> {
@@ -54,38 +52,3 @@ module.exports.index = (req, res, next)=> {
 //         console.log(err)
 //     }
 // }
-module.exports.addTinhThanh = async (req, res, next) => {
-    try{
-        let { name } = req.body;
-        await tinhThanhService.addTinhThanh(name);
-        res.redirect('/provinces')
-    }
-    catch(err){
-        console.log(err)
-    }
-
-}
-module.exports.updateTinhThanh = async (req, res, next) => {
-    try{
-        const id = req.params.id;
-        let values = req.body;
-       
-        await tinhThanhService.updateTinhThanhById(id, values);
-        res.redirect('/provinces')
-    }
-    catch(err){
-        console.log(err)
-    }
-
-}
-
-module.exports.deleteTinhThanh = async (req, res, next) => {
-    try {
-        const id = req.params.id;
-        await tinhThanhService.deleteTinhThanhById(id);
-        res.redirect('/provinces')
-    } catch (err) {
-        console.log(err)
-    }
- 
-}
