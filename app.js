@@ -23,9 +23,11 @@ const { connection } = require('./database')
 
 const homeRouter = require('./routes/home.route');
 const tinhThanhAPI = require('./routes/api/tinhthanh.api');
+const goidichvuAPI = require('./routes/api/goidichvu.api');
 
 app.use('/', homeRouter);
 app.use('/api', tinhThanhAPI);
+app.use('/api', goidichvuAPI)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const GoiDichVuSchema = new Schema({
   tenGoiDichVu:{type: String, required: true},
-  gia:{type: Number, required: true},
+  
 
 });
 // a setter

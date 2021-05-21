@@ -9,6 +9,8 @@ router.get('/', controllerHome.index);
 // router.post('/users', controllerHome.postUsers);
 // router.get('/provinces', controllerHome.getAllTinhThanh);
 router.post('/provinces/add', controllerHome.addTinhThanh);
+router.post('/goidichvu/add', controllerHome.addgoidichvu);
+
 router.put('/provinces/edit/:id', controllerHome.updateTinhThanh)
 router.delete('/provinces/delete/:id', controllerHome.deleteTinhThanh)
 // router.get('/provinces/:id', controllerHome.getTinhThanhById);

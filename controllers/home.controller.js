@@ -6,6 +6,7 @@ const CTS = require('../models/cts.model')
 const GiaoDich = require('../models/giaodich.model')
 const GoiDichVu = require('../models/goidichvu.model')
 const tinhThanhService = require('../services/tinhthanh.service');
+const goidichvuService = require('../services/goidichvu.service');
 const TinhThanh = require('../models/provinces.model')
 const QuanHuyen = require('../models/districts.model')
 module.exports.index = (req, res, next)=> {
@@ -59,6 +60,17 @@ module.exports.addTinhThanh = async (req, res, next) => {
         let { name } = req.body;
         await tinhThanhService.addTinhThanh(name);
         res.redirect('/provinces')
+    }
+    catch(err){
+        console.log(err)
+    }
+
+}
+module.exports.addgoidichvu = async (req, res, next) => {
+    try{
+        let { name } = req.body;
+        await goidichvuService.addgoidichvu(name);
+        res.redirect('/goidichvu')
     }
     catch(err){
         console.log(err)
