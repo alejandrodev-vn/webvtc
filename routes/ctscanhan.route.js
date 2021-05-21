@@ -6,9 +6,9 @@ const controllerCTSCaNhan = require('../controllers/ctscanhan.controller')
 
 
 // router.get('/ctscanhan', controllerCTSCaNhan.getAll);
-router.post('/digital-certificate/personal/add', validateCTSCaNhan(), controllerCTSCaNhan.addCTSCaNhan);
-router.put('/digital-certificate/personal/edit/:id', validateCTSCaNhan(), controllerCTSCaNhan.editCTSCaNhan);
-router.delete('/digital-certificate/personal/delete/:id', validateCTSCaNhan(), controllerCTSCaNhan.deleteCTSCaNhan);
+router.post('/digital-certificate/personal/add', validateCTSCaNhan(), controllerCTSCaNhan.add);
+router.put('/digital-certificate/personal/edit/:id', validateCTSCaNhan(), controllerCTSCaNhan.update);
+router.delete('/digital-certificate/personal/delete/:id', controllerCTSCaNhan.delete);
 
 
 module.exports = router;

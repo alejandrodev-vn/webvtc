@@ -8,7 +8,7 @@ const CTSCaNhanSchema = new Schema({
   hoTenNguoiDK: {type: String, required: true},
   soCMT: {type: String, required: true},
   noiCapCMT: {type: String, required: true},
-  ngayCapCMT: {type: String, required: true},
+  ngayCapCMT: {type: Date, required: true},
   diaChi: {type: String, required: true},
   MSTCaNhan: {type: String},
   MSTCongTy: {type: String},

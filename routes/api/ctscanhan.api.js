@@ -15,7 +15,7 @@ router.get('/digital-certificate/personal', async (req, res, next) => {
 router.get('/digital-certificate/personal/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
-        const ctscanhan = await CTSCaNhanService.getCTSCaNhanById(id)
+        const ctscanhan = await CTSCaNhanService.getById(id)
         res.json(ctscanhan)
     }   
     catch(err){

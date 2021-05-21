@@ -25,17 +25,21 @@ const homeRouter = require('./routes/home.route');
 const goidichvuRouter = require('./routes/goidichvu.route');
 const provincesRouter = require('./routes/provinces.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
-const tinhThanhAPI = require('./routes/api/provinces.api');
 const goidichvuAPI = require('./routes/api/goidichvu.api');
+const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
+const tinhThanhAPI = require('./routes/api/provinces.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
+const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 
 app.use(homeRouter);
 app.use(provincesRouter);
 app.use(goidichvuRouter);
 app.use(CTSCaNhanRouter)
+app.use(CTSDoanhNghiepRouter)
 app.use('/api', tinhThanhAPI);
 app.use('/api', goidichvuAPI)
 app.use('/api', CTSCaNhanAPI);
+app.use('/api', CTSDoanhNghiepAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

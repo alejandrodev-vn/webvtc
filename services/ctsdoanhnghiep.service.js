@@ -1,29 +1,29 @@
-const CTSCaNhanModel = require('../models/ctscanhan.model')
+const CTSDoanhNghiepModel = require('../models/ctsdoanhnghiep.model')
 
 exports.getAll = async () => {
     try{
-        const CTSCaNhan = await CTSCaNhanModel.find({});
-        return CTSCaNhan
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({});
+        return CTSDoanhNghiep
     }
     catch(err){
         console.log(err)
     }
 }
 
-exports.getById = async (id) => {
+exports.getById= async (id) => {
     try{
-        const CTSCaNhan = await CTSCaNhanModel.findById(id);
-        return CTSCaNhan
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.findById(id);
+        return CTSDoanhNghiep
     }
     catch(err){
         console.log(err)
     }
 }
 
-exports.createNew = async (values) => {
+exports.createNew= async (values) => {
     try{
-        let NewCTSCaNhan = new CTSCaNhanModel(values)
-        return NewCTSCaNhan.save((err) => {
+        let NewCTSDoanhNghiep = new CTSDoanhNghiepModel(values)
+        return NewCTSDoanhNghiep.save((err) => {
             if(err){
                 console.log('Add CTS failed! b:' + err);
             }else{
@@ -37,7 +37,7 @@ exports.createNew = async (values) => {
 
 }
 exports.update = async (id, values) => {
-    await CTSCaNhanModel.findByIdAndUpdate({_id:id},values, function(err){
+    await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
             console.log('Update failed!')
         }else console.log('Update success!')
@@ -46,7 +46,7 @@ exports.update = async (id, values) => {
 
 
 exports.delete = async (id) => {
-    await CTSCaNhanModel.findByIdAndDelete({_id: id}, (err) => {
+    await CTSDoanhNghiepModel.findByIdAndDelete({_id: id}, (err) => {
         if(err){
             console.log('Delete fail!');
         }else{
