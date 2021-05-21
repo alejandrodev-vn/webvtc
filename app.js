@@ -23,13 +23,17 @@ const { connection } = require('./database')
 
 const homeRouter = require('./routes/home.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
+const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const tinhThanhAPI = require('./routes/api/tinhthanh.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
+const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 
 app.use(homeRouter);
 app.use(CTSCaNhanRouter)
+app.use(CTSDoanhNghiepRouter)
 app.use('/api', tinhThanhAPI);
 app.use('/api', CTSCaNhanAPI);
+app.use('/api', CTSDoanhNghiepAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
