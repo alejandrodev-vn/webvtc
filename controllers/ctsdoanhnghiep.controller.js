@@ -1,4 +1,4 @@
-const CTSCaNhanService = require('../services/ctscanhan.service')
+const CTSDoanhNghiepService = require('../services/ctsdoanhnghiep.service')
 const {validationResult} = require('express-validator');
 
 module.exports.add = async (req, res, next) => {
@@ -9,8 +9,8 @@ module.exports.add = async (req, res, next) => {
         }
         let values = req.body;
 
-        await CTSCaNhanService.createNew(values);
-        res.redirect('/digital-certificate/personal')
+        await CTSDoanhNghiepService.createNew(values);
+        res.redirect('/digital-certificate/company')
     }
     catch(err){
         console.log(err)
@@ -25,8 +25,8 @@ module.exports.update = async (req, res, next) => {
         const { id } = req.params
         let values = req.body;
 
-        await CTSCaNhanService.update(id, values);
-        res.redirect('/digital-certificate/personal')
+        await CTSDoanhNghiepService.update(id, values);
+        res.redirect('/digital-certificate/company')
     }
     catch(err){
         console.log(err)
@@ -36,8 +36,8 @@ module.exports.delete = async (req, res, next) => {
     try{
         const { id } = req.params
 
-        await CTSCaNhanService.delete(id);
-        res.redirect('/digital-certificate/personal')
+        await CTSDoanhNghiepService.delete(id);
+        res.redirect('/digital-certificate/company')
     }
     catch(err){
         console.log(err)
