@@ -86,3 +86,23 @@ module.exports.changePassword = async (id, inputValues) =>{
         }else console.log('Update success!')
     })
 }
+module.exports.login = async (values) =>{
+    try{
+        const { username ,password } = values
+        const user = await usersModel.findOne({username:username})
+        if(!user){
+            return {success: false, error:'User not found'}
+        }else {
+            const bcrypt = require("bcrypt");        
+            const password_db = user.password
+            const passwordCompared = bcrypt.compareSync(password, password_db)
+            if(!passwordCompared){
+                return {success: false, error:'Password error !!!'}
+            }else {
+                return user
+            }
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
