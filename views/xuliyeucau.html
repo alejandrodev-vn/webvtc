@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        DOCUMENT
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/stylesheets/xuliyeucau.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="header">
+            <img src="../public/images/logo.png" alt="">
+        </div>
+        <div class="scrollmenu">
+            <a href="./xuliyeucau.html">Xử Lí Yêu Cầu</a>
+            <a href="#news">Báo Cáo Thống Kê</a>
+            <a href="./quanlitaikhoan.html">Quản Lí Tài Khoản</a>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">Profile
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="#">Đăng Nhập</a>
+                    <a href="#">Đăng Xuất</a>
+                </div>
+            </div>
+        </div>
+        <div class="scrollmenu2">
+            <a href="#home">Sửa Thông Tin</a>
+            <a href="#news">Phê Duyệt YC Đại Lí</a>
+            <a href="#contact">Phê Duyệt YC Gia Hạn</a>
+            <a href="#about">Quản Lí CTS Server</a>
+        </div>
+    </div>
+    <div class="nm-fm">
+        <h2>Xử Lý Phiếu Yêu Cầu</h2>
+    </div>
+    <form action="/action_page.php">
+        <div id="form">
+            <div class="info-user">
+                <div>
+                    <h3>Thông tin khách hàng</h3>
+                </div>
+                <div id="wrt-info">
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Tên Giao Dịch</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Mã Số Thuế</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Giấy phép ĐKKD</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Ngày cấp</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="if-fm mn">
+                        <span>
+                            Địa chỉ 
+                        </span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Email Giao Dịch</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Số Điện Thoại</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="if-fm mn">
+                        <span>
+                            Thuộc Tổ CHức
+                        </span>
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    <div id="form" style="margin-top: 1vw;">
+        <div class="info-user">
+            <div>
+                <h3>Đại Diện Pháp Lý</h3>
+            </div>
+            <div id="wrt-info">
+                <div class="if-fm">
+                    <div class="if-fm ck">
+                        <span>Họ Và Tên</span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm ck">
+                        <span>Chức Vụ</span>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="if-fm">
+                    <div class="if-fm ck">
+                        <span>Số CMTND/HC</span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm ck">
+                        <span>Ngày cấp</span>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                           Nơi Cấp
+                        </span>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="if-fm">
+                <div class="if-fm ck">
+                    <span>Email</span>
+                    <input type="text">
+                </div>
+                <div class="if-fm ck">
+                    <span>Số Điện Thoại</span>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="form" style="margin-top: 1vw;">
+        <div class="info-user">
+            <div>
+                <h3>Thông Tin Phiếu Yêu Cầu</h3>
+            </div>
+            <div id="wrt-info">
+                <div class="if-fm">
+                    <div class="if-fm ck">
+                        <span>Mã Phiếu Yêu Cầu</span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm ck">
+                        <span>Loại Yêu Cầu</span>
+                        <select name="" id="" style="width: 34vw;">
+                           <option value=""></option>
+                       </select>
+                    </div>
+                </div>
+                <div class="if-fm">
+                    <div class="if-fm ck">
+                        <span>Loại Chứng Thư</span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm ck">
+                        <span>Thời Hạn Sử Dụng</span>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                           Ý Kiến Đại Lý
+                        </span>
+                    <input type="text">
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                           Ý Kiến VINA
+                        </span>
+                    <input type="text">
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                          Giấy Phép DKKD - CMND
+                        </span>
+                    <input type="text">
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                           Phiếu Đăng Kí Hợp Đồng
+                        </span>
+                    <input type="text">
+                </div>
+                <div class="if-fm mn">
+                    <span>
+                          BBBG/Giấy Xác Nhận
+                        </span>
+                    <input type="text">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="register">
+        <div class="rg-btn">
+            <input type="submit" value="Từ Chối Duyệt" class="btn">
+            <input type="submit" value="Duyệt" class="btn">
+            <input type="submit" value="Đóng" class="btn">
+        </div>
+    </div>
+</body>
+<script>
+    /* When the user clicks on the button, 
+                                                                                                                                                                                                                                                                            toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+</html>

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session')
 
 
 
@@ -24,24 +25,36 @@ const { connection } = require('./database')
 const homeRouter = require('./routes/home.route');
 const goiDichVuRouter = require('./routes/goidichvu.route');
 const provincesRouter = require('./routes/provinces.route');
+const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
 //api
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
 const tinhThanhAPI = require('./routes/api/provinces.api');
+const districtsAPI = require('./routes/api/districts.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 const usersAPI = require('./routes/api/users.api');
 
+app.use(
+  session({
+  secret: process.env.KEY,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge:600000, secure:false }
+}));
+
 app.use(homeRouter);
 app.use(provincesRouter);
+app.use(districtsRouter);
+app.use(CTSDoanhNghiepRouter);
 app.use(goiDichVuRouter);
 app.use(CTSCaNhanRouter)
 app.use(CTSDoanhNghiepRouter)
 app.use(usersRouter);
-
 //api
+app.use('/api', districtsAPI);
 app.use('/api', usersAPI);
 app.use('/api', tinhThanhAPI);
 app.use('/api', goiDichVuAPI)
@@ -52,7 +65,6 @@ app.use('/api', CTSDoanhNghiepAPI);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
