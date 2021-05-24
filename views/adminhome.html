@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/stylesheets/adminhome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+
+<body style="margin: 0.5%;">
+    <div class="box">
+        <div class="header">
+            <img src="../public/images/logo.png" alt="">
+        </div>
+        <div class="scrollmenu">
+            <a href="./xuliyeucau.html">Xử Lí Yêu Cầu</a>
+            <a href="#news">Báo Cáo Thống Kê</a>
+            <a href="./quanlitaikhoan.html">Quản Lí Tài Khoản</a>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">Profile
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="#">Đăng Nhập</a>
+                    <a href="#">Đăng Xuất</a>
+                </div>
+            </div>
+        </div>
+        <div class="scrollmenu2">
+            <a href="#home">Sửa Thông Tin</a>
+            <a href="#news">Phê Duyệt YC Đại Lí</a>
+            <a href="#contact">Phê Duyệt YC Gia Hạn</a>
+            <a href="#about">Quản Lí CTS Server</a>
+        </div>
+    </div>
+
+    <form action="/action_page.php" style="margin: 5px;padding:25px;margin-top: 2vw;">
+        <div id="form">
+            <div class="info-user">
+                <div>
+                    <h3>Thông tin tìm kiếm</h3>
+                </div>
+                <div id="wrt-info">
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Mã Phiếu Yêu Cầu</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Trạng Thái</span>
+                            <select name="" id="" style="width: 176px;">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Mã Khách Hàng</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Tên Giao Dịch</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Số CMTND/HC</span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Giấy Phép DKKD</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-user">
+                <div>
+                    <h3></h3>
+                </div>
+                <div id="wrt-info">
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Tỉnh/Thành Phố</span>
+                            <select name="" id="" style="width: 176px;">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Loại Yêu Cầu</span>
+                            <select name="" id="" style="width: 176px;">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="if-fm">
+                        <div class="if-fm ck">
+                            <span>Ngày Yêu Cầu : Từ Ngày</span>
+                            <input type="date">
+                        </div>
+                        <div class="if-fm ck">
+                            <span>Đến Ngày</span>
+                            <input type="date">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+        <input type="text" placeholder="Tim kiem..." name="search2">
+    </div>
+
+</body>
+<script>
+    /* When the user clicks on the button, 
+                                                                                                                                                                                                                                                            toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>
+
+</html>
