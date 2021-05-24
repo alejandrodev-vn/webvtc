@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const goidichvuService = require('../../services/goidichvu.service')
+const goiDichVuService = require('../../services/goidichvu.service')
 
-router.get('/goidichvu', async (req, res, next) => {
+router.get('/services', async (req, res, next) => {
     try{
-        const goidichvu = await goidichvuService.getAll()
-        res.json(goidichvu)
+        const goiDichVu = await goiDichVuService.getAll()
+        res.json(goiDichVu)
     }   
     catch(err){
         console.log(err)
     }
 });
 
-router.get('/goidichvu/:id', async (req, res, next)=> {
+router.get('/services/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
-        const goidichvu = await goidichvuService.getgoidichvuById(id)
-        res.json(goidichvu)
+        const goiDichVu = await goiDichVuService.getById(id)
+        res.json(goiDichVu)
     }   
     catch(err){
         console.log(err)

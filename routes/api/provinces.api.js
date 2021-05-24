@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const tinhThanhService = require('../../services/tinhthanh.service')
+const tinhThanhService = require('../../services/provinces.service')
 
 router.get('/provinces', async (req, res, next) => {
     try{
@@ -15,7 +15,7 @@ router.get('/provinces', async (req, res, next) => {
 router.get('/provinces/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
-        const tinhThanh = await tinhThanhService.getTinhThanhById(id)
+        const tinhThanh = await tinhThanhService.getById(id)
         res.json(tinhThanh)
     }   
     catch(err){

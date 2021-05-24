@@ -1,10 +1,10 @@
-const tinhThanhService = require('../services/tinhthanh.service');
+const tinhThanhService = require('../services/provinces.service');
 
 
-module.exports.addTinhThanh = async (req, res, next) => {
+module.exports.add = async (req, res, next) => {
     try{
         let { name } = req.body;
-        await tinhThanhService.addTinhThanh(name);
+        await tinhThanhService.createNew(name);
         res.redirect('/provinces')
     }
     catch(err){
@@ -13,12 +13,12 @@ module.exports.addTinhThanh = async (req, res, next) => {
 
 }
 
-module.exports.updateTinhThanh = async (req, res, next) => {
+module.exports.update = async (req, res, next) => {
     try{
         const id = req.params.id;
         let values = req.body;
        
-        await tinhThanhService.updateTinhThanhById(id, values);
+        await tinhThanhService.update(id, values);
         res.redirect('/provinces')
     }
     catch(err){
@@ -27,10 +27,10 @@ module.exports.updateTinhThanh = async (req, res, next) => {
 
 }
 
-module.exports.deleteTinhThanh = async (req, res, next) => {
+module.exports.delete = async (req, res, next) => {
     try {
         const id = req.params.id;
-        await tinhThanhService.deleteTinhThanhById(id);
+        await tinhThanhService.delete(id);
         res.redirect('/provinces')
     } catch (err) {
         console.log(err)
