@@ -42,7 +42,7 @@ app.use(
   secret: process.env.KEY,
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge:600000, secure:false }
+  cookie: { secure:false }
 }));
 
 app.use(homeRouter);
