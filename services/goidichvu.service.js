@@ -1,36 +1,35 @@
 const { log } = require('debug');
-const goidichvuModel = require('../models/goidichvu.model')
+const goiDichVuModel = require('../models/goidichvu.model')
 
 exports.getAll = async () => {
     try{
-        const goidichvu = await goidichvuModel.find({});
-        return goidichvu
+        const goiDichVu = await goiDichVuModel.find({});
+        return goiDichVu
     }
     catch(err){
         console.log(err)
     }
 }
 
-exports.getgoidichvuById = async (id) => {
+exports.getById = async (id) => {
     try{
-        const goidichvu = await goidichvuModel.findById(id);
-        return goidichvu
+        const goiDichVu = await goiDichVuModel.findById(id);
+        return goiDichVu
     }
     catch(err){
         console.log(err)
     }
 }
 
-exports.addgoidichvu = async (name, gia, time) => {
+exports.createNew = async (name, gia, time) => {
     try{
-        let dichvuMoi = new goidichvuModel({
+        let dichVuMoi = new goiDichVuModel({
             tenGoiDichVu: name,
             gia: gia,
             thoiHan: time   
-            //gia: gia
         })
     
-        return await dichvuMoi.save((err) => {
+        return await dichVuMoi.save((err) => {
             if(err){
                 console.log('Add gói dịch vụ fail!');
             }else{
@@ -43,10 +42,13 @@ exports.addgoidichvu = async (name, gia, time) => {
     }
 
 }
-exports.updategoidichvuById = async (id, values) => {
+exports.update = async (id, values) => {
     try{
-        return await goidichvuModel.findByIdAndUpdate({_id:id},values)
-        
+        return await goiDichVuModel.findByIdAndUpdate({_id:id},values, function(err){
+            if(err){
+                console.log('Update failed!')
+            }else console.log('Update success!')
+        })        
      
     }
     catch(err){
@@ -56,9 +58,9 @@ exports.updategoidichvuById = async (id, values) => {
 }
 
 
-exports.deletegoidichvuById = async (id) => {
+exports.delete = async (id) => {
     try{
-        await goidichvuModel.findByIdAndDelete({_id: id}, (err) => {
+        return await goiDichVuModel.findByIdAndDelete({_id: id}, (err) => {
             if(err){
                 console.log('Delete fail!');
             }else{

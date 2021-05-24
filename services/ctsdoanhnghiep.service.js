@@ -37,7 +37,7 @@ exports.createNew= async (values) => {
 
 }
 exports.update = async (id, values) => {
-    await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
+    return await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
             console.log('Update failed!')
         }else console.log('Update success!')
@@ -46,7 +46,7 @@ exports.update = async (id, values) => {
 
 
 exports.delete = async (id) => {
-    await CTSDoanhNghiepModel.findByIdAndDelete({_id: id}, (err) => {
+    return await CTSDoanhNghiepModel.findByIdAndDelete({_id: id}, (err) => {
         if(err){
             console.log('Delete fail!');
         }else{
