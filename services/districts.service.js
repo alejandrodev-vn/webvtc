@@ -11,7 +11,7 @@ exports.getAll = async () => {
     }
 }
 
-exports.getdistrictsById = async (id) => {
+exports.getById = async (id) => {
     try{
         const districts = await districtsModel.findById(id);
         return districts
@@ -21,7 +21,7 @@ exports.getdistrictsById = async (id) => {
     }
 }
 
-exports.adddistricts = async (name,idprovinces) => {
+exports.creatNew = async (name,idprovinces) => {
     try{
         let districtsMoi = new districtsModel({
             TenQuanHuyen: name,
@@ -41,7 +41,7 @@ exports.adddistricts = async (name,idprovinces) => {
     }
 
 }
-exports.updatedistrictsById = async (id, values) => {
+exports.update = async (id, values) => {
     await districtsModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
             console.log('Update failed!')
@@ -50,7 +50,7 @@ exports.updatedistrictsById = async (id, values) => {
 }
 
 
-exports.deletedistrictsById = async (id) => {
+exports.delete = async (id) => {
     await districtsModel.findByIdAndDelete({_id: id}, (err) => {
         if(err){
             console.log('Delete fail!');
