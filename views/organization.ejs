@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="stylesheets/organization.css">
+    </head>
+
+    <body>
+        <div class="nm-fm">
+            <h2>CẤP CHỨNG THƯ SỐ CHO TỔ CHỨC/ DOANH NGHIỆP</h2>
+        </div>
+        <form action="/action_page.php">
+            <div id="form">
+                <div class="info-user">
+                    <div>
+                        <h3>Thông tin khách hàng</h3>
+                    </div>
+                    <div id="wrt-info">
+                        <div class="if-fm mn" >
+                            <span>
+                                Tên giao dịch *
+                            </span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Giấy phép ĐKKD</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Ngày cấp</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Mã số thuế</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Công ty mẹ</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Cam kết không hủy</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Mật khẩu</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm mn">
+                            <span>
+                                Địa chỉ *
+                            </span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Tỉnh/ Thành Phố</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Quận/ Huyện</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Email giao dịch</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Số điện thoại</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-user">
+                    <div>
+                        <h3>Thông tin chủ doanh nghiệp (Giám đốc Chủ Tich HĐQT)</h3>
+                    </div>
+                    <div id="wrt-info">
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Họ và tên</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Chức vụ</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Số CMTND/HC*</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Ngày cấp</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="if-fm mn">
+                            <span>
+                                Nơi cấp *
+                            </span>
+                            <input type="text">
+                        </div>
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <span>Email</span>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm ck">
+                                <span>Số điện thoại</span>
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yeucau">
+                <div>
+                    <h3>Yêu cầu cấp chứng thư số</h3>
+                </div>
+                <div id="wrt-info">
+                    <div class="if-fm mn" >
+                        <span>
+                            Gói chứng thư
+                        </span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm mn">
+                        <span>
+                           Gía cước
+                        </span>
+                        <input type="text">
+                    </div>
+                    <div class="if-fm mn">
+                        <span>
+                           Người thực hiện
+                        </span>
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="hoso">
+                <div>
+                    <h3>Hồ sơ khách hàng</h3>
+                </div>
+                <div id="wrt-info">
+                    <div class="if-fm mn" >
+                        <span>
+                            Chọn tệp: 
+                        </span>
+                        <form enctype="multipart/form-data" method="POST">
+                            <input type="file" name="myfile" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            </form>
+        </div>
+        <div id="register">
+            <div class="rg-btn">
+                <input type="submit" value="Ghi lại" class="btn">
+                <input type="submit" value="Ghi lại & gửi" class="btn">
+                <input type="submit" value="Đóng" class="btn">
+            </div>
+        </div>
+
+    </body>
+
+</html>
