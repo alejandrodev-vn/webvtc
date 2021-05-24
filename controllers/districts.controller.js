@@ -1,11 +1,10 @@
 const districtsService = require('../services/districts.service');
 
 
-module.exports.adddistricts = async (req, res, next) => {
+module.exports.add = async (req, res, next) => {
     try{
-        let { name } = req.body;
-        let { idprovinces } = req.body;
-        await districtsService.adddistricts(name, idprovinces);
+        let { name , idprovinces } = req.body;
+        await districtsService.creatNew(name, idprovinces);
         res.redirect('/districts')
     }
     catch(err){
@@ -14,12 +13,12 @@ module.exports.adddistricts = async (req, res, next) => {
 
 }
 
-module.exports.updatedistricts = async (req, res, next) => {
+module.exports.update = async (req, res, next) => {
     try{
         const id = req.params.id;
         let values = req.body;
        
-        await districtsService.updatedistrictsById(id, values);
+        await districtsService.update(id, values);
         res.redirect('/districts')
     }
     catch(err){
@@ -28,10 +27,10 @@ module.exports.updatedistricts = async (req, res, next) => {
 
 }
 
-module.exports.deletedistricts = async (req, res, next) => {
+module.exports.delete = async (req, res, next) => {
     try {
         const id = req.params.id;
-        await districtsService.deletedistrictsById(id);
+        await districtsService.delete(id);
         res.redirect('/districts')
     } catch (err) {
         console.log(err)
