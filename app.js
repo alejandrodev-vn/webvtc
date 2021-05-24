@@ -40,10 +40,9 @@ const usersAPI = require('./routes/api/users.api');
 app.use(
   session({
   secret: process.env.KEY,
-  name:'token',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge:600000 }
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge:600000, secure:false }
 }));
 
 app.use(homeRouter);
