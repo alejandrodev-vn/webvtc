@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session')
 
 
 
@@ -34,6 +35,15 @@ const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 const usersAPI = require('./routes/api/users.api');
 
+app.use(
+  session({
+  secret: process.env.KEY,
+  name:'token',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge:600000 }
+}));
+
 app.use(homeRouter);
 app.use(provincesRouter);
 app.use(goiDichVuRouter);
@@ -52,7 +62,6 @@ app.use('/api', CTSDoanhNghiepAPI);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
