@@ -44,30 +44,20 @@ exports.addgoidichvu = async (name, gia, time) => {
 
 }
 exports.updategoidichvuById = async (id, values) => {
-    try{
-        return await goidichvuModel.findByIdAndUpdate({_id:id},values)
-        
-     
-    }
-    catch(err){
-        console.log(err)
-    }
-
+    await goidichvuModel.findByIdAndUpdate({_id:id},values, function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
 }
 
 
 exports.deletegoidichvuById = async (id) => {
-    try{
-        await goidichvuModel.findByIdAndDelete({_id: id}, (err) => {
-            if(err){
-                console.log('Delete fail!');
-            }else{
-                console.log('Delete success!');
-            }
-        })
-    }
-    catch(err){
-        console.log(err)
-    }
-  
+    await goidichvuModel.findByIdAndDelete({_id: id}, (err) => {
+        if(err){
+            console.log('Delete fail!');
+        }else{
+            console.log('Delete success!');
+        }
+    })
 }
