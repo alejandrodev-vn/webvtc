@@ -22,27 +22,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 const { connection } = require('./database')
 
 const homeRouter = require('./routes/home.route');
-const goidichvuRouter = require('./routes/goidichvu.route');
+const goiDichVuRouter = require('./routes/goidichvu.route');
 const provincesRouter = require('./routes/provinces.route');
 const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
-const goidichvuAPI = require('./routes/api/goidichvu.api');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
+const usersRouter = require('./routes/users.route')
+//api
+const goiDichVuAPI = require('./routes/api/goidichvu.api');
 const tinhThanhAPI = require('./routes/api/provinces.api');
 const districtsAPI = require('./routes/api/districts.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
+const usersAPI = require('./routes/api/users.api');
 
 app.use(homeRouter);
 app.use(provincesRouter);
-app.use(goidichvuRouter);
-app.use(CTSCaNhanRouter);
 app.use(districtsRouter);
-
 app.use(CTSDoanhNghiepRouter);
-app.use('/api', tinhThanhAPI);
+app.use(goiDichVuRouter);
+app.use(CTSCaNhanRouter)
+app.use(CTSDoanhNghiepRouter)
+app.use(usersRouter);
+//api
 app.use('/api', districtsAPI);
-app.use('/api', goidichvuAPI);
+app.use('/api', usersAPI);
+app.use('/api', tinhThanhAPI);
+app.use('/api', goiDichVuAPI)
 app.use('/api', CTSCaNhanAPI);
 app.use('/api', CTSDoanhNghiepAPI);
 
