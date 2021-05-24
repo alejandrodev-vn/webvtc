@@ -12,7 +12,7 @@ const CTSDoanhNghiepSchema = new Schema({
   camKet: {type: Boolean},
   diaChi: {type: String, required: true},
   tinhThanh: {type: mongoose.Schema.Types.ObjectId, required: true},
-  quanHuyen: {type: mongoose.Schema.Types.ObjectId, required: true},
+  quanHuyen: {type:String, required: true},
   soDienThoaiCongTy: {type: String},
   emailGD: {type: String},
   hoTenChuDoanhNghiep: {type: String, required: true},
