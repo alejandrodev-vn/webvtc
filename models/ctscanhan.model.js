@@ -19,8 +19,9 @@ const CTSCaNhanSchema = new Schema({
   quanHuyen: {type: mongoose.Schema.Types.ObjectId, required: true},
   goiCTSId:{type:mongoose.Schema.Types.ObjectId, required: true},
   thoiHan:{type: String, required: true},
-  giaCuoc:{type: Number},
+  gia:{type: Number},
   nguoiThucHien:{type: String, required: true},
+  ngayTao:{type: Date, required: true},
   fileHoSo:{type:String},
   trangThai:{type: Number, required: true, default:0}
 

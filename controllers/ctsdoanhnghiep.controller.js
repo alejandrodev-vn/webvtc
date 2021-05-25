@@ -10,7 +10,7 @@ module.exports.add = async (req, res, next) => {
         let values = req.body;
 
         await CTSDoanhNghiepService.createNew(values);
-        res.redirect('/digital-certificate/company')
+        res.redirect('/digital-certificate/organization')
     }
     catch(err){
         console.log(err)
@@ -26,7 +26,7 @@ module.exports.update = async (req, res, next) => {
         let values = req.body;
 
         await CTSDoanhNghiepService.update(id, values);
-        res.redirect('/digital-certificate/company')
+        res.redirect('/digital-certificate/organization')
     }
     catch(err){
         console.log(err)
@@ -37,7 +37,7 @@ module.exports.delete = async (req, res, next) => {
         const { id } = req.params
 
         await CTSDoanhNghiepService.delete(id);
-        res.redirect('/digital-certificate/company')
+        res.redirect('/digital-certificate/organization')
     }
     catch(err){
         console.log(err)

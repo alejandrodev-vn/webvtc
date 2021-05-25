@@ -1,12 +1,155 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <%- include('header') %>
-  </head>
-  <body>
- 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('header') %> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/organization.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="box">
+                <%- include('menuDaiLy')  %> 
+            </div>
+            <div class="container">
+                <div class="row">
+                  <div class="nm-fm col-md-12">
+                    <h2 class="title">TẠO YÊU CẦU CẤP MỚI CHỨNG THƯ SỐ</h2>
+                    <div class="choose-certificate">
+                        <a href="/digital-certificate/personal" class="btn btn-primary">Cá nhân</a>
+                        <a href="/digital-certificate/organization"  class="btn btn-primary">Tổ chức</a>
+                    </div>
+                </div>
+                    <form action="" style="margin: 5px;padding:25px;margin-top: 2vw;">
+                        <div id="form">
+                            <div class="info-user">
+                                <div>
+                                    <h3>Tìm kiếm nhanh</h3>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Mã Phiếu Yêu Cầu</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Trạng Thái</label>
+                                            <select name="" id="" style="width: 176px;">
+                                                <option value="0">Dự thảo</option>
+                                                <option value="1">Chờ duyệt lần 1</option>
+                                                <option value="2">Chờ duyệt lần 2</option>
+                                                <option value="3">Đã duyệt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Mã Khách Hàng</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Tên Giao Dịch</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Số CMTND/HC</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Giấy Phép DKKD</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-user">
+                                <div>
+                                    <h3></h3>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Tỉnh/Thành Phố</label>
+                                            <select name="" id="" style="width: 176px;">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Loại Yêu Cầu</label>
+                                            <select name="" id="" style="width: 176px;">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Ngày Yêu Cầu : Từ Ngày</label>
+                                            <input type="date">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Đến Ngày</label>
+                                            <input type="date">
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+                        <input type="text" placeholder="Tim kiem..." name="search2">
+                    </div>
+                </div>
+            </div>
+            <h3 class="pl-3">Chờ phê duyệt</h3>
+
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col"><input type="checkbox" name="select" id=""></th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">Mã yêu cầu</th>
+                    <th scope="col">Tên giao dịch</th>
+                    <th scope="col">GPKD/ CMND</th>
+                    <th scope="col">MST</th>
+                    <th scope="col">Gói CTS</th>
+                    <th scope="col">Thời hạn (năm)</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Thời hạn (năm)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        
+
+    </body>
+
 </html>

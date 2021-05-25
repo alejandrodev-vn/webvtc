@@ -22,5 +22,29 @@ router.get('/users/:id', async (req, res, next)=> {
         console.log(err)
     }
 });
+//for mobile
+router.post('/users/login', async (req, res, next) => {
+    try{
+        let values = req.body;
+        
+        const user = await usersService.login(values);
+        if(user.error === 'User not found'){
+            res.status(404).json(user.error)
+        }else if(user.error === 'Password error !!!'){
+            res.status(401).json(user.error)
+        }else{
+            const jwt = require('jsonwebtoken')
+            let token = jwt.sign({ username: user.username }, process.env.KEY, (err, token) => {
+                if (err) {
+                    res.json({ success:false, error:'Login failed'})
+                }else{
+                    res.json(token);
+                }
+            }) 
+        }
+    }catch(err){
+        console.log(err)
+    }
+})
 
 module.exports = router;
