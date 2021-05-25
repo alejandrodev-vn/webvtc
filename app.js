@@ -24,13 +24,17 @@ const { connection } = require('./database')
 const homeRouter = require('./routes/home.route');
 const goiDichVuRouter = require('./routes/goidichvu.route');
 const provincesRouter = require('./routes/provinces.route');
+const giaoDichRouter = require('./routes/giaodich.route');
+const loaiCTSRouter = require('./routes/loaicts.route');
 const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
 //api
+const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
 const tinhThanhAPI = require('./routes/api/provinces.api');
+const loaiCTSAPI = require('./routes/api/loaicts.api');
 const districtsAPI = require('./routes/api/districts.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
@@ -38,6 +42,8 @@ const usersAPI = require('./routes/api/users.api');
 
 app.use(homeRouter);
 app.use(provincesRouter);
+app.use(giaoDichRouter);
+app.use(loaiCTSRouter);
 app.use(districtsRouter);
 app.use(CTSDoanhNghiepRouter);
 app.use(goiDichVuRouter);
@@ -48,7 +54,9 @@ app.use(usersRouter);
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);
 app.use('/api', tinhThanhAPI);
-app.use('/api', goiDichVuAPI)
+app.use('/api', loaiCTSAPI);
+app.use('/api', giaoDichAPI);
+app.use('/api', goiDichVuAPI);
 app.use('/api', CTSCaNhanAPI);
 app.use('/api', CTSDoanhNghiepAPI);
 
