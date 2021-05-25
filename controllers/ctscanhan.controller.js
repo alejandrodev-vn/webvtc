@@ -13,10 +13,10 @@ module.exports.add = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ error: errors.array() })
         }
         let values = req.body;
-        console.log(req.body)
+        values.gia =Number(req.body.gia.replace(/[^0-9]/g,''))
         await CTSCaNhanService.createNew(values);
         res.redirect('/digital-certificate/personal')
     }
