@@ -12,7 +12,7 @@ module.exports.validateCTSCaNhan = () => {
       check('quanHuyen', 'Quận Huyện không được trống').not().isEmpty(),
       check('goiCTSId', 'Vui lòng chọn gói giao dịch').not().isEmpty(),
       check('thoiHan', 'Thời hạn sử dụng không được trống').not().isEmpty(),
-      check('giaCuoc', 'Giá cước không được trống').not().isEmpty(),
+      check('gia', 'Giá cước không được trống').not().isEmpty(),
       check('nguoiThucHien', 'Người thực hiện không được trống').not().isEmpty(),
     ]; 
   }

@@ -26,6 +26,7 @@ const CTSDoanhNghiepSchema = new Schema({
   thoiHan:{type: String, required: true},
   giaCuoc:{type: Number},
   nguoiThucHien:{type: String, required: true},
+  ngayTao:{type: Date, required: true},
   fileHoSo:{type:String},
   trangThai:{type: Number, required: true, default:0}
 }, {timestamps: true});
