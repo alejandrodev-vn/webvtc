@@ -29,7 +29,6 @@ label {
 #form {
     display: flex;
     font-size: 12px;
-    border: solid 0.25px #ccc;
     padding: 5px;
     width: 80%;
     margin: auto;
