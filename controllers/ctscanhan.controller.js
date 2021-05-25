@@ -18,7 +18,7 @@ module.exports.add = async (req, res, next) => {
         let values = req.body;
         values.gia =Number(req.body.gia.replace(/[^0-9]/g,''))
         await CTSCaNhanService.createNew(values);
-        res.redirect('/digital-certificate/personal')
+        res.redirect('/')
     }
     catch(err){
         console.log(err)
