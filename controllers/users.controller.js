@@ -1,16 +1,10 @@
 const usersService = require('../services/users.service');
 
-
-module.exports.test = (req, res, next)=> {
-    // try{
-    //    const users = await usersService.getAll()
-    //    res.json(users)
-    // }
-    // catch(err){
-    //     console.log(err)
-    // }
-    res.render('index')
+module.exports.signup = (req, res, next)=> {
+    res.render('signup')
+    
 }
+
 
 module.exports.add = async (req, res, next)=> {
     try{
