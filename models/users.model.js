@@ -10,7 +10,8 @@ const UserSchema = new Schema({
   soDienThoai: {type: String, required: true},
   gender: {type: String, required: true},
   avatar: {type: String},
-  role: {type: String, default:0}
+  role: {type: String, default:0},
+  isActive: {type: Boolean, default:true}
 
 }, {timestamps: true});
 // a setter
