@@ -5,17 +5,21 @@ body {
     padding: 0;
     box-sizing: border-box;
     max-width: 1170px;
-    background-color:#eee;
+    background-color: #eee;
 }
-.wrapper{
-    background-color:#fff;
+
+.wrapper {
+    background-color: #fff;
 }
+
 .info-user {
     padding: 10px 15px;
 }
-form{
+
+form {
     padding: 10px;
 }
+
 .header {
     width: auto;
     height: auto;
@@ -30,18 +34,21 @@ div.scrollmenu {
     background-color: #E8AB1C;
     overflow: auto;
     white-space: nowrap;
-    display:flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
-a{
+
+a {
     text-decoration: none
 }
-.left{
+
+.left {
     display: flex;
 }
-.right{
+
+.right {
     display: flex;
 }
+
 div.scrollmenu a {
     margin: 1.2vw;
     line-height: 50px;
@@ -49,7 +56,7 @@ div.scrollmenu a {
     text-decoration: none;
     padding: 0 10px;
     border-radius: 10px;
-    transition:0.2s
+    transition: 0.2s
 }
 
 div.scrollmenu a:hover {
@@ -195,10 +202,12 @@ input[type=date] {
     border: 2px solid #58257b;
     border-radius: 4px;
 }
-select{
+
+select {
     width: 140px;
-    height:30px
+    height: 30px
 }
+
 * {
     box-sizing: border-box;
 }
@@ -219,16 +228,19 @@ label {
     display: block;
 }
 
-.title{
+.title {
     font-size: 30px !important;
     margin: 10px auto;
 }
-h3{
-    color:#ffa100;
+
+h3 {
+    color: #ffa100;
 }
-.note{
+
+.note {
     color: red;
 }
+
 #form {
     font-size: 12px;
     padding: 5px;
@@ -252,12 +264,14 @@ h3{
 .table thead th {
     vertical-align: middle;
 }
+
 .table td {
     vertical-align: middle;
     font-size: 15px;
     padding: 0.25rem;
 }
-table{
+
+table {
     max-width: 95%;
     margin: 0 auto;
     margin-bottom: 15px;
@@ -272,12 +286,10 @@ table{
     display: inline-flex;
     align-items: center;
 }
-label{
+
+label {
     font-size: 14px;
-
 }
-
-
 
 .yeucau {
     border: solid 0.25px #ccc;
