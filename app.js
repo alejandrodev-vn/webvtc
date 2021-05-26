@@ -44,8 +44,8 @@ const usersAPI = require('./routes/api/users.api');
 app.use(
   session({
   secret: process.env.KEY,
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: { secure:false }
 }));
 
