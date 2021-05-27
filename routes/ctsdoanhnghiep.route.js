@@ -6,9 +6,7 @@ const controllerCTSDoanhNghiep = require('../controllers/ctsdoanhnghiep.controll
 
 
 // router.get('/ctscanhan', controllerCTSCaNhan.getAll);
-router.get('/digital-certificate/organization', function(req, res, next) {
-    res.render('organization', { title: 'CTS Doanh nghiệp' });
-});
+router.get('/digital-certificate/organization', controllerCTSDoanhNghiep.organization);
 router.post('/digital-certificate/organization/add', validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.add);
 router.put('/digital-certificate/organization/edit/:id', validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.update);
 router.delete('/digital-certificate/organization/delete/:id', controllerCTSDoanhNghiep.delete);
