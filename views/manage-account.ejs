@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Quản lý tài khoản
+    </title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <%- include('header') %>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/addmi-add.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                
+            </div>
+        </div>
+        <div class="box">
+            <%- include('menuAdmin') %>
+        </div>
+           <!-- The Modal -->
+           <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+              <div class="modal-content">
+                
+                  <div class="form-area">
+                      <div class="top-modal">
+                        <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Thêm mới tài khoản người dùng</h2>
+                        <span class="close">&times;</span>
+                      </div>
+                      <form action="users/add" method="POST" id="formNewAccount">
+                        <div class="form-left">
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Họ và tên: </label>
+                                <input type="text" name="hoTen" id="hoTen" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Tên đăng nhập: </label>
+                              <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Mật khẩu: </label>
+                              <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Nhập lại mật khẩu: </label>
+                              <input type="password" id="passwordAgain" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Loại tài khoản: </label>
+                              <select name="role">
+                                  <option value="0">Admin cấp 1</option>
+                                  <option value="1">Admin cấp 2</option>
+                                  <option value="2">Đại lý cấp 1</option>
+                                  <option value="3">Đại lý cấp 2</option>
+                              </select>
+                            </div>
+                            <small>Chú thích: (<span style="color: red;">*</span>) là bắt buộc</small>
+                            <button type="submit" class="btn-primary">Ghi lại</button>
+                            <button type="reset" class="btn-secondary">Reset</button>   
+                        </div>
+                        <div class="form-right">
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Địa chỉ: </label>
+                                <input type="diaChi" name="diaChi" id="diaChi" class="form-control">
+                              </div>
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Trạng thái: </label>
+                                <select name="isActive">
+                                    <option value="0">Không hoạt động</option>
+                                    <option value="1" selected>Hoạt động</option>
+                                </select>
+                              </div>
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Tỉnh/TP: </label>
+                                <select name="tinhThanhId" class="tinhThanh">
+
+                                </select>
+                              </div>
+                        </div>
+                 
+  
+                          <input type="hidden" id="id" value=0>
+                      
+                    
+                      </form>
+                  </div>
+              </div>
+  
+            </div>
+        <form action="/action_page.php" style="margin-top: 1vw;">
+            <div id="form">
+                <div class="info-user">
+                    <div>
+                        <h3>Thông Tin Tìm Kiếm</h3>
+                    </div>
+                    <div id="wrt-info">
+
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <label>Tên đăng nhập</label>
+                                <input type="text" name="username">
+                            </div>
+                            <div class="if-fm ck">
+                                <label>Tỉnh/TP</label>
+                                <select name="tinhThanhFilter" class="tinhThanh" style="width: 70%;">
+                                </select>
+                            </div>
+                        </div>
+        
+              
+                        <div class="if-fm">
+                            <div class="if-fm ck">
+                                <label>Loại Tài Khoản</label>
+                                <select  style="width: 70%;">
+                              <option value="0">Tất Cả</option>
+                              <option value="0">Admin Cấp 1</option>
+                              <option value="1">Admin Cấp 2</option>
+                              <option value="2">Đại Lý Cấp 1</option>
+                              <option value="3">Đại Lý Cấp 2</option>
+                            </select>
+                        </div>
+                        <div class="if-fm ck">
+                            <label>Đại Lý</label>
+                            <select name="roleFilter" style="width: 70%;">
+                            <option value="2">Đại Lý Cấp 1</option>
+                            <option value="3">Đại Lý Cấp 2</option>
+                        </select>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="register">
+                    <div class="rg-btn">
+                        <input type="submit" value="Tìm Kiếm" class="btn btn-primary">
+                        <input type="button" value="Thêm Mới" class="btn btn-primary btn-modal">
+                    </div>
+                </div>
+        </form>
+
+        <div id="form">
+            <div class="info-user">
+                <div>
+                    <h3>Kết Quả Tìm Kiếm</h3>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+<script src="../javascripts/modalBox.js"></script>
+<script src="../javascripts/init.js"></script>
+
+<!-- <div class="if-fm">
+    <div class="if-fm ck">
+        <span>Họ Và Tên</span>
+        <input type="text">
+    </div>
+    <div class="if-fm ck">
+        <span>Trạng Thái</span>
+        <select name="" id="" style="width: 34vw;">
+      <option value="">Hoạt Động</option>
+      <option value="">Hoạt Động</option>
+      <option value="">Không Hoạt Động</option>
+    </select>
+    </div>
+</div>
+<div class="if-fm">
+    <div class="if-fm ck">
+        <span>Tên Đăng Nhập</span>
+        <input type="text">
+    </div>
+    <div class="if-fm ck">
+        <span>Mã Tỉnh/Thành Phố</span>
+        <input type="text">
+    </div>
+</div>
+<div class="if-fm">
+    <div class="if-fm ck">
+        <span>Mật Khẩu</span>
+        <input type="text">
+    </div>
+    <div class="if-fm ck">
+        <span>Nhập Lại Mật Khẩu</span>
+        <input type="text">
+    </div>
+</div>
+<div class="if-fm">
+    <div class="if-fm ck">
+        <span>Loại Tài Khoản</span>
+        <select name="" id="" >
+      <option value="">Tất Cả</option>
+      <option value="">Admin Cấp 1</option>
+      <option value="">Admin Cấp 2</option>
+      <option value="">Đại Lý Cấp 1</option>
+      <option value="">Đại Lý Cấp 2</option>
+    </select>
+    </div>
+    <div class="if-fm ck">
+        <span>Đại Lý</span>
+        <select name="" id="" style="width: 34vw;">
+      <option value="">Đại Lý Cấp 1</option>
+      <option value="">Đại Lý Cấp 2</option>
+    </select>
+    </div>
+</div>
+<div class="if-fm mn">
+    <span>
+       Địa Chỉ
+    </span>
+    <input type="text">
+</div>
+</div> -->

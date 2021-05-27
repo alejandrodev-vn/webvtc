@@ -10,6 +10,7 @@ body {
 
 .wrapper {
     background-color: #fff;
+    padding-bottom:20px;
 }
 
 .info-user {
@@ -34,9 +35,13 @@ div.scrollmenu {
     background-color: #E8AB1C;
     overflow: auto;
     white-space: nowrap;
+    display: flex;
     justify-content: space-between;
 }
-
+thead.thead-default {
+    background: #eee;
+    border-bottom: 3px solid;
+}
 a {
     text-decoration: none
 }
