@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Ngày cấp</label>
-                                    <input type="text">
+                                    <input type="date">
                                 </div>
                             </div>
                             <div class="if-fm">
@@ -71,7 +71,8 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Tỉnh/ Thành Phố</label>
-                                    <input type="text">
+                                    <select name="tinhThanh" id="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                    </select>
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Quận/ Huyện</label>
@@ -113,7 +114,7 @@
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Ngày cấp</label>
-                                    <input type="text">
+                                    <input type="date">
                                 </div>
                             </div>
                             <div class="if-fm mn">
@@ -142,16 +143,18 @@
                     </div>
                     <div id="wrt-info">
                         <div class="if-fm mn" >
-                            <label>
-                                Gói chứng thư
-                            </label>
-                            <input type="text">
+                            <label>Gói chứng thư</label>
+                            <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
+                                <option value="">Đăng ký CTS 1 năm</option>
+                            </select>
+                            <label>Thời hạn</label>
+                            <input type="text" name="" id="">
                         </div>
                         <div class="if-fm mn">
                             <label>
                                Giá cước
                             </label>
-                            <input type="text">
+                            <input type="text" id="gia">
                         </div>
                         <div class="if-fm mn">
                             <label>
@@ -185,7 +188,7 @@
                 <div class="rg-btn">
                     <input type="submit" value="Ghi lại" class="btn btn-primary">
                     <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
-                    <input type="submit" value="Đóng" class="btn btn-primary">
+                    <input type="submit" value="Đóng" class="btn-primary dong">
                 </div>
             </div>
         </div>

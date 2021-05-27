@@ -89,10 +89,17 @@ label {
     text-align: center;
 }
 
-#register div input {
-    width: 20%;
-    height: 8%;
+#register div .btn {
+    width: 16%;
     margin: 5px;
+}
+
+#register div .dong {
+    width: 8%;
+    border-radius: 5px;
+    background-color: rgb(114, 113, 113);
+    border: solid 0.5px rgb(114, 113, 113);
+    padding: 5px;
 }
 
 #register .rg-btn {
