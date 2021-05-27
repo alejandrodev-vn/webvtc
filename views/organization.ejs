@@ -199,8 +199,7 @@
             <div class="nm-fm col-md-12">
                 <h2 class="title">CẤP CHỨNG THƯ SỐ CHO TỔ CHỨC/ DOANH NGHIỆP</h2>
             </div>
-
-            <form action="/digital-certificate/organzation/add" method="POST">
+            <form action="/digital-certificate/organization/add" method="POST">
                 <div id="form">
                     <div class="info-user">
                         <div>
@@ -217,10 +216,10 @@
                                     <label>Giấy phép ĐKKD</label>
                                     <input type="text">
                                 </div>
-                                <div class="if-fm ck" style=" width:70% ">
+                                <div class="if-fm ck">
                                     <label>Ngày cấp</label>
-                                    <input  type="text" name="ngayCapCMT">
-                                </div>
+                                    <input type="date" name="ngayCapCMT">
+                            </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
@@ -316,8 +315,22 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <% if(typeof errorsDN != 'undefined') { 
+
+                            errorsDN.forEach(msg => {    
+                        %> 
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= msg.msg %>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                   
+                        <% }) }%>
+
+
                     </div>
-                    
                 </div>
                 <div class="yeucau">
                     <div>
@@ -364,17 +377,14 @@
                             </label>
                             <form enctype="multipart/form-data" method="POST">
                                 <input type="file" name="myfile" />
-                            </form>
                         </div>
                     </div>
                 </div>
-
                 <div id="register">
                     <div class="rg-btn">
                         <input type="submit" value="Ghi lại" class="btn btn-primary">
                         <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
-                        <a href="/" class="btn
-                                                        btn-secondary">Đóng</a>
+                        <a href="/" class="btn btn-secondary">Đóng</a>
                     </div>
                 </div>
             </form>
