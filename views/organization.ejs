@@ -1,18 +1,18 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            <%= title %>
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <%- include('header') %> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../stylesheets/organization.css">
-        <link rel="stylesheet" href="../stylesheets/adminhome.css">
-    </head>
 
-    <body>
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('header') %>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/personal.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+</head>
+<!-- <body>
         <div class="wrapper">
             <div class="box">
                 <%- include('menuDaiLy')  %> 
@@ -189,9 +189,204 @@
                 </div>
             </div>
         </div>
-        
+         -->
+<div class="wrapper">
+    <div class="box">
+        <%- include('menuDaiLy') %>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="nm-fm col-md-12">
+                <h2 class="title">CẤP CHỨNG THƯ SỐ CHO TỔ CHỨC/ DOANH NGHIỆP</h2>
+            </div>
 
-    </body>
-    <script src="../javascripts/init.js"></script>
+            <form action="/digital-certificate/organzation/add" method="POST">
+                <div id="form">
+                    <div class="info-user">
+                        <div>
+                            <h3>Thông tin khách hàng</h3>
+                        </div>
+                        <div id="wrt-info">
+                            <div class="if-fm mn" >
+                                <label for="">Tên giao dịch <span>*</span> </label>
+                               
+                                <input type="text">
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Giấy phép ĐKKD</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck" style=" width:70% ">
+                                    <label>Ngày cấp</label>
+                                    <input  type="text" name="ngayCapCMT">
+                                </div>
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Mã số thuế</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Công ty mẹ</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Cam kết không hủy</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Mật khẩu</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="if-fm mn">
+                                <label>
+                                    Địa chỉ *
+                                </label>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Tỉnh/ Thành Phố</label>
+                                    <select name="tinhThanh" id="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                       
+                                    </select>
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Quận/ Huyện</label>
+                                    <select name="quanHuyen" id="quanHuyen">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Email giao dịch</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Số điện thoại</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="info-user">
+                        <div>
+                            <h3>Thông tin chủ doanh nghiệp (Giám đốc Chủ Tich HĐQT)</h3>
+                        </div>
+                        <div id="wrt-info">
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Họ và tên</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Chức vụ</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Số CMTND/HC*</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                        <label>Ngày cấp</label>
+                                        <input type="date" name="ngayCapCMT">
+                                </div>
+                            </div>
+                            <div class="if-fm mn">
+                                <label>
+                                    Nơi cấp *
+                                </label>
+                                <input type="text">
+                            </div>
+                            <div class="if-fm">
+                                <div class="if-fm ck">
+                                    <label>Email</label>
+                                    <input type="text">
+                                </div>
+                                <div class="if-fm ck">
+                                    <label>Số điện thoại</label>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="yeucau">
+                    <div>
+                        <h3>Yêu cầu cấp chứng thư số</h3>
+                    </div>
+                    <div id="wrt-info">
+                        <div class="if-fm mn" >
+                            <label>
+                                Gói chứng thư
+                            </label>
+                            <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
+                                <option value="">Đăng ký CTS 1 năm</option>
+                            </select>
+                        </div>
+                        <div class="if-fm mn">
+                            <label>
+                               Giá cước
+                            </label>
+                            <input type="text" name="gia"  id="gia">
+                        </div>
+                        <div class="if-fm mn">
+                            <label>
+                                Thời hạn sử dụng
+                            </label> 
+                            <input type="text"  name="thoiHan" id="thoiHan">
+                        </div>
+                        <div class="if-fm mn">
+                            <label>
+                               Người thực hiện
+                            </label>
+                            <input type="text" name="nguoiThucHien">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="hoso">
+                    <div>
+                        <h3>Hồ sơ khách hàng</h3>
+                    </div>
+                    <div id="wrt-info">
+                        <div class="if-fm mn" >
+                            <label>
+                                Chọn tệp: 
+                            </label>
+                            <form enctype="multipart/form-data" method="POST">
+                                <input type="file" name="myfile" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="register">
+                    <div class="rg-btn">
+                        <input type="submit" value="Ghi lại" class="btn btn-primary">
+                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
+                        <a href="/" class="btn
+                                                        btn-secondary">Đóng</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+</body>
+<script src="../javascripts/init.js"></script>
 
 </html>
