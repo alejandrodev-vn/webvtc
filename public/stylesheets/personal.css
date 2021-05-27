@@ -65,7 +65,7 @@ label {
 }
 
 .if-fm input {
-    width: 70%;
+    width: 100%;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;

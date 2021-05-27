@@ -26,7 +26,6 @@ async function getPendingStatus(){
 }
 getPendingStatus()
 function showPending(data){
-
     let html = ''
     data.forEach(async (cts, index)=> {
         const service = await getServiceDetail(cts.goiCTSId)
