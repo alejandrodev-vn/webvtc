@@ -4,14 +4,16 @@ const { Timestamp } = require('mongodb');
 
 const UserSchema = new Schema({
   hoTen: {type: String, required: true},
-  email: {type: String, required: true},
+  email: {type: String, unique: true},
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  soDienThoai: {type: String, required: true},
-  gender: {type: String, required: true},
-  avatar: {type: String},
-  role: {type: String, default:0},
-  isActive: {type: Boolean, default:true}
+  soDienThoai: {type: String},
+  tinhThanhId: {type: mongoose.Schema.Types.ObjectId, required: true},
+  diaChi: {type: String, required: true},
+  gender: {type: String},
+  role: {type: Number, default:4},
+  isActive: {type: Boolean, default:true},
+  tenDaiLy: {type: String}
 
 }, {timestamps: true});
 // a setter

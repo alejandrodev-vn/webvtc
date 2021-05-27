@@ -31,6 +31,7 @@ const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
+const manageAccountRouter = require('./routes/manageAccount.route')
 //api
 const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
@@ -59,6 +60,7 @@ app.use(goiDichVuRouter);
 app.use(CTSCaNhanRouter)
 app.use(CTSDoanhNghiepRouter)
 app.use(usersRouter);
+app.use(manageAccountRouter);
 //api
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);

@@ -19,6 +19,7 @@ module.exports.add = async (req, res, next) => {
         }
         let values = req.body;
         values.gia =Number(req.body.gia.replace(/[^0-9]/g,''))
+        values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSCaNhanService.createNew(values);
         res.redirect('/')
     }
@@ -52,4 +53,18 @@ module.exports.delete = async (req, res, next) => {
     catch(err){
         console.log(err)
     }
+}
+function convertToYYYYMMDD (d){
+    date = new Date(d);
+    year = date.getFullYear();
+    month = date.getMonth()+1;
+    dt = date.getDate();
+
+    if (dt < 10) {
+        dt = '0' + dt;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    return (year+'-' + month + '-'+dt);
 }

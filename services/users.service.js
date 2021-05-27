@@ -30,8 +30,10 @@ exports.createNew = async (values) => {
         const username = values.username
         const password = values.password
         const soDienThoai = values.soDienThoai
-        const gender = values.gender
-        const avatar = values.avatar
+        const diaChi = values.diaChi
+        const tinhThanhId = values.tinhThanhId
+        const role = values.role
+        const tenDaiLy = values.tenDaiLy
     
         const passwordHashed = bcrypt.hashSync(password, salt);
         let newUser = new usersModel({
@@ -40,8 +42,10 @@ exports.createNew = async (values) => {
                 username,
                 password:passwordHashed,
                 soDienThoai,
-                gender,
-                avatar,
+                diaChi,
+                tinhThanhId,
+                role,
+                tenDaiLy
         })
         return newUser.save((err) => {
             if(err){
@@ -89,6 +93,7 @@ module.exports.changePassword = async (id, inputValues) =>{
 module.exports.login = async (values) =>{
     try{
         const { username ,password } = values
+        console.log(values)
         const user = await usersModel.findOne({username:username})
         if(!user){
             return {success: false, error:'User not found'}
