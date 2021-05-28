@@ -31,7 +31,6 @@ const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
-const manageAccountRouter = require('./routes/manageAccount.route')
 //api
 const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
@@ -49,7 +48,21 @@ app.use(
   saveUninitialized: false,
   cookie: { secure:false }
 }));
-
+app.use(async (req, res, next) =>{
+  try{
+      const { connection } = require('./database');
+      const User = require('./models/users.model')
+      const { xcmvusfhsh } = req.session
+      if(xcmvusfhsh){
+          res.locals.user = await User.findOne({_id:xcmvusfhsh})                               
+      }
+      next()
+  }
+  catch(err){
+      console.log(err)
+  }
+  
+})
 app.use(homeRouter);
 app.use(provincesRouter);
 app.use(giaoDichRouter);
@@ -60,7 +73,6 @@ app.use(goiDichVuRouter);
 app.use(CTSCaNhanRouter)
 app.use(CTSDoanhNghiepRouter)
 app.use(usersRouter);
-app.use(manageAccountRouter);
 //api
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);

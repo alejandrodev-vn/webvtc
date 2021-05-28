@@ -8,12 +8,12 @@
         <a href="/manage-account">Quản lý tài khoản</a>
     </div>
     <div class="right">
-        <% if(locals.hoTen) { %> 
-        <a href="#"><%= locals.hoTen %></a>
+        <% if(locals.user) { %> 
+        <a href="#"><%= locals.user.hoTen %></a>
         <% }else{ %>
-        <a href="/users">Đăng Nhập</a>
+        <a href="/users/login">Đăng Nhập</a>
         <% } %> 
-        <a href="#">Đăng Xuất</a>   
+        <a href="/users/logout">Đăng Xuất</a>   
     </div>
 </div>
 
