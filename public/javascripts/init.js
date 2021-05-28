@@ -5,7 +5,6 @@ const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
 async function getTinhThanh(){
     try{
-        console.log(tinhThanhEl)
         if(!tinhThanhEl){
             return
         }

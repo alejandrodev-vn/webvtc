@@ -46,7 +46,6 @@ module.exports.changePassword = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
     try{
         let values = req.body;
-        console.log(req.body)
         const user = await usersService.login(values);
         if(user.error === 'User not found'){
             res.status(404).json(user.error)
@@ -61,8 +60,8 @@ module.exports.login = async (req, res, next) => {
                     console.log('Token sign failed');
                 }else{
                     req.session.token = token
-                    req.locals.fullName = user.hoTen
-                    res.redirect('/')  
+                    req.session.xcmvusfhsh = user._id
+                    res.redirect('/')
                 }
             }) 
         }
@@ -70,4 +69,8 @@ module.exports.login = async (req, res, next) => {
     catch(err){
         console.log(err)
     }
+}
+module.exports.logout = (req, res, next) => {
+    res.clearCookie('connect.sid', { path: '/' })
+    res.redirect('/users/login')
 }

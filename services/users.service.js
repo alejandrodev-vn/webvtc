@@ -34,6 +34,7 @@ exports.createNew = async (values) => {
         const tinhThanhId = values.tinhThanhId
         const role = values.role
         const tenDaiLy = values.tenDaiLy
+        const belongTo = values.belongTo
     
         const passwordHashed = bcrypt.hashSync(password, salt);
         let newUser = new usersModel({
@@ -45,10 +46,12 @@ exports.createNew = async (values) => {
                 diaChi,
                 tinhThanhId,
                 role,
-                tenDaiLy
+                tenDaiLy,
+                belongTo
         })
         return newUser.save((err) => {
             if(err){
+                console.log(err)
                 console.log('Add user fail!');
             }else{
                 console.log('Add user success!');
@@ -93,7 +96,6 @@ module.exports.changePassword = async (id, inputValues) =>{
 module.exports.login = async (values) =>{
     try{
         const { username ,password } = values
-        console.log(values)
         const user = await usersModel.findOne({username:username})
         if(!user){
             return {success: false, error:'User not found'}

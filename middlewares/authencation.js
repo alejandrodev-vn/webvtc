@@ -6,25 +6,25 @@ module.exports.checkAuthencation = function(req, res, next){
         if(token){
             const check = jwt.verify(token, process.env.KEY)
             if(check){
-                res.redirect('/')
+                next()
             }else {
                 console.log('Token verify failed')
-                res.redirect('/users')
+                res.redirect('/users/login')
             }
         }else{
             console.log('Token not found')
-            res.redirect('/users')
+            res.redirect('/users/login')
         }
     }catch(err){
         console.log('Token verify failed')
-        res.redirect('/users')
+        res.redirect('/users/login')
     }
 }
 module.exports.checkLogin = function(req, res, next){
     try{
         let { token } = req.session;
         if(!token){
-            res.redirect('/users')
+            res.redirect('/users/login')
         }else next()
     }catch(err){
         console.log(err)

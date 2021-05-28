@@ -88,7 +88,7 @@
                         </div>
                  
   
-                          <input type="hidden" id="id" value=0>
+                          <input type="hidden" name="belongTo" id="id" value="<%= locals.user._id %> ">
                       
                     
                       </form>
@@ -154,6 +154,37 @@
             </div>
         </div>
         </div>
+        <h3 class="pl-3">Danh sách đại lý</h3>
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead class="thead-default">
+                      <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col"><input type="checkbox" name="selectUsers" id=""></th>
+                        <th scope="col">Tên đăng nhập</th>
+                        <th scope="col">Tên đầy đủ</th>
+                        <th scope="col">Họ Tên</th>
+                        <th scope="col">CMND</th>
+                        <th scope="col">MST</th>
+                        <th scope="col">Gói CTS</th>
+                        <th scope="col">Thời hạn (năm)</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Trạng thái hồ sơ</th>
+                      </tr>
+                    </thead>
+                    <tbody id="pendingStatus">
+                     
+                    </tbody>
+                </table>
+                <div class="action col-md-3 col-md-push-2">
+                    <button class="btn btn-primary">Xóa</button>
+                    <button class="btn btn-primary">Gửi SmartSign</button>
+                </div>
+            </div>
+        </div>
+       
 </body>
 <script src="../javascripts/modalBox.js"></script>
 <script src="../javascripts/init.js"></script>
