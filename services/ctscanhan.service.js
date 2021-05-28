@@ -1,4 +1,5 @@
 const CTSCaNhanModel = require('../models/ctscanhan.model')
+const goiDichVuService = require('../services/goidichvu.service')
 
 exports.getAll = async () => {
     try{

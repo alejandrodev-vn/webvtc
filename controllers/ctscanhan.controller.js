@@ -1,4 +1,4 @@
-const tinhThanhService = require('../services/provinces.service')
+const goiDichVuService = require('../services/goidichvu.service')
 const CTSCaNhanService = require('../services/ctscanhan.service')
 const {validationResult} = require('express-validator');
 const url = "http://localhost:3000/"
@@ -18,7 +18,10 @@ module.exports.add = async (req, res, next) => {
             return res.redirect('/digital-certificate/personal')
         }
         let values = req.body;
-        values.gia =Number(req.body.gia.replace(/[^0-9]/g,''))
+        const goiDichVu = await goiDichVuService.findById(values.goiCTSId)
+        values.goiCTSId = goiDichVu._id
+        values.thoiHan = goiDichVu.thoiHan
+        values.gia =Number(goiDichVu.gia.replace(/[^0-9]/g,''))
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSCaNhanService.createNew(values);
         res.redirect('/')

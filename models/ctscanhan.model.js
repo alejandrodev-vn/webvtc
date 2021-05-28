@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
 
 const CTSCaNhanSchema = new Schema({
-  email: {type: String},
-  soDienThoai: {type: String},
+  email: {type: String, required: true},
+  soDienThoai: {type: String, required: true},
   hoTenNguoiDK: {type: String, required: true},
   soCMT: {type: String, required: true},
   noiCapCMT: {type: String, required: true},
