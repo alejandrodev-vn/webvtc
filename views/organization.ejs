@@ -209,32 +209,32 @@
                             <div class="if-fm mn" >
                                 <label for="">Tên giao dịch <span>*</span> </label>
                                
-                                <input type="text">
+                                <input type="text" name="tenGD">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Giấy phép ĐKKD</label>
-                                    <input type="text">
+                                    <input type="text" name="giayPhepDKKD">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Ngày cấp</label>
-                                    <input type="date" name="ngayCapCMT">
+                                    <input type="date" name="ngayCapGiayPhepDKKD">
                             </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Mã số thuế</label>
-                                    <input type="text">
+                                    <input type="text" name="MST">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Công ty mẹ</label>
-                                    <input type="text">
+                                    <input type="text" name="">
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Cam kết không hủy</label>
-                                    <input type="text">
+                                    <input type="text" name="camKet">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Mật khẩu</label>
@@ -245,29 +245,30 @@
                                 <label>
                                     Địa chỉ *
                                 </label>
-                                <input type="text">
+                                <input type="text" name="diaChi">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Tỉnh/ Thành Phố</label>
-                                    <select name="tinhThanh" id="tinhThanh" onchange="getQuanHuyen(this.value)">
-                                       
-                                    </select>
+                                    <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
+                                            <select name="tinhThanh" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                <option value="0">--Lựa chọn--</option>
+                                            </select>
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Quận/ Huyện</label>
-                                    <select name="quanHuyen" id="quanHuyen">
-                                    </select>
+                                    <label>Quận/ Huyện <span class="note">*</span></label>
+                                            <select name="quanHuyen" id="quanHuyen">
+                                                <option value="0">Chọn tỉnh thành trước</option>
+                                            </select>
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Email giao dịch</label>
-                                    <input type="text">
+                                    <input type="text" name="emailGD">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Số điện thoại</label>
-                                    <input type="text">
+                                    <input type="text" name="soDienThoaiCongTy">
                                 </div>
                             </div>
                         </div>
@@ -281,7 +282,7 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Họ và tên</label>
-                                    <input type="text">
+                                    <input type="text" name="hoTenChuDoanhNghiep">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Chức vụ</label>
@@ -291,7 +292,7 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Số CMTND/HC*</label>
-                                    <input type="text">
+                                    <input type="text" name="soCMT">
                                 </div>
                                 <div class="if-fm ck">
                                         <label>Ngày cấp</label>
@@ -302,12 +303,12 @@
                                 <label>
                                     Nơi cấp *
                                 </label>
-                                <input type="text">
+                                <input type="text" name="noiCapCMT">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Email</label>
-                                    <input type="text">
+                                    <input type="text" name="email">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Số điện thoại</label>
@@ -349,7 +350,7 @@
                             <label>
                                Giá cước
                             </label>
-                            <input type="text" name="gia"  id="gia">
+                            <input type="text" name="giaCuoc"  id="gia">
                         </div>
                         <div class="if-fm mn">
                             <label>
