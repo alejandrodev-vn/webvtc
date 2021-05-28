@@ -72,3 +72,7 @@ async function chooseService(id){
     }
   
 }
+const checkbox = document.getElementById("camKet")
+function checkCamKet(){
+    (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
+}

@@ -17,6 +17,7 @@ module.exports.add = async (req, res, next) => {
             req.session.errorsDN = errors.array()
             return res.redirect('/digital-certificate/organization')
         }
+        console.log(req.body)
         let values = req.body;
         values.giaCuoc =Number(req.body.giaCuoc.replace(/[^0-9]/g,''))
         values.ngayTao = convertToYYYYMMDD(Date.now())
