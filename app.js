@@ -52,9 +52,9 @@ app.use(async (req, res, next) =>{
   try{
       const { connection } = require('./database');
       const User = require('./models/users.model')
-      const { xcmvusfhsh } = req.session
-      if(xcmvusfhsh){
-          res.locals.user = await User.findOne({_id:xcmvusfhsh})                               
+      const { userId } = req.session
+      if(userId){
+          res.locals.user = await User.findOne({_id:userId})                               
       }
       next()
   }

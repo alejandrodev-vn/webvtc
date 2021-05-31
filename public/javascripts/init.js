@@ -3,6 +3,7 @@ const quanHuyenEl = document.querySelector('#quanHuyen')
 const servicesEl = document.querySelector('#services')
 const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
+
 async function getTinhThanh(){
     try{
         if(!tinhThanhEl){
@@ -76,3 +77,4 @@ const checkbox = document.getElementById("camKet")
 function checkCamKet(){
     (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
 }
+

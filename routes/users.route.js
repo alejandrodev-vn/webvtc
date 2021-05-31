@@ -9,7 +9,14 @@ router.get('/users/login', controllerUsers.authencation)
 router.post('/users/login', controllerUsers.login)
 router.get('/users/logout', controllerUsers.logout)
 router.get('/manage-account',middlewares.checkAuthencation, function(req, res,next){
-    res.render('manage-account')
+    const { role } = req.session
+    if(role===0){
+        res.render('manage-account-admin1')
+    }else if(role===1 || role ===2){
+        res.render('manage-account')
+    }else{
+        res.redirect('/')
+    }
 })
 router.post('/users/add',middlewares.checkAuthencation, controllerUsers.add)
 router.put('/users/edit/:id', middlewares.checkAuthencation, controllerUsers.update)

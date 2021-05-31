@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('header') %> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/organization.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="box">
+                <%- include('menuAdmin')  %> 
+            </div>
+            <div id="modalCertificatePersonal" class="modal">
+
+                <!-- Modal content -->
+                  <div class="modal-content">
+                    
+                      <div class="form-area">
+                          <div class="top-modal">
+                            <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Xử lý yêu cầu</h2>
+                            <span class="close">&times;</span>
+                          </div>
+                          <form action="/digital-certificate/personal" action="POST">
+                            <div id="form">
+                                <div class="info-user">
+                                    <div>
+                                        <h5>Thông tin khách hàng</h5>
+                                    </div>
+                                    <div id="wrt-info">
+                                        <div class="if-fm">
+                                            <div class="if-fm ck">
+                                                <span>Họ Và Tên</span>
+                                                <input type="text" id="hoTenNguoiDK" disabled>
+                                            </div>
+                                            <div class="if-fm ck">
+                                                <span>Mã Số Thuế</span>
+                                                <input type="text" id="MSTCaNhan" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="if-fm">
+                                            <div class="if-fm ck">
+                                                <span>Số CMTND/HC</span>
+                                                <input type="text" id="soCMT" disabled>
+                                            </div>
+                                            <div class="if-fm ck">
+                                                <span>Ngày cấp</span>
+                                                <input type="text" id="ngayCapCMT" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <div class="if-fm ck">
+                                                <span>Nơi cấp</span>
+                                                <input type="text" id="noiCapCMT" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="if-fm">
+                                            <div class="if-fm ck">
+                                                <span>Email Giao Dịch</span>
+                                                <input type="text" id="email" disabled>
+                                            </div>
+                                            <div class="if-fm ck">
+                                                <span>Số Điện Thoại</span>
+                                                <input type="text" id="soDienThoai" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <span>Địa chỉ</span>
+                                            <input type="text" id="diaChi" disabled>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <span>Thuộc Tổ Chức</span>
+                                            <input type="text" id="tenCongTy" disabled>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="info-user" style="margin-top: 2vw;">
+                        
+                                    <div id="wrt-info">
+                                        <div class="if-fm">
+                                            <div class="if-fm ck">  
+                                                <span>Ngành nghề</span>
+                                                <input type="text" id="nganhNghe" disabled>
+                                            </div>
+                                            <div class="if-fm ck">
+                                                <span>Chức Vụ</span>
+                                                <input type="text" id="chucVu" disabled>
+                                            </div>
+                                        </div>
+                                            <div class="if-fm ck">
+                                                <span>Mã số thuế Công ty</span>
+                                                <input type="text" id="MSTCongTy" disabled>
+                                            </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Tỉnh Thành</span>
+                                            <input type="text" id="tinhThanh" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Quận Huyện</span>
+                                            <input type="text" id="quanHuyen" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                                
+                        
+                            <div id="form" style="margin-top: 1vw;">
+                                <div class="info-user">
+                                    <div>
+                                        <h5>Thông Tin Phiếu Yêu Cầu</h5>
+                                    </div>
+                                    <div id="wrt-info">
+                                        <div class="if-fm mn">
+                                            <span>Mã Phiếu Yêu Cầu</span>
+                                            <input type="text" id="maPhieuYC" disabled>                                    
+                                        </div>
+                                        <div class="if-fm">
+                                            <div class="if-fm ck">
+                                                <span>Loại Chứng Thư</span>
+                                                <input type="text" id="goiCTS" disabled>
+                                            </div>
+                                            <div class="if-fm ck">
+                                                <span>Thời Hạn Sử Dụng</span>
+                                                <input type="text" id="thoiHan" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <span>
+                                            Ý Kiến Đại Lý
+                                            </span>
+                                            <input type="text" >
+                                        </div>
+                                        <div class="if-fm mn" >
+                                            <span>
+                                            Ý Kiến VINA
+                                            </span>
+                                            <input type="text" >
+                                        </div>
+                                        <div class="if-fm mn" disabled>
+                                            <span>
+                                            Giấy Phép DKKD - CMND
+                                            </span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <span>
+                                            Phiếu Đăng Kí Hợp Đồng
+                                            </span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm mn">
+                                            <span>
+                                            BBBG/Giấy Xác Nhận
+                                            </span>
+                                            <input type="text" disabled>
+                                        </div>
+                    
+                                    </div>
+                    
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead class="thead-default">
+                                    <th>Chọn</th>
+                                    <th>STT</th>
+                                    <th>Loại tài liệu</th>
+                                    <th>Tên tài liệu</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Người tạo</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="col"><input type="checkbox" name="selectDocPersonal" id="fileHoSo"></td>
+                                        <td>1</td>
+                                        <td>Hồ sơ khách hàng</td>
+                                        <td>ABC.rar</td>
+                                        <td>05/05/2020</td>
+                                        <td>daily1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="register">
+                                <div class="rg-btn">
+                                    <input type="submit" value="Duyệt" class="btn btn-primary" id="btnSubmitPersonal">
+                                    <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                    <input type="button" value="Đóng" class="btn btn-secondary">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                </div>
+            </form>
+            <!-- end-modal personal -->
+            <div id="modalCertificateOrganization" class="modal">
+
+                <!-- Modal content -->
+                  <div class="modal-content">
+                    
+                      <div class="form-area">
+                          <div class="top-modal">
+                            <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Xử lý yêu cầu</h2>
+                            <span class="close">&times;</span>
+                          </div>
+                          <div id="form">
+                            <div class="info-user">
+                                <div>
+                                    <h5>Thông tin khách hàng</h5>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Tên Giao Dịch</span>
+                                            <input type="text" name="hoTenNguoiDK" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Mã Số Thuế</span>
+                                            <input type="text" id="MSTCaNhan" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Giấy phép ĐKKD</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Ngày cấp</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                        Địa chỉ 
+                                    </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Email Giao Dịch</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Số Điện Thoại</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                        Thuộc Tổ Chức
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>  
+                          <div id="form" style="margin-top: 1vw;">
+                            <div class="info-user">
+                                <div>
+                                    <h5>Đại Diện Pháp Lý</h5>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Họ Và Tên</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Chức Vụ</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Số CMTND/HC</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Ngày cấp</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                           Nơi Cấp
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                </div>
+                                <div class="if-fm">
+                                    <div class="if-fm ck">
+                                        <span>Email</span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm ck">
+                                        <span>Số Điện Thoại</span>
+                                        <input type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="form" style="margin-top: 1vw;">
+                            <div class="info-user">
+                                <div>
+                                    <h5>Thông Tin Phiếu Yêu Cầu</h5>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Mã Phiếu Yêu Cầu</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Loại Yêu Cầu</span>
+                                            <input type="text" id="loaiYC" disabled>
+                                       </select>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <span>Loại Chứng Thư</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <span>Thời Hạn Sử Dụng</span>
+                                            <input type="text" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                           Ý Kiến Đại Lý
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm mn" disabled>
+                                        <span>
+                                           Ý Kiến VINA
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm mn" disabled>
+                                        <span>
+                                          Giấy Phép DKKD - CMND
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                           Phiếu Đăng Kí Hợp Đồng
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                                    <div class="if-fm mn">
+                                        <span>
+                                          BBBG/Giấy Xác Nhận
+                                        </span>
+                                        <input type="text" disabled>
+                                    </div>
+                
+                                </div>
+                
+                            </div>
+                        </div>
+                        <div id="register">
+                            <div class="rg-btn">
+                                <input type="submit" value="Duyệt" class="btn btn-primary">
+                                <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                <input type="button" value="Đóng" class="btn btn-secondary">
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+            </div>
+            <!-- end-modal organization -->
+            <div class="container">
+                <div class="row">
+                    <form action="" style="margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
+                        <div id="form">
+                            <div class="info-user">
+                                <div>
+                                    <h3>Tìm kiếm nhanh</h3>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Mã Phiếu Yêu Cầu</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Trạng Thái</label>
+                                            <select name="" id="" style="width: 176px;">
+                                                <option value="0">Dự thảo</option>
+                                                <option value="1">Chờ duyệt lần 1</option>
+                                                <option value="2">Chờ duyệt lần 2</option>
+                                                <option value="3">Đã duyệt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Mã Khách Hàng</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Tên Giao Dịch</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Số CMTND/HC</label>
+                                            <input type="text">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Giấy Phép DKKD</label>
+                                            <input type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-user">
+                                <div>
+                                    <h3></h3>
+                                </div>
+                                <div id="wrt-info">
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Tỉnh/Thành Phố</label>
+                                            <select name="tinhThanhFilter" id="tinhThanh" style="width: 176px;">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Loại Yêu Cầu</label>
+                                            <select name="loaiCTSIdFilter" id="quanHuyen"  style="width: 176px;">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="if-fm">
+                                        <div class="if-fm ck">
+                                            <label>Ngày Yêu Cầu : Từ Ngày</label>
+                                            <input type="date">
+                                        </div>
+                                        <div class="if-fm ck">
+                                            <label>Đến Ngày</label>
+                                            <input type="date">
+                                        </div>
+                                    </div>
+                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+
+                    </form>
+                </div>
+            </div>
+            <h3 class="pl-3">Danh sách phiếu yêu cầu</h3>
+            <div class="container">
+                <div class="row">
+                    <table class="table table-bordered">
+                        <thead class="thead-default">
+                          <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Xử lý</th>
+                            <th scope="col">Mã yêu cầu</th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">Gói</th>
+                            <th scope="col">TokenId</th>
+                            <th scope="col">Mã số thuế</th>
+                            <th scope="col">Serial</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Người tạo</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Trạng thái hồ sơ</th>
+                            <th scope="col">Lịch sử</th>
+                          </tr>
+                        </thead>
+                        <tbody id="pendingStatus">
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+        
+
+    </body>
+    <script src="../javascripts/listAdmin.js" type="module"></script>
+    <script src="../javascripts/init.js"></script>
+</html>
