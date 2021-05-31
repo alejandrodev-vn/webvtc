@@ -33,7 +33,7 @@ async function showPending(data){
        <td scope="row">${index+1}</td>
        ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
        ${(cts.trangThai == 0) ? `<td><button class="btn btn-info">Sửa</button></td>` : '<td></td>'}
-       <td>${cts._id}</td>
+       <td><p>${cts._id}</p></td>
        <td>${cts.hoTenNguoiDK}</td>
        <td>${cts.soCMT}</td>
        <td>${cts.MSTCaNhan}</td>
