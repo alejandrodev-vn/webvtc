@@ -1,42 +1,37 @@
 import { convertToDDMMYYYY } from './convert.js'
+import { fetchAPI,
+    fetchAndShowData 
+} from './fetch.js'
 const pendingStatus = document.querySelector('#pendingStatus')
+
 const url = 'http://localhost:3000/'
 
-async function fetchAPI(url, options, cb){
+async function getCTSCaNhan(){
     try{
-        const res = await fetch(url, options)
-        const data = await res.json()
-        cb(data)
-    }catch(err){
-        console.log(err)
-    }
-}
-async function getPendingStatus(){
-    try{
-        const urlList = url + `api/digital-certificate/personal`
+        const urlList = url + `api/digital-certificate/personal/byUserId`
         const options = {
             method: 'GET'
         }
-        fetchAPI(urlList, options, showPending)
+        await fetchAndShowData(urlList, options, showPending)
 
        
     }catch(err){
         console.log(err)
     }
 }
-getPendingStatus()
+getCTSCaNhan()
 async function showPending(data){
     let html = ''
     const services = await getServices()
     data.forEach((cts, index)=> {   
         services.forEach(service => {
             if(cts.goiCTSId == service._id){
-                cts = { ...cts, ...service }
+                cts = { ...service, ...cts }
             }
         })
        html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-       <th scope="row">${index+1}</th>
-       ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="select" id="${cts._id}"></td>` : '<td></td>'}
+       <td scope="row">${index+1}</td>
+       ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
        ${(cts.trangThai == 0) ? `<td><button class="btn btn-info">Sửa</button></td>` : '<td></td>'}
        <td>${cts._id}</td>
        <td>${cts.hoTenNguoiDK}</td>
@@ -47,6 +42,7 @@ async function showPending(data){
        <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
        <td>${cts.nguoiThucHien}</td>
        <td>${(cts.trangThai == 0) ? 'Dự thảo' : 'Chờ duyệt lần 1'}</td>
+       <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
 
      </tr>`
      pendingStatus.innerHTML = html
@@ -61,3 +57,4 @@ async function getServices(){
         console.log(err)
     }
 }
+

@@ -60,7 +60,8 @@ module.exports.login = async (req, res, next) => {
                     console.log('Token sign failed');
                 }else{
                     req.session.token = token
-                    req.session.xcmvusfhsh = user._id
+                    req.session.userId = user._id
+                    req.session.role = user.role
                     res.redirect('/')
                 }
             }) 

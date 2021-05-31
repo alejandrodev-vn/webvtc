@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const {validateCTSCaNhan} = require('../middlewares/ctscanhan.validate')
+const { validateCTSCaNhan } = require('../middlewares/ctscanhan.validate')
 
 const controllerCTSCaNhan = require('../controllers/ctscanhan.controller')
+const middlewares = require('../middlewares/authencation')
 
 
 
-router.get('/digital-certificate/personal', controllerCTSCaNhan.personal);
+router.get('/digital-certificate/personal',middlewares.checkAuthencation, controllerCTSCaNhan.personal);
 router.post('/digital-certificate/personal/add', validateCTSCaNhan(), controllerCTSCaNhan.add);
+router.post('/digital-certificate/personal/send-request', controllerCTSCaNhan.sendRequest);
 router.put('/digital-certificate/personal/edit/:id', validateCTSCaNhan(), controllerCTSCaNhan.update);
 router.delete('/digital-certificate/personal/delete/:id', controllerCTSCaNhan.delete);
 

@@ -18,10 +18,11 @@ module.exports.add = async (req, res, next) => {
             return res.redirect('/digital-certificate/personal')
         }
         let values = req.body;
-        const goiDichVu = await goiDichVuService.findById(values.goiCTSId)
+        const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
+        const getGia = goiDichVu.gia
         values.goiCTSId = goiDichVu._id
         values.thoiHan = goiDichVu.thoiHan
-        values.gia =Number(goiDichVu.gia.replace(/[^0-9]/g,''))
+        values.gia =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSCaNhanService.createNew(values);
         res.redirect('/')
@@ -40,7 +41,25 @@ module.exports.update = async (req, res, next) => {
         let values = req.body;
 
         await CTSCaNhanService.update(id, values);
-        res.redirect('/digital-certificate/personal')
+        res.redirect('/')
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.sendRequest = async (req, res, next) => {
+    try{
+        let { selectItem } = req.body;
+        console.log(selectItem)
+        if(Array.isArray(selectItem)){
+            for(let i=0; i<selectItem.length; i++){
+                await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
+            }
+        }else {
+            await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
+        }
+        
+        res.redirect('/')
     }
     catch(err){
         console.log(err)

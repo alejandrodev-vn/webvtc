@@ -12,6 +12,16 @@ router.get('/users', async (req, res, next) => {
     }
 });
 
+router.get('/users/byBelongTo', async (req, res, next)=> {
+    try{
+        const { userId } = req.session
+        const user = await usersService.getByBelongTo(userId)
+        res.json(user)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 router.get('/users/:id', async (req, res, next)=> {
     try{
         const id = req.params.id

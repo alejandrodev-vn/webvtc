@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
 
 const CTSDoanhNghiepSchema = new Schema({
+  loaiCTS: {type: String, default: 'Tổ chức'},
   tenGD: {type: String, require: true},
   password: {type:String, require: true},
   giayPhepDKKD: {type: String, required: true},
@@ -27,8 +28,9 @@ const CTSDoanhNghiepSchema = new Schema({
   giaCuoc:{type: Number},
   nguoiThucHien:{type: String, required: true},
   ngayTao:{type: Date, required: true},
-  fileHoSo:{type:String},
-  trangThai:{type: Number, required: true, default:0}
+  fileHoSo:{type:String, default:''},
+  trangThai:{type: Number, required: true, default:0},
+  createdBy: {type: String},
 }, {timestamps: true});
 // a setter
 CTSDoanhNghiepSchema.path('tenGD').set(function (input) {

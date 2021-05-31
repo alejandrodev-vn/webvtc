@@ -102,11 +102,11 @@
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
-                                            <label>Email cá nhân</label>
+                                            <label>Email cá nhân  <span class="note">*</span></label>
                                             <input type="text" name="email">
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Số điện thoại</label>
+                                            <label>Số điện thoại  <span class="note">*</span></label>
                                             <input type="text" name="soDienThoai">
                                         </div>
                                     </div>
@@ -126,19 +126,20 @@
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Thời hạn sử dụng <span class="note">*</span></label>
-                                            <input type="text"  name="thoiHan" id="thoiHan">
+                                            <label>Thời hạn sử dụng <span class="note">*</span> </label>
+                                            <input type="text"  name="thoiHan" id="thoiHan" readonly="true" style="background:#eee">
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Giá cước</label>
-                                            <input type="text" name="gia"  id="gia">
+                                            <input type="text" name="gia" id="gia" readonly="true" style="background:#eee">
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Người thực hiện <span class="note">*</span></label>
-                                            <input type="text" name="nguoiThucHien">
+                                            <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
                                         </div>
+                                        <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                     </div>
                                 </div>
                                 <% if(typeof errors != 'undefined') { 
