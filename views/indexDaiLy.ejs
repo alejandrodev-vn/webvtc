@@ -14,7 +14,7 @@
     <body>
         <div class="wrapper">
             <div class="box">
-                <%- include('menuDaiLy')  %> 
+                <%- include('menuDaily')  %> 
             </div>
             <div class="container">
                 <div class="row">
@@ -70,20 +70,18 @@
                                 </div>
                             </div>
                             <div class="info-user">
-                                <div>
-                                    <h3></h3>
-                                </div>
+                               
                                 <div id="wrt-info">
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Tỉnh/Thành Phố</label>
-                                            <select name="tinhThanhFilter" style="width: 176px;">
+                                            <select name="tinhThanhFilter" id="tinhThanh" style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Loại Yêu Cầu</label>
-                                            <select name="loaiCTSIdFilter"  style="width: 176px;">
+                                            <select name="loaiCTSIdFilter" id="quanHuyen"  style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
@@ -109,34 +107,69 @@
                     </form>
                 </div>
             </div>
-            <h3 class="pl-3">Chờ phê duyệt</h3>
-            <div class="row">
-                
+            <h3 class="pl-3">Danh sách phiếu yêu cầu</h3>
+            <div class="container" style="border: 1px solid #aaaaaa;">
+                <div class="row">
+                    <form action="/digital-certificate/personal/send-request" method="POST">
+                    <table class="table table-bordered" >
+                        <thead class="thead-default">
+                          <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col"><input type="checkbox" id="selectAll" onclick="checkAll()"></th>
+                            <th scope="col">Sửa</th>
+                            <th scope="col">Mã yêu cầu</th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">CMND</th>
+                            <th scope="col">MST</th>
+                            <th scope="col">Gói CTS</th>
+                            <th scope="col">Thời hạn (năm)</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Người tạo</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Trạng thái hồ sơ</th>
+                          </tr>
+                        </thead>
+                        <tbody id="pendingStatus">
+                         
+                        </tbody>
+                    </table>
+                    <div class="action col-md-3 col-md-push-2">
+                        <button class="btn btn-primary">Xóa</button>
+                        <input type="submit" class="btn btn-primary btn-submit" disabled value="Gửi SmartSign" onsubmit="getCheckboxValue()">
+                    </div>
+                </div>
+                </form>
             </div>
-            <table class="table table-bordered">
-                <thead class="thead-default">
-                  <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col"><input type="checkbox" name="select" id=""></th>
-                    <th scope="col">Sửa</th>
-                    <th scope="col">Mã yêu cầu</th>
-                    <th scope="col">Họ Tên</th>
-                    <th scope="col">CMND</th>
-                    <th scope="col">MST</th>
-                    <th scope="col">Gói CTS</th>
-                    <th scope="col">Thời hạn (năm)</th>
-                    <th scope="col">Ngày tạo</th>
-                    <th scope="col">Trạng thái</th>
-                    <th scope="col">Trạng thái hồ sơ</th>
-                  </tr>
-                </thead>
-                <tbody id="pendingStatus">
-                 
-                </tbody>
-              </table>
+            <h3 class="pl-3">Đã phê duyệt</h3>
+            <div class="container" style="border: 1px solid;">
+                <div class="row">
+                    <table class="table table-bordered" >
+                        <thead class="thead-default">
+                          <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã yêu cầu</th>
+                            <th scope="col">Họ Tên</th>
+                            <th scope="col">CMND</th>
+                            <th scope="col">MST</th>
+                            <th scope="col">Gói CTS</th>
+                            <th scope="col">Thời hạn (năm)</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Người tạo</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Cấp CTS</th>
+                          </tr>
+                        </thead>
+                        <tbody id="approvedStatus">
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         
 
     </body>
-    <script src="../javascripts/list.js"></script>
+    <script src="../javascripts/listDaiLy.js" type="module"></script>
+    <script src="../javascripts/init.js"></script>
+    <script src="../javascripts/selectSmartSign.js"></script>
 </html>

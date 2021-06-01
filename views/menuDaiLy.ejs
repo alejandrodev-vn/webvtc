@@ -3,17 +3,26 @@
 </div>
 <div class="scrollmenu">
     <div class="right">
+<<<<<<< HEAD
         <a href="/">Trang chủ</a>
         <a href="#news">Báo Cáo Thống Kê</a>
         <a href="/">Chức năng sau bán</a>
         <a href="quanlitaikhoan.ejs">Quản lí tài khoản</a>
         <a href="#">Đăng Nhập</a>
         <a href="#">Đăng Xuất</a>
+=======
+        <a href="/">Danh sách yêu cầu</a>
+        <a href="">Báo Cáo Thống Kê</a>
+        <a href="/manage-account">Quản lý tài khoản</a>
     </div>
-</div>
-<div class="scrollmenu2">
-    <a href="#home">Sửa Thông Tin</a>
-    <a href="#news">Phê Duyệt YC Đại Lí</a>
-    <a href="#contact">Phê Duyệt YC Gia Hạn</a>
-    <a href="#about">Quản Lí CTS Server</a>
+    <div class="right">
+        <% if(locals.user) { %> 
+        <a href="#"><%= locals.user.hoTen %></a>
+        <a href="/users/logout">Đăng Xuất</a>   
+
+        <% }else{ %>
+        <a href="/users/login">Đăng Nhập</a>
+        <% } %> 
+>>>>>>> main
+    </div>
 </div>

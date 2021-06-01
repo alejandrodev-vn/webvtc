@@ -48,7 +48,21 @@ app.use(
   saveUninitialized: false,
   cookie: { secure:false }
 }));
-
+app.use(async (req, res, next) =>{
+  try{
+      const { connection } = require('./database');
+      const User = require('./models/users.model')
+      const { userId } = req.session
+      if(userId){
+          res.locals.user = await User.findOne({_id:userId})                               
+      }
+      next()
+  }
+  catch(err){
+      console.log(err)
+  }
+  
+})
 app.use(homeRouter);
 app.use(provincesRouter);
 app.use(giaoDichRouter);

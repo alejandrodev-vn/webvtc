@@ -15,6 +15,16 @@ exports.getById = async (id) => {
     try{
         const user = await usersModel.findById(id);
         return user
+        
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getByBelongTo = async (userId) => {
+    try{
+        const users = await usersModel.find({belongTo:userId});
+        return users
     }
     catch(err){
         console.log(err)
@@ -30,8 +40,11 @@ exports.createNew = async (values) => {
         const username = values.username
         const password = values.password
         const soDienThoai = values.soDienThoai
-        const gender = values.gender
-        const avatar = values.avatar
+        const diaChi = values.diaChi
+        const tinhThanhId = values.tinhThanhId
+        const role = values.role
+        const tenDaiLy = values.tenDaiLy
+        const belongTo = values.belongTo
     
         const passwordHashed = bcrypt.hashSync(password, salt);
         let newUser = new usersModel({
@@ -40,11 +53,15 @@ exports.createNew = async (values) => {
                 username,
                 password:passwordHashed,
                 soDienThoai,
-                gender,
-                avatar,
+                diaChi,
+                tinhThanhId,
+                role,
+                tenDaiLy,
+                belongTo
         })
         return newUser.save((err) => {
             if(err){
+                console.log(err)
                 console.log('Add user fail!');
             }else{
                 console.log('Add user success!');

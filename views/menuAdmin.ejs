@@ -1,20 +1,22 @@
 <div class="header">
-    <img src="../images/logo.png" alt="logo">
+    <a href="/"><img src="../images/logo.png" alt="logo"></a>
 </div>
 <div class="scrollmenu">
-    <a href="./xuliyeucau.html">Xử Lí Yêu Cầu</a>
-    <a href="#news">Báo Cáo Thống Kê</a>
-    <a href="./quanlitaikhoan.ejs">Quản Lí Tài Khoản</a>
-    <div class="dropdown">
-        <button class="dropbtn" onclick="myFunction()">Profile
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-            <a href="#">Đăng Nhập</a>
-            <a href="#">Đăng Xuất</a>
-        </div>
+    <div class="right">
+        <a href="/">Xử lý yêu cầu</a>
+        <a href="">Báo Cáo Thống Kê</a>
+        <a href="/manage-account">Quản lý tài khoản</a>
+    </div>
+    <div class="right">
+        <% if(locals.user) { %> 
+        <a href="#"><%= locals.user.hoTen %></a>
+        <% }else{ %>
+        <a href="/users/login">Đăng Nhập</a>
+        <% } %> 
+        <a href="/users/logout">Đăng Xuất</a>   
     </div>
 </div>
+
 <div class="scrollmenu2">
     <a href="#home">Sửa Thông Tin</a>
     <a href="#news">Phê Duyệt YC Đại Lí</a>

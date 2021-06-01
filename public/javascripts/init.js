@@ -1,10 +1,14 @@
-const tinhThanhEl = document.querySelector('#tinhThanh')
+const tinhThanhEl = document.querySelectorAll('.tinhThanh')
 const quanHuyenEl = document.querySelector('#quanHuyen')
 const servicesEl = document.querySelector('#services')
 const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
+
 async function getTinhThanh(){
     try{
+        if(!tinhThanhEl){
+            return
+        }
         await fetch('http://localhost:3000/api/provinces')
         .then(res=>res.json())
         .then(provinces=>{
@@ -13,7 +17,9 @@ async function getTinhThanh(){
                 provinceHtml +=  `
                 <option value="${province._id}">${province.TenTinhThanh}</option>`
             })
-            tinhThanhEl.innerHTML = provinceHtml
+            tinhThanhEl.forEach(e=>{
+                e.innerHTML += provinceHtml
+            })
         })
     }catch(err){
         console.log(err)
@@ -22,6 +28,9 @@ async function getTinhThanh(){
 getTinhThanh()
 async function getQuanHuyen(id){
     try{
+        if(!quanHuyenEl){
+            return
+        }
         const res = await fetch('http://localhost:3000/api/districts')
         const data = await res.json()
         let quanHuyenHtml = ''
@@ -36,6 +45,9 @@ async function getQuanHuyen(id){
 }
 async function getServices(){
     try{
+        if(!servicesEl){
+            return
+        }
         const services = await fetch('http://localhost:3000/api/services')
         .then(res=>res.json())
         .then(services=>services)
@@ -61,3 +73,8 @@ async function chooseService(id){
     }
   
 }
+const checkbox = document.getElementById("camKet")
+function checkCamKet(){
+    (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
+}
+

@@ -6,13 +6,22 @@ exports.getAll = async () => {
         return CTSCaNhan
     }
     catch(err){
-        console.log(err)
+        console.log(err)    
     }
 }
 
 exports.getById = async (id) => {
     try{
         const CTSCaNhan = await CTSCaNhanModel.findById(id);
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getByUserId = async (userId) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId});
         return CTSCaNhan
     }
     catch(err){
@@ -37,6 +46,13 @@ exports.createNew = async (values) => {
 
 }
 exports.update = async (id, values) => {
+    return await CTSCaNhanModel.findByIdAndUpdate({_id:id},values, function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
+}
+exports.sendRequest = async (id, values) => {
     return await CTSCaNhanModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
             console.log('Update failed!')

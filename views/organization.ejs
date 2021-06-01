@@ -1,26 +1,28 @@
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            <%= title %>
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <%- include('header') %> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../stylesheets/organization.css">
-        <link rel="stylesheet" href="../stylesheets/adminhome.css">
-    </head>
 
-    <body>
-        <div class="wrapper">
-            <div class="box">
-                <%- include('menuDaiLy')  %> 
-            </div>
-            <div class="nm-fm">
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('header') %>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/personal.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+        <%- include('menuDaiLy') %>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="nm-fm col-md-12">
                 <h2 class="title">CẤP CHỨNG THƯ SỐ CHO TỔ CHỨC/ DOANH NGHIỆP</h2>
             </div>
-            <form action="">
+            <form action="/digital-certificate/organization/add" method="POST">
                 <div id="form">
                     <div class="info-user">
                         <div>
@@ -30,63 +32,77 @@
                             <div class="if-fm mn" >
                                 <label for="">Tên giao dịch <span>*</span> </label>
                                
-                                <input type="text">
+                                <input type="text" name="tenGD">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Giấy phép ĐKKD</label>
-                                    <input type="text">
+                                    <input type="text" name="giayPhepDKKD">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Ngày cấp</label>
+<<<<<<< HEAD
                                     <input type="date">
                                 </div>
+=======
+                                    <input type="date" name="ngayCapGiayPhepDKKD">
+                            </div>
+>>>>>>> main
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Mã số thuế</label>
-                                    <input type="text">
+                                    <input type="text" name="MST">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Công ty mẹ</label>
-                                    <input type="text">
+                                    <input type="text" name="">
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Cam kết không hủy</label>
-                                    <input type="text">
+                                    <input type="checkbox" id="camKet" onchange="checkCamKet()" name="camKet">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Mật khẩu</label>
-                                    <input type="text">
+                                    <input type="password" name="password">
                                 </div>
                             </div>
                             <div class="if-fm mn">
                                 <label>
                                     Địa chỉ *
                                 </label>
-                                <input type="text">
+                                <input type="text" name="diaChi">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
+<<<<<<< HEAD
                                     <label>Tỉnh/ Thành Phố</label>
                                     <select name="tinhThanh" id="tinhThanh" onchange="getQuanHuyen(this.value)">
                                     </select>
+=======
+                                    <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
+                                            <select name="tinhThanh" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                <option value="0">--Lựa chọn--</option>
+                                            </select>
+>>>>>>> main
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Quận/ Huyện</label>
-                                    <input type="text">
+                                    <label>Quận/ Huyện <span class="note">*</span></label>
+                                            <select name="quanHuyen" id="quanHuyen">
+                                                <option value="0">Chọn tỉnh thành trước</option>
+                                            </select>
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Email giao dịch</label>
-                                    <input type="text">
+                                    <input type="text" name="emailGD">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Số điện thoại</label>
-                                    <input type="text">
+                                    <input type="text" name="soDienThoaiCongTy">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +116,7 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Họ và tên</label>
-                                    <input type="text">
+                                    <input type="text" name="hoTenChuDoanhNghiep">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Chức vụ</label>
@@ -110,23 +126,28 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Số CMTND/HC*</label>
-                                    <input type="text">
+                                    <input type="text" name="soCMT">
                                 </div>
                                 <div class="if-fm ck">
+<<<<<<< HEAD
                                     <label>Ngày cấp</label>
                                     <input type="date">
+=======
+                                        <label>Ngày cấp</label>
+                                        <input type="date" name="ngayCapCMT">
+>>>>>>> main
                                 </div>
                             </div>
                             <div class="if-fm mn">
                                 <label>
                                     Nơi cấp *
                                 </label>
-                                <input type="text">
+                                <input type="text" name="noiCapCMT">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Email</label>
-                                    <input type="text">
+                                    <input type="text" name="email">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Số điện thoại</label>
@@ -134,8 +155,22 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <% if(typeof errorsDN != 'undefined') { 
+
+                            errorsDN.forEach(msg => {    
+                        %> 
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= msg.msg %>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                   
+                        <% }) }%>
+
+
                     </div>
-                    
                 </div>
                 <div class="yeucau">
                     <div>
@@ -143,24 +178,43 @@
                     </div>
                     <div id="wrt-info">
                         <div class="if-fm mn" >
+<<<<<<< HEAD
                             <label>Gói chứng thư</label>
                             <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
                                 <option value="">Đăng ký CTS 1 năm</option>
                             </select>
                             <label>Thời hạn</label>
                             <input type="text" name="" id="">
+=======
+                            <label>
+                                Gói chứng thư
+                            </label>
+                            <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
+                                <option value="">Đăng ký CTS 1 năm</option>
+                            </select>
+>>>>>>> main
                         </div>
                         <div class="if-fm mn">
                             <label>
                                Giá cước
                             </label>
+<<<<<<< HEAD
                             <input type="text" id="gia">
+=======
+                            <input type="text" name="giaCuoc"  id="gia">
+                        </div>
+                        <div class="if-fm mn">
+                            <label>
+                                Thời hạn sử dụng
+                            </label> 
+                            <input type="text"  name="thoiHan" id="thoiHan">
+>>>>>>> main
                         </div>
                         <div class="if-fm mn">
                             <label>
                                Người thực hiện
                             </label>
-                            <input type="text">
+                            <input type="text" name="nguoiThucHien">
                         </div>
                     </div>
                 </div>
@@ -176,10 +230,10 @@
                             </label>
                             <form enctype="multipart/form-data" method="POST">
                                 <input type="file" name="myfile" />
-                            </form>
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 
                 </form>
             </div>
@@ -189,12 +243,24 @@
                     <input type="submit" value="Ghi lại" class="btn btn-primary">
                     <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
                     <input type="submit" value="Đóng" class="btn-primary dong">
+=======
+                <div id="register">
+                    <div class="rg-btn">
+                        <input type="submit" value="Ghi lại" class="btn btn-primary">
+                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
+                        <a href="/" class="btn btn-secondary">Đóng</a>
+                    </div>
+>>>>>>> main
                 </div>
-            </div>
+            </form>
         </div>
-        
 
-    </body>
-    <script src="../javascripts/init.js"></script>
+    </div>
+</div>
 
+</div>
+
+
+</body>
+<script src="../javascripts/init.js"></script>
 </html>

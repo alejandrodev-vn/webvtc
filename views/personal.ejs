@@ -44,13 +44,13 @@
                                             <input type="text" name="soCMT">
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Ngày cấp</label>
+                                            <label>Ngày cấp <span class="note">*</span></label>
                                             <input type="date" name="ngayCapCMT">
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
-                                            <label>Nơi cấp</label>
+                                            <label>Nơi cấp <span class="note">*</span></label>
                                             <input type="text" name="noiCapCMT">
                                         </div>
                                         <div class="if-fm ck">
@@ -88,24 +88,25 @@
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
-                                            <label>Tỉnh/ Thành Phố</label>
-                                            <select name="tinhThanh" id="tinhThanh" onchange="getQuanHuyen(this.value)">
-                                       
+                                            <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
+                                            <select name="tinhThanh" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                <option value="0">--Lựa chọn--</option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Quận/ Huyện</label>
+                                            <label>Quận/ Huyện <span class="note">*</span></label>
                                             <select name="quanHuyen" id="quanHuyen">
+                                                <option value="0">Chọn tỉnh thành trước</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
-                                            <label>Email cá nhân</label>
+                                            <label>Email cá nhân  <span class="note">*</span></label>
                                             <input type="text" name="email">
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Số điện thoại</label>
+                                            <label>Số điện thoại  <span class="note">*</span></label>
                                             <input type="text" name="soDienThoai">
                                         </div>
                                     </div>
@@ -119,29 +120,26 @@
                                 <div id="wrt-info">
                                     <div class="if-fm">
                                         <div class="if-fm ck">
-                                            <label>Gói chứng thư</label>
+                                            <label>Gói chứng thư <span class="note">*</span></label>
                                             <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
-                                                <option value="">Đăng ký CTS 1 năm</option>
+                                        
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Thời hạn sử dụng</label>
-                                            <input type="text"  name="thoiHan" id="thoiHan">
+                                            <label>Thời hạn sử dụng <span class="note">*</span> </label>
+                                            <input type="text"  name="thoiHan" id="thoiHan" readonly="true" style="background:#eee">
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Giá cước</label>
-                                            <input type="text" name="gia"  id="gia">
+                                            <input type="text" name="gia" id="gia" readonly="true" style="background:#eee">
                                         </div>
                                         <div class="if-fm ck">
-                                            <label>Người thực hiện</label>
-                                            <input type="text" name="nguoiThucHien">
+                                            <label>Người thực hiện <span class="note">*</span></label>
+                                            <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
                                         </div>
-                                        <div class="if-fm ck">
-                                            <label>Ngày Tạo</label>
-                                            <input type="date" name="ngayTao">
-                                        </div>
+                                        <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                     </div>
                                 </div>
                                 <% if(typeof errors != 'undefined') { 

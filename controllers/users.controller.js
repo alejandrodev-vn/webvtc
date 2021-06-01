@@ -1,16 +1,16 @@
 const usersService = require('../services/users.service');
 
-module.exports.signup = (req, res, next)=> {
-    res.render('signup')
-    
+module.exports.authencation = async (req, res, next)=> {
+    res.render('authentication',{ title: 'Đăng nhập' })
 }
 
 
 module.exports.add = async (req, res, next)=> {
     try{
        let values = req.body
+       console.log(values)
        await usersService.createNew(values)
-       res.status(200).redirect('/users')
+       res.status(200).redirect('/')
     }
     catch(err){
         console.log(err)
@@ -46,7 +46,6 @@ module.exports.changePassword = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
     try{
         let values = req.body;
-        
         const user = await usersService.login(values);
         if(user.error === 'User not found'){
             res.status(404).json(user.error)
@@ -61,7 +60,9 @@ module.exports.login = async (req, res, next) => {
                     console.log('Token sign failed');
                 }else{
                     req.session.token = token
-                    res.redirect('/')  
+                    req.session.userId = user._id
+                    req.session.role = user.role
+                    res.redirect('/')
                 }
             }) 
         }
@@ -69,4 +70,8 @@ module.exports.login = async (req, res, next) => {
     catch(err){
         console.log(err)
     }
+}
+module.exports.logout = (req, res, next) => {
+    res.clearCookie('connect.sid', { path: '/' })
+    res.redirect('/users/login')
 }

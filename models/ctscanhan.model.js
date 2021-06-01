@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
 
 const CTSCaNhanSchema = new Schema({
-  email: {type: String},
-  soDienThoai: {type: String},
+  loaiCTS: {type: String, default: 'Cá Nhân'},
+  email: {type: String, required: true},
+  soDienThoai: {type: String, required: true},
   hoTenNguoiDK: {type: String, required: true},
   soCMT: {type: String, required: true},
   noiCapCMT: {type: String, required: true},
@@ -22,9 +23,12 @@ const CTSCaNhanSchema = new Schema({
   gia:{type: Number},
   nguoiThucHien:{type: String, required: true},
   ngayTao:{type: Date, required: true},
-  fileHoSo:{type:String},
-  trangThai:{type: Number, required: true, default:0}
-
+  fileHoSo:{type:String, default:''},
+  trangThai:{type: Number, required: true, default:0},
+  createdBy: {type: String},
+  yKienDaiLy: {type: String},
+  yKienVina: {type: String}
+  
 }, {timestamps: true});
 // a setter
 CTSCaNhanSchema.path('hoTenNguoiDK').set(function (input) {

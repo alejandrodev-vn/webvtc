@@ -64,8 +64,8 @@ label {
     padding: 5px;
 }
 
-.if-fm input {
-    width: 70%;
+.if-fm input[type=text] {
+    width: 100%;
     margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
