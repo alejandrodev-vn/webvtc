@@ -1,3 +1,4 @@
+const goiDichVuService = require('../services/goidichvu.service')
 const CTSDoanhNghiepService = require('../services/ctsdoanhnghiep.service')
 const {validationResult} = require('express-validator');
 
@@ -19,7 +20,11 @@ module.exports.add = async (req, res, next) => {
         }
         console.log(req.body)
         let values = req.body;
-        values.giaCuoc =Number(req.body.giaCuoc.replace(/[^0-9]/g,''))
+        const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
+        const getGia = goiDichVu.gia
+        values.goiCTSId = goiDichVu._id
+        values.thoiHan = goiDichVu.thoiHan
+        values.giaCuoc =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSDoanhNghiepService.createNew(values);
         res.redirect('/')
@@ -42,6 +47,24 @@ module.exports.update = async (req, res, next) => {
 
         await CTSDoanhNghiepService.update(id, values);
         res.redirect('/digital-certificate/organization')
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.sendRequest = async (req, res, next) => {
+    try{
+        let { selectItem1 } = req.body;
+        console.log(selectItem1)
+        if(Array.isArray(selectItem1)){
+            for(let i=0; i<selectItem1.length; i++){
+                await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1});
+            }
+        }else {
+            await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1});
+        }
+        
+        res.redirect('/')
     }
     catch(err){
         console.log(err)

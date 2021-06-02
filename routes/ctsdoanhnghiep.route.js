@@ -9,6 +9,7 @@ const controllerCTSDoanhNghiep = require('../controllers/ctsdoanhnghiep.controll
 router.get('/digital-certificate/organization', controllerCTSDoanhNghiep.organization);
 router.post('/digital-certificate/organization/add', validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.add);
 router.put('/digital-certificate/organization/edit/:id', validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.update);
+router.post('/digital-certificate/organization/send-request', controllerCTSDoanhNghiep.sendRequest);
 router.delete('/digital-certificate/organization/delete/:id', controllerCTSDoanhNghiep.delete);
 
 
