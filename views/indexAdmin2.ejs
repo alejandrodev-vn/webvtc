@@ -20,14 +20,13 @@
             <div id="modalCertificatePersonal" class="modal">
 
                 <!-- Modal content -->
-                  <div class="modal-content">
-                    
-                      <div class="form-area">
+                <div class="modal-content">
+                    <div class="form-area">
                           <div class="top-modal">
                             <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Xử lý yêu cầu</h2>
                             <span class="close">&times;</span>
                           </div>
-                          <form action="/digital-certificate/personal" action="POST">
+                        <form action="/digital-certificate/personal/send-response" method="POST">
                             <div id="form">
                                 <div class="info-user">
                                     <div>
@@ -190,15 +189,17 @@
                             </table>
                             <div id="register">
                                 <div class="rg-btn">
-                                    <input type="submit" value="Duyệt" class="btn btn-primary" id="btnSubmitPersonal">
-                                    <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                    <input type="submit" value="Duyệt" class="btn btn-success" name="accept" id="btnAcceptPersonal">
+                                    <input type="submit" value="Từ Chối Duyệt" class="btn btn-danger" name="decline" id="btnDeclinePersonal">
                                     <input type="button" value="Đóng" class="btn btn-secondary">
+                                    <input type="hidden" id="id" name="id">
+
                                 </div>
                             </div>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
             <!-- end-modal personal -->
             <div id="modalCertificateOrganization" class="modal">
 
@@ -498,5 +499,5 @@
 
     </body>
     <script src="../javascripts/listAdmin2.js" type="module"></script>
-    <script src="../javascripts/init.js"></script>
+    <script src="../javascripts/init.js" type="module"></script>
 </html>

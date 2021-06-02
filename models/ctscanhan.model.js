@@ -4,7 +4,7 @@ const { Timestamp } = require('mongodb');
 
 const CTSCaNhanSchema = new Schema({
   loaiCTS: {type: String, default: 'Cá Nhân'},
-  email: {type: String, required: true},
+  email: {type: String, required: true, lowercase:true},
   soDienThoai: {type: String, required: true},
   hoTenNguoiDK: {type: String, required: true},
   soCMT: {type: String, required: true},

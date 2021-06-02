@@ -37,10 +37,10 @@ module.exports.update = async (req, res, next) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { id } = req.params
+        const { idEdit } = req.body
         let values = req.body;
 
-        await CTSCaNhanService.update(id, values);
+        await CTSCaNhanService.update(idEdit, values);
         res.redirect('/')
     }
     catch(err){
@@ -60,6 +60,25 @@ module.exports.sendRequest = async (req, res, next) => {
         }
         
         res.redirect('/')
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.sendResponse = async (req, res, next) => {
+    try{
+        const { id, accept, decline } = req.body
+        console.log(accept, decline)
+        if(accept == 'Duyệt' && accept != 'undefined'){
+            await CTSCaNhanService.sendResponse(id, {trangThai: 2});
+            res.redirect('/')
+        }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
+            await CTSCaNhanService.sendResponse(id, {trangThai: 0});
+            res.redirect('/')
+        }else{
+            res.redirect('/')
+        }
+     
     }
     catch(err){
         console.log(err)
