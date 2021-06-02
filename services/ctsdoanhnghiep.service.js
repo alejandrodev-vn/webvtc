@@ -19,6 +19,15 @@ exports.getById= async (id) => {
         console.log(err)
     }
 }
+exports.getByUserId = async (userId) => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({createdBy:userId});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 exports.createNew= async (values) => {
     try{
@@ -36,6 +45,14 @@ exports.createNew= async (values) => {
     }
 
 }
+exports.sendRequest = async (id, values) => {
+    return await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
+}
+
 exports.update = async (id, values) => {
     return await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
