@@ -170,22 +170,21 @@
                             </select>
                         </div>
                         <div class="if-fm mn">
-                            <label>
-                               Giá cước
-                            </label>
-                            <input type="text" name="giaCuoc"  id="gia">
+                            <div class="if-fm ck">
+                                <label>Giá cước</label>
+                                <input type="text" name="giaCuoc" id="gia" readonly="true" style="background:#eee">
+                            </div>
                         </div>
                         <div class="if-fm mn">
-                            <label>
-                                Thời hạn sử dụng
-                            </label> 
-                            <input type="text"  name="thoiHan" id="thoiHan">
+                            <label>Thời hạn sử dụng <span class="note">*</span> </label>
+                                            <input type="text"  name="thoiHan" id="thoiHan" readonly="true" style="background:#eee">
                         </div>
                         <div class="if-fm mn">
-                            <label>
-                               Người thực hiện
-                            </label>
-                            <input type="text" name="nguoiThucHien">
+                            <div class="if-fm ck">
+                                <label>Người thực hiện <span class="note">*</span></label>
+                                <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
+                            </div>
+                            <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                         </div>
                     </div>
                 </div>
