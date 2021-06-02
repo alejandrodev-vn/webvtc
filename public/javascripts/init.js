@@ -78,3 +78,6 @@ function checkCamKet(){
     (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
 }
 
+export {
+    getQuanHuyen
+}

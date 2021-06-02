@@ -18,7 +18,11 @@
 <body>
     <div class="wrapper">
         <div class="box">
+            <% if(locals.user.role===1){ %> 
             <%- include('menuAdmin') %>
+            <% }else{ %> 
+            <%- include('menuDaily') %>
+            <% } %> 
         </div>
            <!-- The Modal -->
            <div id="myModal" class="modal">
@@ -176,5 +180,5 @@
        
 </body>
 <script src="../javascripts/modalBox.js"></script>
-<script src="../javascripts/init.js"></script>
+<script src="../javascripts/init.js" type="module"></script>
 <script src="../javascripts/listAccountAdmin2.js" type="module"></script>

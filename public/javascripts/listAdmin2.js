@@ -8,12 +8,12 @@ const url = 'http://localhost:3000/'
 
 async function getCTSCaNhan(){
     try{
-        const urlList1 = url + `api/digital-certificate/personal/byAgency`
+        const urlList = url + `api/digital-certificate/personal/byAgency`
         const options = {
             method: 'GET'
         }
-        const CTSCaNhanByAgency = await fetchAndShowData(urlList1, options, showPending)
-        return CTSCaNhanByAgency
+        return await fetchAndShowData(urlList, options, showPending)
+        
        
     }catch(err){
         console.log(err)
@@ -128,7 +128,6 @@ async function handleRequest(){
                 const district = await fetchAPI(urlDistricts, options)
                 const service = await fetchAPI(urlServices, options)
 
-                console.log(cts)
                 modal.style.opacity = "1";
                 modal.style.display = "block"
                 document.querySelector('#hoTenNguoiDK').value = cts.hoTenNguoiDK
@@ -148,6 +147,8 @@ async function handleRequest(){
                 document.querySelector('#maPhieuYC').value = service._id
                 document.querySelector('#goiCTS').value = service.tenGoiDichVu
                 document.querySelector('#thoiHan').value = service.thoiHan
+                document.querySelector('#id').value = cts._id
+
             })
         })
         // When the user clicks on <span> (x), close the modal

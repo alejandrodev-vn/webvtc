@@ -4,8 +4,8 @@ const { Timestamp } = require('mongodb');
 
 const UserSchema = new Schema({
   hoTen: {type: String, required: true},
-  email: {type: String},
-  username: {type: String, required: true, unique: true},
+  email: {type: String, lowercase:true},
+  username: {type: String, required: true, unique: true, lowercase:true},
   password: {type: String, required: true},
   soDienThoai: {type: String},
   tinhThanhId: {type: mongoose.Schema.Types.ObjectId, ref:'Province' ,required: true},

@@ -12,7 +12,7 @@ async function getCTSCaNhan(){
         const options = {
             method: 'GET'
         }
-        await fetchAndShowData(urlList, options, showPending)
+        return await fetchAndShowData(urlList, options, showPending)
 
        
     }catch(err){
