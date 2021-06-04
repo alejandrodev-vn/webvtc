@@ -1,7 +1,7 @@
 const goiDichVuService = require('../services/goidichvu.service')
 const CTSCaNhanService = require('../services/ctscanhan.service')
 const {validationResult} = require('express-validator');
-const url = "http://localhost:3000/"
+
 module.exports.personal = (req, res, next) => {
     try{
         res.render('personal', { title: 'CTS Cá nhân', errors:req.session.errors });
@@ -10,6 +10,7 @@ module.exports.personal = (req, res, next) => {
         console.log(err)
     }
 }
+
 module.exports.add = async (req, res, next) => {
     try{
         const errors = validationResult(req);
@@ -50,7 +51,6 @@ module.exports.update = async (req, res, next) => {
 module.exports.sendRequest = async (req, res, next) => {
     try{
         let { selectItem } = req.body;
-        console.log(selectItem)
         if(Array.isArray(selectItem)){
             for(let i=0; i<selectItem.length; i++){
                 await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
@@ -68,7 +68,6 @@ module.exports.sendRequest = async (req, res, next) => {
 module.exports.sendResponse = async (req, res, next) => {
     try{
         const { id, accept, decline } = req.body
-        console.log(accept, decline)
         if(accept == 'Duyệt' && accept != 'undefined'){
             await CTSCaNhanService.sendResponse(id, {trangThai: 2});
             res.redirect('/')
@@ -84,17 +83,95 @@ module.exports.sendResponse = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.delete = async (req, res, next) => {
+module.exports.sendMail = async (req, res, next) => {
     try{
-        const { id } = req.params
-
-        await CTSCaNhanService.delete(id);
-        res.redirect('/digital-certificate/personal')
+        const user = req.body
+        const mailgun = require("mailgun-js");
+        const DOMAIN = "sandbox7f9e883d109046e38f8d3a0a182518eb.mailgun.org";
+        const mg = mailgun({apiKey: "7f6264d76c3462ed20e7f5a6fe29ffbf-1d8af1f4-c381556f", domain: DOMAIN});
+        const data = {
+            from: "SmartSign <huytra264@gmail.com>",
+            to: "huytra264@gmail.com",
+            subject: "Xác nhận thông tin SmartSign",
+            text: `Kính gửi Ông/Bà ${user.username}`
+        };
+        mg.messages().send(data, function (error, body) {
+            console.log(body);
+        });
+    }catch(err){
+        console.log(err)
+    }
+}
+module.exports.handleFormActions = async (req, res, next) => {
+    try{
+        let { selectItem, deletePersonal, sendPersonal } = req.body;
+        if(deletePersonal == 'Xóa' && deletePersonal != 'undefined'){
+            if(Array.isArray(selectItem)){
+                for(let i=0; i<selectItem.length; i++){
+                    await CTSCaNhanService.delete(selectItem[i]);
+                }
+            }else {
+                await CTSCaNhanService.delete(selectItem);
+            }
+        }else if(sendPersonal != 'undefined'){ 
+            if(Array.isArray(selectItem)){
+                for(let i=0; i<selectItem.length; i++){
+                    await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
+                }
+            }else {
+                await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
+            }
+        }else{
+            res.redirect('/')
+        }
+        
+        
+        res.redirect('/')
     }
     catch(err){
         console.log(err)
     }
 }
+module.exports.sendMail =  async (req, res, next) => {
+    const { id } = req.params 
+    const cts = await CTSCaNhanService.getById({_id:id})
+    const nodemailer = require('nodemailer')
+    var transporter =  nodemailer.createTransport({ // config mail server
+        service:"gmail",
+        auth: {
+            user: 'huytrafpt@gmail.com',
+            pass: 'Huytra264'
+        },
+        tls: {rejectUnauthorized:false}
+
+    });
+    var mainOptions = { 
+        from: 'SmartSign<smartsign@gmail.com>',
+        to: cts.email,
+        subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
+        text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
+        - Thông tin thuê bao như sau:
+            + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
+            + Mã số thuế: ${cts.MSTCaNhan}
+            + CMND/HC: ${cts.soCMT}
+            + Điện thoại: ${cts.soDienThoai}
+        `,
+        html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+        <a href="http://localhost:3000/">http://localhost:3000/</a>
+        `
+    }
+    transporter.sendMail(mainOptions, function(err, info){
+        if (err) {
+            console.log(err);
+            res.redirect('/');
+        } else {
+            console.log('Message sent: ' +  info.response);
+            res.redirect('/');
+        }
+    });
+  
+}
+
 function convertToYYYYMMDD (d){
     date = new Date(d);
     year = date.getFullYear();

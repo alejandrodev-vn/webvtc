@@ -371,9 +371,11 @@
                         </div>
                         <div id="register">
                             <div class="rg-btn">
-                                <input type="submit" value="Duyệt" class="btn btn-primary">
-                                <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                <input type="submit" value="Duyệt" class="btn btn-success" name="acceptOrg" id="btnAcceptOrg">
+                                <input type="submit" value="Từ Chối Duyệt" class="btn btn-danger" name="declineOrg" id="btnDeclineOrg">
                                 <input type="button" value="Đóng" class="btn btn-secondary">
+                                <input type="hidden" id="idOrg" name="idOrg">
+
                             </div>
                         </div>
                         </div>
@@ -560,5 +562,5 @@
         </div>
     </body>
     <script src="../javascripts/listAdmin2.js" type="module"></script>
-    <script src="../javascripts/init.js" type="module"></script>
+    <script src="../javascripts/init.js"></script>
 </html>

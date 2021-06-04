@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('header') %> 
+        <link rel="stylesheet" href="../stylesheets/organization.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="box">
+                <%- include('menuDaily')  %> 
+            </div>
+           <div class="container">
+               <div class="row">
+                <h3 class="pl-3">Thùng rác</h3>
+                <div class="container" style="border: 1px solid #aaaaaa;">
+                    <br>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#CTSDoanhNgiep">Doanh Nghiệp</a>
+                      </li>
+                    </ul>
+                  
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div id="CTSCaNhan" class="container tab-pane active"><br>
+                        <div class="row" style="border: 1px solid #aaaaaa;">
+                            <table class="table table-bordered" >
+                                <thead class="thead-default">
+                                  <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã yêu cầu</th>
+                                    <th scope="col">Họ Tên</th>
+                                    <th scope="col">CMND</th>
+                                    <th scope="col">MST</th>
+                                    <th scope="col">Gói CTS</th>
+                                    <th scope="col">Thời hạn (năm)</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Người tạo</th>
+                                    <th scope="col">Trạng thái hồ sơ</th>
+                                    <th scope="col">Khôi phục</th>
+                                    <th scope="col">Xóa</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="trashPersonal">
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                      </div>
+                      <form id="formRestorePersonal" method="POST"></form>
+                      <form id="formDestroyPersonal" method="POST"></form>
+                      <div id="CTSDoanhNgiep" class="container tab-pane fade"><br>
+                        <div class="row" style="border: 1px solid #aaaaaa;">
+                            <table class="table table-bordered" >
+                                <thead class="thead-default">
+                                  <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã yêu cầu</th>
+                                    <th scope="col">Tên Doanh Ngiệp</th>
+                                    <th scope="col">Giấy Phép KD</th>
+                                    <th scope="col">MST</th>
+                                    <th scope="col">Gói CTS</th>
+                                    <th scope="col">Thời hạn (năm)</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Người tạo</th>
+                                    <th scope="col">Trạng thái hồ sơ</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="trashOrganization">
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+              
+               </div>
+           </div>
+           <div id="modalDelete" class="modal">
+            <div class="modal-content" >
+                <div class="container">
+                <h1>Xóa bản ghi này</h1>
+                <p>Hành động này sẽ xóa vĩnh viễn bản ghi, bạn có chắc chứ?</p>
+                
+                <div class="clearfix">
+                    <button type="button" class="deletebtn btn-danger">Xóa</button>
+                    <button type="button" class="cancelbtn btn-secondary">Đóng</button>
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+        
+
+    </body>
+    <script src="../javascripts/trash.js" type="module"></script>
+</html>

@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    font-family: Arial;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
     font-size: 17px;
     padding: 0;
     box-sizing: border-box;
@@ -40,8 +40,12 @@ div.scrollmenu {
     justify-content: space-between;
 }
 thead.thead-default {
+    font-family:segoe ui light;
     background: #eee;
     border-bottom: 3px solid;
+}
+td>p{
+    margin: 0 !important;
 }
 a {
     text-decoration: none
@@ -345,6 +349,10 @@ div.example::after {
 h5{
     color: #ffa100;
 }
+#modalDelete .modal-content{
+    width: 50%;
+    margin: 0 auto;
+  }
   /* Modal Content */
   .modal-content {
     background-color: #fefefe;

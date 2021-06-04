@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
+const mongooseDelete = require('mongoose-delete');
+
 
 const CTSCaNhanSchema = new Schema({
   loaiCTS: {type: String, default: 'Cá Nhân'},
@@ -30,6 +32,11 @@ const CTSCaNhanSchema = new Schema({
   yKienVina: {type: String}
   
 }, {timestamps: true});
+//add plugin
+CTSCaNhanSchema.plugin(mongooseDelete, { 
+  overrideMethods: true, 
+  deletedAt: true
+})
 // a setter
 CTSCaNhanSchema.path('hoTenNguoiDK').set(function (input) {
   return input.charAt(0).toUpperCase() + input.slice(1);
