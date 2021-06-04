@@ -12,6 +12,7 @@ router.get('/digital-certificate/personal', async (req, res, next) => {
         console.log(err)
     }
 });
+//self
 router.get('/digital-certificate/personal/byUserId', async (req, res, next)=> {
     try{
         const { userId } = req.session
@@ -22,9 +23,11 @@ router.get('/digital-certificate/personal/byUserId', async (req, res, next)=> {
         console.log(err)
     }
 });
+//admin2
 router.get('/digital-certificate/personal/byAgency', async (req, res, next)=> {
     try{
         const { userId } = req.session
+        //daily1
         const agencyList = await usersService.getByBelongTo(userId)
         const result = []
         for(let i=0; i<agencyList.length; i++){
@@ -42,12 +45,34 @@ router.get('/digital-certificate/personal/byAgency', async (req, res, next)=> {
                 })
             }
         }
+        //daily2
+        for(let i=0; i<agencyList.length; i++){
+            let agency2 = await usersService.getByBelongTo(agencyList[i]._id)
+            agency2.forEach( async agency => {
+                let CTSCaNhan = await CTSCaNhanService.getByUserId(agency._id)
+                console.log(CTSCaNhan)
+                if(CTSCaNhan.length==1){
+                    if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==3){
+                        result.push(...CTSCaNhan)
+    
+                    }
+                }else if(CTSCaNhan.length!=0){
+                    CTSCaNhan.map(cts=>{
+                        if(cts.trangThai==1 || cts.trangThai==3){
+                            result.push(cts)
+                        }
+                    })
+                }
+            })
+
+        }
         res.json(result)
     }   
     catch(err){
         console.log(err)
     }
 });
+//daily1
 router.get('/digital-certificate/personal/agency1', async (req, res, next)=> {
     try{
         const { userId } = req.session
@@ -69,6 +94,8 @@ router.get('/digital-certificate/personal/agency1', async (req, res, next)=> {
         console.log(err)
     }
 });
+
+
 router.get('/digital-certificate/personal/:id', async (req, res, next)=> {
     try{
         const id = req.params.id

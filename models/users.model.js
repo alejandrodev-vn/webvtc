@@ -22,9 +22,6 @@ const UserSchema = new Schema({
 UserSchema.path('hoTen').set(function (input) {
   return input.charAt(0).toUpperCase() + input.slice(1);
 });
-UserSchema.path('belongTo').set(function (input) {
-  return input.trim()
-});
 
 
 module.exports = mongoose.model('User', UserSchema);

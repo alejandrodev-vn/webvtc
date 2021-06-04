@@ -31,6 +31,7 @@ const districtsRouter = require('./routes/districts.route');
 const CTSCaNhanRouter = require('./routes/ctscanhan.route');
 const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
+const trashRouter = require('./routes/trash.route')
 //api
 const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
@@ -40,6 +41,7 @@ const districtsAPI = require('./routes/api/districts.api');
 const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 const usersAPI = require('./routes/api/users.api');
+const trashAPI = require('./routes/api/trash.api');
 
 app.use(
   session({
@@ -73,6 +75,7 @@ app.use(goiDichVuRouter);
 app.use(CTSCaNhanRouter)
 app.use(CTSDoanhNghiepRouter)
 app.use(usersRouter);
+app.use(trashRouter);
 //api
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);
@@ -82,6 +85,7 @@ app.use('/api', giaoDichAPI);
 app.use('/api', goiDichVuAPI);
 app.use('/api', CTSCaNhanAPI);
 app.use('/api', CTSDoanhNghiepAPI);
+app.use('/api', trashAPI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

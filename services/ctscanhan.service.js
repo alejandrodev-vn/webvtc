@@ -52,6 +52,13 @@ exports.update = async (id, values) => {
         }else console.log('Update success!')
     })
 }
+exports.delete = async (id) => {
+    return await CTSCaNhanModel.delete({_id:id},function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
+}
 exports.sendRequest = async (id, values) => {
     return await CTSCaNhanModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
@@ -64,15 +71,5 @@ exports.sendResponse = async (id, values) => {
         if(err){
             console.log('Update failed!')
         }else console.log('Update success!')
-    })
-}
-
-exports.delete = async (id) => {
-    return await CTSCaNhanModel.findByIdAndDelete({_id: id}, (err) => {
-        if(err){
-            console.log('Delete fail!');
-        }else{
-            console.log('Delete success!');
-        }
     })
 }
