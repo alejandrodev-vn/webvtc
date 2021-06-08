@@ -50,8 +50,8 @@ async function showTrashPersonal(data){
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-           <td><a href="" class="btn btn-success btn-restore" data-id=${cts._id} style="font-size: 13px;padding: 3px;">Khôi phục</a></td>
-           <td><a href="" class="btn btn-danger btn-destroy" data-id=${cts._id} style="font-size: 13px;padding: 3px;">Xóa vĩnh viễn</a></td>
+           <td><a href="" class="btn btn-success btn-restore" data-id=${cts._id} style="font-size: 13px;padding: 3px;width:60px">Khôi phục</a></td>
+           <td><a href="" class="btn btn-danger btn-destroy" data-id=${cts._id} style="font-size: 13px;padding: 3px;width:60px">Xóa vĩnh viễn</a></td>
     
          </tr>`
          trashPersonal.innerHTML = html
@@ -65,7 +65,7 @@ async function showTrashPersonal(data){
                 formRestorePersonal.submit()
             }
         })
-        // confirmDelete()
+        confirmDelete()
 
     }else {
         trashPersonal.innerHTML = '<td colspan="12"><h3 class="text-md-center">Hiện không có dữ liệu</h3></td>'
@@ -129,7 +129,6 @@ const confirmDelete = function(){
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        event.preventDefault();
         if (event.target == modalDelete) {
             modalDelete.style.opacity = "0"
         setTimeout(()=>{modalDelete.style.display = "none";

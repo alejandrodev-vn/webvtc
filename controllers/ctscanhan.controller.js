@@ -136,40 +136,53 @@ module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 
     const cts = await CTSCaNhanService.getById({_id:id})
     const nodemailer = require('nodemailer')
-    var transporter =  nodemailer.createTransport({ // config mail server
-        service:"gmail",
-        auth: {
-            user: 'huytrafpt@gmail.com',
-            pass: 'Huytra264'
-        },
-        tls: {rejectUnauthorized:false}
-
-    });
-    var mainOptions = { 
-        from: 'SmartSign<smartsign@gmail.com>',
-        to: cts.email,
-        subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
-        text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
-        - Thông tin thuê bao như sau:
-            + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
-            + Mã số thuế: ${cts.MSTCaNhan}
-            + CMND/HC: ${cts.soCMT}
-            + Điện thoại: ${cts.soDienThoai}
-        `,
-        html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-        <a href="http://localhost:3000/">http://localhost:3000/</a>
-        `
-    }
-    transporter.sendMail(mainOptions, function(err, info){
+    const jwt = require('jsonwebtoken')
+    let token = jwt.sign({ username: cts.soDienThoai }, process.env.KEY,{
+        expiresIn: '1m' /*<---- this is 1 minutes ♥*/
+    }, (err, token) => {
         if (err) {
-            console.log(err);
-            res.redirect('/');
-        } else {
-            console.log('Message sent: ' +  info.response);
-            res.redirect('/');
+            console.log('Token sign failed');
+        }else{
+            var transporter =  nodemailer.createTransport({ // config mail server
+                service:"gmail",
+                auth: {
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
+                },
+                tls: {rejectUnauthorized:false}
+        
+            });
+            var mainOptions = { 
+                from: 'SmartSign<smartsign@gmail.com>',
+                to: cts.email,
+                subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
+                text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
+                - Thông tin thuê bao như sau:
+                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
+                    + Mã số thuế: ${cts.MSTCaNhan}
+                    + CMND/HC: ${cts.soCMT}
+                    + Điện thoại: ${cts.soDienThoai}
+                `,
+                html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+                <a href="http://localhost:3000/${token}">http://localhost:3000/${token}</a>
+                `
+            }
+            
+            transporter.sendMail(mainOptions, async function(err, info){
+                if (err) {
+                    console.log(err);
+                    res.redirect('/');
+                } else {
+                    console.log('Message sent: ' +  info.response);
+                    if(cts.trangThai == 2){ 
+                        await 
+                        CTSCaNhanService.update(id, { trangThai:3 }) 
+                    }
+                    res.redirect('/');
+                }
+            });
         }
-    });
-  
+    }) 
 }
 
 function convertToYYYYMMDD (d){
