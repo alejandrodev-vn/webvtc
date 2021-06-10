@@ -10,6 +10,25 @@ exports.getAll = async () => {
         console.log(err)
     }
 }
+exports.getAllAdmin = async () => {
+    try{
+        const users = await usersModel.find({$or:[{role: 0},{role:1}]});
+        return users
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getAllAgency = async () => {
+    try{
+        const users = await usersModel.find({$or:[{role: 2},{role:3}]});
+        return users
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 
 exports.getById = async (id) => {
     try{

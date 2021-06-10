@@ -20,14 +20,13 @@
             <div id="modalCertificatePersonal" class="modal">
 
                 <!-- Modal content -->
-                  <div class="modal-content">
-                    
-                      <div class="form-area">
+                <div class="modal-content">
+                    <div class="form-area">
                           <div class="top-modal">
                             <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Xử lý yêu cầu</h2>
                             <span class="close">&times;</span>
                           </div>
-                          <form action="/digital-certificate/personal" action="POST">
+                        <form action="/digital-certificate/personal/send-response" method="POST">
                             <div id="form">
                                 <div class="info-user">
                                     <div>
@@ -190,16 +189,17 @@
                             </table>
                             <div id="register">
                                 <div class="rg-btn">
-                                    <input type="submit" value="Duyệt" class="btn btn-primary" id="btnSubmitPersonal">
-                                    <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                    <input type="submit" value="Duyệt" class="btn btn-success" name="accept" id="btnAcceptPersonal">
+                                    <input type="submit" value="Từ Chối Duyệt" class="btn btn-danger" name="decline" id="btnDeclinePersonal">
                                     <input type="button" value="Đóng" class="btn btn-secondary">
-                                    <input type="hidden" id="id">
+                                    <input type="hidden" id="id" name="id">
+
                                 </div>
                             </div>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
             <!-- end-modal personal -->
             <div id="modalCertificateOrganization" class="modal">
 
@@ -209,7 +209,7 @@
                       <div class="form-area">
                           <div class="top-modal">
                             <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Xử lý yêu cầu</h2>
-                            <span class="close">&times;</span>
+                            <span class="close close-1">&times;</span>
                           </div>
                           <div id="form">
                             <div class="info-user">
@@ -220,44 +220,44 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Tên Giao Dịch</span>
-                                            <input type="text" name="hoTenNguoiDK" disabled>
+                                            <input type="text" id="tenGD-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Mã Số Thuế</span>
-                                            <input type="text" id="MSTCaNhan" disabled>
+                                            <input type="text" id="MST-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Giấy phép ĐKKD</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="giayPhepDKKD-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Ngày cấp</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="ngayCap-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
                                         <span>
                                         Địa chỉ 
                                     </span>
-                                        <input type="text" disabled>
+                                        <input type="text" id="diaChi-DN" disabled>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Email Giao Dịch</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="emailGD-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Số Điện Thoại</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="soDienThoai-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
                                         <span>
                                         Thuộc Tổ Chức
                                         </span>
-                                        <input type="text" disabled>
+                                        <input type="text" id="toChuc-DN" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -271,38 +271,38 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Họ Và Tên</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="hoTen-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Chức Vụ</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="chucVu-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Số CMTND/HC</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="soCMTND-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Ngày cấp</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="ngayCapCMTND-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
                                         <span>
                                            Nơi Cấp
                                         </span>
-                                        <input type="text" disabled>
+                                        <input type="text" id="noicap-DN" disabled>
                                     </div>
                                 </div>
                                 <div class="if-fm">
                                     <div class="if-fm ck">
                                         <span>Email</span>
-                                        <input type="text" disabled>
+                                        <input type="text" id="email-DN" disabled>
                                     </div>
                                     <div class="if-fm ck">
                                         <span>Số Điện Thoại</span>
-                                        <input type="text" disabled>
+                                        <input type="text" id="sdt-DN" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Mã Phiếu Yêu Cầu</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="maPhieuYC-DN"disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Loại Yêu Cầu</span>
@@ -327,11 +327,11 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <span>Loại Chứng Thư</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="goiCTS-DN" disabled>
                                         </div>
                                         <div class="if-fm ck">
                                             <span>Thời Hạn Sử Dụng</span>
-                                            <input type="text" disabled>
+                                            <input type="text" id="thoiHan-DN" disabled>
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
@@ -371,9 +371,11 @@
                         </div>
                         <div id="register">
                             <div class="rg-btn">
-                                <input type="submit" value="Duyệt" class="btn btn-primary">
-                                <input type="button" value="Từ Chối Duyệt" class="btn btn-danger">
+                                <input type="submit" value="Duyệt" class="btn btn-success" name="acceptOrg" id="btnAcceptOrg">
+                                <input type="submit" value="Từ Chối Duyệt" class="btn btn-danger" name="declineOrg" id="btnDeclineOrg">
                                 <input type="button" value="Đóng" class="btn btn-secondary">
+                                <input type="hidden" id="idOrg" name="idOrg">
+
                             </div>
                         </div>
                         </div>
@@ -434,13 +436,13 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Tỉnh/Thành Phố</label>
-                                            <select name="tinhThanhFilter" id="tinhThanh" style="width: 176px;">
+                                            <select name="tinhThanhFilter" id="tinhThanhFilter" style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Loại Yêu Cầu</label>
-                                            <select name="loaiCTSIdFilter" id="quanHuyen"  style="width: 176px;">
+                                            <select name="loaiCTSIdFilter" style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
@@ -467,37 +469,109 @@
                 </div>
             </div>
             <h3 class="pl-3">Danh sách phiếu yêu cầu</h3>
-            <div class="container">
+                <div class="container">
+                    <br>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#CTSDoanhNgiep">Doanh Nghiệp</a>
+                      </li>
+                    </ul>
+                  
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div id="CTSCaNhan" class="container tab-pane active"><br>
+                        <div class="row" style="border: 1px solid #aaaaaa;">
+                            <table class="table table-bordered">
+                                <thead class="thead-default">
+                                    <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Xử lý</th>
+                                    <th scope="col">Mã yêu cầu</th>
+                                    <th scope="col">Họ Tên</th>
+                                    <th scope="col">Gói</th>
+                                    <th scope="col">TokenId</th>
+                                    <th scope="col">Mã số thuế</th>
+                                    <th scope="col">Serial</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Người tạo</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Trạng thái hồ sơ</th>
+                                    <th scope="col">Lịch sử</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pendingStatus">
+                                </tbody>
+                                <div class="paginationjs">
+                                    <div class="paginationjs-pages">
+                                        <ul>
+                                            <li class="paginationjs-prev" disabled><a><<</a></li>
+                                            <li class="paginationjs-page J-paginationjs-page active" data-num="1" disabled><a>1</a></li>
+                                            <li class="paginationjs-next" disabled><a>>></a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </table>
+                        </div>
+                      </div>
+                      <div id="CTSDoanhNgiep" class="container tab-pane fade"><br>
+                        <div class="row" style="border: 1px solid #aaaaaa;">
+                            <table class="table table-bordered">
+                                <thead class="thead-default">
+                                    <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Xử lý</th>
+                                    <th scope="col">Mã yêu cầu</th>
+                                    <th scope="col">Tên GD</th>
+                                    <th scope="col">Gói</th>
+                                    <th scope="col">TokenId</th>
+                                    <th scope="col">Mã số thuế</th>
+                                    <th scope="col">Serial</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Người tạo</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Trạng thái hồ sơ</th>
+                                    <th scope="col">Lịch sử</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pendingStatusDN">
+                                </tbody>
+                            </table>
+                        </div>
+                      </div> 
+                    </div>
+                </div>
+            <h3 class="pl-3">Đã phê duyệt</h3>
+            <div class="container" style="border: 1px solid;">
                 <div class="row">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" >
                         <thead class="thead-default">
                           <tr>
                             <th scope="col">STT</th>
-                            <th scope="col">Xử lý</th>
                             <th scope="col">Mã yêu cầu</th>
                             <th scope="col">Họ Tên</th>
-                            <th scope="col">Gói</th>
-                            <th scope="col">TokenId</th>
-                            <th scope="col">Mã số thuế</th>
-                            <th scope="col">Serial</th>
+                            <th scope="col">CMND</th>
+                            <th scope="col">MST</th>
+                            <th scope="col">Gói CTS</th>
+                            <th scope="col">Thời hạn (năm)</th>
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Người tạo</th>
                             <th scope="col">Trạng thái</th>
-                            <th scope="col">Trạng thái hồ sơ</th>
-                            <th scope="col">Lịch sử</th>
+                            <th scope="col">Cấp CTS</th>
                           </tr>
                         </thead>
-                        <tbody id="pendingStatus">
-                         
+                        <tbody id="approvedStatus">
                         </tbody>
                     </table>
                 </div>
             </div>
-           
         </div>
-        
-
     </body>
     <script src="../javascripts/listAdmin1.js" type="module"></script>
     <script src="../javascripts/init.js"></script>
+    <script src="../vendor/pagination.js"></script>
 </html>

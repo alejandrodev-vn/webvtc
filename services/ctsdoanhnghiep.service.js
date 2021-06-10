@@ -9,6 +9,17 @@ exports.getAll = async () => {
         console.log(err)
     }
 }
+exports.getForAdmin1 = async () => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
+            {trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
 
 exports.getById= async (id) => {
     try{

@@ -11,6 +11,25 @@ router.get('/users', async (req, res, next) => {
         console.log(err)
     }
 });
+router.get('/users/admin', async (req, res, next) => {
+    try{
+        const users = await usersService.getAllAdmin()
+        res.json(users)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
+router.get('/users/agency', async (req, res, next) => {
+    try{
+        const users = await usersService.getAllAgency()
+        res.json(users)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
+
 
 router.get('/users/byBelongTo', async (req, res, next)=> {
     try{

@@ -2,6 +2,7 @@ import { convertToDDMMYYYY, convertToYYYYMMDD } from './convert.js'
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
+import { getSendMailPersonal } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
 
@@ -67,7 +68,7 @@ async function showPending(data){
          
         })
         openEdit()
-        getSendMail()
+        getSendMailPersonal()
     }else {
         pendingStatus.innerHtml = '<h3>Hiện không có dữ liệu</h3>'
     }
@@ -157,17 +158,7 @@ async function openEdit(){
     }    
 
 }
-function getSendMail(){
-    const formSendMailPersonal = document.querySelector('#formSendMailPersonal')
-    const btnsSendMail = document.querySelectorAll('.btn-sendMail')
-    btnsSendMail.forEach(btn=>{
-        btn.onclick = (e) => {
-            e.preventDefault()
-            formSendMailPersonal.action = `/digital-certificate/personal/send-mail/${btn.dataset.id}`
-            formSendMailPersonal.submit()
-        }
-    })
-}
+
 async function getCTSDoanhNghiep(){
     try{
         const urlList = url + `api/digital-certificate/organization/byUserId`
@@ -233,7 +224,5 @@ async function getQuanHuyen(id){
     }
   
 }
-export { 
-    getSendMail 
-}
+
 

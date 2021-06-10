@@ -115,17 +115,17 @@
                         <div class="if-fm">
                             <div class="if-fm ck">
                                 <label>Loại Tài Khoản</label>
-                                <select  style="width: 70%;">
-                              <option value="0">Tất Cả</option>
-                              <option value="0">Admin Cấp 1</option>
-                              <option value="1">Admin Cấp 2</option>
-                              <option value="2">Đại Lý Cấp 1</option>
-                              <option value="3">Đại Lý Cấp 2</option>
+                            <select name="roleFilter"  style="width: 70%;">
+                                <option value="0">Tất Cả</option>
+                                <option value="0">Admin Cấp 1</option>
+                                <option value="1">Admin Cấp 2</option>
+                                <option value="2">Đại Lý Cấp 1</option>
+                                <option value="3">Đại Lý Cấp 2</option>
                             </select>
                         </div>
                         <div class="if-fm ck">
                             <label>Đại Lý</label>
-                            <select name="roleFilter" style="width: 70%;">
+                            <select  style="width: 70%;">
                             <option value="2">Đại Lý Cấp 1</option>
                             <option value="3">Đại Lý Cấp 2</option>
                         </select>
@@ -148,6 +148,29 @@
                 </div>
             </div>
         </div>
+        <h3 class="pl-3">Danh sách Admin</h3>
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead class="thead-default">
+                      <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Chọn</th>
+                        <th scope="col">Tên đăng nhập</th>
+                        <th scope="col">Tên đầy đủ</th>
+                        <th scope="col">Tỉnh/ TP</th>
+                        <th scope="col">Quyền người dùng</th>
+                        <th scope="col">Trạng thái</th>    
+                      </tr>
+                    </thead>
+                    <tbody id="listAccountAdmin">
+                        <td colspan="7"><h6>Hiện chưa có tài khoản nào</h6></td>
+                    </tbody>
+                </table>
+                <div class="action col-md-3 col-md-push-2">
+                    <button class="btn btn-primary">Vô hiệu hóa</button>
+                </div>
+            </div>
         </div>
         <h3 class="pl-3">Danh sách đại lý</h3>
         <div class="container">
@@ -164,8 +187,8 @@
                         <th scope="col">Trạng thái</th>    
                       </tr>
                     </thead>
-                    <tbody id="listAccount">
-                        <td><h6>Hiện chưa có tài khoản nào</h6></td>
+                    <tbody id="listAccountAgency">
+                        <td colspan="7"><h6>Hiện chưa có tài khoản nào</h6></td>
                     </tbody>
                 </table>
                 <div class="action col-md-3 col-md-push-2">
@@ -173,7 +196,7 @@
                 </div>
             </div>
         </div>
-       
+    </div>
 </body>
 <script src="../javascripts/modalBox.js"></script>
 <script src="../javascripts/init.js"></script>
