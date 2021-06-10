@@ -2,7 +2,7 @@ import { convertToDDMMYYYY } from './convert.js'
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
-import { getSendMail } from './listDaiLy1.js'
+// import { getSendMail } from './listDaiLy1.js'
 const pendingStatusDL2 = document.querySelector('#pendingStatusDL2')
 const pendingStatusDN_DL2 = document.querySelector('#pendingStatusDN_DL2')
 
@@ -54,7 +54,7 @@ async function showPendingDL2(data){
          </tr>`
          pendingStatusDL2.innerHTML = html
         })
-        getSendMail()
+        // getSendMail()
 
     }else{
         pendingStatusDL2.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
