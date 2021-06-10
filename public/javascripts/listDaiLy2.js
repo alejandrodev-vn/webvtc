@@ -2,7 +2,7 @@ import { convertToDDMMYYYY } from './convert.js'
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
-// import { getSendMail } from './listDaiLy1.js'
+import { getSendMailPersonal } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 
 const url = 'http://localhost:3000/'
@@ -47,13 +47,18 @@ async function showPending(data){
                                     data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                         Gửi thông tin thuê bao
                                     </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
+                                        data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                            Gửi lại
+                                        </button>`
             : 'Chờ duyệt lần 2'}</td></td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
     
          </tr>`
          pendingStatus.innerHTML = html
         })
-        // getSendMail()
+        getSendMailPersonal()
 
     }else{
         pendingStatus.innerHTML = '<h3>Hiện không có dữ liệu</h3>'

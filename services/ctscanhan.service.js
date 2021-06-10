@@ -10,6 +10,19 @@ exports.getAll = async () => {
     }
 }
 
+exports.getForAdmin1 = async () => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({$or: [
+            {trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
+
+
 exports.getById = async (id) => {
     try{
         const CTSCaNhan = await CTSCaNhanModel.findById(id);

@@ -83,25 +83,7 @@ module.exports.sendResponse = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.sendMail = async (req, res, next) => {
-    try{
-        const user = req.body
-        const mailgun = require("mailgun-js");
-        const DOMAIN = "sandbox7f9e883d109046e38f8d3a0a182518eb.mailgun.org";
-        const mg = mailgun({apiKey: "7f6264d76c3462ed20e7f5a6fe29ffbf-1d8af1f4-c381556f", domain: DOMAIN});
-        const data = {
-            from: "SmartSign <huytra264@gmail.com>",
-            to: "huytra264@gmail.com",
-            subject: "Xác nhận thông tin SmartSign",
-            text: `Kính gửi Ông/Bà ${user.username}`
-        };
-        mg.messages().send(data, function (error, body) {
-            console.log(body);
-        });
-    }catch(err){
-        console.log(err)
-    }
-}
+
 module.exports.handleFormActions = async (req, res, next) => {
     try{
         let { selectItem, deletePersonal, sendPersonal } = req.body;
@@ -137,8 +119,8 @@ module.exports.sendMail =  async (req, res, next) => {
     const cts = await CTSCaNhanService.getById({_id:id})
     const nodemailer = require('nodemailer')
     const jwt = require('jsonwebtoken')
-    let token = jwt.sign({ username: cts.soDienThoai }, process.env.KEY,{
-        expiresIn: '1m' /*<---- this is 1 minutes ♥*/
+    let token = jwt.sign({ soDienThoai: cts.soDienThoai, idCer: cts._id }, process.env.KEY,{
+        expiresIn: '5m' /*<---- this is 5 minutes ♥*/
     }, (err, token) => {
         if (err) {
             console.log('Token sign failed');
@@ -164,7 +146,9 @@ module.exports.sendMail =  async (req, res, next) => {
                     + Điện thoại: ${cts.soDienThoai}
                 `,
                 html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-                <a href="http://localhost:3000/${token}">http://localhost:3000/${token}</a>
+                <a href="http://localhost:3000/digital-certificate/personal/get-otp/${token}">
+                http://localhost:3000/digital-certificate/personal/get-otp/${token}
+                </a>
                 `
             }
             

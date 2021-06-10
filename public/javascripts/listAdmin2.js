@@ -56,7 +56,17 @@ async function showPending(data){
         <td></td>
         <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
         <td style="color:firebrick">${cts.nguoiThucHien}</td>
-        <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1' : 'Chờ duyệt lần 2'}</td>
+        <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+        : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
+                                data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    Gửi thông tin thuê bao
+                                </button>`
+        : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
+                                data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                Gửi lại
+                                </button>`
+        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
         <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
         <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
      </tr>`
