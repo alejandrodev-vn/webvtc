@@ -83,63 +83,90 @@ module.exports.sendResponse = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.sendMail = async (req, res, next) => {
+
+module.exports.handleFormActions = async (req, res, next) => {
     try{
-        const user = req.body
-        const mailgun = require("mailgun-js");
-        const DOMAIN = "sandbox7f9e883d109046e38f8d3a0a182518eb.mailgun.org";
-        const mg = mailgun({apiKey: "7f6264d76c3462ed20e7f5a6fe29ffbf-1d8af1f4-c381556f", domain: DOMAIN});
-        const data = {
-            from: "SmartSign <huytra264@gmail.com>",
-            to: "huytra264@gmail.com",
-            subject: "Xác nhận thông tin SmartSign",
-            text: `Kính gửi Ông/Bà ${user.username}`
-        };
-        mg.messages().send(data, function (error, body) {
-            console.log(body);
-        });
-    }catch(err){
+        let { selectItem, deletePersonal, sendPersonal } = req.body;
+        if(deletePersonal == 'Xóa' && deletePersonal != 'undefined'){
+            if(Array.isArray(selectItem)){
+                for(let i=0; i<selectItem.length; i++){
+                    await CTSCaNhanService.delete(selectItem[i]);
+                }
+            }else {
+                await CTSCaNhanService.delete(selectItem);
+            }
+        }else if(sendPersonal != 'undefined'){ 
+            if(Array.isArray(selectItem)){
+                for(let i=0; i<selectItem.length; i++){
+                    await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
+                }
+            }else {
+                await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
+            }
+        }else{
+            res.redirect('/')
+        }
+        
+        
+        res.redirect('/')
+    }
+    catch(err){
         console.log(err)
     }
 }
-
 module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 
     const cts = await CTSCaNhanService.getById({_id:id})
     const nodemailer = require('nodemailer')
-    var transporter =  nodemailer.createTransport({ // config mail server
-        service:"gmail",
-        auth: {
-            user: 'huytrafpt@gmail.com',
-            pass: 'Huytra264'
-        },
-        tls: {rejectUnauthorized:false}
-
-    });
-    var mainOptions = { 
-        from: 'SmartSign<smartsign@gmail.com>',
-        to: cts.email,
-        subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
-        text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
-        - Thông tin thuê bao như sau:
-            + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
-            + Mã số thuế: ${cts.MSTCaNhan}
-            + CMND/HC: ${cts.soCMT}
-            + Điện thoại: ${cts.soDienThoai}
-        `,
-        html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-        <a href="http://localhost:3000/">http://localhost:3000/</a>
-        `
-    }
-    transporter.sendMail(mainOptions, function(err, info){
+    const jwt = require('jsonwebtoken')
+    let token = jwt.sign({ soDienThoai: cts.soDienThoai, idCer: cts._id }, process.env.KEY,{
+        expiresIn: '5m' /*<---- this is 5 minutes ♥*/
+    }, (err, token) => {
         if (err) {
-            console.log(err);
-            res.redirect('/');
-        } else {
-            console.log('Message sent: ' +  info.response);
-            res.redirect('/');
+            console.log('Token sign failed');
+        }else{
+            var transporter =  nodemailer.createTransport({ // config mail server
+                service:"gmail",
+                auth: {
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
+                },
+                tls: {rejectUnauthorized:false}
+        
+            });
+            var mainOptions = { 
+                from: 'SmartSign<smartsign@gmail.com>',
+                to: cts.email,
+                subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
+                text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
+                - Thông tin thuê bao như sau:
+                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
+                    + Mã số thuế: ${cts.MSTCaNhan}
+                    + CMND/HC: ${cts.soCMT}
+                    + Điện thoại: ${cts.soDienThoai}
+                `,
+                html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+                <a href="http://localhost:3000/digital-certificate/personal/get-otp/${token}">
+                http://localhost:3000/digital-certificate/personal/get-otp/${token}
+                </a>
+                `
+            }
+            
+            transporter.sendMail(mainOptions, async function(err, info){
+                if (err) {
+                    console.log(err);
+                    res.redirect('/');
+                } else {
+                    console.log('Message sent: ' +  info.response);
+                    if(cts.trangThai == 2){ 
+                        await 
+                        CTSCaNhanService.update(id, { trangThai:3 }) 
+                    }
+                    res.redirect('/');
+                }
+            });
         }
-    });
+    }) 
 }
 
 function convertToYYYYMMDD (d){
