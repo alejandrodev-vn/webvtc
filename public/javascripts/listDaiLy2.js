@@ -2,27 +2,27 @@ import { convertToDDMMYYYY } from './convert.js'
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
-// import { getSendMail } from './listDaiLy1.js'
-const pendingStatusDL2 = document.querySelector('#pendingStatusDL2')
-const pendingStatusDN_DL2 = document.querySelector('#pendingStatusDN_DL2')
+import { getSendMailPersonal } from './sendMail.js'
+const pendingStatus = document.querySelector('#pendingStatus')
+const pendingStatusDN = document.querySelector('#pendingStatusDN')
 
 const url = 'http://localhost:3000/'
 
-async function getCTSCaNhanDL2(){
+async function getCTSCaNhan(){
     try{
         const urlList = url + `api/digital-certificate/personal/byUserId`
         const options = {
             method: 'GET'
         }
-        return await fetchAndShowData(urlList, options, showPendingDL2)
+        return await fetchAndShowData(urlList, options, showPending)
 
        
     }catch(err){
         console.log(err)
     }
 }
-getCTSCaNhanDL2()
-async function showPendingDL2(data){
+getCTSCaNhan()
+async function showPending(data){
     let html = ''
     const services = await getServices()
     if(data.length!=0){
@@ -48,34 +48,39 @@ async function showPendingDL2(data){
                                     data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                         Gửi thông tin thuê bao
                                     </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
+                                        data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                            Gửi lại
+                                        </button>`
             : 'Chờ duyệt lần 2'}</td></td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
     
          </tr>`
-         pendingStatusDL2.innerHTML = html
+         pendingStatus.innerHTML = html
         })
-        // getSendMail()
+        getSendMailPersonal()
 
     }else{
-        pendingStatusDL2.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatus.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
     }
    
 }
-async function getCTSDoanhNghiepDL2(){
+async function getCTSDoanhNghiep(){
     try{
         const urlList = url + `api/digital-certificate/organization/byUserId`
         const options = {
             method: 'GET'
         }
-        await fetchAndShowData(urlList, options, showPendingDN_DL2)
+        await fetchAndShowData(urlList, options, showPendingDN)
 
        
     }catch(err){
         console.log(err)
     }
 }
-getCTSDoanhNghiepDL2()
-async function showPendingDN_DL2(data){
+getCTSDoanhNghiep()
+async function showPendingDN(data){
     let html = ''
     const services = await getServices()
     if(data.length!=0){
@@ -105,12 +110,12 @@ async function showPendingDN_DL2(data){
                <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
     
          </tr>`
-         pendingStatusDN_DL2.innerHTML = html
+         pendingStatusDN.innerHTML = html
          
         })
         
     }else{
-        pendingStatusDN_DL2.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatusDN.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
 
     }
 } 

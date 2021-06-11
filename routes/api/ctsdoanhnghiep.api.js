@@ -12,6 +12,15 @@ router.get('/digital-certificate/organization', async (req, res, next) => {
         console.log(err)
     }
 });
+router.get('/admin/digital-certificate/organization', async (req, res, next) => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepService.getForAdmin1()
+        res.json(CTSDoanhNghiep)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 
 router.get('/digital-certificate/organization/byUserId', async (req, res, next)=> {
     try{

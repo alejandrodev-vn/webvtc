@@ -102,87 +102,44 @@ module.exports.sendMail = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.handleFormActions = async (req, res, next) => {
-    try{
-        let { selectItem, deletePersonal, sendPersonal } = req.body;
-        if(deletePersonal == 'Xóa' && deletePersonal != 'undefined'){
-            if(Array.isArray(selectItem)){
-                for(let i=0; i<selectItem.length; i++){
-                    await CTSCaNhanService.delete(selectItem[i]);
-                }
-            }else {
-                await CTSCaNhanService.delete(selectItem);
-            }
-        }else if(sendPersonal != 'undefined'){ 
-            if(Array.isArray(selectItem)){
-                for(let i=0; i<selectItem.length; i++){
-                    await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
-                }
-            }else {
-                await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
-            }
-        }else{
-            res.redirect('/')
-        }
-        
-        
-        res.redirect('/')
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+
 module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 
     const cts = await CTSCaNhanService.getById({_id:id})
     const nodemailer = require('nodemailer')
-    const jwt = require('jsonwebtoken')
-    let token = jwt.sign({ username: cts.soDienThoai }, process.env.KEY,{
-        expiresIn: '1m' /*<---- this is 1 minutes ♥*/
-    }, (err, token) => {
+    var transporter =  nodemailer.createTransport({ // config mail server
+        service:"gmail",
+        auth: {
+            user: 'huytrafpt@gmail.com',
+            pass: 'Huytra264'
+        },
+        tls: {rejectUnauthorized:false}
+
+    });
+    var mainOptions = { 
+        from: 'SmartSign<smartsign@gmail.com>',
+        to: cts.email,
+        subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
+        text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
+        - Thông tin thuê bao như sau:
+            + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
+            + Mã số thuế: ${cts.MSTCaNhan}
+            + CMND/HC: ${cts.soCMT}
+            + Điện thoại: ${cts.soDienThoai}
+        `,
+        html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+        <a href="http://localhost:3000/">http://localhost:3000/</a>
+        `
+    }
+    transporter.sendMail(mainOptions, function(err, info){
         if (err) {
-            console.log('Token sign failed');
-        }else{
-            var transporter =  nodemailer.createTransport({ // config mail server
-                service:"gmail",
-                auth: {
-                    user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
-                },
-                tls: {rejectUnauthorized:false}
-        
-            });
-            var mainOptions = { 
-                from: 'SmartSign<smartsign@gmail.com>',
-                to: cts.email,
-                subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
-                text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
-                - Thông tin thuê bao như sau:
-                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
-                    + Mã số thuế: ${cts.MSTCaNhan}
-                    + CMND/HC: ${cts.soCMT}
-                    + Điện thoại: ${cts.soDienThoai}
-                `,
-                html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-                <a href="http://localhost:3000/${token}">http://localhost:3000/${token}</a>
-                `
-            }
-            
-            transporter.sendMail(mainOptions, async function(err, info){
-                if (err) {
-                    console.log(err);
-                    res.redirect('/');
-                } else {
-                    console.log('Message sent: ' +  info.response);
-                    if(cts.trangThai == 2){ 
-                        await 
-                        CTSCaNhanService.update(id, { trangThai:3 }) 
-                    }
-                    res.redirect('/');
-                }
-            });
+            console.log(err);
+            res.redirect('/');
+        } else {
+            console.log('Message sent: ' +  info.response);
+            res.redirect('/');
         }
-    }) 
+    });
 }
 
 function convertToYYYYMMDD (d){

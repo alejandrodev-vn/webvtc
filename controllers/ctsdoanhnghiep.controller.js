@@ -46,7 +46,7 @@ module.exports.update = async (req, res, next) => {
         let values = req.body;
 
         await CTSDoanhNghiepService.update(id, values);
-        res.redirect('/digital-certificate/organization')
+        res.redirect('/')
     }
     catch(err){
         console.log(err)
