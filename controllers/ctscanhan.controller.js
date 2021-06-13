@@ -128,8 +128,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
+                    user: 'namdtps12220@fpt.edu.vn',
+                    pass: 'nam180201'
                 },
                 tls: {rejectUnauthorized:false}
         
