@@ -1,9 +1,13 @@
 const tinhThanhEl = document.querySelectorAll('.tinhThanh')
 const quanHuyenEl = document.querySelector('#quanHuyen')
+const tinhThanhDNEl = document.querySelectorAll('.tinhThanhDN')
+const quanHuyenDNEl = document.querySelector('#quanHuyenDN')
 const servicesEl = document.querySelector('#services')
 const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
-
+const servicesDNEl = document.querySelector('#servicesDN')
+const thoiHanDNEl = document.querySelector('#thoiHanDN')
+const giaDNEl = document.querySelector('#giaDN')
 async function getTinhThanh(){
     try{
         if(!tinhThanhEl){
@@ -37,7 +41,13 @@ async function getQuanHuyen(id){
         data.forEach(district => { if(district.tinhThanhId == id){
             quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
         }})
-        quanHuyenEl.innerHTML = quanHuyenHtml
+        if(quanHuyenEl){
+            quanHuyenEl.innerHTML = quanHuyenHtml
+
+        }
+        if(quanHuyenDNEl){
+            quanHuyenDNEl.innerHTML = quanHuyenHtml
+        }
     }catch(err){
         console.log(err)
     }
@@ -56,7 +66,12 @@ async function getServices(){
             serviceHtml +=  `
             <option value="${service._id}">${service.tenGoiDichVu}</option>`
         })
-        servicesEl.innerHTML = serviceHtml
+        if(servicesEl){
+            servicesEl.innerHTML = serviceHtml
+        }
+        if(servicesDNEl){
+            servicesDNEl.innerHTML = serviceHtml
+        }
     }catch(err){
         console.log(err)
     }
@@ -68,6 +83,9 @@ async function chooseService(id){
         const service = await res.json()
         thoiHanEl.value = service.thoiHan
         giaEl.value = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(service.gia)
+        thoiHanDNEl.value = service.thoiHan
+        giaDNEl.value = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(service.gia)
+        
     }catch(err){
         console.log(err)
     }

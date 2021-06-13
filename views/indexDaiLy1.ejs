@@ -196,6 +196,191 @@
                 </div>
                 <!-- end-modal personal -->
                 <!-- edit -->
+                <div id="modalEditCertificateOrganization" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="form-area">
+                              <div class="top-modal">
+                                <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Doanh Nghiệp</h2>
+                                <span class="close">&times;</span>
+                              </div>
+                              <form action="/digital-certificate/organization/edit" method="POST">
+                                <div id="form">
+                                    <div class="info-user">
+                                        <div>
+                                            <h3>Thông tin khách hàng</h3>
+                                        </div>
+                                        <div id="wrt-info">
+                                            <div class="if-fm mn" >
+                                                <label>
+                                                    Tên Doanh Nghiệp <span class="note">*</span>
+                                                </label>
+                                                <input type="text" id="tenGD" name="tenGD">
+                                            </div>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Giấy phép ĐKKD <span class="note">*</span></label>
+                                                    <input type="text" id="giayPhepDKKD" name="giayPhepDKKD">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Ngày cấp <span class="note">*</span></label>
+                                                    <input type="date" id="ngayCapGiayPhepDKKD" name="ngayCapGiayPhepDKKD">
+                                                </div>
+                                            </div>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Mã số thuế</label>
+                                                    <input type="text" id="MST" name="MST">
+                                                </div>
+                                            </div>
+                                            <div class="if-fm mn">
+                                                <label>
+                                                    Địa chỉ  <span class="note">*</span>
+                                                </label>
+                                                <input type="text" id="diaChiDN" name="diaChi">
+                                            </div>
+
+                                            <div class="if-fm mn">
+                                                <label>
+                                                   Công ty mẹ
+                                                </label>
+                                                <input type="text" id="congTyMe" name="congTyMe">
+                                            </div>
+                                            <div class="if-fm mn">
+                                                <label>
+                                                    Chức vụ
+                                                </label>
+                                                <input type="text" id="chucVu" name="chucVu">
+                                            </div>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
+                                                    <select name="tinhThanh" id="tinhThanhDN" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                        <option value="0">--Lựa chọn--</option>
+                                                    </select>
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Quận/ Huyện <span class="note">*</span></label>
+                                                    <select name="quanHuyen" id="quanHuyenDN">
+                                                        <option value="0">Chọn tỉnh thành trước</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Email giao dịch  <span class="note">*</span></label>
+                                                    <input type="text" id="emailGD" name="emailGD">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Số điện thoại  <span class="note">*</span></label>
+                                                    <input type="text" id="soDienThoaiCongTy" name="soDienThoaiCongTy">
+                                                </div>
+        
+                                            </div>
+                                            <h3>Thông tin chủ doanh nghiệp</h3>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Email cá nhân  <span class="note">*</span></label>
+                                                    <input type="text" id="emailChuDoanhNghiep" name="emailChuDoanhNghiep">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Số điện thoại  <span class="note">*</span></label>
+                                                    <input type="text" id="soDienThoaiChuDoanhNghiep" name="soDienThoaiChuDoanhNghiep">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Chức vụ</label>
+                                                    <input type="text" id="chucVu" name="chucVu">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Số CMTND/HC</label>
+                                                    <input type="text" id="soCMTDN" name="soCMT">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Ngày Cấp CMT</label>
+                                                    <input type="date" id="ngayCapCMTDN" name="ngayCapCMT">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Nơi Cấp CMT</label>
+                                                    <input type="text" id="noiCapCMTDN" name="noiCapCMT">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="info-user">
+                                        <div>
+                                            <h3>Yêu cầu cấp chứng thư số</h3>
+                                        </div>
+                                        <div id="wrt-info">
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Gói chứng thư <span class="note">*</span></label>
+                                                    <select name="goiCTSId" id="servicesDN" onchange="chooseService(this.value)">
+                                                
+                                                    </select>
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Thời hạn sử dụng <span class="note">*</span> </label>
+                                                    <input type="text"  name="thoiHan" id="thoiHanDN" readonly="true" style="background:#eee">
+                                                </div>
+                                            </div>
+                                            <div class="if-fm">
+                                                <div class="if-fm ck">
+                                                    <label>Giá cước</label>
+                                                    <input type="text" name="gia" id="giaDN" readonly="true" style="background:#eee">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Người thực hiện <span class="note">*</span></label>
+                                                    <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
+                                                </div>
+                                                <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
+                                            </div>
+                                        </div>
+                                        <% if(typeof errors != 'undefined') { 
+            
+                                            errors.forEach(msg => {    
+                                        %> 
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <%= msg.msg %>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                   
+                                        <% }) }%>
+                                    </div>
+                                </div>
+            
+                                <div class="hoso">
+                                    <div>
+                                        <h3>Hồ sơ khách hàng</h3>
+                                    </div>
+                                    <div id="wrt-info">
+                                        <div class="if-fm mn" >
+                                            <label>
+                                                Chọn tệp: 
+                                            </label>
+                                            <input type="file" name="myfile" />
+            
+                                        </div>
+                                    </div>
+                                </div>
+                     
+                                <div id="register">
+                                    <div class="rg-btn">
+                                        <input type="submit" value="Ghi lại" class="btn btn-primary">
+                                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
+                                        <a href="/" class="btn btn-secondary">Đóng</a>
+                                        <input type="hidden" name="idEdit" id="idDN">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end-modal organization -->
+                <!-- edit -->
                     <form action="" style="margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
                         <div id="form">
                             <div class="info-user">

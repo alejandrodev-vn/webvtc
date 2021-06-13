@@ -124,8 +124,17 @@ async function showPendingDN(data){
             <td></td>
             <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td style="color:firebrick">${cts.nguoiThucHien}</td>
-            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1' : 'Chờ duyệt lần 2'}</td>
-            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                        Gửi thông tin thuê bao
+                                    </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    Gửi lại
+                                    </button>`
+            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
             <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
          </tr>`
         })
@@ -247,18 +256,22 @@ async function handleRequestDN(){
             document.querySelector('#diaChi-DN').value = cts.diaChi
             document.querySelector('#emailGD-DN').value = cts.emailGD
             document.querySelector('#soDienThoai-DN').value = cts.soDienThoaiCongTy
-            // document.querySelector('#toChuc-DN').value = cts.diaChi
+            document.querySelector('#toChuc-DN').value = cts.congTyMe
             document.querySelector('#hoTen-DN').value = cts.hoTenChuDoanhNghiep
             document.querySelector('#chucVu-DN').value = cts.chucVu
             document.querySelector('#soCMTND-DN').value = cts.soCMT 
             document.querySelector('#ngayCapCMTND-DN').value = cts.ngayCapCMT
             document.querySelector('#noicap-DN').value = cts.noiCapCMT
+            document.querySelector('#tinhThanh-DN').value = province.TenTinhThanh
+            document.querySelector('#quanHuyen-DN').value = district.TenQuanHuyen
             document.querySelector('#email-DN').value = cts.emailGD
-            // document.querySelector('#sdt-DN').value = service.soDienThoaiCongTy
-            document.querySelector('#maPhieuYC-DN').value = service._id
-            // document.querySelector('#loaiYC').value = service.thoiHan
-            document.querySelector('#goiCTS-DN').value = service.tenGoiDichVu
+            document.querySelector('#sdt-DN').value = cts.soDienThoaiCongTy
+            document.querySelector('#maPhieuYC-DN').value = cts._id
+            document.querySelector('#loaiYC').value = service.tenGoiDichVu
+            document.querySelector('#goiCTS-DN').value = cts.loaiCTS
             document.querySelector('#thoiHan-DN').value = service.thoiHan
+            document.querySelector('#idOrg').value = cts._id
+
         })
     })
     // When the user clicks on <span> (x), close the modal
