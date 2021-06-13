@@ -13,19 +13,20 @@ async function getCTSCaNhan(){
             method: 'GET'
         }
         const data = await fetchAPI(urlList, options)
-        $('#pendingStatus').pagination({
-            dataSource: data,
-            callback: function(data, pagination) {
-                // template method of yourself
-                showPending(data);
-            },
-            pageSize: 5,
-            afterPageOnClick: function (event, pageNumber){
-                console.log(pageNumber)
-            }
-        })
-        // return await fetchAndShowData(urlList, options, showPending)
-        
+        if(data.length!=0){
+            $('#paginPersonal').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPending(data);
+                },
+                pageSize: 5
+            })
+            
+        }else{
+            showPending(data)
+        }
+     
        
     }catch(err){
         console.log(err)
@@ -35,11 +36,25 @@ getCTSCaNhan()
 
 async function getCTSDoanhNghiep(){
     try{
-        const urlList1 = url + `api/admin/digital-certificate/organization`
+        const urlList = url + `api/admin/digital-certificate/organization`
         const options = {
             method: 'GET'
         }
-        return await fetchAndShowData(urlList1, options, showPendingDN)
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginOrganization').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPendingDN(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPendingDN(data)
+        }
+    
+        
        
     }catch(err){
         console.log(err)
@@ -49,70 +64,80 @@ getCTSDoanhNghiep()
 
 async function showPending(data){
     let html = ''
-    const services = await getServices()
-    data.forEach((cts, index)=> {   
-        services.forEach(service => {
-            if(cts.goiCTSId == service._id){
-                cts = { ...service, ...cts }
-            }
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td scope="row">${index+1}</td>
+            <td><button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button></td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td></td>
+            <td style="color:firebrick">${cts.MSTCaNhan}</td>
+            <td></td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                        Gửi thông tin thuê bao
+                                    </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    Gửi lại
+                                    </button>`
+            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+         </tr>`
         })
-        html+=`<tr style="background:#cfebff">
-        <td scope="row">${index+1}</td>
-        <td><button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button></td>
-        <td>${cts._id}</td>
-        <td>${cts.hoTenNguoiDK}</td>
-        <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-        <td></td>
-        <td style="color:firebrick">${cts.MSTCaNhan}</td>
-        <td></td>
-        <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-        <td style="color:firebrick">${cts.nguoiThucHien}</td>
-        <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-        : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
-                                data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
-                                    Gửi thông tin thuê bao
-                                </button>`
-        : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
-                                data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
-                                Gửi lại
-                                </button>`
-        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
-        <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-        <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
-     </tr>`
-    })
-    pendingStatus.innerHTML = html
-    handleRequest()
+        pendingStatus.innerHTML = html
+        handleRequest()
+    }else{
+        pendingStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
 }
 
 async function showPendingDN(data){
     let html = ''
-    const services = await getServices()
-    data.forEach((cts, index)=> {   
-        services.forEach(service => {
-            if(cts.goiCTSId == service._id){
-                cts = { ...service, ...cts }
-            }
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td scope="row">${index+1}</td>
+            <td><button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button></td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td></td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td></td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1' : 'Chờ duyệt lần 2'}</td>
+            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+         </tr>`
         })
-        html+=`<tr style="background:#cfebff">
-        <td scope="row">${index+1}</td>
-        <td><button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button></td>
-        <td>${cts._id}</td>
-        <td>${cts.tenGD}</td>
-        <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-        <td></td>
-        <td style="color:firebrick">${cts.MST}</td>
-        <td></td>
-        <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-        <td style="color:firebrick">${cts.nguoiThucHien}</td>
-        <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1' : 'Chờ duyệt lần 2'}</td>
-        <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-        <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
-     </tr>`
-    })
-    pendingStatusDN.innerHTML = html
-    handleRequestDN()
+        pendingStatusDN.innerHTML = html
+        handleRequestDN()
+    }else{
+        pendingStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+  
 }
 async function getServices(){
     try{

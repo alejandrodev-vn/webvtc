@@ -43,7 +43,8 @@ const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 const usersAPI = require('./routes/api/users.api');
 const trashAPI = require('./routes/api/trash.api');
-
+const cors = require('cors')
+app.use(cors())
 app.use(
   session({
   secret: process.env.KEY,

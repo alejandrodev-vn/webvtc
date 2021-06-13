@@ -74,8 +74,11 @@ module.exports.sendResponse = async (req, res, next) => {
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
             await CTSCaNhanService.sendResponse(id, {trangThai: 0});
             res.redirect('/')
+
+
         }else{
             res.redirect('/')
+
         }
      
     }
@@ -128,8 +131,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'namdtps12220@fpt.edu.vn',
-                    pass: 'nam180201'
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
                 },
                 tls: {rejectUnauthorized:false}
         

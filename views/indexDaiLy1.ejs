@@ -246,13 +246,13 @@
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Tỉnh/Thành Phố</label>
-                                            <select name="tinhThanhFilter" id="tinhThanh" style="width: 176px;">
+                                            <select name="tinhThanhFilter" id="tinhThanhFilter" style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Loại Yêu Cầu</label>
-                                            <select name="loaiCTSIdFilter" id="quanHuyen"  style="width: 176px;">
+                                            <select name="loaiCTSIdFilter" id="quanHuyenFilter"  style="width: 176px;">
                                                 <option value=""></option>
                                             </select>
                                         </div>
@@ -318,6 +318,7 @@
                              
                             </tbody>
                         </table>
+                        <div id="paginPersonal"></div>
                         <div class="action col-md-4 col-md-push-2">
                             <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete" disabled value="Xóa" />
                             <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit" disabled value="Gửi SmartSign" />
@@ -353,9 +354,10 @@
                              
                             </tbody>
                         </table>
+                        <div id="paginOrganization"></div>
                         <div class="action col-md-4 col-md-push-2">
-                            <input type="submit" name="deleteOrg" class="btn btn-primary" disabled value="Xóa"/>
-                            <input type="submit" name="sendOrg" class="btn btn-primary btn-submit1" disabled value="Gửi SmartSign">
+                            <input type="submit" name="deleteOrganization" class="btn btn-primary btn-delete1" disabled value="Xóa"/>
+                            <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1" disabled value="Gửi SmartSign">
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
                     </form>
@@ -395,4 +397,5 @@
     <script src="../javascripts/listDaiLy1.js" type="module"></script>
     <script src="../javascripts/init.js"></script>
     <script src="../javascripts/selectSmartSign.js"></script>
+    <script src="../vendor/pagination.js"></script>
 </html>

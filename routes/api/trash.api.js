@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const trashService = require('../../services/trash.service')
 const usersService = require('../../services/users.service')
-//trash
+//trash certificate personal
 router.get('/digital-certificate/personal/trash/agency1', async (req, res, next)=> {
     try{
         const { userId } = req.session
@@ -34,6 +34,37 @@ router.get('/digital-certificate/personal/trash/byUserId', async (req, res, next
         console.log(err)
     }
 });
-//
+//trash certificate organization
+router.get('/digital-certificate/organization/trash/agency1', async (req, res, next)=> {
+    try{
+        const { userId } = req.session
+        const agencyList = await usersService.getByBelongTo(userId)
+        const result = []
+        for(let i=0; i<agencyList.length; i++){
+            let CTSDoanhNghiep = await trashService.getByTrashUserIdOrg(agencyList[i]._id)
+            if(CTSDoanhNghiep.length==1){
+                result.push(...CTSDoanhNghiep)
+            }else if(CTSDoanhNghiep.length!=0){
+                CTSDoanhNghiep.map(cts=>{
+                    result.push(cts)
+                })
+            }
+        }
+        res.json(result)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
+router.get('/digital-certificate/organization/trash/byUserId', async (req, res, next)=> {
+    try{
+        const { userId } = req.session
+        const CTSDoanhNghiep = await trashService.getByTrashUserIdOrg(userId)
+        res.json(CTSDoanhNghiep)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 
 module.exports = router;

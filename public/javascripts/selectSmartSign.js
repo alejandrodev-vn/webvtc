@@ -1,8 +1,9 @@
 const selectAll = document.querySelector('#selectAll')
 const selectAllDN = document.querySelector('#selectAllDN')
-const btnSubmit1 = document.querySelector('.btn-submit1')
+const btnSubmitDN = document.querySelector('.btn-submit1')
 const btnSubmit = document.querySelector('.btn-submit')
 const btnDelete = document.querySelector('.btn-delete')
+const btnDeleteDN = document.querySelector('.btn-delete1')
 function checkAll(){
     const selectItem = document.querySelectorAll('.select-smart-sign')
     let isSelectAll = selectAll.checked
@@ -51,8 +52,10 @@ function checkSelectAllDN() {
 function validateSendRequestDN(){
     const countItem = document.querySelectorAll('input[name="selectItem1"]:checked').length
     if(countItem==0){
-        btnSubmit1.setAttribute('disabled',true)
+        btnSubmitDN.setAttribute('disabled',true)
+        btnDeleteDN.setAttribute('disabled',true)
     }else{
-        btnSubmit1.removeAttribute('disabled')
+        btnSubmitDN.removeAttribute('disabled')
+        btnDeleteDN.removeAttribute('disabled')
     }
 }

@@ -4,6 +4,7 @@ import { fetchAPI,
 } from './fetch.js'
 import { getSendMailPersonal } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
+const pendingStatusDN = document.querySelector('#pendingStatusDN')
 
 const url = 'http://localhost:3000/'
 
@@ -13,7 +14,20 @@ async function getCTSCaNhan(){
         const options = {
             method: 'GET'
         }
-        return await fetchAndShowData(urlList, options, showPending)
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginPersonal').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPending(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPending(data)
+        }
+       
 
        
     }catch(err){
@@ -61,7 +75,7 @@ async function showPending(data){
         getSendMailPersonal()
 
     }else{
-        pendingStatus.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatus.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
     }
    
 }
@@ -71,8 +85,20 @@ async function getCTSDoanhNghiep(){
         const options = {
             method: 'GET'
         }
-        await fetchAndShowData(urlList, options, showPendingDN)
-
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginOrganization').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPendingDN(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPendingDN(data)
+        }
+       
        
     }catch(err){
         console.log(err)
@@ -81,30 +107,34 @@ async function getCTSDoanhNghiep(){
 getCTSDoanhNghiep()
 async function showPendingDN(data){
     let html = ''
-    const services = await getServices()
-    data.forEach((cts, index)=> {   
-        services.forEach(service => {
-            if(cts.goiCTSId == service._id){
-                cts = { ...service, ...cts }
-            }
-        })
-       html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-       <td scope="row">${index+1}</td>
-       <td><p>${cts._id}</p></td>
-       <td>${cts.tenGD}</td>
-       <td>${cts.giayPhepDKKD}</td>
-       <td>${cts.MST}</td>
-       <td>${cts.tenGoiDichVu}</td>
-       <td>${cts.thoiHan}</td>
-       <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
-       <td>${cts.nguoiThucHien}</td>
-       <td>${(cts.trangThai == 0) ? 'Dự thảo' : 'Chờ duyệt lần 1'}</td>
-       <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-
-     </tr>`
-     pendingStatusDN.innerHTML = html
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+            <td scope="row">${index+1}</td>
+            <td><p>${cts._id}</p></td>
+            <td>${cts.tenGD}</td>
+            <td>${cts.giayPhepDKKD}</td>
+            <td>${cts.MST}</td>
+            <td>${cts.tenGoiDichVu}</td>
+            <td>${cts.thoiHan}</td>
+            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td>${cts.nguoiThucHien}</td>
+            <td>${(cts.trangThai == 0) ? 'Dự thảo' : 'Chờ duyệt lần 1'}</td>
+            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
      
-    })
+          </tr>`
+          pendingStatusDN.innerHTML = html
+    
+         })    
+    }else{
+        pendingStatusDN.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
+    }
 } 
 async function getServices(){
     try{
