@@ -94,6 +94,27 @@ module.exports.delete = async (req, res, next) => {
         console.log(err)
     }
 }
+module.exports.sendResponse = async (req, res, next) => {
+    try{
+        const { idOrg, acceptOrg, declineOrg } = req.body
+        if(acceptOrg == 'Duyệt' && acceptOrg != 'undefined'){
+            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 2});
+            res.redirect('/')
+        }else if(declineOrg == 'Từ Chối Duyệt' && declineOrg != 'undefined'){
+            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 0});
+            res.redirect('/')
+
+
+        }else{
+            res.redirect('/')
+
+        }
+     
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 
@@ -117,7 +138,7 @@ module.exports.sendMail =  async (req, res, next) => {
             });
             var mainOptions = { 
                 from: 'SmartSign<smartsign@gmail.com>',
-                to: cts.email,
+                to: cts.emailGD,
                 subject: `Kính gửi Doanh nghiệp/ Tổ chức: ${cts.tenGD}.`,
                 text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
                 - Thông tin thuê bao như sau:
