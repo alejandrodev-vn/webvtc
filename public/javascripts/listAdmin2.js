@@ -254,12 +254,11 @@ async function handleRequestDN(){
             document.querySelector('#ngayCapCMTND-DN').value = cts.ngayCapCMT
             document.querySelector('#noicap-DN').value = cts.noiCapCMT
             document.querySelector('#email-DN').value = cts.emailGD
-            document.querySelector('#sdt-DN').value = cts.soDienThoaiChuDoanhNghiep
+            // document.querySelector('#sdt-DN').value = service.soDienThoaiCongTy
             document.querySelector('#maPhieuYC-DN').value = service._id
             // document.querySelector('#loaiYC').value = service.thoiHan
             document.querySelector('#goiCTS-DN').value = service.tenGoiDichVu
             document.querySelector('#thoiHan-DN').value = service.thoiHan
-            document.querySelector('#idOrg').value = cts._id
         })
     })
     // When the user clicks on <span> (x), close the modal

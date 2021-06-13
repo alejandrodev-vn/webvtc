@@ -35,19 +35,18 @@ router.get('/digital-certificate/organization/byUserId', async (req, res, next)=
 router.get('/digital-certificate/organization/byAgency', async (req, res, next)=> {
     try{
         const { userId } = req.session
-        //daily1
         const agencyList = await usersService.getByBelongTo(userId)
         const result = []
         for(let i=0; i<agencyList.length; i++){
             let CTSDoanhNghiep = await CTSDoanhNghiepService.getByUserId(agencyList[i]._id)
             if(CTSDoanhNghiep.length==1){
-                if(CTSDoanhNghiep[0].trangThai==1 || CTSDoanhNghiep[0].trangThai==3){
+                if(CTSDoanhNghiep[0].trangThai!=0){
                     result.push(...CTSDoanhNghiep)
 
                 }
             }else if(CTSDoanhNghiep.length!=0){
                 CTSDoanhNghiep.map(cts=>{
-                    if(cts.trangThai==1 || cts.trangThai==3){
+                    if(cts.trangThai!=0){
                         result.push(cts)
                     }
                 })
@@ -79,7 +78,6 @@ router.get('/digital-certificate/organization/byAgency', async (req, res, next)=
         console.log(err)
     }
 });
-
 router.get('/digital-certificate/organization/agency1', async (req, res, next)=> {
     try{
         const { userId } = req.session

@@ -3,11 +3,8 @@ const router = express.Router();
 const { validateCTSDoanhNghiep } = require('../middlewares/ctsdoanhnghiep.validate')
 
 const controllerCTSDoanhNghiep = require('../controllers/ctsdoanhnghiep.controller')
-const middlewares = require('../middlewares/authencation')
 
 
-
-// router.get('/ctscanhan', controllerCTSCaNhan.getAll);
 router.get('/digital-certificate/organization',middlewares.checkAuthencation, controllerCTSDoanhNghiep.organization);
 router.post('/digital-certificate/organization/add', validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.adds);
 router.post('/digital-certificate/organization/edit',middlewares.checkAuthencation, validateCTSDoanhNghiep(), controllerCTSDoanhNghiep.update);
