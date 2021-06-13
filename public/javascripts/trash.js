@@ -73,71 +73,7 @@ async function showTrashPersonal(data){
     
 
 }
-// Doanh Nghiep
-async function getTrashCTSDoanhNghiep(){
-    try{
-        //get cts from daily1
-        const urlList1 = url + `api/digital-certificate/organization/trash/agency1`
-        //get cts from self
-        const urlList2 = url + `api/digital-certificate/organization/trash/byUserId`
-        const options = {
-            method: 'GET'
-        }
-        const CTSDoanhNghiepByAgency = await fetchAPI(urlList1, options)
-        const CTSDoanhNghiepBySelf = await fetchAPI(urlList2, options)
-        const data = [ ...CTSDoanhNghiepByAgency, ...CTSDoanhNghiepBySelf ]
-        return showTrashOrganization(data)
-       
-    }catch(err){
-        console.log(err)
-    }
-}
-getTrashCTSDoanhNghiep()
-async function showTrashOrganization(data){
-    let html = ''
-    const services = await getServices()
-    console.log(data.length)
-    if(data.length!=0){
-        data.forEach((cts, index)=> {   
-            services.forEach(service => {
-                if(cts.goiCTSId == service._id){
-                    cts = { ...service, ...cts }
-                }
-            })
-           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-           <td scope="row">${index+1}</td>
-           <td><p>${cts._id}</p></td>
-           <td>${cts.hoTenNguoiDK}</td>
-           <td>${cts.soCMT}</td>
-           <td>${cts.MSTCaNhan}</td>
-           <td>${cts.tenGoiDichVu}</td>
-           <td>${cts.thoiHan}</td>
-           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
-           <td>${cts.nguoiThucHien}</td>
-           <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-           <td><a href="" class="btn btn-success btn-restore" data-id=${cts._id} style="font-size: 13px;padding: 3px;width:60px">Khôi phục</a></td>
-           <td><a href="" class="btn btn-danger btn-destroy" data-id=${cts._id} style="font-size: 13px;padding: 3px;width:60px">Xóa vĩnh viễn</a></td>
-    
-         </tr>`
-         trashPersonal.innerHTML = html
 
-        })
-        const btnsRestore = document.querySelectorAll('.btn-restore')
-        btnsRestore.forEach(btn=>{
-            btn.onclick = (e) =>{
-                e.preventDefault()
-                formRestorePersonal.action = `/digital-certificate/trash/${btn.dataset.id}/restore`
-                formRestorePersonal.submit()
-            }
-        })
-        confirmDelete()
-
-    }else {
-        trashPersonal.innerHTML = '<td colspan="12"><h3 class="text-md-center">Hiện không có dữ liệu</h3></td>'
-    }
-    
-
-}
 
 async function getServices(){
     try{

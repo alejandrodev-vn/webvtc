@@ -195,210 +195,6 @@
                     </div>
                 </div>
                 <!-- end-modal personal -->
-
-                <!-- model organization -->
-                <div id="modalEditCertificateOrganization" class="modal">
-
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <div class="form-area">
-                              <div class="top-modal">
-                                <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Doanh Nghiệp</h2>
-                                <span class="close closeDN">&times;</span>
-                              </div>
-                              <form action="/digital-certificate/organization/edit" method="POST">
-                                <div id="form">
-                                    <div class="info-user">
-                                        <div>
-                                            <h3>Thông tin khách hàng</h3>
-                                        </div>
-                                        <div id="wrt-info">
-                                            <div class="if-fm mn" >
-                                                <label for="">Tên giao dịch <span>*</span> </label>
-                                               
-                                                <input type="text" name="tenGD" id="tenGD_DN">
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Giấy phép ĐKKD</label>
-                                                    <input type="text" name="giayPhepDKKD" id="giayPhepDKKD_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Ngày cấp</label>
-                                                    <input type="date" name="ngayCapGiayPhepDKKD" id="ngayCapGiayPhepDKKD_DN">
-                                            </div>
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Mã số thuế</label>
-                                                    <input type="text" name="MST" id="MST_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Công ty mẹ</label>
-                                                    <input type="text" name="CtyMe" id="CtyMe">
-                                                </div>
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Cam kết không hủy</label>
-                                                    <input type="text" id="camKet_DN" value="" disabled>
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Mật khẩu</label>
-                                                    <input type="password" name="password" id="password_DN">
-                                                </div>
-                                            </div>
-                                            <div class="if-fm mn">
-                                                <label>
-                                                    Địa chỉ *
-                                                </label>
-                                                <input type="text" name="diaChi" id="diaChi_DN">
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
-                                                            <select name="tinhThanh" id="tinhThanh_DN" class="tinhThanh" onchange="getQuanHuyen(this.value)">
-                                                                <option value="0">--Lựa chọn--</option>
-                                                            </select>
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Quận/ Huyện <span class="note">*</span></label>
-                                                            <select name="quanHuyen" id="quanHuyen_DN">
-                                                                <option value="0">Chọn tỉnh thành trước</option>
-                                                            </select>
-                                                </div>
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Email giao dịch</label>
-                                                    <input type="text" name="emailGD" id="emailGD_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Số điện thoại</label>
-                                                    <input type="text" name="soDienThoaiCongTy" id="soDienThoaiCongTy_DN">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="info-user">
-                                        <div>
-                                            <h3>Thông tin chủ doanh nghiệp (Giám đốc Chủ Tich HĐQT)</h3>
-                                        </div>
-                                        <div id="wrt-info">
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Họ và tên</label>
-                                                    <input type="text" name="hoTenChuDoanhNghiep" id="hoTenChuDoanhNghiep_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Chức vụ</label>
-                                                    <input type="text" id="chucVu_DN">
-                                                </div>
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Số CMTND/HC*</label>
-                                                    <input type="text" name="soCMT" id="soCMT_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                        <label>Ngày cấp</label>
-                                                        <input type="date" name="ngayCapCMT" id="ngayCapCMT_DN">
-                                                </div>
-                                            </div>
-                                            <div class="if-fm mn">
-                                                <label>
-                                                    Nơi cấp *
-                                                </label>
-                                                <input type="text" name="noiCapCMT" id="noiCapCMT_DN">
-                                            </div>
-                                            <div class="if-fm">
-                                                <div class="if-fm ck">
-                                                    <label>Email</label>
-                                                    <input type="text" name="email" id="email_DN">
-                                                </div>
-                                                <div class="if-fm ck">
-                                                    <label>Số điện thoại</label>
-                                                    <input type="text" id="std_DN">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <% if(typeof errorsDN != 'undefined') { 
-                
-                                            errorsDN.forEach(msg => {    
-                                        %> 
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <%= msg.msg %>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                   
-                                        <% }) }%>
-                
-                
-                                    </div>
-                                </div>
-                                <div class="yeucau">
-                                    <div>
-                                        <h3>Yêu cầu cấp chứng thư số</h3>
-                                    </div>
-                                    <div id="wrt-info">
-                                        <div class="if-fm mn" >
-                                            <label>Gói chứng thư <span class="note">*</span></label>
-                                                    <select name="goiCTSId" id="services_DN" onchange="chooseService(this.value)">
-                                                
-                                                    </select>
-                                        </div>
-                                        <div class="if-fm mn">
-                                            <div class="if-fm ck">
-                                                <label>Giá cước</label>
-                                                <input type="text" name="giaCuoc" id="gia_DN" readonly="true" style="background:#eee">
-                                            </div>
-                                        </div>
-                                        <div class="if-fm mn">
-                                            <label>Thời hạn sử dụng <span class="note">*</span> </label>
-                                            <input type="text"  name="thoiHan" id="thoiHan_DN" readonly="true" style="background:#eee">
-                                        </div>
-                                        <div class="if-fm mn">
-                                            <div class="if-fm ck">
-                                                <label>Người thực hiện <span class="note">*</span></label>
-                                                <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
-                                            </div>
-                                            <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div class="hoso">
-                                    <div>
-                                        <h3>Hồ sơ khách hàng</h3>
-                                    </div>
-                                    <div id="wrt-info">
-                                        <div class="if-fm mn" >
-                                            <label>
-                                                Chọn tệp: 
-                                            </label>
-                                            <form enctype="multipart/form-data" method="POST">
-                                                <input type="file" name="myfile" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="register">
-                                    <div class="rg-btn">
-                                        <input type="submit" value="Ghi lại" class="btn btn-primary">
-                                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
-                                        <a href="/" class="btn btn-secondary">Đóng</a>
-                                        <input type="hidden" name="idEditDN" id="idDN">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- modal organization -->
-                
                 <!-- edit -->
                     <form action="" style="margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
                         <div id="form">
@@ -499,7 +295,7 @@
                 <div class="tab-content">
                   <div id="CTSCaNhan" class="container tab-pane active"><br>
                     <div class="row" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/personal/send-request" method="POST">
+                        <form action="/digital-certificate/personal/handle-form-actions" method="POST">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
@@ -528,11 +324,13 @@
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
                     </form>
+                    <form id="formSendMailPersonal" method="POST"></form>
+
                     </div>
                   </div>
                   <div id="CTSDoanhNgiep" class="container tab-pane fade"><br>
                     <div class="row" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/organization/send-request" method="POST">
+                        <form action="/digital-certificate/organization/handle-form-actions" method="POST">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
@@ -557,7 +355,7 @@
                         </table>
                         <div class="action col-md-4 col-md-push-2">
                             <input type="submit" name="deleteOrg" class="btn btn-primary" disabled value="Xóa"/>
-                            <input type="submit" name="sendOrg" class="btn btn-primary btn-submit" disabled value="Gửi SmartSign">
+                            <input type="submit" name="sendOrg" class="btn btn-primary btn-submit1" disabled value="Gửi SmartSign">
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
                     </form>
@@ -595,6 +393,6 @@
 
     </body>
     <script src="../javascripts/listDaiLy1.js" type="module"></script>
-    <script src="../javascripts/init.js" type="module"></script>
+    <script src="../javascripts/init.js"></script>
     <script src="../javascripts/selectSmartSign.js"></script>
 </html>

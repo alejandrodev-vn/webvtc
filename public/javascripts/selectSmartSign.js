@@ -30,6 +30,9 @@ function validateSendRequest(){
 }
 
 
+
+
+
 function checkAllDN(){
     const selectItem = document.querySelectorAll('.select-smart-sign-DN')
     let isSelectAll = selectAllDN.checked
