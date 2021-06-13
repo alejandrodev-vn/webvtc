@@ -4,6 +4,7 @@ import { fetchAPI,
 } from './fetch.js'
 import { getSendMailPersonal } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
+const pendingStatusDN = document.querySelector('#pendingStatusDN')
 
 const url = 'http://localhost:3000/'
 
@@ -82,29 +83,41 @@ getCTSDoanhNghiep()
 async function showPendingDN(data){
     let html = ''
     const services = await getServices()
-    data.forEach((cts, index)=> {   
-        services.forEach(service => {
-            if(cts.goiCTSId == service._id){
-                cts = { ...service, ...cts }
-            }
+    if(data.length!=0){
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           <td scope="row">${index+1}</td>
+           <td><p>${cts._id}</p></td>
+           <td>${cts.tenGD}</td>
+           <td>${cts.giayPhepDKKD}</td>
+           <td>${cts.MST}</td>
+           <td>${cts.tenGoiDichVu}</td>
+           <td>${cts.thoiHan}</td>
+           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.nguoiThucHien}</td>
+           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+                : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
+                                        data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                                            Gửi thông tin thuê bao
+                                        </button>`
+                : 'Chờ duyệt lần 2'}</td></td>
+               <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+    
+         </tr>`
+         pendingStatusDN.innerHTML = html
+         
         })
-       html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-       <td scope="row">${index+1}</td>
-       <td><p>${cts._id}</p></td>
-       <td>${cts.tenGD}</td>
-       <td>${cts.giayPhepDKKD}</td>
-       <td>${cts.MST}</td>
-       <td>${cts.tenGoiDichVu}</td>
-       <td>${cts.thoiHan}</td>
-       <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
-       <td>${cts.nguoiThucHien}</td>
-       <td>${(cts.trangThai == 0) ? 'Dự thảo' : 'Chờ duyệt lần 1'}</td>
-       <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+        
+    }else{
+        pendingStatusDN.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
 
-     </tr>`
-     pendingStatusDN.innerHTML = html
-     
-    })
+    }
 } 
 async function getServices(){
     try{

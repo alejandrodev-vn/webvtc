@@ -161,11 +161,15 @@ async function openEdit(){
 
 async function getCTSDoanhNghiep(){
     try{
-        const urlList = url + `api/digital-certificate/organization/byUserId`
+        const urlList1 = url + `api/digital-certificate/organization/agency1`
+        const urlList2 = url + `api/digital-certificate/organization/byUserId`
         const options = {
             method: 'GET'
         }
-        await fetchAndShowData(urlList, options, showPendingDN)
+        const CTSDoanhNghiepByAgency = await fetchAPI(urlList1, options)
+        const CTSDoanhNghiepBySelf = await fetchAPI(urlList2, options)
+        const dataDN = [ ...CTSDoanhNghiepByAgency, ...CTSDoanhNghiepBySelf ]
+        return showPendingDN(dataDN)
 
        
     }catch(err){
@@ -186,7 +190,7 @@ async function showPendingDN(data){
            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
            <td scope="row">${index+1}</td>
            ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem1" class="select-smart-sign-DN" value="${cts._id}" onchange="checkSelectAllDN()"></td>` : '<td></td>'}
-           ${(cts.trangThai == 0) ? `<td><button class="btn btn-info">Sửa</button></td>` : '<td></td>'}
+           ${(cts.trangThai == 0) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-info btn-edit-organization">Sửa</button></td>` : '<td></td>'}
            <td><p>${cts._id}</p></td>
            <td>${cts.tenGD}</td>
            <td>${cts.giayPhepDKKD}</td>
@@ -195,11 +199,24 @@ async function showPendingDN(data){
            <td>${cts.thoiHan}</td>
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
-           <td>${(cts.trangThai == 0) ? 'Dự thảo' : 'Chờ duyệt lần 1'}</td>
+           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1' 
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                        Gửi thông tin thuê bao
+                                    </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
+                data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                    Gửi lại
+                </button>`
+            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
     
          </tr>`
-         pendingStatusDN.innerHTML = html
+        pendingStatusDN.innerHTML = html
+        openEditDN()
+        getSendMailPersonal()
          
         })
     }else {
@@ -224,5 +241,84 @@ async function getQuanHuyen(id){
     }
   
 }
+async function openEditDN(){
+    
+    // Get the modal
+    const modal = document.getElementById("modalEditCertificateOrganization");
 
+    // Get the button that opens the modal
+    const btns = document.querySelectorAll('.btn-edit-organization')
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("closeDN")[0];
+    // When the user clicks the button, open the modal
+    btns.forEach(btn=>{
+        btn.addEventListener('click', async (e)=>{
+            e.preventDefault()
+            const urlCer = url + `api/digital-certificate/organization/${btn.dataset.id}` 
+            const options = {
+                method:'GET'
+            }
+            const cts = await fetchAPI(urlCer, options)
+            modal.style.opacity = "1";
+            modal.style.display = "block"
+            document.querySelector('#tenGD_DN').value = cts.tenGD
+            document.querySelector('#giayPhepDKKD_DN').value = cts.giayPhepDKKD
+            document.querySelector('#ngayCapGiayPhepDKKD_DN').value = convertToYYYYMMDD(cts.ngayCapGiayPhepDKKD)
+            document.querySelector('#MST_DN').value = cts.MST
+            document.querySelector('#CtyMe').value = cts.congTyMe
+            document.querySelector('#camKet_DN').value = cts.camKet
+            document.querySelector('#password_DN').value = cts.password
+            document.querySelector('#diaChi_DN').value = cts.diaChi
+            document.querySelector('#emailGD_DN').value = cts.emailGD
+            document.querySelector('#soDienThoaiCongTy_DN').value = cts.soDienThoaiCongTy
+            document.querySelector('#hoTenChuDoanhNghiep_DN').value = cts.hoTenChuDoanhNghiep
+            document.querySelector('#chucVu_DN').value = cts.goiCTSId
+            document.querySelector('#soCMT_DN').value = cts.soCMT 
+            document.querySelector('#ngayCapCMT_DN').value = convertToYYYYMMDD(cts.ngayCapCMT)
+            document.querySelector('#noiCapCMT_DN').value = cts.noiCapCMT
+            document.querySelector('#email_DN').value = cts.emailChuDoanhNghiep
+            document.querySelector('#std_DN').value = cts.soDienThoaiChuDoanhNghiep
+            document.querySelector('#tinhThanh_DN').childNodes.forEach(province=>{
+                if(cts.tinhThanh == province.value) {
+                    province.setAttribute('selected',true)
+                }
+            })
+            await getQuanHuyen(cts.tinhThanh)
+            document.querySelector('#quanHuyen_DN').childNodes.forEach(district=>{
+                if(cts.quanHuyen == district.value) {
+                    district.setAttribute('selected',true)
+                }
+            })
+            document.querySelector('#services_DN').childNodes.forEach(service=>{
+                if(cts.goiCTSId == service.value) {
+                    service.setAttribute('selected',true)
+                }
+            })
+            document.querySelector('#thoiHan_DN').value = cts.thoiHan
+            document.querySelector('#gia_DN').value = Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(cts.giaCuoc)
+            document.querySelector('#id').value = cts._id
+
+        })
+    })
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.opacity = "0"
+        setTimeout(()=>{modal.style.display = "none";
+            },450)
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.opacity = "0"
+        setTimeout(()=>{modal.style.display = "none";
+            },450)
+        }
+    }    
+
+}
+// export { 
+//     getSendMail 
+// }
 

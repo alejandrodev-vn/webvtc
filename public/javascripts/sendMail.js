@@ -9,6 +9,18 @@ function getSendMailPersonal(){
         }
     })
 }
+function getSendMailOrganization(){
+    const formSendMailOrganization = document.querySelector('#formSendMailOrganization')
+    const btnsSendMail = document.querySelectorAll('.btn-sendMail')
+    btnsSendMail.forEach(btn=>{
+        btn.onclick = (e) => {
+            e.preventDefault()
+            formSendMailOrganization.action = `/digital-certificate/organization/send-mail/${btn.dataset.id}`
+            formSendMailOrganization.submit()
+        }
+    })
+}
 export { 
-    getSendMailPersonal 
+    getSendMailPersonal,
+    getSendMailOrganization
 }
