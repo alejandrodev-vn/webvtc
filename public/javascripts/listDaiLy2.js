@@ -14,7 +14,20 @@ async function getCTSCaNhan(){
         const options = {
             method: 'GET'
         }
-        return await fetchAndShowData(urlList, options, showPending)
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginPersonal').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPending(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPending(data)
+        }
+       
 
        
     }catch(err){
@@ -62,7 +75,7 @@ async function showPending(data){
         getSendMailPersonal()
 
     }else{
-        pendingStatus.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatus.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
     }
    
 }
@@ -72,8 +85,20 @@ async function getCTSDoanhNghiep(){
         const options = {
             method: 'GET'
         }
-        await fetchAndShowData(urlList, options, showPendingDN)
-
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginOrganization').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPendingDN(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPendingDN(data)
+        }
+       
        
     }catch(err){
         console.log(err)
@@ -115,7 +140,7 @@ async function showPendingDN(data){
         })
         
     }else{
-        pendingStatusDN.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatusDN.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
 
     }
 } 

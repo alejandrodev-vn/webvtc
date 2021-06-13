@@ -74,8 +74,11 @@ module.exports.sendResponse = async (req, res, next) => {
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
             await CTSCaNhanService.sendResponse(id, {trangThai: 0});
             res.redirect('/')
+
+
         }else{
             res.redirect('/')
+
         }
      
     }

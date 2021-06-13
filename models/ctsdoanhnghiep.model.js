@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
+const mongooseDelete = require('mongoose-delete');
 
 const CTSDoanhNghiepSchema = new Schema({
   loaiCTS: {type: String, default: 'Tổ chức'},
@@ -32,6 +33,11 @@ const CTSDoanhNghiepSchema = new Schema({
   trangThai:{type: Number, required: true, default:0},
   createdBy: {type: String},
 }, {timestamps: true});
+//add plugin
+CTSDoanhNghiepSchema.plugin(mongooseDelete, { 
+  overrideMethods: true, 
+  deletedAt: true
+})
 // a setter
 CTSDoanhNghiepSchema.path('tenGD').set(function (input) {
   return input.toUpperCase()

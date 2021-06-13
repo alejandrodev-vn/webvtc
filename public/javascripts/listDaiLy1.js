@@ -20,7 +20,19 @@ async function getCTSCaNhan(){
         const CTSCaNhanByAgency = await fetchAPI(urlList1, options)
         const CTSCaNhanBySelf = await fetchAPI(urlList2, options)
         const data = [ ...CTSCaNhanByAgency, ...CTSCaNhanBySelf ]
-        return showPending(data)
+        if(data.length!=0){
+            $('#paginPersonal').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPending(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPending(data)
+        }
+       
        
     }catch(err){
         console.log(err)
@@ -70,7 +82,7 @@ async function showPending(data){
         openEdit()
         getSendMailPersonal()
     }else {
-        pendingStatus.innerHtml = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatus.innerHtml = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
     }
     
 
@@ -168,8 +180,20 @@ async function getCTSDoanhNghiep(){
         }
         const CTSDoanhNghiepByAgency = await fetchAPI(urlList1, options)
         const CTSDoanhNghiepBySelf = await fetchAPI(urlList2, options)
-        const dataDN = [ ...CTSDoanhNghiepByAgency, ...CTSDoanhNghiepBySelf ]
-        return showPendingDN(dataDN)
+        const data = [ ...CTSDoanhNghiepByAgency, ...CTSDoanhNghiepBySelf ]
+        if(data.length!=0){
+            $('#paginOrganization').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showPendingDN(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showPendingDN(data)
+        }
+       
 
        
     }catch(err){
@@ -220,7 +244,7 @@ async function showPendingDN(data){
          
         })
     }else {
-        pendingStatusDN.innerHTML = '<h3>Hiện không có dữ liệu</h3>'
+        pendingStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
     }
    
 }
@@ -318,7 +342,5 @@ async function openEditDN(){
     }    
 
 }
-// export { 
-//     getSendMail 
-// }
+
 

@@ -74,7 +74,7 @@ exports.update = async (id, values) => {
 
 
 exports.delete = async (id) => {
-    return await CTSDoanhNghiepModel.findByIdAndDelete({_id: id}, (err) => {
+    return await CTSDoanhNghiepModel.delete({_id: id}, (err) => {
         if(err){
             console.log('Delete fail!');
         }else{

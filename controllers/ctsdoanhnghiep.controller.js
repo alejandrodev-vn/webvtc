@@ -52,19 +52,32 @@ module.exports.update = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.sendRequest = async (req, res, next) => {
+module.exports.handleFormActions = async (req, res, next) => {
     try{
-        let { selectItem1 } = req.body;
-        console.log(selectItem1)
-        if(Array.isArray(selectItem1)){
-            for(let i=0; i<selectItem1.length; i++){
-                await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1});
+        let { selectItem1, deleteOrganization, sendOrganization } = req.body;
+        if(deleteOrganization == 'Xóa' && deleteOrganization != 'undefined'){
+            if(Array.isArray(selectItem1)){
+                for(let i=0; i<selectItem1.length; i++){
+                    await CTSDoanhNghiepService.delete(selectItem1[i]);
+                }
+            }else {
+                await CTSDoanhNghiepService.delete(selectItem1);
             }
-        }else {
-            await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1});
+            res.redirect('/')
+        }else if(sendOrganization != 'undefined'){ 
+            if(Array.isArray(selectItem1)){
+                for(let i=0; i<selectItem1.length; i++){
+                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1});
+                }
+            }else {
+                await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1});
+            }
+            res.redirect('/')
+        }else{
+            res.redirect('/')
         }
         
-        res.redirect('/')
+        
     }
     catch(err){
         console.log(err)
@@ -100,25 +113,6 @@ module.exports.delete = async (req, res, next) => {
     }
 }
 
-module.exports.sendMail = async (req, res, next) => {
-    try{
-        const user = req.body
-        const mailgun = require("mailgun-js");
-        const DOMAIN = "sandbox7f9e883d109046e38f8d3a0a182518eb.mailgun.org";
-        const mg = mailgun({apiKey: "7f6264d76c3462ed20e7f5a6fe29ffbf-1d8af1f4-c381556f", domain: DOMAIN});
-        const data = {
-            from: "SmartSign <huytra264@gmail.com>",
-            to: "huytra264@gmail.com",
-            subject: "Xác nhận thông tin SmartSign",
-            text: `Kính gửi Ông/Bà ${user.username}`
-        };
-        mg.messages().send(data, function (error, body) {
-            console.log(body);
-        });
-    }catch(err){
-        console.log(err)
-    }
-}
 
 module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 

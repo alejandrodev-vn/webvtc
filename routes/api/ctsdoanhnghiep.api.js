@@ -58,7 +58,6 @@ router.get('/digital-certificate/organization/byAgency', async (req, res, next)=
             let agency2 = await usersService.getByBelongTo(agencyList[i]._id)
             agency2.forEach( async agency => {
                 let CTSDoanhNghiep = await CTSDoanhNghiepService.getByUserId(agency._id)
-                console.log(CTSDoanhNghiep)
                 if(CTSDoanhNghiep.length==1){
                     if(CTSDoanhNghiep[0].trangThai==1 || CTSDoanhNghiep[0].trangThai==3){
                         result.push(...CTSDoanhNghiep)
