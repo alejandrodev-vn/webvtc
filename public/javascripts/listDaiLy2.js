@@ -143,6 +143,7 @@ async function showPendingDN(data){
           pendingStatusDN.innerHTML = html
     
          })    
+        getSendMailOrganization()
     }else{
         pendingStatusDN.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
     }

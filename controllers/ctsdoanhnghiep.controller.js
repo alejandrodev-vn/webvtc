@@ -18,13 +18,13 @@ module.exports.add = async (req, res, next) => {
             req.session.errorsDN = errors.array()
             return res.redirect('/digital-certificate/organization')
         }
-        console.log(req.body)
         let values = req.body;
         const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
         const getGia = goiDichVu.gia
         values.goiCTSId = goiDichVu._id
         values.thoiHan = goiDichVu.thoiHan
         values.giaCuoc =Number(getGia)
+        values.fileHoSo = req.file.originalname
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSDoanhNghiepService.createNew(values);
         res.redirect('/')
@@ -130,8 +130,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
+                    user: 'namdtps12220@fpt.edu.vn',
+                    pass: 'nam180201'
                 },
                 tls: {rejectUnauthorized:false}
         

@@ -25,6 +25,7 @@ module.exports.add = async (req, res, next) => {
         values.thoiHan = goiDichVu.thoiHan
         values.gia =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
+        values.fileHoSo = req.file.originalname
         await CTSCaNhanService.createNew(values);
         res.redirect('/')
     }
@@ -86,7 +87,6 @@ module.exports.sendResponse = async (req, res, next) => {
         console.log(err)
     }
 }
-
 module.exports.handleFormActions = async (req, res, next) => {
     try{
         let { selectItem, deletePersonal, sendPersonal } = req.body;
@@ -131,8 +131,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
+                    user: 'namdtps12220@fpt.edu.vn',
+                    pass: 'nam180201'
                 },
                 tls: {rejectUnauthorized:false}
         
