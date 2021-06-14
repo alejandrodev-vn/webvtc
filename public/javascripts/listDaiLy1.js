@@ -257,7 +257,7 @@ async function openEditDN(){
     const btns = document.querySelectorAll('.btn-edit-organization')
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close-1")[0];
+    const span = document.getElementsByClassName("closeDN")[0];
     // When the user clicks the button, open the modal
     btns.forEach(btn=>{
         btn.addEventListener('click', async (e)=>{
@@ -267,7 +267,6 @@ async function openEditDN(){
                 method:'GET'
             }
             const cts = await fetchAPI(urlCer, options)
-            console.log(cts.diaChi)
             modal.style.opacity = "1";
             modal.style.display = "block"
             document.querySelector('#tenGD').value = cts.tenGD
@@ -321,7 +320,7 @@ async function openEditDN(){
         setTimeout(()=>{modal.style.display = "none";
             },450)
         }
-    }    
+    }     
 
 }
 async function getQuanHuyen(id){
