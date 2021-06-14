@@ -42,16 +42,18 @@ module.exports.update = async (req, res, next) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { id } = req.params
+        const { idEdit } = req.body
         let values = req.body;
 
-        await CTSDoanhNghiepService.update(id, values);
-        res.redirect('/digital-certificate/organization')
+        await CTSDoanhNghiepService.update(idEdit, values);
+        res.redirect('/')
     }
     catch(err){
         console.log(err)
     }
 }
+
+
 module.exports.handleFormActions = async (req, res, next) => {
     try{
         let { selectItem1, deleteOrganization, sendOrganization } = req.body;
