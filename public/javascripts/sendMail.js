@@ -20,7 +20,8 @@ function getSendMailOrganization(){
         }
     })
 }
+   
 export { 
     getSendMailPersonal,
-    getSendMailOrganization
+    getSendMailOrganization,
 }

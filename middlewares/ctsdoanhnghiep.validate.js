@@ -12,7 +12,7 @@ module.exports.validateCTSDoanhNghiep = () => {
       check('soDienThoaiCongTy', 'Số điện thoại công ty không được trống').not().isEmpty(),
       check('emailGD', 'Email giao dich không được trống').not().isEmpty(),
       check('hoTenChuDoanhNghiep', 'Họ tên chủ doanh nghiệp không được trống').not().isEmpty(),
-      check('email', 'Họ tên chủ doanh nghiẹp không được trống').not().isEmpty(),
+      check('emailChuDoanhNghiep', 'Họ tên chủ doanh nghiẹp không được trống').not().isEmpty(),
       check('soCMT', 'Số chứng minh thư không được trống').not().isEmpty(),
       check('noiCapCMT', 'nơi cấp chứng minh thư không được trống').not().isEmpty(),
       check('ngayCapCMT', 'Ngày cấp chứng minh thư không được trống').not().isEmpty(),

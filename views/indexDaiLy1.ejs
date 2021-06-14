@@ -251,7 +251,7 @@
                                                 <label>
                                                     Chức vụ
                                                 </label>
-                                                <input type="text" id="chucVu" name="chucVu">
+                                                <input type="text" id="chucVuDN" name="chucVu">
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
@@ -262,7 +262,7 @@
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Quận/ Huyện <span class="note">*</span></label>
-                                                    <select name="quanHuyen" id="quanHuyenDN">
+                                                    <select name="quanHuyen" id="quanHuyenDN" >
                                                         <option value="0">Chọn tỉnh thành trước</option>
                                                     </select>
                                                 </div>
@@ -279,7 +279,11 @@
         
                                             </div>
                                             <h3>Thông tin chủ doanh nghiệp</h3>
-                                            <div class="if-fm">
+                                            <div class="if-ck">
+                                                <div class="if-fm ck">
+                                                    <label>Ho Ten chu Doanh Nghiep  <span class="note">*</span></label>
+                                                    <input type="text" id="hoTenChuDoanhNghiepDN" name="hoTenChuDoanhNghiep">
+                                                </div>
                                                 <div class="if-fm ck">
                                                     <label>Email cá nhân  <span class="note">*</span></label>
                                                     <input type="text" id="emailChuDoanhNghiep" name="emailChuDoanhNghiep">
@@ -289,16 +293,12 @@
                                                     <input type="text" id="soDienThoaiChuDoanhNghiep" name="soDienThoaiChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Chức vụ</label>
-                                                    <input type="text" id="chucVu" name="chucVu">
-                                                </div>
-                                                <div class="if-fm ck">
                                                     <label>Số CMTND/HC</label>
                                                     <input type="text" id="soCMTDN" name="soCMT">
                                                 </div>
-                                                <div class="if-fm ck">
+                                                <div class="if-fm ck" width="70%">
                                                     <label>Ngày Cấp CMT</label>
-                                                    <input type="date" id="ngayCapCMTDN" name="ngayCapCMT">
+                                                    <input style="width:70%" type="date" id="ngayCapCMTDN" name="ngayCapCMT">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Nơi Cấp CMT</label>
@@ -328,7 +328,7 @@
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Giá cước</label>
-                                                    <input type="text" name="gia" id="giaDN" readonly="true" style="background:#eee">
+                                                    <input type="text" name="giaCuoc" id="giaDN" readonly="true" style="background:#eee">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Người thực hiện <span class="note">*</span></label>
@@ -546,6 +546,8 @@
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
                     </form>
+                    <form id="formSendMailOrganization" method="POST"></form>
+
                     </div>
                   </div> 
                 </div>

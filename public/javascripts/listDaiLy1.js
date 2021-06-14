@@ -247,23 +247,7 @@ async function showPendingDN(data){
     }
    
 }
-async function getQuanHuyen(id){
-    try{
-        if(!quanHuyenEl){
-            return
-        }
-        const res = await fetch('http://localhost:3000/api/districts')
-        const data = await res.json()
-        let quanHuyenHtml = ''
-        data.forEach(district => { if(district.tinhThanhId == id){
-            quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
-        }})
-        quanHuyenEl.innerHTML = quanHuyenHtml
-    }catch(err){
-        console.log(err)
-    }
-  
-}
+
 async function openEditDN(){
     
     // Get the modal
@@ -273,7 +257,7 @@ async function openEditDN(){
     const btns = document.querySelectorAll('.btn-edit-organization')
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
+    const span = document.getElementsByClassName("close-1")[0];
     // When the user clicks the button, open the modal
     btns.forEach(btn=>{
         btn.addEventListener('click', async (e)=>{
@@ -296,10 +280,11 @@ async function openEditDN(){
             document.querySelector('#noiCapCMTDN').value = cts.noiCapCMT
             document.querySelector('#emailGD').value = cts.emailGD
             document.querySelector('#soDienThoaiCongTy').value = cts.soDienThoaiCongTy
-            document.querySelector('#emailChuDoanhNghiep').value = cts.emailChuDoanhNghiep
-            document.querySelector('#soDienThoaiChuDoanhNghiep').value = cts.soDienThoaiChuDoanhNghiep
+            document.querySelector('#hoTenChuDoanhNghiepDN').value = cts.hoTenChuDoanhNghiep
+            document.querySelector('#emailChuDoanhNghiep').value = cts.emailGD
+            document.querySelector('#soDienThoaiChuDoanhNghiep').value = cts.soDienThoaiCongTy
             document.querySelector('#congTyMe').value = cts.congTyMe
-            document.querySelector('#chucVu').value = cts.chucVu
+            document.querySelector('#chucVuDN').value = cts.chucVu
             document.querySelector('#tinhThanhDN').childNodes.forEach(province=>{
                 if(cts.tinhThanh == province.value) {
                     province.setAttribute('selected',true)
@@ -317,7 +302,7 @@ async function openEditDN(){
                 }
             })
             document.querySelector('#thoiHanDN').value = cts.thoiHan
-            document.querySelector('#giaDN').value = cts.gia
+            document.querySelector('#giaDN').value = cts.giaCuoc
             document.querySelector('#idDN').value = cts._id
 
         })
@@ -338,5 +323,22 @@ async function openEditDN(){
         }
     }    
 
+}
+async function getQuanHuyen(id){
+    try{
+        if(!quanHuyenEl){
+            return
+        }
+        const res = await fetch('http://localhost:3000/api/districts')
+        const data = await res.json()
+        let quanHuyenHtml = ''
+        data.forEach(district => { if(district.tinhThanhId == id){
+            quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
+        }})
+        quanHuyenEl.innerHTML = quanHuyenHtml
+    }catch(err){
+        console.log(err)
+    }
+  
 }
 

@@ -2,6 +2,7 @@ import { convertToDDMMYYYY } from './convert.js'
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
+import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
 const url = 'http://localhost:3000/'
@@ -97,6 +98,7 @@ async function showPending(data){
         })
         pendingStatus.innerHTML = html
         handleRequest()
+        getSendMailPersonal()
     }else{
         pendingStatus.innerHTML = '<td colspan="11"><h4>Hiện không có dữ liệu</h4></td>'
     }
@@ -134,12 +136,14 @@ async function showPendingDN(data){
                                     data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
                                     Gửi lại
                                     </button>`
-            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>   
+            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
             <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
          </tr>`
         })
         pendingStatusDN.innerHTML = html
         handleRequestDN()
+        getSendMailOrganization()
     }else{
         pendingStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
     }

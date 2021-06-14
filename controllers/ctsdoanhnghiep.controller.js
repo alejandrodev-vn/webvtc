@@ -18,13 +18,13 @@ module.exports.add = async (req, res, next) => {
             req.session.errorsDN = errors.array()
             return res.redirect('/digital-certificate/organization')
         }
-        console.log(req.body)
         let values = req.body;
         const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
         const getGia = goiDichVu.gia
         values.goiCTSId = goiDichVu._id
         values.thoiHan = goiDichVu.thoiHan
         values.giaCuoc =Number(getGia)
+        values.fileHoSo = req.file.originalname
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSDoanhNghiepService.createNew(values);
         res.redirect('/')
@@ -42,16 +42,18 @@ module.exports.update = async (req, res, next) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { id } = req.params
+        const { idEdit } = req.body
         let values = req.body;
 
-        await CTSDoanhNghiepService.update(id, values);
-        res.redirect('/digital-certificate/organization')
+        await CTSDoanhNghiepService.update(idEdit, values);
+        res.redirect('/')
     }
     catch(err){
         console.log(err)
     }
 }
+
+
 module.exports.handleFormActions = async (req, res, next) => {
     try{
         let { selectItem1, deleteOrganization, sendOrganization } = req.body;
@@ -130,8 +132,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
+                    user: 'namdtps12220@fpt.edu.vn',
+                    pass: 'nam180201'
                 },
                 tls: {rejectUnauthorized:false}
         
