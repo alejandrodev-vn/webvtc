@@ -10,7 +10,8 @@ module.exports.checkAuthencation = function(req, res, next){
         }else{
             jwt.verify(token, process.env.KEY, (err, decode)=>{
                 if(!err){
-                    res.json({success:true, data: decode, msg:'Authorized'})
+                    req.data = decode
+                    next()
                 }else{
                     res.json({success:false, msg:'Unauthorized'})
                 }

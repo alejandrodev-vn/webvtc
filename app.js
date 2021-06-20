@@ -34,6 +34,7 @@ const usersRouter = require('./routes/users.route')
 const trashRouter = require('./routes/trash.route')
 const otpRouter = require('./routes/otp.route')
 //api
+const authMobile = require('./routes/api/authMobile.api')
 const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
 const tinhThanhAPI = require('./routes/api/provinces.api');
@@ -84,7 +85,7 @@ app.use('/api', districtsAPI);
 app.use('/api', usersAPI);
 app.use('/api', tinhThanhAPI);
 app.use('/api', loaiCTSAPI);
-app.use('/api', giaoDichAPI);
+app.use('/api', authMobile.checkAuthencation, giaoDichAPI);
 app.use('/api', goiDichVuAPI);
 app.use('/api', CTSCaNhanAPI);
 app.use('/api', CTSDoanhNghiepAPI);
