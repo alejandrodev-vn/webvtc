@@ -21,6 +21,17 @@ exports.getForAdmin1 = async () => {
         console.log(err)    
     }
 }
+exports.getApprovedForAdmin1 = async () => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
 
 
 exports.getById = async (id) => {
