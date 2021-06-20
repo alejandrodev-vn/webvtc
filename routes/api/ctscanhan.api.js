@@ -21,6 +21,15 @@ router.get('/admin/digital-certificate/personal', async (req, res, next) => {
         console.log(err)
     }
 });
+router.get('/admin/digital-certificate/personal-approved', async (req, res, next) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanService.getApprovedForAdmin1()
+        res.json(CTSCaNhan)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 //self
 router.get('/digital-certificate/personal/byUserId', async (req, res, next)=> {
     try{

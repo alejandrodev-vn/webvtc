@@ -72,7 +72,7 @@ async function showPending(data){
             })
             html+=`<tr style="background:#cfebff">
             <td scope="row">${index+1}</td>
-            <td><button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button></td>
+            <td>${(cts.trangThai==1 || cts.trangThai==4)? `<button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td>${cts._id}</td>
             <td>${cts.hoTenNguoiDK}</td>
             <td style="color:firebrick">${cts.tenGoiDichVu}</td>
@@ -117,7 +117,7 @@ async function showPendingDN(data){
             })
             html+=`<tr style="background:#cfebff">
             <td scope="row">${index+1}</td>
-            <td><button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button></td>
+            <td>${(cts.trangThai == 1 || cts.trangThai == 4) ? `<button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td>${cts._id}</td>
             <td>${cts.tenGD}</td>
             <td style="color:firebrick">${cts.tenGoiDichVu}</td>

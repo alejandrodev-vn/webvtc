@@ -25,7 +25,9 @@ module.exports.add = async (req, res, next) => {
         values.thoiHan = goiDichVu.thoiHan
         values.gia =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
-        values.fileHoSo = req.file.originalname
+        if(values.fileHoSo){
+            values.fileHoSo = req.file.originalname
+        }
         await CTSCaNhanService.createNew(values);
         res.redirect('/')
     }
@@ -39,7 +41,7 @@ module.exports.update = async (req, res, next) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { idEdit } = req.body
+        const { idEdit } = req.body 
         let values = req.body;
 
         await CTSCaNhanService.update(idEdit, values);
@@ -141,14 +143,14 @@ module.exports.sendMail =  async (req, res, next) => {
                 from: 'SmartSign<smartsign@gmail.com>',
                 to: cts.email,
                 subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
-                text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
-                - Thông tin thuê bao như sau:
-                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
-                    + Mã số thuế: ${cts.MSTCaNhan}
-                    + CMND/HC: ${cts.soCMT}
-                    + Điện thoại: ${cts.soDienThoai}
-                `,
-                html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+                text: `Xác nhận`,
+                html: `<h4>SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.</h4>
+                <h4>- Thông tin thuê bao như sau:</h4>
+                    <p>+ Họ tên người đăng ký: ${cts.hoTenNguoiDK}</p> 
+                    <p>+ Mã số thuế: ${cts.MSTCaNhan}</p> 
+                    <p>+ CMND/HC: ${cts.soCMT}</p>
+                    <p>+ Điện thoại: ${cts.soDienThoai}</p>
+                <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
                 <a href="http://localhost:3000/digital-certificate/personal/get-otp/${token}">
                 http://localhost:3000/digital-certificate/personal/get-otp/${token}
                 </a>
