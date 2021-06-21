@@ -24,7 +24,9 @@ module.exports.add = async (req, res, next) => {
         values.goiCTSId = goiDichVu._id
         values.thoiHan = goiDichVu.thoiHan
         values.giaCuoc =Number(getGia)
-        values.fileHoSo = req.file.originalname
+        if(req.file.originalname){
+            values.fileHoSo = req.file.originalname
+        }
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSDoanhNghiepService.createNew(values);
         res.redirect('/')
@@ -44,7 +46,15 @@ module.exports.update = async (req, res, next) => {
         }
         const { idEdit } = req.body
         let values = req.body;
-
+        if(req.file.originalname){
+            const fs = require('fs')
+            const data = await CTSDoanhNghiepService.getById(idEdit)
+            const path = `public/uploads/fileHoSo/${data.fileHoSo}`
+            if(fs.existsSync(path)){
+                fs.unlinkSync(path)
+            }
+            values.fileHoSo = req.file.originalname
+        }
         await CTSDoanhNghiepService.update(idEdit, values);
         res.redirect('/')
     }

@@ -9,6 +9,28 @@ exports.getAll = async () => {
         console.log(err)    
     }
 }
+exports.getAllPending = async () => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({$or: [
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
+exports.getAllApproved = async () => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
 
 exports.getForAdmin1 = async () => {
     try{
@@ -43,9 +65,22 @@ exports.getById = async (id) => {
         console.log(err)
     }
 }
-exports.getByUserId = async (userId) => {
+exports.getPendingByUserId = async (userId) => {
     try{
-        const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId});
+        const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId,$or: [
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSCaNhan
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getApprovedByUserId = async (userId) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId,$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
         return CTSCaNhan
     }
     catch(err){

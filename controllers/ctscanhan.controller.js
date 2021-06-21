@@ -25,7 +25,7 @@ module.exports.add = async (req, res, next) => {
         values.thoiHan = goiDichVu.thoiHan
         values.gia =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
-        if(values.fileHoSo){
+        if(req.file.originalname){
             values.fileHoSo = req.file.originalname
         }
         await CTSCaNhanService.createNew(values);
@@ -43,7 +43,15 @@ module.exports.update = async (req, res, next) => {
         }
         const { idEdit } = req.body 
         let values = req.body;
-
+        if(req.file.originalname){
+            const fs = require('fs')
+            const data = await CTSCaNhanService.getById(idEdit)
+            const path = `public/uploads/fileHoSo/${data.fileHoSo}`
+            if(fs.existsSync(path)){
+                fs.unlinkSync(path)
+            }
+            values.fileHoSo = req.file.originalname
+        }
         await CTSCaNhanService.update(idEdit, values);
         res.redirect('/')
     }

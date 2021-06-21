@@ -9,6 +9,29 @@ exports.getAll = async () => {
         console.log(err)
     }
 }
+exports.getAllPending = async () => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
+exports.getAllApproved = async () => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
+
 exports.getForAdmin1 = async () => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
@@ -20,7 +43,17 @@ exports.getForAdmin1 = async () => {
         console.log(err)    
     }
 }
-
+exports.getApprovedForAdmin1 = async () => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)    
+    }
+}
 exports.getById= async (id) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepModel.findById(id);
@@ -30,9 +63,22 @@ exports.getById= async (id) => {
         console.log(err)
     }
 }
-exports.getByUserId = async (userId) => {
+exports.getPendingByUserId = async (userId) => {
     try{
-        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({createdBy:userId});
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({createdBy:userId,$or: [
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+        ]});
+        return CTSDoanhNghiep
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getApprovedByUserId = async (userId) => {
+    try{
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({createdBy:userId,$or: [
+            {trangThai: 5},{trangThai: 6}
+        ]});
         return CTSDoanhNghiep
     }
     catch(err){

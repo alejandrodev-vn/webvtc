@@ -5,6 +5,8 @@ import { fetchAPI,
 import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
+const approvedStatus = document.querySelector('#approvedStatus')
+const approvedStatusDN = document.querySelector('#approvedStatusDN')
 const url = 'http://localhost:3000/'
 
 async function getCTSCaNhan(){
@@ -71,29 +73,30 @@ async function showPending(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td scope="row">${index+1}</td>
-            <td>${(cts.trangThai==1 || cts.trangThai==4)? `<button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td>${cts._id}</td>
-            <td>${cts.hoTenNguoiDK}</td>
-            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-            <td></td>
-            <td style="color:firebrick">${cts.MSTCaNhan}</td>
-            <td></td>
-            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td>${(cts.trangThai==1 || cts.trangThai==4)
+                ? `<button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                    data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                    <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                    data-id="${cts._id}">
                                     Gửi lại
                                     </button>`
             : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MSTCaNhan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
             <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+            <td></td>
+            <td></td>
          </tr>`
         })
         pendingStatus.innerHTML = html
@@ -116,29 +119,30 @@ async function showPendingDN(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td scope="row">${index+1}</td>
-            <td>${(cts.trangThai == 1 || cts.trangThai == 4) ? `<button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td>${cts._id}</td>
-            <td>${cts.tenGD}</td>
-            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-            <td></td>
-            <td style="color:firebrick">${cts.MST}</td>
-            <td></td>
-            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td>${(cts.trangThai == 1 || cts.trangThai == 4) 
+                ? `<button class="btn btn-action btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                    <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}">
                                     Gửi lại
                                     </button>`
             : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>   
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
             <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+            <td></td>
+            <td></td>
          </tr>`
         })
         pendingStatusDN.innerHTML = html
@@ -294,4 +298,123 @@ async function handleRequestDN(){
         }
     }    
 
+}
+
+async function getCTSCaNhanApproved(){
+    try{
+        const urlList = url + `api/digital-certificate/personal/approved-by-agency`
+        const options = {
+            method: 'GET'
+        }
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginPersonalApproved').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showApprovedPersonal(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showApprovedPersonal(data)
+        }
+       
+    }catch(err){
+        console.log(err)
+    }
+}
+getCTSCaNhanApproved()
+async function showApprovedPersonal(data){
+    let html = ''
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td scope="row">${index+1}</td>
+            <td style="color:firebrick">Đã duyệt lần 2</td>
+            <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.thoiHan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+        
+         </tr>`
+        })
+        approvedStatus.innerHTML = html
+
+    }else{
+        approvedStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
+}
+async function getCTSDoanhNghiepApproved(){
+    try{
+        const urlList = url + `api/digital-certificate/organization/approved-by-agency`
+        const options = {
+            method: 'GET'
+        }
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginOrgApproved').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showApprovedOrg(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showApprovedOrg(data)
+        }
+    
+        
+       
+    }catch(err){
+        console.log(err)
+    }
+}
+getCTSDoanhNghiepApproved()
+async function showApprovedOrg(data){
+    let html = ''
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td scope="row">${index+1}</td>
+            <td style="color:firebrick">Đã duyệt lần 2</td>
+            <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.thoiHan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+        
+         </tr>`
+        })
+        approvedStatusDN.innerHTML = html
+
+    }else{
+        approvedStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
 }
