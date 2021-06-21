@@ -5,6 +5,8 @@ import { fetchAPI,
 import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
+const approvedStatus = document.querySelector('#approvedStatus')
+const approvedStatusDN = document.querySelector('#approvedStatusDN')
 const url = 'http://localhost:3000/'
 
 async function getCTSCaNhan(){
@@ -296,4 +298,123 @@ async function handleRequestDN(){
         }
     }    
 
+}
+
+async function getCTSCaNhanApproved(){
+    try{
+        const urlList = url + `api/digital-certificate/personal/approved-by-agency`
+        const options = {
+            method: 'GET'
+        }
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginPersonalApproved').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showApprovedPersonal(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showApprovedPersonal(data)
+        }
+       
+    }catch(err){
+        console.log(err)
+    }
+}
+getCTSCaNhanApproved()
+async function showApprovedPersonal(data){
+    let html = ''
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td scope="row">${index+1}</td>
+            <td style="color:firebrick">Đã duyệt lần 2</td>
+            <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.thoiHan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+        
+         </tr>`
+        })
+        approvedStatus.innerHTML = html
+
+    }else{
+        approvedStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
+}
+async function getCTSDoanhNghiepApproved(){
+    try{
+        const urlList = url + `api/digital-certificate/organization/approved-by-agency`
+        const options = {
+            method: 'GET'
+        }
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginOrgApproved').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showApprovedOrg(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showApprovedOrg(data)
+        }
+    
+        
+       
+    }catch(err){
+        console.log(err)
+    }
+}
+getCTSDoanhNghiepApproved()
+async function showApprovedOrg(data){
+    let html = ''
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td scope="row">${index+1}</td>
+            <td style="color:firebrick">Đã duyệt lần 2</td>
+            <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.thoiHan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+        
+         </tr>`
+        })
+        approvedStatusDN.innerHTML = html
+
+    }else{
+        approvedStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
 }
