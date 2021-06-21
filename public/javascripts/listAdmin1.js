@@ -5,6 +5,8 @@ import { fetchAPI,
 import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
+const approvedStatus = document.querySelector('#approvedStatus')
+const approvedStatusDN = document.querySelector('#approvedStatusDN')
 const url = 'http://localhost:3000/'
 
 async function getCTSCaNhan(){
@@ -63,6 +65,33 @@ async function getCTSDoanhNghiep(){
 }
 getCTSDoanhNghiep()
 
+async function getCTSCaNhanApproved(){
+    try{
+        const urlList = url + `api/admin/digital-certificate/personal-approved`
+        const options = {
+            method: 'GET'
+        }
+        const data = await fetchAPI(urlList, options)
+        if(data.length!=0){
+            $('#paginPersonalApproved').pagination({
+                dataSource: data,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showApprovedPersonal(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showApprovedPersonal(data)
+        }
+    
+        
+       
+    }catch(err){
+        console.log(err)
+    }
+}
+getCTSCaNhanApproved()
 async function showPending(data){
     let html = ''
     if(data.length!=0){
@@ -75,7 +104,7 @@ async function showPending(data){
             })
             html+=`<tr style="background:#cfebff">
             <td scope="row">${index+1}</td>
-            <td><button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button></td>
+            <td>${(cts.trangThai == 1 || cts.trangThai == 4) ? `<button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` :  ''}</td>
             <td>${cts._id}</td>
             <td>${cts.hoTenNguoiDK}</td>
             <td style="color:firebrick">${cts.tenGoiDichVu}</td>
@@ -154,6 +183,39 @@ async function showPendingDN(data){
     }
   
 }
+async function showApprovedPersonal(data){
+    let html = ''
+    if(data.length!=0){
+        const services = await getServices()
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td scope="row">${index+1}</td>
+            <td><button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.soCMT}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.thoiHan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td style="color:firebrick">Đã duyệt lần 2</td>
+            <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
+         </tr>`
+        })
+        approvedStatus.innerHTML = html
+
+    }else{
+        approvedStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+    
+}
+
 async function getServices(){
     try{
         const res = await fetch('http://localhost:3000/api/services')
