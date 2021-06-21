@@ -71,29 +71,30 @@ async function showPending(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td scope="row">${index+1}</td>
-            <td>${(cts.trangThai==1 || cts.trangThai==4)? `<button class="btn btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td>${cts._id}</td>
-            <td>${cts.hoTenNguoiDK}</td>
-            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-            <td></td>
-            <td style="color:firebrick">${cts.MSTCaNhan}</td>
-            <td></td>
-            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td>${(cts.trangThai==1 || cts.trangThai==4)
+                ? `<button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                    data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                    <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                    data-id="${cts._id}">
                                     Gửi lại
                                     </button>`
             : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MSTCaNhan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
             <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+            <td></td>
+            <td></td>
          </tr>`
         })
         pendingStatus.innerHTML = html
@@ -116,29 +117,30 @@ async function showPendingDN(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td scope="row">${index+1}</td>
-            <td>${(cts.trangThai == 1 || cts.trangThai == 4) ? `<button class="btn btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td>${cts._id}</td>
-            <td>${cts.tenGD}</td>
-            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
-            <td></td>
-            <td style="color:firebrick">${cts.MST}</td>
-            <td></td>
-            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
-            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td>${(cts.trangThai == 1 || cts.trangThai == 4) 
+                ? `<button class="btn btn-action btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
             <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
+                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                    <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}">
                                     Gửi lại
                                     </button>`
             : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>   
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
             <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-            <td><button class="btn btn-secondary" data-id="${cts.id}"}>Lịch sử</button></td>
+            <td></td>
+            <td></td>
          </tr>`
         })
         pendingStatusDN.innerHTML = html

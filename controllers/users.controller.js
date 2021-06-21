@@ -54,7 +54,7 @@ module.exports.login = async (req, res, next) => {
         }else{
             const jwt = require('jsonwebtoken')
             let token = jwt.sign({ username: user.username }, process.env.KEY,{
-                expiresIn: '20m' /*<---- this is 20 minutes ♥*/
+                expiresIn: '24h' /*<---- this is 24h */
             }, (err, token) => {
                 if (err) {
                     console.log('Token sign failed');
