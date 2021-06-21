@@ -141,14 +141,15 @@ module.exports.sendMail =  async (req, res, next) => {
                 from: 'SmartSign<smartsign@gmail.com>',
                 to: cts.email,
                 subject: `Kính gửi Ông/Bà ${cts.hoTenNguoiDK}.`,
-                text: `SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.
-                - Thông tin thuê bao như sau:
-                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK}
-                    + Mã số thuế: ${cts.MSTCaNhan}
-                    + CMND/HC: ${cts.soCMT}
-                    + Điện thoại: ${cts.soDienThoai}
+                text: `
                 `,
-                html: `<h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
+                html: ` <h2>SmartSign trân trọng cám ơn quý khách hàng đã tin tưởng sử dụng dịch vụ của công ty chúng tôi.</h2>
+                <h2>- Thông tin thuê bao như sau:</h2>
+                    + Họ tên người đăng ký: ${cts.hoTenNguoiDK} <br>
+                    + Mã số thuế: ${cts.MSTCaNhan} <br>
+                    + CMND/HC: ${cts.soCMT} <br>
+                    + Điện thoại: ${cts.soDienThoai} 
+                <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
                 <a href="http://localhost:3000/digital-certificate/personal/get-otp/${token}">
                 http://localhost:3000/digital-certificate/personal/get-otp/${token}
                 </a>
