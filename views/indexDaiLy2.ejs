@@ -116,18 +116,18 @@
                     <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#CTSDoanhNgiep">Doanh Nghiệp</a>
+                    <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiep">Doanh Nghiệp</a>
                   </li>
                 </ul>
               
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div id="CTSCaNhan" class="container tab-pane active"><br>
-                    <div class="row" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/personal/send-request" method="POST">
+                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
+                                <th scope="col">Trạng thái</th>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã yêu cầu</th>
                                 <th scope="col">Họ Tên</th>
@@ -137,7 +137,6 @@
                                 <th scope="col">Thời hạn (năm)</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái</th>
                                 <th scope="col">Trạng thái hồ sơ</th>
                               </tr>
                             </thead>
@@ -145,18 +144,18 @@
                              
                             </tbody>
                         </table>
-                        <div class="pagin-wrapper"  id="paginPersonal"></div>
-                    </form>
-                    <form id="formSendMailPersonal" method="POST"></form>
+                    <form  style="display:none" id="formSendMailPersonal" method="POST"></form>
 
                     </div>
+                    <div class="pagin-wrapper"  id="paginPersonal"></div>
+
                   </div>
-                  <div id="CTSDoanhNgiep" class="container tab-pane fade"><br>
-                    <div class="row" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/organization/send-request" method="POST">
+                  <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
+                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
+                                <th scope="col">Trạng thái</th>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã yêu cầu</th>
                                 <th scope="col">Tên Doanh Ngiệp</th>
@@ -166,7 +165,6 @@
                                 <th scope="col">Thời hạn (năm)</th>
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái</th>
                                 <th scope="col">Trạng thái hồ sơ</th>
                               </tr>
                             </thead>
@@ -174,15 +172,17 @@
                              
                             </tbody>
                         </table>
-                        <div class="pagin-wrapper"  id="paginOrganization"></div>
-                    </form>
+                    <form style="display:none" id="formSendMailOrganization" method="POST"></form>
+
                     </div>
+                    <div class="pagin-wrapper"  id="paginOrganization"></div>
+
                   </div> 
                 </div>
               </div>
             <h3 class="pl-3">Đã phê duyệt</h3>
             <div class="container" style="border: 1px solid;">
-                <div class="row">
+                <div class="row table-wrapper">
                     <table class="table table-bordered" >
                         <thead class="thead-default">
                           <tr>

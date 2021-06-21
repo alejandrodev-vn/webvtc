@@ -10,7 +10,7 @@ const url = 'http://localhost:3000/'
 
 async function getCTSCaNhan(){
     try{
-        const urlList = url + `api/digital-certificate/personal/byUserId`
+        const urlList = url + `api/digital-certificate/personal/getPendingByUserId`
         const options = {
             method: 'GET'
         }
@@ -46,6 +46,19 @@ async function showPending(data){
                 }
             })
            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+           : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
+           : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                   data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                                       Gửi thông tin thuê bao
+                                   </button>`
+           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                       padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                       <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                       data-id="${cts._id}">
+                                           Gửi lại
+                                       </button>`
+           : 'Chờ duyệt lần 2'}</td></td>
            <td scope="row">${index+1}</td>
            <td><p>${cts._id}</p></td>
            <td>${cts.hoTenNguoiDK}</td>
@@ -55,20 +68,7 @@ async function showPending(data){
            <td>${cts.thoiHan}</td>
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
-           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
-            : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMail" 
-                                        data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
-                                            Gửi lại
-                                        </button>`
-            : 'Chờ duyệt lần 2'}</td></td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-    
          </tr>`
          pendingStatus.innerHTML = html
         })
@@ -81,7 +81,7 @@ async function showPending(data){
 }
 async function getCTSDoanhNghiep(){
     try{
-        const urlList = url + `api/digital-certificate/organization/byUserId`
+        const urlList = url + `api/digital-certificate/organization/getPendingByUserId`
         const options = {
             method: 'GET'
         }
@@ -116,6 +116,19 @@ async function showPendingDN(data){
                 }
             })
             html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+            <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+            : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                                        Gửi thông tin thuê bao
+                                    </button>`
+            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                        <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                        data-id="${cts._id}">
+                                            Gửi lại
+                                        </button>`
+            : 'Chờ duyệt lần 2'}</td></td>
             <td scope="row">${index+1}</td>
             <td><p>${cts._id}</p></td>
             <td>${cts.tenGD}</td>
@@ -125,18 +138,7 @@ async function showPendingDN(data){
             <td>${cts.thoiHan}</td>
             <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td>${cts.nguoiThucHien}</td>
-            <td>${(cts.trangThai == 0) ? 'Dự thảo' 
-            : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p><button type="button" class="btn btn-primary btn-sendMailOrg" 
-                                        data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;width:60px">
-                                            Gửi lại
-                                        </button>`
-            : 'Chờ duyệt lần 2'}</td></td>
+           
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
      
           </tr>`

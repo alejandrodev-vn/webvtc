@@ -38,7 +38,9 @@ async function showTrashPersonal(data){
                     cts = { ...service, ...cts }
                 }
             })
-           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           html+=`<tr style="background:#cfebff">
+           <td><a href="" class="btn btn-action btn-success btn-restore" data-id=${cts._id}>Khôi phục</a></td>
+           <td><a href="" class="btn btn-action btn-danger btn-destroy" data-id=${cts._id}>Xóa vĩnh viễn</a></td>
            <td scope="row">${index+1}</td>
            <td><p>${cts._id}</p></td>
            <td>${cts.hoTenNguoiDK}</td>
@@ -49,8 +51,7 @@ async function showTrashPersonal(data){
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-           <td><a href="" class="btn btn-success btn-restore" data-id=${cts._id}  style="font-size: 13px;padding: 3px;width:60px">Khôi phục</a></td>
-           <td><a href="" class="btn btn-danger btn-destroy" data-id=${cts._id}  style="font-size: 13px;padding: 3px;width:60px">Xóa vĩnh viễn</a></td>
+           
     
          </tr>`
          trashPersonal.innerHTML = html
@@ -104,7 +105,9 @@ async function showTrashOrganization(data){
                     cts = { ...service, ...cts }
                 }
             })
-           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           html+=`<tr style="background:#cfebff">
+           <td><a href="" class="btn btn-action btn-success btn-restore" data-id=${cts._id}>Khôi phục</a></td>
+           <td><a href="" class="btn btn-action btn-danger btn-destroy" data-id=${cts._id}>Xóa vĩnh viễn</a></td>
            <td scope="row">${index+1}</td>
            <td><p>${cts._id}</p></td>
            <td>${cts.tenGD}</td>
@@ -115,8 +118,7 @@ async function showTrashOrganization(data){
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-           <td><a href="" class="btn btn-success btn-restore" data-id=${cts._id}  style="font-size: 13px;padding: 3px;width:60px">Khôi phục</a></td>
-           <td><a href="" class="btn btn-danger btn-destroy" data-id=${cts._id}  style="font-size: 13px;padding: 3px;width:60px">Xóa vĩnh viễn</a></td>
+          
     
          </tr>`
          trashOrganization.innerHTML = html

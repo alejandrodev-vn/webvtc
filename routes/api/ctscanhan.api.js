@@ -2,10 +2,18 @@ const express = require('express');
 const router = express.Router();
 const CTSCaNhanService = require('../../services/ctscanhan.service')
 const usersService = require('../../services/users.service')
-
 router.get('/digital-certificate/personal', async (req, res, next) => {
     try{
         const CTSCaNhan = await CTSCaNhanService.getAll()
+        res.json(CTSCaNhan)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
+router.get('/digital-certificate/personal-pending', async (req, res, next) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanService.getAllPending()
         res.json(CTSCaNhan)
     }   
     catch(err){
@@ -31,10 +39,10 @@ router.get('/admin/digital-certificate/personal-approved', async (req, res, next
     }
 });
 //self
-router.get('/digital-certificate/personal/byUserId', async (req, res, next)=> {
+router.get('/digital-certificate/personal/getPendingByUserId', async (req, res, next)=> {
     try{
         const { userId } = req.session
-        const CTSCaNhan = await CTSCaNhanService.getByUserId(userId)
+        const CTSCaNhan = await CTSCaNhanService.getPendingByUserId(userId)
         res.json(CTSCaNhan)
     }   
     catch(err){
@@ -49,15 +57,15 @@ router.get('/digital-certificate/personal/byAgency', async (req, res, next)=> {
         const agencyList = await usersService.getByBelongTo(userId)
         const result = []
         for(let i=0; i<agencyList.length; i++){
-            let CTSCaNhan = await CTSCaNhanService.getByUserId(agencyList[i]._id)
+            let CTSCaNhan = await CTSCaNhanService.getPendingByUserId(agencyList[i]._id)
             if(CTSCaNhan.length==1){
-                if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==3){
+                if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==4){
                     result.push(...CTSCaNhan)
 
                 }
             }else if(CTSCaNhan.length!=0){
                 CTSCaNhan.map(cts=>{
-                    if(cts.trangThai==1 || cts.trangThai==3){
+                    if(cts.trangThai==1 || cts.trangThai==4){
                         result.push(cts)
                     }
                 })
@@ -67,15 +75,15 @@ router.get('/digital-certificate/personal/byAgency', async (req, res, next)=> {
         for(let i=0; i<agencyList.length; i++){
             let agency2 = await usersService.getByBelongTo(agencyList[i]._id)
             agency2.forEach( async agency => {
-                let CTSCaNhan = await CTSCaNhanService.getByUserId(agency._id)
+                let CTSCaNhan = await CTSCaNhanService.getPendingByUserId(agency._id)
                 if(CTSCaNhan.length==1){
-                    if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==3){
+                    if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==4){
                         result.push(...CTSCaNhan)
     
                     }
                 }else if(CTSCaNhan.length!=0){
                     CTSCaNhan.map(cts=>{
-                        if(cts.trangThai==1 || cts.trangThai==3){
+                        if(cts.trangThai==1 || cts.trangThai==4){
                             result.push(cts)
                         }
                     })
@@ -96,12 +104,18 @@ router.get('/digital-certificate/personal/agency1', async (req, res, next)=> {
         const agencyList = await usersService.getByBelongTo(userId)
         const result = []
         for(let i=0; i<agencyList.length; i++){
-            let CTSCaNhan = await CTSCaNhanService.getByUserId(agencyList[i]._id)
+            let CTSCaNhan = await CTSCaNhanService.getPendingByUserId(agencyList[i]._id)
             if(CTSCaNhan.length==1){
-                result.push(...CTSCaNhan)
+                if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==2 
+                    || CTSCaNhan[0].trangThai==3 || CTSCaNhan[0].trangThai==4){
+                    result.push(...CTSCaNhan)
+                }
             }else if(CTSCaNhan.length!=0){
                 CTSCaNhan.map(cts=>{
-                    result.push(cts)
+                    if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==2 
+                        || CTSCaNhan[0].trangThai==3 || CTSCaNhan[0].trangThai==4){
+                        result.push(cts)
+                    }
                 })
             }
         }
