@@ -3,6 +3,7 @@ const quanHuyenEl = document.querySelector('#quanHuyen')
 const tinhThanhDNEl = document.querySelectorAll('.tinhThanhDN')
 const quanHuyenDNEl = document.querySelector('#quanHuyenDN')
 const servicesEl = document.querySelector('#services')
+const servicesFindEl = document.querySelector('#servicesFind')
 const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
 const servicesDNEl = document.querySelector('#servicesDN')
@@ -71,6 +72,9 @@ async function getServices(){
         }
         if(servicesDNEl){
             servicesDNEl.innerHTML = serviceHtml
+        }
+        if(servicesFindEl){
+            servicesFindEl.innerHTML = serviceHtml
         }
     }catch(err){
         console.log(err)
