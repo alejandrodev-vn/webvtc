@@ -381,85 +381,104 @@
                 </div>
                 <!-- end-modal organization -->
                 <!-- edit -->
-                    <form action="" style="margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
-                        <div id="form">
-                            <div class="info-user">
-                                <div>
-                                    <h3>Tìm kiếm nhanh</h3>
-                                </div>
-                                <div id="wrt-info">
-                                    <div class="if-fm">
-                                        <div class="if-fm ck">
-                                            <label>Mã Phiếu Yêu Cầu</label>
-                                            <input type="text">
-                                        </div>
-                                        <div class="if-fm ck">
-                                            <label>Trạng Thái</label>
-                                            <select name="" id="" style="width: 176px;">
-                                                <option value="0">Dự thảo</option>
-                                                <option value="1">Chờ duyệt lần 1</option>
-                                                <option value="2">Chờ duyệt lần 2</option>
-                                                <option value="3">Đã duyệt</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="if-fm">
-                                        <div class="if-fm ck">
-                                            <label>Mã Khách Hàng</label>
-                                            <input type="text">
-                                        </div>
-                                        <div class="if-fm ck">
-                                            <label>Tên Giao Dịch</label>
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                    <div class="if-fm">
-                                        <div class="if-fm ck">
-                                            <label>Số CMTND/HC</label>
-                                            <input type="text">
-                                        </div>
-                                        <div class="if-fm ck">
-                                            <label>Giấy Phép DKKD</label>
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="info-user">
-                               
-                                <div id="wrt-info">
-                                    <div class="if-fm">
-                                        <div class="if-fm ck">
-                                            <label>Tỉnh/Thành Phố</label>
-                                            <select name="tinhThanhFilter" id="tinhThanhFilter" style="width: 176px;">
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                        <div class="if-fm ck">
-                                            <label>Loại Yêu Cầu</label>
-                                            <select name="loaiCTSIdFilter" id="quanHuyenFilter"  style="width: 176px;">
-                                                <option value=""></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="if-fm">
-                                        <div class="if-fm ck">
-                                            <label>Ngày Yêu Cầu : Từ Ngày</label>
-                                            <input type="date">
-                                        </div>
-                                        <div class="if-fm ck">
-                                            <label>Đến Ngày</label>
-                                            <input type="date">
-                                        </div>
-                                    </div>
-                    
-                                </div>
-                            </div>
-
+                    <form action="" style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
+                        <style>
+                            .form-control {
+                                height: calc(0.75em + .75rem + 2px);
+                                padding: 0;
+                            }
+                            .form-group{
+                                margin-bottom: 0;
+                            }
+                        </style>
+                        <div>
+                            <h3>Thông tin tìm kiếm
+                            </h3>
                         </div>
-
-                        <input type="submit" class="btn btn-primary" value="Tìm kiếm">
-
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Mã phiếu yêu cầu</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Mã khách hàng</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Số CMTND/HC</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputState" class="col-sm-4 col-form-label">Tỉnh/Thành phố</label>
+                                    <div class="col-sm-8">
+                                        <select name="tinhThanh" class="tinhThanh form-control">
+                                            <option selected>Chọn tỉnh thành</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Ngày YC&emsp;Từ ngày:</label>
+                                    <div class="col-sm-8">
+                                      <input type="date" class="form-control">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label for="inputState" class="col-sm-4 col-form-label">Trạng thái</label>
+                                    <div class="col-sm-8">
+                                        <select id="inputState" class="form-control">
+                                            <option selected>Chọn trạng thái</option>
+                                            <option value="0">Dự thảo</option>
+                                            <option value="1">Chờ duyệt lần 1</option>
+                                            <option value="2">Gửi thông tin thuê bao</option>
+                                            <option value="3">Đã gửi thông tin thuê bao</option>
+                                            <option value="4">Chờ duyệt lần 2</option>
+                                            <option value="5">Chưa cấp CTS</option>
+                                            <option value="6">Đã cấp CTS</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Tên giao dịch</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Giấy phép ĐKKD</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Loại yêu cầu</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control">
+                                            <option selected>...</option>
+                                            <option>...</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
+                                    <div class="col-sm-8">
+                                      <input type="date" class="form-control">
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div style="margin: 0 auto; width: 13%; margin-top:30px" class="search">
+                            <input  type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        </div>
+                        
                     </form>
                 </div>
             </div>
