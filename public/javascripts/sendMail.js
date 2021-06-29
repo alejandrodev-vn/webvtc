@@ -6,6 +6,9 @@ function getSendMailPersonal(){
             e.preventDefault()
             formSendMailPersonal.action = `/digital-certificate/personal/send-mail/${btn.dataset.id}`
             formSendMailPersonal.submit()
+            setTimeout(()=>{
+                alert('Gửi thành công')
+            },5000)
         }
     })
 }
@@ -17,6 +20,9 @@ function getSendMailOrganization(){
             e.preventDefault()
             formSendMailOrganization.action = `/digital-certificate/organization/send-mailOrg/${btn.dataset.id}`
             formSendMailOrganization.submit()
+            setTimeout(()=>{
+                alert('Gửi thành công')
+            },5000)
         }
     })
 }

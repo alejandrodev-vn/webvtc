@@ -198,23 +198,14 @@ form {
     display: block;
 }
 
-input[type=text] select option,
+input[type=text], select, option,
 input[type=date] {
-    border: 2px solid purple;
     border-radius: 4px;
 }
 
-input[type=text] select option,
-input[type=date] {
-    width: 100%;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #58257b;
-    border-radius: 4px;
-}
 
 select {
-    width: 140px;
+    width: 100%;
     height: 30px
 }
 
@@ -269,6 +260,7 @@ h3 {
 .if-fm label {
     width: 34%;
     text-align: left;
+    padding-right:1px;
 }
 
 .table thead th {
@@ -298,7 +290,7 @@ table {
 }
 
 .mn label {
-    width: 16%;
+    width: 15%;
     display: inline-flex;
     align-items: center;
 }
@@ -393,6 +385,11 @@ h5{
 .form-group{
     display:flex;
     align-items: center;
+    
+}
+.form-control {
+    height: calc(0.75em + .75rem + 2px);
+    padding: 0;
 }
 .pagin-wrapper {
     width: 100%;

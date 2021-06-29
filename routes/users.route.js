@@ -11,9 +11,9 @@ router.get('/users/logout', controllerUsers.logout)
 router.get('/manage-account',middlewares.checkAuthencation, function(req, res,next){
     const { role } = req.session
     if(role===0){
-        res.render('manage-account-admin1')
+        res.render('manage-account-admin1',{message:null})
     }else if(role===1 || role ===2){
-        res.render('manage-account')
+        res.render('manage-account',{message:null})
     }else{
         res.redirect('/')
     }

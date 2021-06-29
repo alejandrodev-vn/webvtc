@@ -6,6 +6,8 @@ const trashPersonal = document.querySelector('#trashPersonal')
 const trashOrganization = document.querySelector('#trashOrganization')
 const formRestorePersonal = document.querySelector('#formRestorePersonal')
 const formDestroyPersonal = document.querySelector('#formDestroyPersonal')
+const formRestoreOrganization = document.querySelector('#formRestoreOrganization')
+const formDestroyOrganization = document.querySelector('#formDestroyOrganization')
 
 const url = 'http://localhost:3000/'
 
@@ -61,6 +63,7 @@ async function showTrashPersonal(data){
         btnsRestore.forEach(btn=>{
             btn.onclick = (e) =>{
                 e.preventDefault()
+                alert('Khôi phục thành công')
                 formRestorePersonal.action = `/digital-certificate/trash/${btn.dataset.id}/restore`
                 formRestorePersonal.submit()
             }
@@ -128,8 +131,9 @@ async function showTrashOrganization(data){
         btnsRestore.forEach(btn=>{
             btn.onclick = (e) =>{
                 e.preventDefault()
-                formRestorePersonal.action = `/digital-certificate/trash/${btn.dataset.id}/restoreOrg`
-                formRestorePersonal.submit()
+                alert('Khôi phục thành công')
+                formRestoreOrganization.action = `/digital-certificate/trash/${btn.dataset.id}/restoreOrg`
+                formRestoreOrganization.submit()
             }
         })
         confirmDeleteOrg()
@@ -173,8 +177,9 @@ const confirmDelete = function(){
                 btnDel.dataset.id = this.dataset.id
                 btnDel.onclick = (e) =>{
                     e.preventDefault()
-                    formDestroyPersonal.action = `/digital-certificate/trash/${btnDel.dataset.id}/force-destroy`
-                    formDestroyPersonal.submit()
+                    formDestroyOrganization.action = `/digital-certificate/trash/${btnDel.dataset.id}/force-destroyOrg`
+                    formDestroyOrganization.submit()
+                
                 }
               
                

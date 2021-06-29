@@ -4,6 +4,7 @@ const btnSubmitDN = document.querySelector('.btn-submit1')
 const btnSubmit = document.querySelector('.btn-submit')
 const btnDelete = document.querySelector('.btn-delete')
 const btnDeleteDN = document.querySelector('.btn-delete1')
+
 function checkAll(){
     const selectItem = document.querySelectorAll('.select-smart-sign')
     let isSelectAll = selectAll.checked

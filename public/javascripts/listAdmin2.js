@@ -166,12 +166,13 @@ async function handleRequest(){
     
         // Get the modal
         const modal = document.getElementById("modalCertificatePersonal");
+        const title = document.getElementById("titleModalPersonal");
 
         // Get the button that opens the modal
         const btnHandles = document.querySelectorAll('.btn-handle-personal')
     
         // Get the <span> element that closes the modal
-        const span = document.getElementsByClassName("close")[0];
+        const btnCancel = document.querySelectorAll(".btn-cancel");
         // When the user clicks the button, open the modal
         btnHandles.forEach(btn=>{
             btn.addEventListener('click', async (e)=>{
@@ -188,8 +189,11 @@ async function handleRequest(){
                 const district = await fetchAPI(urlDistricts, options)
                 const service = await fetchAPI(urlServices, options)
 
-                modal.style.opacity = "1";
-                modal.style.display = "block"
+                if(cts.trangThai == 1){
+                    title.innerHTML = 'Xử lý yêu cầu phê duyệt lần 1'
+                }else if(cts.trangThai == 4){
+                    title.innerHTML = 'Xử lý yêu cầu phê duyệt lần 2'
+                }
                 document.querySelector('#hoTenNguoiDK').value = cts.hoTenNguoiDK
                 document.querySelector('#MSTCaNhan').value = cts.MSTCaNhan
                 document.querySelector('#soCMT').value = cts.soCMT
@@ -208,24 +212,33 @@ async function handleRequest(){
                 document.querySelector('#goiCTS').value = service.tenGoiDichVu
                 document.querySelector('#thoiHan').value = service.thoiHan
                 document.querySelector('#id').value = cts._id
-
+                if(cts.fileHoSo.length!=0){
+                    document.querySelector('#documentPersonal').innerHTML = `
+                    <tr>
+                        <td scope="col"><input type="checkbox" name="selectDocPersonal" id="fileHoSo"></td>
+                        <td>1</td>
+                        <td>Hồ sơ khách hàng</td>
+                        <td><a href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">${cts.fileHoSo}</a></td>
+                        <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+                        <td>${cts.nguoiThucHien}</td>
+                    </tr>`
+                }else{
+                    document.querySelector('#documentPersonal').innerHTML = `<tr><td>Chưa đủ</td></tr>`
+                }
+              
+                modal.style.opacity = "1";
+                modal.style.display = "block"
+           
             })
         })
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+      // When the user clicks on <span> (x), close the modal
+      btnCancel.forEach(btn=>{
+        btn.onclick = function(e) {
             modal.style.opacity = "0"
             setTimeout(()=>{modal.style.display = "none";
                 },450)
         }
-    
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-            modal.style.opacity = "0"
-            setTimeout(()=>{modal.style.display = "none";
-                },450)
-            }
-        }    
+    })  
   
 }
 
@@ -233,12 +246,13 @@ async function handleRequestDN(){
     
     // Get the modal
     const modal = document.getElementById("modalCertificateOrganization");
+    const title = document.getElementById("titleModalOrganization");
 
     // Get the button that opens the modal
     const btnHandles = document.querySelectorAll('.btn-handle-organization')
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close-1")[0];
+    const btnCancel = document.querySelectorAll(".btn-cancelDN");
     // When the user clicks the button, open the modal
     btnHandles.forEach(btn=>{
         btn.addEventListener('click', async (e)=>{
@@ -255,8 +269,11 @@ async function handleRequestDN(){
             const district = await fetchAPI(urlDistricts, options)
             const service = await fetchAPI(urlServices, options)
 
-            modal.style.opacity = "1";
-            modal.style.display = "block"
+            if(cts.trangThai == 1){
+                title.innerHTML = 'Xử lý yêu cầu phê duyệt lần 1'
+            }else if(cts.trangThai == 4){
+                title.innerHTML = 'Xử lý yêu cầu phê duyệt lần 2'
+            }
             document.querySelector('#tenGD-DN').value = cts.tenGD
             document.querySelector('#MST-DN').value = cts.MST
             document.querySelector('#giayPhepDKKD-DN').value = cts.giayPhepDKKD
@@ -264,39 +281,44 @@ async function handleRequestDN(){
             document.querySelector('#diaChi-DN').value = cts.diaChi
             document.querySelector('#emailGD-DN').value = cts.emailGD
             document.querySelector('#soDienThoai-DN').value = cts.soDienThoaiCongTy
-            document.querySelector('#toChuc-DN').value = cts.congTyMe
             document.querySelector('#hoTen-DN').value = cts.hoTenChuDoanhNghiep
             document.querySelector('#chucVu-DN').value = cts.chucVu
             document.querySelector('#soCMTND-DN').value = cts.soCMT 
             document.querySelector('#ngayCapCMTND-DN').value = cts.ngayCapCMT
             document.querySelector('#noicap-DN').value = cts.noiCapCMT
-            document.querySelector('#tinhThanh-DN').value = province.TenTinhThanh
-            document.querySelector('#quanHuyen-DN').value = district.TenQuanHuyen
             document.querySelector('#email-DN').value = cts.emailGD
-            document.querySelector('#sdt-DN').value = cts.soDienThoaiCongTy
-            document.querySelector('#maPhieuYC-DN').value = cts._id
-            document.querySelector('#loaiYC').value = service.tenGoiDichVu
-            document.querySelector('#goiCTS-DN').value = cts.loaiCTS
+            document.querySelector('#maPhieuYC-DN').value = service._id
+            document.querySelector('#goiCTS-DN').value = service.tenGoiDichVu
             document.querySelector('#thoiHan-DN').value = service.thoiHan
             document.querySelector('#idOrg').value = cts._id
+            if(cts.fileHoSo.length!=0){
+                document.querySelector('#documentOrganization').innerHTML = `
+                <tr>
+                    <td scope="col"><input type="checkbox" name="selectDocOrganization" id="fileHoSoDN"></td>
+                    <td>1</td>
+                    <td>Hồ sơ khách hàng</td>
+                    <td><a href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">${cts.fileHoSo}</a></td>
+                    <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+                    <td>${cts.nguoiThucHien}</td>
+                </tr>`
+            }else{
+                document.querySelector('#documentOrganization').innerHTML = `<tr><td>Chưa đủ</td></</tr>`
+            }
+          
+
+            modal.style.opacity = "1";
+            modal.style.display = "block"
 
         })
     })
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-        }
-    }    
+         // When the user clicks on <span> (x), close the modal
+         btnCancel.forEach(btn=>{
+            btn.onclick = function(e) {
+                modal.style.opacity = "0"
+                setTimeout(()=>{modal.style.display = "none";
+                    },450)
+            }
+        })   
 
 }
 
@@ -336,7 +358,7 @@ async function showApprovedPersonal(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
@@ -396,7 +418,7 @@ async function showApprovedOrg(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>

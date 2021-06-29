@@ -22,6 +22,14 @@
                 <h1>Đăng nhập</h1>
                 <input type="text" name="username" placeholder="Tên đăng nhập" />
                 <input type="password"  name="password" placeholder="Mật khẩu" />
+                <% if(message){ %> 
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <%= message %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% } %> 
                 <a href="#">Quên mật khẩu?</a>
                 <button type="submit" class="btn">Đăng nhập</button>
             </form>
@@ -37,6 +45,7 @@
         </div>
     </div>
     </div>
+
 </body>
 
 
