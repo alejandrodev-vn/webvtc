@@ -6,7 +6,6 @@ const logger = require('morgan');
 const session = require('express-session')
 
 
-
 const app = express();
 
 // view engine setup
@@ -33,6 +32,8 @@ const CTSDoanhNghiepRouter = require('./routes/ctsdoanhnghiep.route');
 const usersRouter = require('./routes/users.route')
 const trashRouter = require('./routes/trash.route')
 const otpRouter = require('./routes/otp.route')
+const downloadFileRouter = require('./routes/downloadFile.route');
+
 //api
 const giaoDichAPI = require('./routes/api/giaodich.api');
 const goiDichVuAPI = require('./routes/api/goidichvu.api');
@@ -79,6 +80,7 @@ app.use(CTSDoanhNghiepRouter)
 app.use(usersRouter);
 app.use(trashRouter);
 app.use(otpRouter);
+app.use(downloadFileRouter);
 //api
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);

@@ -5,8 +5,12 @@ const {validationResult} = require('express-validator');
 
 module.exports.organization = (req, res, next) => {
     try{
-        res.render('organization', { title: 'CTS Doanh nghiep', errorsDN:req.session.errorsDN });
-        req.session.errorsDN = null
+        res.render('organization', { 
+            title: 'CTS Doanh Nghiệp', 
+            errors:[], 
+            prevData:{},
+            message:null
+        });
     }catch(err){
         console.log(err)
     }
@@ -15,8 +19,12 @@ module.exports.add = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            req.session.errorsDN = errors.array()
-            return res.redirect('/digital-certificate/organization')
+            return res.render('organization',{ 
+                title: 'CTS Doanh Nghiệp', 
+                errors: errors.array(),
+                prevData:req.body,
+                message:'Thêm thất bại'
+            })
         }
         let values = req.body;
         const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
@@ -24,12 +32,17 @@ module.exports.add = async (req, res, next) => {
         values.goiCTSId = goiDichVu._id
         values.thoiHan = goiDichVu.thoiHan
         values.giaCuoc =Number(getGia)
-        if(req.file.originalname){
+        if(req.file){
             values.fileHoSo = req.file.originalname
         }
         values.ngayTao = convertToYYYYMMDD(Date.now())
         await CTSDoanhNghiepService.createNew(values);
-        res.redirect('/')
+        res.render('organization', {
+            title: 'CTS Doanh Nghiệp', 
+            errors:[], 
+            prevData:{},
+            message:'Thêm thành công'
+        })
         
     }
     
@@ -42,21 +55,28 @@ module.exports.update = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.render('organization',{ 
+                title: 'CTS Doanh Nghiệp', 
+                errors: errors.array(),
+                prevData:req.body,
+                message:'Thêm thất bại'
+            })
         }
         const { idEdit } = req.body
         let values = req.body;
-        if(req.file.originalname){
+        if(req.file){
             const fs = require('fs')
             const data = await CTSDoanhNghiepService.getById(idEdit)
-            const path = `public/uploads/fileHoSo/${data.fileHoSo}`
-            if(fs.existsSync(path)){
-                fs.unlinkSync(path)
+            if(data.fileHoSo.length!=0){
+                const path = `public/uploads/fileHoSo/${data.fileHoSo}`
+                if(fs.existsSync(path)){
+                    fs.unlinkSync(path)
+                }
             }
             values.fileHoSo = req.file.originalname
         }
         await CTSDoanhNghiepService.update(idEdit, values);
-        res.redirect('/')
+       
     }
     catch(err){
         console.log(err)

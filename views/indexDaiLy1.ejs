@@ -6,7 +6,6 @@
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%- include('header') %> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../stylesheets/organization.css">
         <link rel="stylesheet" href="../stylesheets/adminhome.css">
     </head>
@@ -33,8 +32,8 @@
                         <div class="form-area">
                               <div class="top-modal">
                                 <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Cá nhân</h2>
-                                <span class="close">&times;</span>
-                              </div>
+                                <span class="close btn-cancel">&times;</span>
+                            </div>
                               <form action="/digital-certificate/personal/edit" method="POST" enctype="multipart/form-data">
                                 <div id="form">
                                     <div class="info-user">
@@ -171,6 +170,8 @@
                                     <div>
                                         <h3>Hồ sơ khách hàng</h3>
                                     </div>
+                                    <div id="documentPersonal"></div>
+
                                     <div id="wrt-info">
                                         <div class="if-fm mn" >
                                             <label>
@@ -185,8 +186,7 @@
                                 <div id="register">
                                     <div class="rg-btn">
                                         <input type="submit" value="Ghi lại" class="btn btn-primary">
-                                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
-                                        <a href="/" class="btn btn-secondary">Đóng</a>
+                                        <input type="button" value="Đóng" class="btn btn-secondary btn-cancel">
                                         <input type="hidden" name="idEdit" id="id">
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                         <div class="form-area">
                               <div class="top-modal">
                                 <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Doanh Nghiệp</h2>
-                                <span class="closeDN">&times;</span>
+                                <span class="close btn-cancelDN">&times;</span>
                               </div>
                             <form action="/digital-certificate/organization/edit" method="POST" enctype="multipart/form-data">
                                 <div id="form">
@@ -355,6 +355,7 @@
                                     <div>
                                         <h3>Hồ sơ khách hàng</h3>
                                     </div>
+                                    <div id="documentOrganization"></div>
                                     <div id="wrt-info">
                                         <div class="if-fm mn" >
                                             <label>
@@ -369,18 +370,17 @@
                                 <div id="register">
                                     <div class="rg-btn">
                                         <input type="submit" value="Ghi lại" class="btn btn-primary">
-                                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
-                                        <a href="/" class="btn btn-secondary">Đóng</a>
+                                        <input type="button" value="Đóng" class="btn btn-secondary btn-cancelDN">
                                         <input type="hidden" name="idEdit" id="idDN">
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                
+            
                 </div>
                 <!-- end-modal organization -->
-                <!-- edit -->
+                <!-- search -->
                     <form action="" style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
                         <style>
                             .form-control {
@@ -498,7 +498,7 @@
                 <div class="tab-content">
                   <div id="CTSCaNhan" class="container tab-pane active"><br>
                     <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/personal/handle-form-actions" method="POST" style="padding: 0;">
+                        <form action="/digital-certificate/personal/handle-form-actions" id="formPersonal" method="POST" style="padding: 0;">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
@@ -535,7 +535,7 @@
                   </div>
                   <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
                     <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/organization/handle-form-actions" method="POST" style="padding: 0;">
+                        <form action="/digital-certificate/organization/handle-form-actions" id="formOrganization" method="POST" style="padding: 0;">
                         <table class="table table-bordered" >
                             <thead class="thead-default">
                               <tr>
@@ -643,9 +643,11 @@
              </div>
          </div>
         </div>
-        
+        <div id='status' style="display:none; visibility:hidden"><%= message %></div>
+
 
     </body>
+
     <script src="../javascripts/listDaiLy1.js" type="module"></script>
     <script src="../javascripts/init.js"></script>
     <script src="../javascripts/selectSmartSign.js"></script>

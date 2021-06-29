@@ -1,7 +1,7 @@
 const usersService = require('../services/users.service');
 
 module.exports.authencation = async (req, res, next)=> {
-    res.render('authentication',{ title: 'Đăng nhập' })
+    res.render('authentication',{ title: 'Đăng nhập', message:req.session.message })
 }
 
 
@@ -47,10 +47,16 @@ module.exports.login = async (req, res, next) => {
     try{
         let values = req.body;
         const user = await usersService.login(values);
+        if(values.username.trim().length==0 || values.password.trim().length==0){
+            req.session.message = 'Tài khoản hoặc mật khẩu không được trống!'
+            return res.redirect('/users/login')
+        }
         if(user.error === 'User not found'){
-            res.status(404).json(user.error)
+            req.session.message = 'Tài khoản không tồn tại!'
+            return res.redirect('/users/login')
         }else if(user.error === 'Password error !!!'){
-            res.status(401).json(user.error)
+            req.session.message = 'Sai mật khẩu!'
+            return res.redirect('/users/login')
         }else{
             const jwt = require('jsonwebtoken')
             let token = jwt.sign({ username: user.username }, process.env.KEY,{

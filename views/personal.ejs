@@ -25,7 +25,7 @@
                         <h2 class="title">CẤP CHỨNG THƯ SỐ CHO CÁ NHÂN</h2>
                     </div>
                   
-                    <form action="/digital-certificate/personal/add" method="POST" enctype="multipart/form-data">
+                    <form action="/digital-certificate/personal" method="POST" enctype="multipart/form-data">
                         <div id="form">
                             <div class="info-user">
                                 <div>
@@ -36,78 +36,90 @@
                                         <label>
                                             Họ và tên <span class="note">*</span>
                                         </label>
-                                        <input type="text" name="hoTenNguoiDK">
+                                        <input type="text" name="hoTenNguoiDK" 
+                                        value="<% if(prevData.hoTenNguoiDK) { %><%= prevData.hoTenNguoiDK %><% } %>">
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Số CMTND/ Hộ Chiếu <span class="note">*</span></label>
-                                            <input type="text" name="soCMT">
+                                            <input type="text" name="soCMT" 
+                                            value="<% if(prevData.soCMT) { %><%= prevData.soCMT %><% } %>">
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Ngày cấp <span class="note">*</span></label>
-                                            <input type="date" name="ngayCapCMT">
+                                            <input type="date" name="ngayCapCMT" 
+                                            value="<% if(prevData.ngayCapCMT) { %><%= prevData.ngayCapCMT %><% } %>">
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Nơi cấp <span class="note">*</span></label>
-                                            <input type="text" name="noiCapCMT">
+                                            <input type="text" name="noiCapCMT"  
+                                            value="<% if(prevData.noiCapCMT) { %><%= prevData.noiCapCMT %><% } %>">
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Mã số thuế</label>
-                                            <input type="text" name="MSTCaNhan">
+                                            <input type="text" name="MSTCaNhan"  
+                                            value="<% if(prevData.MSTCaNhan) { %><%= prevData.MSTCaNhan %><% } %>">
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
                                         <label>
                                             Địa chỉ  <span class="note">*</span>
                                         </label>
-                                        <input type="text" name="diaChi">
+                                        <input type="text" name="diaChi" 
+                                        value="<% if(prevData.diaChi) { %><%= prevData.diaChi %><% } %>">
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Mã số thuế công ty</label>
-                                            <input type="text" name="MSTCongTy">
+                                            <input type="text" name="MSTCongTy"
+                                            value="<% if(prevData.MSTCongTy) { %><%= prevData.MSTCongTy %><% } %>">
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Ngành nghề</label>
-                                            <input type="text" name="nganhNghe">
+                                            <input type="text" name="nganhNghe" 
+                                            value="<% if(prevData.nganhNghe) { %><%= prevData.nganhNghe %><% } %>">
                                         </div>
                                     </div>
                                     <div class="if-fm mn">
                                         <label>
                                             Công ty/ Tổ chức
                                         </label>
-                                        <input type="text" name="tenCongTy">
+                                        <input type="text" name="tenCongTy" 
+                                        value="<% if(prevData.tenCongTy) { %><%= prevData.tenCongTy %><% } %>">
                                     </div>
                                     <div class="if-fm mn">
                                         <label>
                                             Chức vụ
                                         </label>
-                                        <input type="text" name="chucVu">
+                                        <input type="text" name="chucVu" 
+                                        value="<% if(prevData.chucVu) { %><%= prevData.chucVu %><% } %>">
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
                                             <select name="tinhThanh" class="tinhThanh" onchange="getQuanHuyen(this.value)">
-                                                <option value="0">--Lựa chọn--</option>
+                                                <option value="">--Lựa chọn--</option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Quận/ Huyện <span class="note">*</span></label>
                                             <select name="quanHuyen" id="quanHuyen">
-                                                <option value="0">Chọn tỉnh thành trước</option>
+                                                <option value="">Chọn tỉnh thành trước</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="if-fm">
                                         <div class="if-fm ck">
                                             <label>Email cá nhân  <span class="note">*</span></label>
-                                            <input type="text" name="email">
+                                            <input type="text" name="email" 
+                                            value="<% if(prevData.tenGD) { %><%= prevData.tenGD %><% } %>">
                                         </div>
                                         <div class="if-fm ck">
                                             <label>Số điện thoại  <span class="note">*</span></label>
-                                            <input type="text" name="soDienThoai">
+                                            <input type="text" name="soDienThoai" 
+                                            value="<% if(prevData.tenGD) { %><%= prevData.tenGD %><% } %>">
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +134,7 @@
                                         <div class="if-fm ck">
                                             <label>Gói chứng thư <span class="note">*</span></label>
                                             <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
-                                        
+                                                <option value="">Chọn gói CTS</option>
                                             </select>
                                         </div>
                                         <div class="if-fm ck">
@@ -175,7 +187,6 @@
                         <div id="register">
                             <div class="rg-btn">
                                 <input type="submit" value="Ghi lại" class="btn btn-primary">
-                                <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
                                 <a href="/" class="btn btn-secondary">Đóng</a>
                             </div>
                         </div>
@@ -186,8 +197,7 @@
             </div>
          
         </div>
-      
-
+        <div id='status' style="display:none; visibility:hidden"><%= message %></div>
     </body>
     <script src="../javascripts/init.js"></script>
 </html>

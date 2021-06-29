@@ -8,12 +8,10 @@ module.exports.checkAuthencation = function(req, res, next){
             if(check){
                 next()
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('authentication',{ title: 'Đăng nhập', message: 'Vui lòng đăng nhập để tiếp tục' })
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('authentication',{ title: 'Đăng nhập', message: 'Vui lòng đăng nhập để tiếp tục' })
         }
     }catch(err){
         console.log('Token verify failed')
@@ -30,15 +28,13 @@ module.exports.checkAdmin1 = function(req, res, next){
                 if(role==0){
                     next()
                 }else{
-                    res.redirect('/users/login')
+                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
         }
     }catch(err){
         console.log('Token verify failed')
@@ -55,15 +51,15 @@ module.exports.checkAdmin2 = function(req, res, next){
                 if(role==1){
                     next()
                 }else{
-                    res.redirect('/users/login')
+                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
         }
     }catch(err){
         console.log('Token verify failed')
@@ -80,15 +76,13 @@ module.exports.checkAgency1 = function(req, res, next){
                 if(role==2){
                     next()
                 }else{
-                    res.redirect('/users/login')
+                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
         }
     }catch(err){
         console.log('Token verify failed')
@@ -105,15 +99,15 @@ module.exports.checkAgency2 = function(req, res, next){
                 if(role==3){
                     next()
                 }else{
-                    res.redirect('/users/login')
+                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
         }
     }catch(err){
         console.log('Token verify failed')
@@ -130,15 +124,15 @@ module.exports.checkIsAdmin = function(req, res, next){
                 if(role==0 || role == 1){
                     next()
                 }else{
-                    res.redirect('/users/login')
+                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                console.log('Token verify failed')
-                res.redirect('/users/login')
+                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
             }
         }else{
-            console.log('Token not found')
-            res.redirect('/users/login')
+            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+
         }
     }catch(err){
         console.log('Token verify failed')

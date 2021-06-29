@@ -68,13 +68,13 @@ async function getServices(){
             <option value="${service._id}">${service.tenGoiDichVu}</option>`
         })
         if(servicesEl){
-            servicesEl.innerHTML = serviceHtml
+            servicesEl.innerHTML += serviceHtml
         }
         if(servicesDNEl){
-            servicesDNEl.innerHTML = serviceHtml
+            servicesDNEl.innerHTML += serviceHtml
         }
         if(servicesFindEl){
-            servicesFindEl.innerHTML = serviceHtml
+            servicesFindEl.innerHTML += serviceHtml
         }
     }catch(err){
         console.log(err)
@@ -99,3 +99,10 @@ const checkbox = document.getElementById("camKet")
 function checkCamKet(){
     (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
 }
+function popupAlert(){
+    const message = document.getElementById('status').textContent
+    if(message.length!=0){
+        alert(message)
+    }
+}
+popupAlert()

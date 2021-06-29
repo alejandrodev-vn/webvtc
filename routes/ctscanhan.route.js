@@ -10,7 +10,7 @@ var upload = require('../multer')
 
 
 router.get('/digital-certificate/personal',middlewares.checkAuthencation, controllerCTSCaNhan.personal);
-router.post('/digital-certificate/personal/add', middlewares.checkAuthencation,upload.single('fileHoSo'), validateCTSCaNhan(), controllerCTSCaNhan.add);
+router.post('/digital-certificate/personal', middlewares.checkAuthencation,upload.single('fileHoSo'), validateCTSCaNhan(), controllerCTSCaNhan.add);
 router.post('/digital-certificate/personal/send-response',middlewares.checkIsAdmin, controllerCTSCaNhan.sendResponse);
 router.post('/digital-certificate/personal/send-mail/:id',middlewares.checkAuthencation, controllerCTSCaNhan.sendMail);
 router.post('/digital-certificate/personal/handle-form-actions',middlewares.checkAuthencation, controllerCTSCaNhan.handleFormActions);

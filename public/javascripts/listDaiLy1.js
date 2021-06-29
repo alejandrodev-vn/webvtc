@@ -109,7 +109,7 @@ async function openEdit(){
     const btns = document.querySelectorAll('.btn-edit-personal')
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
+    const btnCancel = document.querySelectorAll(".btn-cancel");
     // When the user clicks the button, open the modal
     btns.forEach(btn=>{
         btn.addEventListener('click', async (e)=>{
@@ -119,8 +119,7 @@ async function openEdit(){
                 method:'GET'
             }
             const cts = await fetchAPI(urlCer, options)
-            modal.style.opacity = "1";
-            modal.style.display = "block"
+        
             document.querySelector('#hoTenNguoiDK').value = cts.hoTenNguoiDK
             document.querySelector('#MSTCaNhan').value = cts.MSTCaNhan
             document.querySelector('#soCMT').value = cts.soCMT
@@ -152,24 +151,28 @@ async function openEdit(){
             document.querySelector('#thoiHan').value = cts.thoiHan
             document.querySelector('#gia').value = cts.gia
             document.querySelector('#id').value = cts._id
+            if(cts.fileHoSo.length!=0){
+                document.querySelector('#documentPersonal').innerHTML = `
+                <a href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">${cts.fileHoSo}</a>`
+            }else{
+                document.querySelector('#documentOrganization').innerHTML = `<p>Chưa đủ</p>`
+            }
+       
 
+            modal.style.opacity = "1";
+            modal.style.display = "block"
         })
     })
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-    }
+         // When the user clicks on <span> (x), close the modal
+         btnCancel.forEach(btn=>{
+            btn.onclick = function(e) {
+                modal.style.opacity = "0"
+                setTimeout(()=>{modal.style.display = "none";
+                    },450)
+            }
+        })   
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-        }
-    }    
+       
 
 }
 
@@ -260,7 +263,7 @@ async function openEditDN(){
     const btns = document.querySelectorAll('.btn-edit-organization')
 
     // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("closeDN")[0];
+    const btnCancel = document.querySelectorAll(".btn-cancelDN");
     // When the user clicks the button, open the modal
     btns.forEach(btn=>{
         btn.addEventListener('click', async (e)=>{
@@ -270,8 +273,7 @@ async function openEditDN(){
                 method:'GET'
             }
             const cts = await fetchAPI(urlCer, options)
-            modal.style.opacity = "1";
-            modal.style.display = "block"
+
             document.querySelector('#tenGD').value = cts.tenGD
             document.querySelector('#MST').value = cts.MST
             document.querySelector('#giayPhepDKKD').value = cts.giayPhepDKKD
@@ -306,24 +308,24 @@ async function openEditDN(){
             document.querySelector('#thoiHanDN').value = cts.thoiHan
             document.querySelector('#giaDN').value = cts.giaCuoc
             document.querySelector('#idDN').value = cts._id
-
+            if(cts.fileHoSo.length!=0){
+                document.querySelector('#documentOrganization').innerHTML = `
+                <a href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">${cts.fileHoSo}</a>`
+            }else{
+                document.querySelector('#documentOrganization').innerHTML = `<p>Chưa đủ</p>`
+            }
+            modal.style.opacity = "1";
+            modal.style.display = "block"
         })
     })
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-        }
-    }     
+         // When the user clicks on <span> (x), close the modal
+         btnCancel.forEach(btn=>{
+            btn.onclick = function(e) {
+                modal.style.opacity = "0"
+                setTimeout(()=>{modal.style.display = "none";
+                    },450)
+            }
+        })      
 
 }
 
@@ -339,9 +341,6 @@ async function getCTSCaNhanApproved(){
         const CTSCaNhanByAgency = await fetchAPI(urlList1, options)
         const CTSCaNhanBySelf = await fetchAPI(urlList2, options)
         const data = [ ...CTSCaNhanByAgency, ...CTSCaNhanBySelf ]
-        console.log(data)
-        console.log(CTSCaNhanByAgency)
-        console.log(CTSCaNhanBySelf)
         if(data.length!=0){
             $('#paginPersonalApproved').pagination({
                 dataSource: data,
@@ -371,7 +370,7 @@ async function showApprovedPersonal(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
@@ -436,7 +435,7 @@ async function showApprovedOrg(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xem</button></td>
+            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
