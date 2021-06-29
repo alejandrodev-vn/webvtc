@@ -94,17 +94,23 @@ module.exports.sendRequest = async (req, res, next) => {
 }
 module.exports.sendResponse = async (req, res, next) => {
     try{
-        const { id, accept, decline } = req.body
+        const { id, accept, decline, yKienDaiLy, yKienVina } = req.body
+        const cts = await CTSCaNhanService.getById(id)
         if(accept == 'Duyệt' && accept != undefined){
-            await CTSCaNhanService.sendResponse(id, {trangThai: 2});
-            res.redirect('/')
+            if(cts.trangThai==1){
+                await CTSCaNhanService.sendResponse(id, {trangThai: 2});
+                return res.redirect('/')
+            }else if(cts.trangThai==2){
+                await CTSCaNhanService.sendResponse(id, {trangThai: 5});
+                return res.redirect('/')
+            }
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
-            await CTSCaNhanService.sendResponse(id, {trangThai: 0});
-            res.redirect('/')
+            await CTSCaNhanService.sendResponse(id, {trangThai: 0, yKienDaiLy, yKienVina});
+            return res.redirect('/')
 
 
         }else{
-            res.redirect('/')
+            return res.redirect('/')
 
         }
      

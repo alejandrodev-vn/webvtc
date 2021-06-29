@@ -10,9 +10,18 @@ exports.getAll = async() =>{
         consolog(err)
     }
 }
-exports.getById = async(id) =>{
+exports.getById = async (id) =>{
     try{
-        const giaoDich = await giaoDich.findById(id)
+        const giaoDich = await giaodichModel.findById(id)
+        return giaoDich
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.getByUser = async (id) =>{
+    try{
+        const giaoDich = await giaodichModel.find({userId:id})
         return giaoDich
     }
     catch(err){
