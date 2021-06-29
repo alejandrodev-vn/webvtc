@@ -22,6 +22,7 @@ router.get('/giaodich/get-by-user', async (req, res, next) => {
             if(!err){
                 res.json({success:false, msg:'Unauthorized'})
             }else{
+                const user = await userService.getUserByUsername(decode.username)
                 const giaoDich = await giaoDichService.getByUser(id)
                 res.json(giaoDich)
             }

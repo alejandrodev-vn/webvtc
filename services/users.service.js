@@ -40,6 +40,10 @@ exports.getById = async (id) => {
         console.log(err)
     }
 }
+
+exports.getUserByUsername = async (username) => {
+    return await usersModel.findOne({username: username})
+}
 exports.getByBelongTo = async (userId) => {
     try{
         const users = await usersModel.find({belongTo:userId});
