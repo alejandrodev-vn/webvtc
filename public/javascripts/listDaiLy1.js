@@ -289,6 +289,7 @@ async function openEditDN(){
             document.querySelector('#soDienThoaiChuDoanhNghiep').value = cts.soDienThoaiCongTy
             document.querySelector('#congTyMe').value = cts.congTyMe
             document.querySelector('#chucVuDN').value = cts.chucVu
+            if(cts.camKet == true){document.querySelector('#camKet').setAttribute('checked',true)}
             document.querySelector('#tinhThanhDN').childNodes.forEach(province=>{
                 if(cts.tinhThanh == province.value) {
                     province.setAttribute('selected',true)
@@ -370,7 +371,7 @@ async function showApprovedPersonal(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
+            <td><a class="btn btn-action btn-info" href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">Xem</a></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
@@ -435,7 +436,7 @@ async function showApprovedOrg(data){
                 }
             })
             html+=`<tr style="background:#cfebff">
-            <td><button class="btn btn-action btn-info" data-id="${cts._id}">Xem</button></td>
+            <td><a class="btn btn-action btn-info" href="/uploads/fileHoSo/${cts.fileHoSo}" target="_blank">Xem</a></td>
             <td scope="row">${index+1}</td>
             <td style="color:firebrick">Đã duyệt lần 2</td>
             <td>${(cts.trangThai == 5) ? 'Chưa cấp' : 'Đã cấp CTS'}</td>
@@ -469,6 +470,7 @@ async function getQuanHuyen(id){
             quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
         }})
         quanHuyenEl.innerHTML = quanHuyenHtml
+        quanHuyenDNEl.innerHTML = quanHuyenHtml
     }catch(err){
         console.log(err)
     }

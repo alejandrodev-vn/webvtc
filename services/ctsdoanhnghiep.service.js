@@ -113,6 +113,7 @@ exports.sendRequest = async (id, values) => {
 exports.update = async (id, values) => {
     return await CTSDoanhNghiepModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
+            console.log(err)
             console.log('Update failed!')
         }else console.log('Update success!')
     })

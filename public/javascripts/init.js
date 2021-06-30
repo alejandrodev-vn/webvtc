@@ -97,7 +97,7 @@ async function chooseService(id){
 }
 const checkbox = document.getElementById("camKet")
 function checkCamKet(){
-    (checkbox.checked) ? checkbox.setAttribute('value', true) :checkbox.setAttribute('value', false)  
+    (checkbox.checked) ? checkbox.setAttribute('value', true) : checkbox.setAttribute('value', false)  
 }
 function popupAlert(){
     const message = document.getElementById('status').textContent
