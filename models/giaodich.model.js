@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 const { Timestamp } = require('mongodb');
 
 const GiaoDichSchema = new Schema({
-  // userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+  userId: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+  tenGD: {type:String },
   content: {type: String},
   money: {type: Number},
-  // goiDichVuId: {type: mongoose.Schema.Types.ObjectId, ref:'GoiDichVu'},
+  date:{type:Date}
   
 }, {timestamps: true});
 

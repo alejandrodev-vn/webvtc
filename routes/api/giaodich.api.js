@@ -16,7 +16,6 @@ router.get('/giaodich', async (req, res, next) => {
 router.get('/giaodich/get-by-user', async (req, res, next) => {
     try{
         let auth = req.headers.authorization
-        console.log(req.headers)
         let token = auth.split(' ')[1]
         jwt.verify(token, process.env.KEY, async (err, decode)=>{
             if(!err){
