@@ -55,12 +55,7 @@ module.exports.update = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.render('organization',{ 
-                title: 'CTS Doanh Nghiệp', 
-                errors: errors.array(),
-                prevData:req.body,
-                message:'Thêm thất bại'
-            })
+            return res.redirect('/')
         }
         const { idEdit } = req.body
         let values = req.body;
@@ -75,8 +70,13 @@ module.exports.update = async (req, res, next) => {
             }
             values.fileHoSo = req.file.originalname
         }
+        const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
+        const getGia = goiDichVu.gia
+        values.goiCTSId = goiDichVu._id
+        values.thoiHan = goiDichVu.thoiHan
+        values.giaCuoc =Number(getGia)
         await CTSDoanhNghiepService.update(idEdit, values);
-       
+        return res.redirect('/')
     }
     catch(err){
         console.log(err)
