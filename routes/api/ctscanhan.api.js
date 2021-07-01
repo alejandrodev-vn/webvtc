@@ -174,13 +174,13 @@ router.get('/digital-certificate/personal/agency1', async (req, res, next)=> {
         for(let i=0; i<agencyList.length; i++){
             let CTSCaNhan = await CTSCaNhanService.getPendingByUserId(agencyList[i]._id)
             if(CTSCaNhan.length==1){
-                if(CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==2 
+                if(CTSCaNhan[0].trangThai==0 || CTSCaNhan[0].trangThai==1 || CTSCaNhan[0].trangThai==2 
                     || CTSCaNhan[0].trangThai==3 || CTSCaNhan[0].trangThai==4){
                     result.push(...CTSCaNhan)
                 }
             }else if(CTSCaNhan.length!=0){
                 CTSCaNhan.map(cts=>{
-                    if(cts.trangThai==1 || cts.trangThai==2 
+                    if(cts.trangThai==0 || cts.trangThai==1 || cts.trangThai==2 
                         || cts.trangThai==3 || cts.trangThai==4){
                         result.push(cts)
                     }

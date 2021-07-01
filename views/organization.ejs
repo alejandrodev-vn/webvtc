@@ -22,7 +22,7 @@
             <div class="nm-fm col-md-12">
                 <h2 class="title">CẤP CHỨNG THƯ SỐ CHO TỔ CHỨC/ DOANH NGHIỆP</h2>
             </div>
-            <form action="/digital-certificate/organization/add" method="POST" enctype="multipart/form-data">
+            <form action="/digital-certificate/organization" method="POST" enctype="multipart/form-data">
                 <div id="form">
                     <div class="info-user">
                         <div>
@@ -30,45 +30,56 @@
                         </div>
                         <div id="wrt-info">
                             <div class="if-fm mn" >
-                                <label for="">Tên giao dịch <span>*</span> </label>
+                                <label for="">Tên giao dịch <span class="note">*</span> </label>
                                
-                                <input type="text" name="tenGD">
+                                <input type="text" name="tenGD" 
+                                    value="<% if(prevData.tenGD) { %><%= prevData.tenGD %><% } %>">
+                                    
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Giấy phép ĐKKD</label>
-                                    <input type="text" name="giayPhepDKKD">
+                                    <label>Giấy phép ĐKKD <span class="note">*</span></label>
+                                    <input type="text" name="giayPhepDKKD"  
+                                    value="<% if(prevData.giayPhepDKKD) { %><%= prevData.giayPhepDKKD %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Ngày cấp</label>
-                                    <input type="date" name="ngayCapGiayPhepDKKD">
+                                    <label>Ngày cấp <span class="note">*</span></label>
+                                    <input type="date" name="ngayCapGiayPhepDKKD"  
+                                    value="<% if(prevData.ngayCapGiayPhepDKKD) { %><%= prevData.ngayCapGiayPhepDKKD %><% } %>">
                             </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Mã số thuế</label>
-                                    <input type="text" name="MST">
+                                    <label>Mã số thuế <span class="note">*</span></label>
+                                    <input type="text" name="MST" 
+                                    value="<% if(prevData.MST) { %><%= prevData.MST %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Công ty mẹ</label>
-                                    <input type="text" name="congTyMe">
+                                    <label>Công ty mẹ </label>
+                                    <input type="text" name="congTyMe"
+                                    value="<% if(prevData.congTyMe) { %><%= prevData.congTyMe %><% } %>">
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Cam kết không hủy</label>
-                                    <input type="checkbox" id="camKet" onchange="checkCamKet()" name="camKet">
+                                    <label>Cam kết không hủy <span class="note">*</span></label>
+                                    <input type="checkbox" id="camKet" onchange="checkCamKet()" name="camKet"
+                                        <%= (prevData.camKet) ? 'checked' : null %> 
+                                    >
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Mật khẩu</label>
-                                    <input type="password" name="password">
+                                    <label>Mật khẩu </label>
+                                    <input type="password" name="password"
+                                    value="<% if(prevData.password) { %><%= prevData.password %><% } %>"
+                                    >
                                 </div>
                             </div>
                             <div class="if-fm mn">
                                 <label>
-                                    Địa chỉ *
+                                    Địa chỉ <span class="note">*</span>
                                 </label>
-                                <input type="text" name="diaChi">
+                                <input type="text" name="diaChi" 
+                                value="<% if(prevData.diaChi) { %><%= prevData.diaChi %><% } %>">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
@@ -87,11 +98,13 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Email giao dịch</label>
-                                    <input type="text" name="emailGD">
+                                    <input type="text" name="emailGD"
+                                    value="<% if(prevData.emailGD) { %><%= prevData.emailGD %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Số điện thoại</label>
-                                    <input type="text" name="soDienThoaiCongTy">
+                                    <input type="text" name="soDienThoaiCongTy"
+                                    value="<% if(prevData.soDienThoaiCongTy) { %><%= prevData.soDienThoaiCongTy %><% } %>">
                                 </div>
                             </div>
                         </div>
@@ -105,45 +118,53 @@
                             <div class="if-fm">
                                 <div class="if-fm ck">
                                     <label>Họ và tên</label>
-                                    <input type="text" name="hoTenChuDoanhNghiep">
+                                    <input type="text" name="hoTenChuDoanhNghiep"
+                                    value="<% if(prevData.hoTenChuDoanhNghiep) { %><%= prevData.hoTenChuDoanhNghiep %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
                                     <label>Chức vụ</label>
-                                    <input type="text" name="chucVu">
+                                    <input type="text" name="chucVu"
+                                    value="<% if(prevData.chucVu) { %><%= prevData.chucVu %><% } %>">
                                 </div>
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Số CMTND/HC*</label>
-                                    <input type="text" name="soCMT">
+                                    <label>Số CMT/HC <span class="note">*</span> </label>
+                                    <input type="text" name="soCMT"
+                                    value="<% if(prevData.soCMT) { %><%= prevData.soCMT %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
-                                        <label>Ngày cấp</label>
-                                        <input type="date" name="ngayCapCMT">
-                                </div>
+                                        <label>Ngày cấp <span class="note">*</span></label>
+                                        <input type="date" name="ngayCapCMT"
+                                        value="<% if(prevData.ngayCapCMT) { %><%= prevData.ngayCapCMT %><% } %>">
+                                    </div>
                             </div>
                             <div class="if-fm mn">
                                 <label>
-                                    Nơi cấp *
+                                    Nơi cấp <span class="note">*</span>
                                 </label>
-                                <input type="text" name="noiCapCMT">
+                                <input type="text" name="noiCapCMT"
+                                value="<% if(prevData.noiCapCMT) { %><%= prevData.noiCapCMT %><% } %>">
                             </div>
                             <div class="if-fm">
                                 <div class="if-fm ck">
-                                    <label>Email</label>
-                                    <input type="text" name="emailChuDoanhNghiep">
+                                    <label>Email <span class="note">*</span></label>
+                                    <input type="text" name="emailChuDoanhNghiep"
+                                    value="<% if(prevData.emailChuDoanhNghiep) { %><%= prevData.emailChuDoanhNghiep %><% } %>">
                                 </div>
                                 <div class="if-fm ck">
-                                    <label>Số điện thoại</label>
-                                    <input type="text" name="soDienThoaiChuDoanhNghiep,
-                                    ">
+                                    <label>Số điện thoại <span class="note">*</span></label>
+                                    <input type="text" name="soDienThoaiChuDoanhNghiep"
+                                    value="<% if(prevData.soDienThoaiChuDoanhNghiep) { %>
+                                        <%= prevData.soDienThoaiChuDoanhNghiep %>
+                                        <% } %>">
                                 </div>
                             </div>
                         </div>
                         
-                        <% if(typeof errorsDN != 'undefined') { 
+                        <% if(typeof errors != 'undefined') { 
 
-                            errorsDN.forEach(msg => {    
+                            errors.forEach(msg => {    
                         %> 
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <%= msg.msg %>
@@ -177,12 +198,12 @@
                             </div>
                         </div>
                         <div class="if-fm mn">
-                            <label>Thời hạn sử dụng <span class="note">*</span> </label>
+                            <label>Thời hạn sử dụng  </label>
                                             <input type="text"  name="thoiHan" id="thoiHan" readonly="true" style="background:#eee">
                         </div>
                         <div class="if-fm mn">
                             <div class="if-fm ck">
-                                <label>Người thực hiện <span class="note">*</span></label>
+                                <label>Người thực hiện </label>
                                 <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
                             </div>
                             <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
@@ -206,7 +227,6 @@
                 <div id="register">
                     <div class="rg-btn">
                         <input type="submit" value="Ghi lại" class="btn btn-primary">
-                        <input type="submit" value="Ghi lại & gửi" class="btn btn-primary">
                         <a href="/" class="btn btn-secondary">Đóng</a>
                     </div>
                 </div>
@@ -218,6 +238,7 @@
 
 </div>
 
+<div id='status' style="display:none; visibility:hidden"><%= message %></div>
 
 </body>
 <script src="../javascripts/init.js"></script>

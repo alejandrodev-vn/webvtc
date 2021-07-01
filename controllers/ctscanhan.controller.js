@@ -4,8 +4,12 @@ const {validationResult} = require('express-validator');
 
 module.exports.personal = (req, res, next) => {
     try{
-        res.render('personal', { title: 'CTS Cá nhân', errors:req.session.errors });
-        req.session.errors = null
+        res.render('personal', { 
+            title: 'CTS Cá nhân', 
+            errors:[], 
+            prevData:{},
+            message:null
+        });
     }catch(err){
         console.log(err)
     }
@@ -15,8 +19,12 @@ module.exports.add = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            req.session.errors = errors.array()
-            return res.redirect('/digital-certificate/personal')
+            return res.render('personal',{ 
+                title: 'CTS Cá nhân', 
+                errors: errors.array(),
+                prevData:req.body,
+                message:'Thêm thất bại'
+            })
         }
         let values = req.body;
         const goiDichVu = await goiDichVuService.getById(values.goiCTSId)
@@ -25,11 +33,16 @@ module.exports.add = async (req, res, next) => {
         values.thoiHan = goiDichVu.thoiHan
         values.gia =Number(getGia)
         values.ngayTao = convertToYYYYMMDD(Date.now())
-        if(req.file.originalname){
+        if(req.file){
             values.fileHoSo = req.file.originalname
         }
         await CTSCaNhanService.createNew(values);
-        res.redirect('/')
+        res.render('personal', {
+            title: 'CTS Cá nhân', 
+            errors:[], 
+            prevData:{},
+            message:'Thêm thành công'
+        })
     }
     catch(err){
         console.log(err)
@@ -39,18 +52,21 @@ module.exports.update = async (req, res, next) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.redirect('/')
         }
         const { idEdit } = req.body 
         let values = req.body;
-        if(req.file.originalname){
+        if(req.file){
             const fs = require('fs')
             const data = await CTSCaNhanService.getById(idEdit)
-            const path = `public/uploads/fileHoSo/${data.fileHoSo}`
-            if(fs.existsSync(path)){
-                fs.unlinkSync(path)
+            if(data.fileHoSo.length!=0){
+                const path = `public/uploads/fileHoSo/${data.fileHoSo}`
+                if(fs.existsSync(path)){
+                    fs.unlinkSync(path)
+                }
             }
             values.fileHoSo = req.file.originalname
+         
         }
         await CTSCaNhanService.update(idEdit, values);
         res.redirect('/')
@@ -78,17 +94,23 @@ module.exports.sendRequest = async (req, res, next) => {
 }
 module.exports.sendResponse = async (req, res, next) => {
     try{
-        const { id, accept, decline } = req.body
-        if(accept == 'Duyệt' && accept != 'undefined'){
-            await CTSCaNhanService.sendResponse(id, {trangThai: 2});
-            res.redirect('/')
+        const { id, accept, decline, yKienDaiLy, yKienVina } = req.body
+        const cts = await CTSCaNhanService.getById(id)
+        if(accept == 'Duyệt' && accept != undefined){
+            if(cts.trangThai==1){
+                await CTSCaNhanService.sendResponse(id, {trangThai: 2});
+                return res.redirect('/')
+            }else if(cts.trangThai==2){
+                await CTSCaNhanService.sendResponse(id, {trangThai: 5});
+                return res.redirect('/')
+            }
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
-            await CTSCaNhanService.sendResponse(id, {trangThai: 0});
-            res.redirect('/')
+            await CTSCaNhanService.sendResponse(id, {trangThai: 0, yKienDaiLy, yKienVina});
+            return res.redirect('/')
 
 
         }else{
-            res.redirect('/')
+            return res.redirect('/')
 
         }
      
@@ -100,28 +122,33 @@ module.exports.sendResponse = async (req, res, next) => {
 module.exports.handleFormActions = async (req, res, next) => {
     try{
         let { selectItem, deletePersonal, sendPersonal } = req.body;
-        if(deletePersonal == 'Xóa' && deletePersonal != 'undefined'){
+        if(deletePersonal != undefined){
             if(Array.isArray(selectItem)){
                 for(let i=0; i<selectItem.length; i++){
                     await CTSCaNhanService.delete(selectItem[i]);
+                    res.redirect('/')
                 }
             }else {
                 await CTSCaNhanService.delete(selectItem);
+                res.redirect('/')
+
             }
-        }else if(sendPersonal != 'undefined'){ 
+        }else if(sendPersonal != undefined){ 
+            console.log(sendPersonal)
             if(Array.isArray(selectItem)){
                 for(let i=0; i<selectItem.length; i++){
                     await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
+                    res.redirect('/')
+
                 }
             }else {
                 await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
+                res.redirect('/')
+
             }
         }else{
             res.redirect('/')
         }
-        
-        
-        res.redirect('/')
     }
     catch(err){
         console.log(err)
@@ -172,8 +199,7 @@ module.exports.sendMail =  async (req, res, next) => {
                 } else {
                     console.log('Message sent: ' +  info.response);
                     if(cts.trangThai == 2){ 
-                        await 
-                        CTSCaNhanService.update(id, { trangThai:3 }) 
+                        await CTSCaNhanService.update(id, { trangThai:3 }) 
                     }
                     res.redirect('/');
                 }

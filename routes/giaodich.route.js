@@ -3,7 +3,6 @@ const router = express.Router();
 
 const controllerGiaoDich = require('../controllers/giaodich.controller')
 
-router.post('/giaodich/add', controllerGiaoDich.add);
-router.put('/giaodich/edit/:id', controllerGiaoDich.update)
-router.delete('/giaodich/delete/:id', controllerGiaoDich.delete)
+router.get('/giaodich', controllerGiaoDich.getAll);
+router.post('/giaodich', controllerGiaoDich.add);
 module.exports = router;

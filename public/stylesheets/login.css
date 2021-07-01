@@ -21,7 +21,7 @@ p {
 }
 
 span {
-    font-size: 12px;
+    font-size: 20px;
 }
 
 a {
@@ -55,7 +55,18 @@ button.ghost {
     background-color: transparent;
     border-color: #FFFFFF;
 }
-
+button.close{
+    padding: 10px;
+}
+.alert-dismissible .close{
+    padding: 5px;
+}
+.alert-dismissible{
+    padding-right: 50px !important;
+}
+.alert{
+    padding: 7px;
+}
 form {
     background-color: #FFFFFF;
     display: flex;
