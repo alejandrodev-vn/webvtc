@@ -3,12 +3,13 @@ const quanHuyenEl = document.querySelector('#quanHuyen')
 const tinhThanhDNEl = document.querySelectorAll('.tinhThanhDN')
 const quanHuyenDNEl = document.querySelector('#quanHuyenDN')
 const servicesEl = document.querySelector('#services')
-const servicesFindEl = document.querySelector('#servicesFind')
+const servicesFindEl = document.querySelectorAll('.serviecesFind')
 const thoiHanEl = document.querySelector('#thoiHan')
 const giaEl = document.querySelector('#gia')
 const servicesDNEl = document.querySelector('#servicesDN')
 const thoiHanDNEl = document.querySelector('#thoiHanDN')
 const giaDNEl = document.querySelector('#giaDN')
+
 async function getTinhThanh(){
     try{
         if(!tinhThanhEl){
@@ -73,14 +74,33 @@ async function getServices(){
         if(servicesDNEl){
             servicesDNEl.innerHTML = serviceHtml
         }
-        if(servicesFindEl){
-            servicesFindEl.innerHTML = serviceHtml
-        }
     }catch(err){
         console.log(err)
     }
 }
 getServices()
+async function getServicesfind(){
+    try{
+        if(!servicesFindEl){
+            return
+        }
+        await fetch('http://localhost:3000/api/services')
+        .then(res=>res.json())
+        .then(services=>{
+            let serviceHtml = ''
+            services.forEach(services=>{
+                serviceHtml +=  `
+                <option value="${services._id}">${services.tenGoiDichVu}</option>`
+            })
+            servicesFindEl.forEach(e=>{
+                e.innerHTML += serviceHtml
+            })
+        })
+    }catch(err){
+        console.log(err)
+    }
+}
+getServicesfind()
 async function chooseService(id){
     try{
         const res = await fetch('http://localhost:3000/api/services/'+ id)
