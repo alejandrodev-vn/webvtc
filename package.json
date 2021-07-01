@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f ./.env nodemon node ./bin/www"
+    "start": "env-cmd -f ./.env nodemon node  ./bin/www"
   },
   "dependencies": {
     "b64-to-blob": "^1.2.19",
