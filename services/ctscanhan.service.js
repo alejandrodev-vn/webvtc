@@ -2,7 +2,8 @@ const CTSCaNhanModel = require('../models/ctscanhan.model')
 
 exports.getAll = async () => {
     try{
-        const CTSCaNhan = await CTSCaNhanModel.find({});
+        const CTSCaNhan = await CTSCaNhanModel.find({
+        });
         return CTSCaNhan
     }
     catch(err){
@@ -70,6 +71,7 @@ exports.getPendingByUserId = async (userId) => {
         const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId,$or: [
             {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
         ]});
+        // console.log(values)
         return CTSCaNhan
     }
     catch(err){

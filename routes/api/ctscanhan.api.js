@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const CTSCaNhanService = require('../../services/ctscanhan.service')
 const usersService = require('../../services/users.service')
+const findService = require('../../services/find.service')
 router.get('/digital-certificate/personal', async (req, res, next) => {
     try{
         const CTSCaNhan = await CTSCaNhanService.getAll()
@@ -43,6 +44,16 @@ router.get('/digital-certificate/personal/getPendingByUserId', async (req, res, 
     try{
         const { userId } = req.session
         const CTSCaNhan = await CTSCaNhanService.getPendingByUserId(userId)
+        res.json(CTSCaNhan)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
+router.get('/digital-certificate/personal/getFindByUserId', async (req, res, next)=> {
+    try{
+        const CTSCaNhan = await findService.getFindByUserId()
+        console.log(CTSCaNhan)
         res.json(CTSCaNhan)
     }   
     catch(err){

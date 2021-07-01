@@ -8,20 +8,20 @@
         <%- include('header') %> 
         <link rel="stylesheet" href="../stylesheets/organization.css">
         <link rel="stylesheet" href="../stylesheets/adminhome.css">
-    </head>
+</head>
 
-    <body>
-        <div class="wrapper">
-            <div class="box">
-                <%- include('menuDaily')  %> 
-            </div>
-            <div class="container">
-                <div class="row">
-                  <div class="nm-fm col-md-12">
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <%- include('menuDaily') %>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="nm-fm col-md-12">
                     <h2 class="title">TẠO YÊU CẦU CẤP MỚI CHỨNG THƯ SỐ</h2>
                     <div class="choose-certificate">
                         <a href="/digital-certificate/personal" class="btn btn-primary">Cá nhân</a>
-                        <a href="/digital-certificate/organization"  class="btn btn-primary">Tổ chức</a>
+                        <a href="/digital-certificate/organization" class="btn btn-primary">Tổ chức</a>
                     </div>
                 </div>
                 <!-- edit -->
@@ -41,7 +41,7 @@
                                             <h3>Thông tin khách hàng</h3>
                                         </div>
                                         <div id="wrt-info">
-                                            <div class="if-fm mn" >
+                                            <div class="if-fm mn">
                                                 <label>
                                                     Họ và tên <span class="note">*</span>
                                                 </label>
@@ -69,7 +69,7 @@
                                             </div>
                                             <div class="if-fm mn">
                                                 <label>
-                                                    Địa chỉ  <span class="note">*</span>
+                                                    Địa chỉ <span class="note">*</span>
                                                 </label>
                                                 <input type="text" id="diaChi" name="diaChi">
                                             </div>
@@ -98,7 +98,8 @@
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
-                                                    <select name="tinhThanh" id="tinhThanh" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                    <select name="tinhThanh" id="tinhThanh" class="tinhThanh"
+                                                        onchange="getQuanHuyen(this.value)">
                                                         <option value="0">--Lựa chọn--</option>
                                                     </select>
                                                 </div>
@@ -111,17 +112,17 @@
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
-                                                    <label>Email cá nhân  <span class="note">*</span></label>
+                                                    <label>Email cá nhân <span class="note">*</span></label>
                                                     <input type="text" id="email" name="email">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Số điện thoại  <span class="note">*</span></label>
+                                                    <label>Số điện thoại <span class="note">*</span></label>
                                                     <input type="text" id="soDienThoai" name="soDienThoai">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                    
+
                                     <div class="info-user">
                                         <div>
                                             <h3>Yêu cầu cấp chứng thư số</h3>
@@ -130,42 +131,45 @@
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Gói chứng thư <span class="note">*</span></label>
-                                                    <select name="goiCTSId" id="services" onchange="chooseService(this.value)">
-                                                
+                                                    <select name="goiCTSId" id="services"
+                                                        onchange="chooseService(this.value)">
+
                                                     </select>
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Thời hạn sử dụng <span class="note">*</span> </label>
-                                                    <input type="text"  name="thoiHan" id="thoiHan" readonly="true" style="background:#eee">
+                                                    <input type="text" name="thoiHan" id="thoiHan" readonly="true"
+                                                        style="background:#eee">
                                                 </div>
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Giá cước</label>
-                                                    <input type="text" name="gia" id="gia" readonly="true" style="background:#eee">
+                                                    <input type="text" name="gia" id="gia" readonly="true"
+                                                        style="background:#eee">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Người thực hiện <span class="note">*</span></label>
-                                                    <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
+                                                    <input type="text" name="nguoiThucHien" readonly="true"
+                                                        value="<%= locals.user.hoTen %>" style="background:#eee">
                                                 </div>
                                                 <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                             </div>
                                         </div>
-                                        <% if(typeof errors != 'undefined') { 
-            
-                                            errors.forEach(msg => {    
-                                        %> 
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <%= msg.msg %>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                   
-                                        <% }) }%>
+                                        <% if(typeof errors !='undefined' ) { errors.forEach(msg=> {
+                                            %>
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <%= msg.msg %>
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+
+                                            <% }) }%>
                                     </div>
                                 </div>
-            
+
                                 <div class="hoso">
                                     <div>
                                         <h3>Hồ sơ khách hàng</h3>
@@ -173,16 +177,16 @@
                                     <div id="documentPersonal"></div>
 
                                     <div id="wrt-info">
-                                        <div class="if-fm mn" >
+                                        <div class="if-fm mn">
                                             <label>
-                                                Chọn tệp: 
+                                                Chọn tệp:
                                             </label>
                                             <input type="file" name="fileHoSo" />
-            
+
                                         </div>
                                     </div>
                                 </div>
-                     
+
                                 <div id="register">
                                     <div class="rg-btn">
                                         <input type="submit" value="Ghi lại" class="btn btn-primary">
@@ -197,7 +201,7 @@
                 <!-- end-modal personal -->
                 <!-- edit -->
                 <div id="modalEditCertificateOrganization" class="modal">
-                        <!-- Modal content -->
+                    <!-- Modal content -->
                     <div class="modal-content">
                         <div class="form-area">
                               <div class="top-modal">
@@ -211,7 +215,7 @@
                                             <h3>Thông tin khách hàng</h3>
                                         </div>
                                         <div id="wrt-info">
-                                            <div class="if-fm mn" >
+                                            <div class="if-fm mn">
                                                 <label>
                                                     Tên Doanh Nghiệp <span class="note">*</span>
                                                 </label>
@@ -224,7 +228,8 @@
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Ngày cấp <span class="note">*</span></label>
-                                                    <input type="date" id="ngayCapGiayPhepDKKD" name="ngayCapGiayPhepDKKD">
+                                                    <input type="date" id="ngayCapGiayPhepDKKD"
+                                                        name="ngayCapGiayPhepDKKD">
                                                 </div>
                                             </div>
                                             <div class="if-fm">
@@ -235,14 +240,14 @@
                                             </div>
                                             <div class="if-fm mn">
                                                 <label>
-                                                    Địa chỉ  <span class="note">*</span>
+                                                    Địa chỉ <span class="note">*</span>
                                                 </label>
                                                 <input type="text" id="diaChiDN" name="diaChi">
                                             </div>
 
                                             <div class="if-fm mn">
                                                 <label>
-                                                   Công ty mẹ
+                                                    Công ty mẹ
                                                 </label>
                                                 <input type="text" id="congTyMe" name="congTyMe">
                                             </div>
@@ -255,27 +260,28 @@
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
-                                                    <select name="tinhThanh" id="tinhThanhDN" class="tinhThanh" onchange="getQuanHuyen(this.value)">
+                                                    <select name="tinhThanh" id="tinhThanhDN" class="tinhThanh"
+                                                        onchange="getQuanHuyen(this.value)">
                                                         <option value="0">--Lựa chọn--</option>
                                                     </select>
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Quận/ Huyện <span class="note">*</span></label>
-                                                    <select name="quanHuyen" id="quanHuyenDN" >
+                                                    <select name="quanHuyen" id="quanHuyenDN">
                                                         <option value="0">Chọn tỉnh thành trước</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
-                                                    <label>Email giao dịch  <span class="note">*</span></label>
+                                                    <label>Email giao dịch <span class="note">*</span></label>
                                                     <input type="text" id="emailGD" name="emailGD">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Số điện thoại  <span class="note">*</span></label>
+                                                    <label>Số điện thoại <span class="note">*</span></label>
                                                     <input type="text" id="soDienThoaiCongTy" name="soDienThoaiCongTy">
                                                 </div>
-        
+
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
@@ -287,16 +293,19 @@
                                             <h3>Thông tin chủ doanh nghiệp</h3>
                                             <div class="if-ck">
                                                 <div class="if-fm ck">
-                                                    <label>Ho Ten chu Doanh Nghiep  <span class="note">*</span></label>
-                                                    <input type="text" id="hoTenChuDoanhNghiepDN" name="hoTenChuDoanhNghiep">
+                                                    <label>Ho Ten chu Doanh Nghiep <span class="note">*</span></label>
+                                                    <input type="text" id="hoTenChuDoanhNghiepDN"
+                                                        name="hoTenChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Email cá nhân  <span class="note">*</span></label>
-                                                    <input type="text" id="emailChuDoanhNghiep" name="emailChuDoanhNghiep">
+                                                    <label>Email cá nhân <span class="note">*</span></label>
+                                                    <input type="text" id="emailChuDoanhNghiep"
+                                                        name="emailChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Số điện thoại  <span class="note">*</span></label>
-                                                    <input type="text" id="soDienThoaiChuDoanhNghiep" name="soDienThoaiChuDoanhNghiep">
+                                                    <label>Số điện thoại <span class="note">*</span></label>
+                                                    <input type="text" id="soDienThoaiChuDoanhNghiep"
+                                                        name="soDienThoaiChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Số CMTND/HC</label>
@@ -304,7 +313,8 @@
                                                 </div>
                                                 <div class="if-fm ck" width="70%">
                                                     <label>Ngày Cấp CMT</label>
-                                                    <input style="width:70%" type="date" id="ngayCapCMTDN" name="ngayCapCMT">
+                                                    <input style="width:70%" type="date" id="ngayCapCMTDN"
+                                                        name="ngayCapCMT">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Nơi Cấp CMT</label>
@@ -313,7 +323,7 @@
                                             </div>
                                         </div>
                                     </div>
-                    
+
                                     <div class="info-user">
                                         <div>
                                             <h3>Yêu cầu cấp chứng thư số</h3>
@@ -322,58 +332,61 @@
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Gói chứng thư <span class="note">*</span></label>
-                                                    <select name="goiCTSId" id="servicesDN" onchange="chooseService(this.value)">
-                                                
+                                                    <select name="goiCTSId" id="servicesDN"
+                                                        onchange="chooseService(this.value)">
+
                                                     </select>
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Thời hạn sử dụng <span class="note">*</span> </label>
-                                                    <input type="text"  name="thoiHan" id="thoiHanDN" readonly="true" style="background:#eee">
+                                                    <input type="text" name="thoiHan" id="thoiHanDN" readonly="true"
+                                                        style="background:#eee">
                                                 </div>
                                             </div>
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Giá cước</label>
-                                                    <input type="text" name="giaCuoc" id="giaDN" readonly="true" style="background:#eee">
+                                                    <input type="text" name="giaCuoc" id="giaDN" readonly="true"
+                                                        style="background:#eee">
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Người thực hiện <span class="note">*</span></label>
-                                                    <input type="text" name="nguoiThucHien" readonly="true" value="<%= locals.user.hoTen %>" style="background:#eee">
+                                                    <input type="text" name="nguoiThucHien" readonly="true"
+                                                        value="<%= locals.user.hoTen %>" style="background:#eee">
                                                 </div>
                                                 <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                             </div>
                                         </div>
-                                        <% if(typeof errors != 'undefined') { 
-            
-                                            errors.forEach(msg => {    
-                                        %> 
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <%= msg.msg %>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                   
-                                        <% }) }%>
+                                        <% if(typeof errors !='undefined' ) { errors.forEach(msg=> {
+                                            %>
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <%= msg.msg %>
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+
+                                            <% }) }%>
                                     </div>
                                 </div>
-            
+
                                 <div class="hoso">
                                     <div>
                                         <h3>Hồ sơ khách hàng</h3>
                                     </div>
                                     <div id="documentOrganization"></div>
                                     <div id="wrt-info">
-                                        <div class="if-fm mn" >
+                                        <div class="if-fm mn">
                                             <label>
-                                                Chọn tệp: 
+                                                Chọn tệp:
                                             </label>
                                             <input type="file" name="fileHoSo" />
-            
+
                                         </div>
                                     </div>
                                 </div>
-                     
+
                                 <div id="register">
                                     <div class="rg-btn">
                                         <input type="submit" value="Ghi lại" class="btn btn-primary">
@@ -384,123 +397,319 @@
                             </form>
                         </div>
                     </div>
-            
                 </div>
                 <!-- end-modal organization -->
-                <!-- search -->
-                    <form action="" style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
-                        <style>
-                            .form-control {
-                                height: calc(0.75em + .75rem + 2px);
-                                padding: 0;
-                            }
-                            .form-group{
-                                margin-bottom: 0;
-                            }
-                        </style>
-                        <div>
-                            <h3>Thông tin tìm kiếm
-                            </h3>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Mã phiếu yêu cầu</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Mã khách hàng</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Số CMTND/HC</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label for="inputState" class="col-sm-4 col-form-label">Tỉnh/Thành phố</label>
-                                    <div class="col-sm-8">
-                                        <select name="tinhThanh" class="tinhThanh form-control">
-                                            <option selected>Chọn tỉnh thành</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Ngày YC&emsp;Từ ngày:</label>
-                                    <div class="col-sm-8">
-                                      <input type="date" class="form-control">
-                                    </div>
-                                  </div>
+                <!-- edit -->
+                <form action="api/digital-certificate/find" method="GET" id="theForm"
+                    style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;">
+                    <!-- <form action="/digital-certificate/organization/find" method="POST"> -->
+                    <style>
+                        .form-control {
+                            height: calc(0.75em + .75rem + 2px);
+                            padding: 0;
+                        }
+
+                        .form-group {
+                            margin-bottom: 0;
+                        }
+                    </style>
+                    <div>
+                        <h3>Thông tin tìm kiếm
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Mã phiếu yêu cầu</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="findMYC" class="form-control">
+                                </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group row">
-                                    <label  class="col-sm-4 col-form-label">Trạng thái</label>
-                                    <div class="col-sm-8">
-                                        <select  class="form-control">
-                                            <option selected>Chọn trạng thái</option>
-                                            <option value="0">Dự thảo</option>
-                                            <option value="1">Chờ duyệt lần 1</option>
-                                            <option value="2">Gửi thông tin thuê bao</option>
-                                            <option value="3">Đã gửi thông tin thuê bao</option>
-                                            <option value="4">Chờ duyệt lần 2</option>
-                                            <option value="5">Chưa cấp CTS</option>
-                                            <option value="6">Đã cấp CTS</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Tên giao dịch</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Giấy phép ĐKKD</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Loại yêu cầu</label>
-                                    <div class="col-sm-8">
-                                        <select name="goiCTSId" id="servicesFind" class="form-control">
-                                            <option selected >Chọn loại yêu cầu</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
-                                    <div class="col-sm-8">
-                                      <input type="date" class="form-control">
-                                    </div>
-                                  </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Mã khách hàng</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="findMKH" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Số CMTND/HC</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="findCMTND" id="findCMTND" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Tỉnh/Thành phố</label>
+                                <div class="col-sm-8">
+                                    <select name="findTinhThanh" id="findTinhThanh" class="tinhThanh form-control">
+                                        <option selected value="">Chọn tỉnh thành</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Ngày YC&emsp;Từ ngày:</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="findDateTN" id="findDateTN" class="form-control">
+                                </div>
                             </div>
                         </div>
-                        <div style="margin: 0 auto; width: 13%; margin-top:30px" class="search">
-                            <input  type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Trạng thái</label>
+                                <div class="col-sm-8">
+                                    <select name="findTrangThai" id="findTrangThai" class="form-control">
+                                        <option selected value="">Chọn trạng thái</option>
+                                        <option value="0">Dự thảo</option>
+                                        <option value="1">Chờ duyệt lần 1</option>
+                                        <option value="2">Gửi thông tin thuê bao</option>
+                                        <option value="3">Đã gửi thông tin thuê bao</option>
+                                        <option value="4">Chờ duyệt lần 2</option>
+                                        <option value="5">Chưa cấp CTS</option>
+                                        <option value="6">Đã cấp CTS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Tên giao dịch</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="findTenGD" name="findTenGD" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Giấy phép ĐKKD</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="findGiayPhepDKKD" id="findGiayPhepDKKD"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Loại yêu cầu</label>
+                                <div class="col-sm-8">
+                                    <select name="findCTS" id="findCTS" class="form-control">
+                                        <option value="canhan">CTS cá nhân</option>
+                                        <option value="doanhnghiep">CTS doanh nghiệp</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Đến ngày:</label>
+                                <div class="col-sm-8">
+                                    <input type="date" name="findDateKT" id="findDateKT" class="form-control">
+                                </div>
+                            </div>
                         </div>
-                        
-                    </form>
+                    </div>
+            </div>
+            <!-- </form> -->
+            </form>
+            <div style="margin: 0 auto; width: 13%;" class="search">
+                <button class="btn btn-primary" id="getFind">Tim kiem</button>
+            </div>
+            <div>
+                <h3>Kết quả tiềm kiếm
+                </h3>
+                <div class="container">
+                    <br>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanFind">Cá Nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepFind">Doanh Nghiệp</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="CTSCaNhanFind" class="container tab-pane active"><br>
+                            <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                                <form action="/digital-certificate/personal/handle-form-actions" method="POST"
+                                    style="padding: 0;">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th scope="col"><label for="selectAll">Chọn </label> <input
+                                                        type="checkbox" id="selectAll" onclick="checkAll()"></th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Chỉnh sửa</th>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Mã yêu cầu</th>
+                                                <th scope="col">Họ Tên</th>
+                                                <th scope="col">CMND</th>
+                                                <th scope="col">MST</th>
+                                                <th scope="col">Gói CTS</th>
+                                                <th scope="col">Thời hạn (năm)</th>
+                                                <th scope="col">Ngày tạo</th>
+                                                <th scope="col">Người tạo</th>
+                                                <th scope="col">Trạng thái hồ sơ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="pendingFindStatus">
+
+                                        </tbody>
+                                    </table>
+                                    <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
+                                        <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete"
+                                            disabled value="Xóa" />
+                                        <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit"
+                                            disabled value="Gửi SmartSign" />
+                                        <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
+                                    </div>
+                                </form>
+                                <form style="display:none" id="formSendMailFindPersonal" method="POST"></form>
+                            </div>
+                            <div class="pagin-wrapper" id="paginFindPersonal"></div>
+                        </div>
+                        <div id="CTSDoanhNghiepFind" class="container tab-pane fade"><br>
+                            <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                                <form action="/digital-certificate/organization/handle-form-actions" method="POST"
+                                    style="padding: 0;">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th scope="col"><label for="selectAllDN">Chọn </label><input
+                                                        type="checkbox" id="selectAllDN" onclick="checkAllDN()">
+                                                </th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Chỉnh sửa</th>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Mã yêu cầu</th>
+                                                <th scope="col">Tên Doanh Ngiệp</th>
+                                                <th scope="col">Giấy Phép KD</th>
+                                                <th scope="col">MST</th>
+                                                <th scope="col">Gói CTS</th>
+                                                <th scope="col">Thời hạn (năm)</th>
+                                                <th scope="col">Ngày tạo</th>
+                                                <th scope="col">Người tạo</th>
+                                                <th scope="col">Trạng thái hồ sơ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="pendingFindStatusDN">
+
+                                        </tbody>
+                                    </table>
+                                    <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
+                                        <input type="submit" name="deleteOrganization"
+                                            class="btn btn-primary btn-delete1" disabled value="Xóa" />
+                                        <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1"
+                                            disabled value="Gửi SmartSign">
+                                        <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
+                                    </div>
+                                </form>
+                                <form style="display:none" id="formSendMailFindOrganization" method="POST"></form>
+                            </div>
+                            <div class="pagin-wrapper" id="paginFindOrganization"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h3 class="pl-3">Danh sách phiếu yêu cầu</h3>
+            <!-- Danh sách Phiếu yêu cầu -->
+            <h3>Danh sách phiếu yêu cầu</h3>
             <div class="container">
                 <br>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiep">Doanh Nghiệp</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiep">Doanh Nghiệp</a>
+                    </li>
                 </ul>
-              
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="CTSCaNhan" class="container tab-pane active"><br>
+                        <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                            <form action="/digital-certificate/personal/handle-form-actions" method="POST"
+                                style="padding: 0;">
+                                <table class="table table-bordered">
+                                    <thead class="thead-default">
+                                        <tr>
+                                            <th scope="col"><label for="selectAll">Chọn </label> <input type="checkbox"
+                                                    id="selectAll" onclick="checkAll()"></th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Chỉnh sửa</th>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Mã yêu cầu</th>
+                                            <th scope="col">Họ Tên</th>
+                                            <th scope="col">CMND</th>
+                                            <th scope="col">MST</th>
+                                            <th scope="col">Gói CTS</th>
+                                            <th scope="col">Thời hạn (năm)</th>
+                                            <th scope="col">Ngày tạo</th>
+                                            <th scope="col">Người tạo</th>
+                                            <th scope="col">Trạng thái hồ sơ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingStatus">
+                                    </tbody>
+                                </table>
+                                <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
+                                    <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete"
+                                        disabled value="Xóa" />
+                                    <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit" disabled
+                                        value="Gửi SmartSign" />
+                                    <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
+                                </div>
+                            </form>
+                            <form style="display:none" id="formSendMailPersonal" method="POST"></form>
+                        </div>
+                        <div class="pagin-wrapper" id="paginPersonal"></div>
+                    </div>
+                    <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
+                        <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                            <form action="/digital-certificate/organization/handle-form-actions" method="POST"
+                                style="padding: 0;">
+                                <table class="table table-bordered">
+                                    <thead class="thead-default">
+                                        <tr>
+                                            <th scope="col"><label for="selectAllDN">Chọn </label><input type="checkbox"
+                                                    id="selectAllDN" onclick="checkAllDN()">
+                                            </th>
+                                            <th scope="col">Trạng thái</th>
+                                            <th scope="col">Chỉnh sửa</th>
+                                            <th scope="col">STT</th>
+                                            <th scope="col">Mã yêu cầu</th>
+                                            <th scope="col">Tên Doanh Ngiệp</th>
+                                            <th scope="col">Giấy Phép KD</th>
+                                            <th scope="col">MST</th>
+                                            <th scope="col">Gói CTS</th>
+                                            <th scope="col">Thời hạn (năm)</th>
+                                            <th scope="col">Ngày tạo</th>
+                                            <th scope="col">Người tạo</th>
+                                            <th scope="col">Trạng thái hồ sơ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingStatusDN">
+                                    </tbody>
+                                </table>
+                                <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
+                                    <input type="submit" name="deleteOrganization" class="btn btn-primary btn-delete1"
+                                        disabled value="Xóa" />
+                                    <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1"
+                                        disabled value="Gửi SmartSign">
+                                    <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
+                                </div>
+                            </form>
+                            <form style="display:none" id="formSendMailOrganization" method="POST"></form>
+                        </div>
+                        <div class="pagin-wrapper" id="paginOrganization"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Đã Phê Duyệt -->
+            <h3>Đã phê duyệt</h3>
+            <div class="container">
+                <br>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanApproved">Cá Nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepApproved">Doanh Nghiệp</a>
+                    </li>
+                </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div id="CTSCaNhan" class="container tab-pane active"><br>
@@ -533,9 +742,7 @@
                             <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit" disabled value="Gửi SmartSign" />
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
-                    </form>
-                    <form style="display:none" id="formSendMailPersonal" method="POST"></form>
-
+                        <div class="pagin-wrapper" id="paginPersonalApproved"></div>
                     </div>
                     <div class="pagin-wrapper"  id="paginPersonal"></div>
                      
@@ -570,85 +777,10 @@
                             <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1" disabled value="Gửi SmartSign">
                             <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                         </div>
-                    </form>
-                    <form style="display:none" id="formSendMailOrganization" method="POST"></form>
-
+                        <div class="pagin-wrapper" id="paginOrgApproved"></div>
                     </div>
-                    <div  class="pagin-wrapper" id="paginOrganization"></div>
-                        
-                  </div> 
                 </div>
-              </div>
-    <!-- Approved -->
-         <h3 class="pl-3">Đã phê duyệt</h3>
-         <div class="container">
-             <br>
-             <!-- Nav tabs -->
-             <ul class="nav nav-tabs" role="tablist">
-               <li class="nav-item">
-                 <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanApproved">Cá Nhân</a>
-               </li>
-               <li class="nav-item">
-                 <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepApproved">Doanh Nghiệp</a>
-               </li>
-             </ul>
-           
-             <!-- Tab panes -->
-             <div class="tab-content">
-               <div id="CTSCaNhanApproved" class="container tab-pane active"><br>
-                 <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                     <table class="table table-bordered">
-                         <thead class="thead-default">
-                             <tr>
-                                 <th scope="col">Chi tiết</th>
-                                 <th scope="col">STT</th>
-                                 <th scope="col">Trạng thái</th>
-                                 <th scope="col">Cấp CTS</th>
-                                 <th scope="col">Mã yêu cầu</th>
-                                 <th scope="col">Họ Tên</th>
-                                 <th scope="col">CMND</th>
-                                 <th scope="col">MST</th>
-                                 <th scope="col">Gói CTS</th>
-                                 <th scope="col">Thời hạn (năm)</th>
-                                 <th scope="col">Ngày tạo</th>
-                                 <th scope="col">Người tạo</th>
-                             
-                             </tr>
-                         </thead>
-                         <tbody id="approvedStatus">
-                         </tbody>
-                     </table>
-
-                 </div>
-                 <div class="pagin-wrapper" id="paginPersonalApproved"></div>
-               </div>
-               <div id="CTSDoanhNghiepApproved" class="container tab-pane fade"><br>
-                 <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                     <table class="table table-bordered">
-                         <thead class="thead-default">
-                             <tr>
-                                 <th scope="col">Chi tiết</th>
-                                 <th scope="col">STT</th>
-                                 <th scope="col">Trạng thái</th>
-                                 <th scope="col">Cấp CTS</th>
-                                 <th scope="col">Mã yêu cầu</th>
-                                 <th scope="col">Tên GD</th>
-                                 <th scope="col">CMND</th>
-                                 <th scope="col">MST</th>
-                                 <th scope="col">Gói CTS</th>
-                                 <th scope="col">Thời hạn (năm)</th>
-                                 <th scope="col">Ngày tạo</th>
-                                 <th scope="col">Người tạo</th>
-                               </tr>
-                             </thead>
-                             <tbody id="approvedStatusDN">
-                             </tbody>
-                     </table>
-                 </div>
-                 <div class="pagin-wrapper" id="paginOrgApproved"></div>
-               </div> 
-             </div>
-         </div>
+            </div>
         </div>
         <div id='status' style="display:none; visibility:hidden"><%= message %></div>
 
