@@ -4,6 +4,8 @@ const { Timestamp } = require('mongodb');
 const mongooseDelete = require('mongoose-delete');
 
 const CTSDoanhNghiepSchema = new Schema({
+  tokenId:{type: String},
+  serialNumber:{type: String},
   loaiCTS: {type: String, default: 'Tổ chức'},
   tenGD: {type: String, require: true},
   password: {type:String, require: true},
@@ -32,6 +34,13 @@ const CTSDoanhNghiepSchema = new Schema({
   fileHoSo:{type:String, default:''},
   trangThai:{type: Number, required: true, default:0},
   createdBy: {type: String},
+  action1: {type:Date},
+  action2: {type:Date},
+  action3: {type:Date},
+  action4: {type:Date},
+  action5: {type:Date},
+  action6: {type:Date},
+  action7: {type:Date}
 }, {timestamps: true});
 //add plugin
 CTSDoanhNghiepSchema.plugin(mongooseDelete, { 

@@ -99,10 +99,10 @@ module.exports.handleFormActions = async (req, res, next) => {
         }else if(sendOrganization != 'undefined'){ 
             if(Array.isArray(selectItem1)){
                 for(let i=0; i<selectItem1.length; i++){
-                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1});
+                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1,action1:Date.now()});
                 }
             }else {
-                await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1});
+                await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1,action1:Date.now()});
             }
             res.redirect('/')
         }else{
@@ -130,7 +130,7 @@ module.exports.sendResponse = async (req, res, next) => {
     try{
         const { idOrg, acceptOrg, declineOrg } = req.body
         if(acceptOrg == 'Duyệt' && acceptOrg != 'undefined'){
-            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 2});
+            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 2,action2:Date.now()});
             res.redirect('/')
         }else if(declineOrg == 'Từ Chối Duyệt' && declineOrg != 'undefined'){
             await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 0});
@@ -154,7 +154,7 @@ module.exports.sendMail =  async (req, res, next) => {
     const nodemailer = require('nodemailer')
     const jwt = require('jsonwebtoken')
     let token = jwt.sign({ soDienThoai: cts.soDienThoaiCongTy, idCer: cts._id }, process.env.KEY,{
-        expiresIn: '5m' /*<---- this is 5 minutes ♥*/
+        expiresIn: '5m' /*<---- this is 5 minutes */
     }, (err, token) => {
         if (err) {
             console.log('Token sign failed');
@@ -162,8 +162,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'namdtps12220@fpt.edu.vn',
-                    pass: 'nam180201'
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
                 },
                 tls: {rejectUnauthorized:false}
         
@@ -183,7 +183,7 @@ module.exports.sendMail =  async (req, res, next) => {
                     + Điện thoại: ${cts.soDienThoaiCongTy}
                 <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
                 <a href="http://localhost:3000/digital-certificate/organization/get-otp/${token}">
-                http://localhost:3000/digital-certificate/organization/get-otp/${token}
+                http://localhost:3000/digital-certificate/organization/get-otp/${token} 
                 </a>
                 `
             }
@@ -196,7 +196,7 @@ module.exports.sendMail =  async (req, res, next) => {
                     console.log('Message sent: ' +  info.response);
                     if(cts.trangThai == 2){ 
                         await 
-                        CTSDoanhNghiepService.update(id, { trangThai:3 }) 
+                        CTSDoanhNghiepService.update(id, { trangThai:3,action3:Date.now() }) 
                     }
                     res.redirect('/');
                 }

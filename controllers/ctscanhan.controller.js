@@ -75,33 +75,17 @@ module.exports.update = async (req, res, next) => {
         console.log(err)
     }
 }
-module.exports.sendRequest = async (req, res, next) => {
-    try{
-        let { selectItem } = req.body;
-        if(Array.isArray(selectItem)){
-            for(let i=0; i<selectItem.length; i++){
-                await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
-            }
-        }else {
-            await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
-        }
-        
-        res.redirect('/')
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+
 module.exports.sendResponse = async (req, res, next) => {
     try{
         const { id, accept, decline, yKienDaiLy, yKienVina } = req.body
         const cts = await CTSCaNhanService.getById(id)
         if(accept == 'Duyệt' && accept != undefined){
             if(cts.trangThai==1){
-                await CTSCaNhanService.sendResponse(id, {trangThai: 2});
+                await CTSCaNhanService.sendResponse(id, {trangThai: 2,action2:Date.now()});
                 return res.redirect('/')
-            }else if(cts.trangThai==2){
-                await CTSCaNhanService.sendResponse(id, {trangThai: 5});
+            }else if(cts.trangThai==4){
+                await CTSCaNhanService.sendResponse(id, {trangThai: 5,action5:Date.now()});
                 return res.redirect('/')
             }
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
@@ -134,15 +118,14 @@ module.exports.handleFormActions = async (req, res, next) => {
 
             }
         }else if(sendPersonal != undefined){ 
-            console.log(sendPersonal)
             if(Array.isArray(selectItem)){
                 for(let i=0; i<selectItem.length; i++){
-                    await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1});
+                    await CTSCaNhanService.sendRequest(selectItem[i], {trangThai: 1,action1:Date.now()});
                     res.redirect('/')
 
                 }
             }else {
-                await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1});
+                await CTSCaNhanService.sendRequest(selectItem, {trangThai: 1,action1:Date.now()});
                 res.redirect('/')
 
             }
@@ -168,8 +151,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'namdtps12220@fpt.edu.vn',
-                    pass: 'nam180201'
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
                 },
                 tls: {rejectUnauthorized:false}
         
@@ -199,7 +182,7 @@ module.exports.sendMail =  async (req, res, next) => {
                 } else {
                     console.log('Message sent: ' +  info.response);
                     if(cts.trangThai == 2){ 
-                        await CTSCaNhanService.update(id, { trangThai:3 }) 
+                        await CTSCaNhanService.update(id, { trangThai:3,action3:Date.now() }) 
                     }
                     res.redirect('/');
                 }

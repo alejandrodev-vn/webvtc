@@ -116,13 +116,13 @@ router.get('/digital-certificate/personal/approved-by-agency', async (req, res, 
         for(let i=0; i<agencyList.length; i++){
             let CTSCaNhan = await CTSCaNhanService.getApprovedByUserId(agencyList[i]._id)
             if(CTSCaNhan.length==1){
-                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6){
+                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6 || CTSCaNhan[0].trangThai==7){
                     result.push(...CTSCaNhan)
 
                 }
             }else if(CTSCaNhan.length!=0){
                 CTSCaNhan.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })
@@ -134,13 +134,13 @@ router.get('/digital-certificate/personal/approved-by-agency', async (req, res, 
             agency2.forEach( async agency => {
                 let CTSCaNhan = await CTSCaNhanService.getApprovedByUserId(agency._id)
                 if(CTSCaNhan.length==1){
-                    if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6){
+                    if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6|| CTSCaNhan[0].trangThai==7){
                         result.push(...CTSCaNhan)
     
                     }
                 }else if(CTSCaNhan.length!=0){
                     CTSCaNhan.map(cts=>{
-                        if(cts.trangThai==5 || cts.trangThai==6){
+                        if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                             result.push(cts)
                         }
                     })
@@ -191,12 +191,12 @@ router.get('/digital-certificate/personal/approved-agency1', async (req, res, ne
             let CTSCaNhan = await CTSCaNhanService.getApprovedByUserId(agencyList[i]._id)
             console.log(CTSCaNhan)
             if(CTSCaNhan.length==1){
-                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6){
+                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6 || CTSCaNhan[0].trangThai==7){
                     result.push(...CTSCaNhan)
                 }
             }else if(CTSCaNhan.length!=0){
                 CTSCaNhan.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })

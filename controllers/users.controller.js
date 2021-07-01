@@ -8,7 +8,6 @@ module.exports.authencation = async (req, res, next)=> {
 module.exports.add = async (req, res, next)=> {
     try{
        let values = req.body
-       console.log(values)
        await usersService.createNew(values)
        res.status(200).redirect('/')
     }

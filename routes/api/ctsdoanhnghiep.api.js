@@ -113,12 +113,12 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
         for(let i=0; i<agencyList.length; i++){
             let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agencyList[i]._id)
             if(CTSDoanhNghiep.length==1){
-                if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6){
+                if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6 || CTSDoanhNghiep[0].trangThai==7){
                     result.push(...CTSDoanhNghiep)
                 }
             }else if(CTSDoanhNghiep.length!=0){
                 CTSDoanhNghiep.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })
@@ -130,13 +130,13 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
             agency2.forEach( async agency => {
                 let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agency._id)
                 if(CTSDoanhNghiep.length==1){
-                    if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6){
+                    if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6 || CTSDoanhNghiep[0].trangThai==7){
                         result.push(...CTSDoanhNghiep)
     
                     }
                 }else if(CTSDoanhNghiep.length!=0){
                     CTSDoanhNghiep.map(cts=>{
-                        if(cts.trangThai==5 || cts.trangThai==6){
+                        if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                             result.push(cts)
                         }
                     })
@@ -180,12 +180,12 @@ router.get('/digital-certificate/organization/approved-agency1', async (req, res
         for(let i=0; i<agencyList.length; i++){
             let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agencyList[i]._id)
             if(CTSDoanhNghiep.length==1){
-                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6){
+                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6 || CTSCaNhan[0].trangThai==7){
                     result.push(...CTSDoanhNghiep)
                 }
             }else if(CTSDoanhNghiep.length!=0){
                 CTSDoanhNghiep.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })

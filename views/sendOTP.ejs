@@ -22,13 +22,12 @@
                 <div class="row">
                     
                     <% if(typeof notifications == 'undefined' ){ %> 
-                        <h1>Xác nhận </h1>
+                        <h2 style="text-align:center;width:100%">Xác nhận</h2>
                         <form action="" method="POST" class="text-md-center" style="width: 50%;margin:0 auto">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="soDienThoai" readonly value="<%= soDienThoai %>">
+                            <div class="form-group" style="justify-content: center;">
+                                <input type="text" class="form-control" style="padding: 5px;width: 50%;" name="soDienThoai" readonly value="<%= soDienThoai %>">
                             </div>
                             <input type="submit" value="Gửi mã OTP" class="btn btn-primary btn-sendOTP col-md-6" />
-                            <!-- <a class="btn btn-primary col-md-6">Xác nhận OTP</a> -->
                         </form>
                     <% }else{ %> 
                         <h2><%= notifications%></h2>
