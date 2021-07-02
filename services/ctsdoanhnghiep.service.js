@@ -12,7 +12,7 @@ exports.getAll = async () => {
 exports.getAllPending = async () => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
-            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4},{trangThai: 9}
         ]});
         return CTSDoanhNghiep
     }
@@ -35,7 +35,7 @@ exports.getAllApproved = async () => {
 exports.getForAdmin1 = async () => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({$or: [
-            {trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+            {trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4},{trangThai: 9}
         ]});
         return CTSDoanhNghiep
     }
@@ -66,7 +66,7 @@ exports.getById= async (id) => {
 exports.getPendingByUserId = async (userId) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({createdBy:userId,$or: [
-            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4}
+            {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4},{trangThai: 9}
         ]});
         return CTSDoanhNghiep
     }

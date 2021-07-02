@@ -46,7 +46,7 @@ async function showPending(data){
                     cts = { ...service, ...cts }
                 }
             })
-           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           html+=`<tr ${(cts.trangThai == 0 || cts.trangThai == 9) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
            <td>${(cts.trangThai == 0) ? 'Dự thảo' 
            : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
@@ -59,7 +59,9 @@ async function showPending(data){
                                        data-id="${cts._id}">
                                            Gửi lại
                                        </button>`
-           : 'Chờ duyệt lần 2'}</td></td>
+           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' 
+           : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>' 
+           : ''}</td></td>
            <td scope="row">${index+1}</td>
            <td><p>${cts._id}</p></td>
            <td>${cts.hoTenNguoiDK}</td>
@@ -116,20 +118,22 @@ async function showPendingDN(data){
                     cts = { ...service, ...cts }
                 }
             })
-            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+            html+=`<tr ${(cts.trangThai == 0 || cts.trangThai == 9) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
             <td>${(cts.trangThai == 0) ? 'Dự thảo' 
             : (cts.trangThai == 1 ) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                     data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                         Gửi thông tin thuê bao
                                     </button>`
             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
                                         padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-                                        <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
+                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                         data-id="${cts._id}">
                                             Gửi lại
                                         </button>`
-            : 'Chờ duyệt lần 2'}</td></td>
+            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' 
+            : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>' 
+            : ''}</td></td>
             <td scope="row">${index+1}</td>
             <td><p>${cts._id}</p></td>
             <td>${cts.tenGD}</td>

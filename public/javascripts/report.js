@@ -69,32 +69,32 @@ async function getFind() {
             const dateEnd = document.getElementById('dateEnd').value
             const services = document.getElementById('goiCTSId').value
             const agency = document.getElementById('agency').value
-            const actionBy = document.getElementById('actionBy').value
             const tokenId = document.getElementById('tokenId').value
             const serialNumber = document.getElementById('serialNumber').value
             const status = document.getElementById('trangThai').value
         if(typeReport == '1'){
             if(mst){
-                const urlFind = url + `api/report?typeReport=${typeReport}&mst=${mst}`
-                const options = {
+                var urlFind = url + `api/report?typeReport=${typeReport}&mst=${mst}`
+                var options = {
                     method: 'GET'
                 }
             }else if(tokenId){
-                const urlFind = url + `api/report?typeReport=${typeReport}&tokenId=${tokenId}`
-                const options = {
+                var urlFind = url + `api/report?typeReport=${typeReport}&tokenId=${tokenId}`
+                var options = {
                     method: 'GET'
                 }
                
             }else if(serialNumber){
-                const urlFind = url + `api/report?typeReport=${typeReport}&serialNumber=${serialNumber}`
-                const options = {
+                var urlFind = url + `api/report?typeReport=${typeReport}&serialNumber=${serialNumber}`
+                var options = {
                     method: 'GET'
                 }
                
+            }else{
+                return alert('Vui lòng chọn điều kiện xuất lịch sử')
             } 
             const data = await fetchAPI(urlFind, options)
             if(data && data.length!=0){
-
                 $('#paginHistory').pagination({
                     dataSource: data,
                     callback: function(data, pagination) {
@@ -113,11 +113,12 @@ async function getFind() {
                 && agency.length==0 && status.length==0){
                     return
                 }
-            const urlFind = url + `api/report?typeReport=&agency=${agency}&actionBy=${actionBy}&services=${services}&dateBegin=${dateBegin}&dateEnd=${dateEnd}&status=${status}`
+            const urlFind = url + `api/report?typeReport=${typeReport}&agency=${agency}&services=${services}&dateBegin=${dateBegin}&dateEnd=${dateEnd}&status=${status}`
             const options = {
                 method: 'GET'
             }
             const data = await fetchAPI(urlFind, options)
+      
             //canhan
             if(data.canhan && data.canhan.length!=0){
                 $('#paginPersonal').pagination({
@@ -129,11 +130,11 @@ async function getFind() {
                     pageSize: 5    
                 })
             }else{
-                showFindCTSCaNhan(data.canhan)
+                showFindCTSCaNhan([])
             }
             //doanh nghiep
             if(data.doanhnghiep && data.doanhnghiep.length!=0){
-                $('#paginPersonal').pagination({
+                $('#paginOrganization').pagination({
                     dataSource: data.doanhnghiep,
                     callback: function(data, pagination) {
                         // template method of yourself
@@ -142,7 +143,7 @@ async function getFind() {
                     pageSize: 5    
                 })
             }else{
-                showFindCTSDoanhNghiep(data.doanhnghiep)
+                showFindCTSDoanhNghiep([])
             }
         }
   
@@ -301,31 +302,34 @@ async function showFindCTSCaNhan(data){
                     cts = { ...service, ...cts }
                 }
             })
-           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-           ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
+           html+=`<tr ${(index % 2 == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           <td scope="row">${index+1}</td>
            <td>${(cts.trangThai == 0) ? 'Dự thảo' 
            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1' 
-           : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                   data-id="${cts._id}">
-                                       Gửi thông tin thuê bao
-                                   </button>`
-           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
-               data-id="${cts._id}">
-                   Gửi lại
-               </button>`
-           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
-           ${(cts.trangThai == 0) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
-           <td scope="row">${index+1}</td>
+           : (cts.trangThai == 2) ? `Đã duyệt lần 1`
+           : (cts.trangThai == 3) ? `Đã gửi thông tin thuê bao`
+           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' 
+           : (cts.trangThai == 5) ? 'Đã duyệt lần 2' 
+           : (cts.trangThai == 6) ? 'Đã ký HĐ' 
+           : (cts.trangThai == 7) ? 'Đã cấp CTS' 
+           : (cts.trangThai == 8) ? 'Đã hủy' 
+           : (cts.trangThai == 9) ? 'Đã từ chối' 
+           : ''}</td>
            <td><p>${cts._id}</p></td>
+           <td>${cts.loaiCTS}</td>
            <td>${cts.hoTenNguoiDK}</td>
-           <td>${cts.soCMT}</td>
            <td>${cts.MSTCaNhan}</td>
+           <td>${cts.soCMT}</td>
+           <td>${cts.diaChi}</td>
+           <td>${cts.email}</td>
+           <td>${cts.soDienThoai}</td>
            <td>${cts.tenGoiDichVu}</td>
-           <td>${cts.thoiHan}</td>
-           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.gia}</td>
+           <td>${(cts.tokenId) ? cts.tokenId : ''}</td>
            <td>${cts.nguoiThucHien}</td>
+           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.thoiHan}</td>
+           <td>${(cts.serialNumber) ? cts.serialNumber : ''}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
     
          </tr>`
@@ -336,7 +340,7 @@ async function showFindCTSCaNhan(data){
         })
 
     }else {
-        resultPersonal.innerHtml = '<td colspan="13"><h4>Không tìm thấy</h4></td>'
+        resultPersonal.innerHTML = '<td colspan="18"><h4>Không tìm thấy</h4></td>'
         historyEl.style.display = "none"
         ctsEl.style.display = "block"
     }
@@ -354,41 +358,43 @@ async function showFindCTSDoanhNghiep(data){
                 }
             })
            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
-           ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
+           <td scope="row">${index+1}</td>
            <td>${(cts.trangThai == 0) ? 'Dự thảo' 
            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1' 
-           : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                   data-id="${cts._id}">
-                                       Gửi thông tin thuê bao
-                                   </button>`
-           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
-               data-id="${cts._id}">
-                   Gửi lại
-               </button>`
-           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
-           ${(cts.trangThai == 0) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
-           <td scope="row">${index+1}</td>
+           : (cts.trangThai == 2) ? `Đã duyệt lần 1`
+           : (cts.trangThai == 3) ? `Đã gửi thông tin thuê bao`
+           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' 
+           : (cts.trangThai == 5) ? 'Đã duyệt lần 2' 
+           : (cts.trangThai == 6) ? 'Đã ký HĐ' 
+           : (cts.trangThai == 7) ? 'Đã cấp CTS' 
+           : (cts.trangThai == 8) ? 'Đã hủy' 
+           : (cts.trangThai == 9) ? 'Đã từ chối' 
+           : ''}</td>
            <td><p>${cts._id}</p></td>
+           <td>${cts.loaiCTS}</td>
            <td>${cts.tenGD}</td>
-           <td>${cts.soCMT}</td>
            <td>${cts.MST}</td>
+           <td>${cts.giayPhepDKKD}</td>
+           <td>${cts.diaChi}</td>
+           <td>${cts.emailGD}</td>
+           <td>${cts.soDienThoaiCongTy}</td>
            <td>${cts.tenGoiDichVu}</td>
-           <td>${cts.thoiHan}</td>
-           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.gia}</td>
+           <td>${(cts.tokenId) ? cts.tokenId : ''}</td>
            <td>${cts.nguoiThucHien}</td>
+           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.thoiHan}</td>
+           <td>${(cts.serialNumber) ? cts.serialNumber : ''}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-    
          </tr>`
-         resultPersonal.innerHTML = html
+         resultOrganization.innerHTML = html
          historyEl.style.display = "none"
          ctsEl.style.display = "block"
          
         })
 
     }else {
-        resultPersonal.innerHtml = '<td colspan="13"><h4>Không tìm thấy</h4></td>'
+        resultOrganization.innerHTML = '<td colspan="18"><h4>Không tìm thấy</h4></td>'
         historyEl.style.display = "none"
         ctsEl.style.display = "block"
     }
