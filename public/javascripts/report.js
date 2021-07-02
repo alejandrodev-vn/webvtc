@@ -2,7 +2,11 @@ import { convertToDDMMYYYY, convertToYYYYMMDD } from './convert.js'
 import { fetchAPI,
     fetchAndShowData    
 } from './fetch.js'
-
+const resultPersonal = document.querySelector('#resultPersonal')
+const resultOrganization = document.querySelector('#resultOrganization')
+const resultHistory = document.querySelector('#history')
+const ctsEl = document.querySelector('#CTSWrapper')
+const historyEl = document.querySelector('#historyWrapper')
 const url = 'http://localhost:3000/'
 async function processServices(){
     const servicesEl = document.querySelector('#goiCTSId')
@@ -61,27 +65,7 @@ async function getFind() {
          e.preventDefault()
         const mst = document.getElementById('mst').value
         const typeReport = document.getElementById('typeReport').value
-        if(mst && typeReport == '1'){
-            const urlFind = url + `api/report?typeReport=${typeReport}&mst=${mst}`
-            const options = {
-                method: 'GET'
-            }
-            const data = await fetchAPI(urlFind, options)
-        if(data && data.length!=0){
-
-            $('#paginHistory').pagination({
-                dataSource: data,
-                callback: function(data, pagination) {
-                    // template method of yourself
-                    showFindByMST(data);
-                },
-                pageSize: 5    
-            })
-            }else{
-                showFindByMST(data)
-            }
-        }else {
-            const dateBegin = document.getElementById('dateBegin').value
+           const dateBegin = document.getElementById('dateBegin').value
             const dateEnd = document.getElementById('dateEnd').value
             const services = document.getElementById('goiCTSId').value
             const agency = document.getElementById('agency').value
@@ -89,15 +73,52 @@ async function getFind() {
             const tokenId = document.getElementById('tokenId').value
             const serialNumber = document.getElementById('serialNumber').value
             const status = document.getElementById('trangThai').value
+        if(typeReport == '1'){
+            if(mst){
+                const urlFind = url + `api/report?typeReport=${typeReport}&mst=${mst}`
+                const options = {
+                    method: 'GET'
+                }
+            }else if(tokenId){
+                const urlFind = url + `api/report?typeReport=${typeReport}&tokenId=${tokenId}`
+                const options = {
+                    method: 'GET'
+                }
+               
+            }else if(serialNumber){
+                const urlFind = url + `api/report?typeReport=${typeReport}&serialNumber=${serialNumber}`
+                const options = {
+                    method: 'GET'
+                }
+               
+            } 
+            const data = await fetchAPI(urlFind, options)
+            if(data && data.length!=0){
+
+                $('#paginHistory').pagination({
+                    dataSource: data,
+                    callback: function(data, pagination) {
+                        // template method of yourself
+                        showFindByMST(data);
+                    },
+                    pageSize: 5    
+                })
+                }else{
+                    showFindByMST(data)
+                }
+            
+        }else {
+         
             if(dateBegin.length==0 && dateEnd.length==0 && services.length==0 
-                && agency.length==0 && tokenId.length==0 && serialNumber.length==0 && status.length==0){
+                && agency.length==0 && status.length==0){
                     return
                 }
-            const urlFind = url + `api/report?typeReport=&agency=${agency}&actionBy=${actionBy}&services=${services}&dateBegin=${dateBegin}&dateEnd=${dateEnd}&tokenId=${tokenId}&serialNumber=${serialNumber}&status=${status}`
+            const urlFind = url + `api/report?typeReport=&agency=${agency}&actionBy=${actionBy}&services=${services}&dateBegin=${dateBegin}&dateEnd=${dateEnd}&status=${status}`
             const options = {
                 method: 'GET'
             }
             const data = await fetchAPI(urlFind, options)
+            //canhan
             if(data.canhan && data.canhan.length!=0){
                 $('#paginPersonal').pagination({
                     dataSource: data.canhan,
@@ -109,6 +130,19 @@ async function getFind() {
                 })
             }else{
                 showFindCTSCaNhan(data.canhan)
+            }
+            //doanh nghiep
+            if(data.doanhnghiep && data.doanhnghiep.length!=0){
+                $('#paginPersonal').pagination({
+                    dataSource: data.doanhnghiep,
+                    callback: function(data, pagination) {
+                        // template method of yourself
+                        showFindCTSDoanhNghiep(data);
+                    },
+                    pageSize: 5    
+                })
+            }else{
+                showFindCTSDoanhNghiep(data.doanhnghiep)
             }
         }
   
@@ -246,11 +280,117 @@ async function showFindByMST(data){
           `
         }
             
-          document.querySelector('#history').innerHTML = html
-          document.querySelector('#historyWrapper').style.display = 'block'
+          resultHistory.innerHTML = html
+          historyEl.style.display = 'block'
+          ctsEl.style.display = "none"
      }else {
-        document.querySelector('#history').innerHTML = '<td colspan="9"><h4>Không tìm thấy</h4></td>'
-         document.querySelector('#historyWrapper').style.display = 'block'
+        resultHistory.innerHTML = '<td colspan="9"><h4>Không tìm thấy</h4></td>'
+        historyEl.style.display = 'block'
+        ctsEl.style.display = "none"
+    }
+    
+
+}
+async function showFindCTSCaNhan(data){
+    let html = ''
+    const services = await getServices()
+    if(data && data.length!=0){
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
+           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+           : (cts.trangThai == 1) ? 'Chờ duyệt lần 1' 
+           : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                   data-id="${cts._id}">
+                                       Gửi thông tin thuê bao
+                                   </button>`
+           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+               data-id="${cts._id}">
+                   Gửi lại
+               </button>`
+           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+           ${(cts.trangThai == 0) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
+           <td scope="row">${index+1}</td>
+           <td><p>${cts._id}</p></td>
+           <td>${cts.hoTenNguoiDK}</td>
+           <td>${cts.soCMT}</td>
+           <td>${cts.MSTCaNhan}</td>
+           <td>${cts.tenGoiDichVu}</td>
+           <td>${cts.thoiHan}</td>
+           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.nguoiThucHien}</td>
+           <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+    
+         </tr>`
+         resultPersonal.innerHTML = html
+         historyEl.style.display = "none"
+         ctsEl.style.display = "block"
+         
+        })
+
+    }else {
+        resultPersonal.innerHtml = '<td colspan="13"><h4>Không tìm thấy</h4></td>'
+        historyEl.style.display = "none"
+        ctsEl.style.display = "block"
+    }
+    
+
+}
+async function showFindCTSDoanhNghiep(data){
+    let html = ''
+    const services = await getServices()
+    if(data && data.length!=0){
+        data.forEach((cts, index)=> {   
+            services.forEach(service => {
+                if(cts.goiCTSId == service._id){
+                    cts = { ...service, ...cts }
+                }
+            })
+           html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
+           ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign" value="${cts._id}" onchange="checkSelectAll()"></td>` : '<td></td>'}
+           <td>${(cts.trangThai == 0) ? 'Dự thảo' 
+           : (cts.trangThai == 1) ? 'Chờ duyệt lần 1' 
+           : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                   data-id="${cts._id}">
+                                       Gửi thông tin thuê bao
+                                   </button>`
+           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+               data-id="${cts._id}">
+                   Gửi lại
+               </button>`
+           : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+           ${(cts.trangThai == 0) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
+           <td scope="row">${index+1}</td>
+           <td><p>${cts._id}</p></td>
+           <td>${cts.tenGD}</td>
+           <td>${cts.soCMT}</td>
+           <td>${cts.MST}</td>
+           <td>${cts.tenGoiDichVu}</td>
+           <td>${cts.thoiHan}</td>
+           <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
+           <td>${cts.nguoiThucHien}</td>
+           <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+    
+         </tr>`
+         resultPersonal.innerHTML = html
+         historyEl.style.display = "none"
+         ctsEl.style.display = "block"
+         
+        })
+
+    }else {
+        resultPersonal.innerHtml = '<td colspan="13"><h4>Không tìm thấy</h4></td>'
+        historyEl.style.display = "none"
+        ctsEl.style.display = "block"
     }
     
 

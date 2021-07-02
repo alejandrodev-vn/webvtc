@@ -4,12 +4,25 @@ const ReportService = require('../../services/report.service')
 
 router.get('/report', async (req, res, next) => {
     try{
-        const { mst, typeReport } = req.query
-        if(mst && typeReport == '1'){
-            const result = await ReportService.reportByMST(mst)
-            if(result){
-                return res.json(result)
-            }else return res.json([])
+        const { mst, typeReport, tokenId, serialNumber } = req.query
+        if(typeReport == '1'){
+            if(mst){
+                const result = await ReportService.reportByMST(mst)
+                if(result){
+                    return res.json(result)
+                }else return res.json([])
+            }else if(tokenId){
+                const result = await ReportService.reportByTokenId(tokenId)
+                if(result){
+                    return res.json(result)
+                }else return res.json([])
+            }else if(serialNumber){
+                const result = await ReportService.reportBySerialNumber(serialNumber)
+                if(result){
+                    return res.json(result)
+                }else return res.json([])
+            }
+      
         }else{
             
             let services = req.query.services
