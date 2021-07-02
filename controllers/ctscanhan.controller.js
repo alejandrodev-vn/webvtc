@@ -83,17 +83,17 @@ module.exports.sendResponse = async (req, res, next) => {
         if(accept == 'Duyệt' && accept != undefined){
             if(cts.trangThai==1){
                 await CTSCaNhanService.sendResponse(id, {
-                    trangThai: 2,action2:Date.now(),action2By:`${req.session.username} - ${req.session.hoTen}` 
+                    trangThai: 2,isRefuse:false,action2:Date.now(),action2By:`${req.session.username} - ${req.session.hoTen}` 
                 });
                 return res.redirect('/')
             }else if(cts.trangThai==4){
                 await CTSCaNhanService.sendResponse(id, {
-                    trangThai: 5,action5:Date.now(),action5By:`${req.session.username} - ${req.session.hoTen}` });
+                    trangThai: 5,isRefuse:false,action5:Date.now(),action5By:`${req.session.username} - ${req.session.hoTen}` });
                 return res.redirect('/')
             }
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
             await CTSCaNhanService.sendResponse(id, {
-                trangThai: 0, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
+                trangThai: 9, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
             return res.redirect('/')
 
 

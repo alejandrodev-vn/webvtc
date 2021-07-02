@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ReportService = require('../../services/report.service')
+const UsersService = require('../../services/users.service')
 
 router.get('/report', async (req, res, next) => {
     try{
@@ -24,13 +25,13 @@ router.get('/report', async (req, res, next) => {
             }
       
         }else{
-            
+            let { role, userId} = req.session
             let services = req.query.services
             let agency = req.query.agency
             let dateBegin = req.query.dateBegin
             let getDateEnd = req.query.dateEnd
             let status = req.query.status
-            let actionBy = req.query.actionBy
+
             if(getDateEnd!=''){
                 let temp = new Date(getDateEnd)
                 var dateEnd = temp.setDate(temp.getDate() + 1);
@@ -42,11 +43,25 @@ router.get('/report', async (req, res, next) => {
                     services = { $ne: null }
                 }
                 if (agency == '') {
-                    agency = { $ne: null }
-                }
-                if (actionBy == '') {
-                    actionBy = { $ne: null }
-                }
+                    if(role == 0){
+                        var user = {role:0}
+    
+                    }else if(role == 1){
+                        var user = {role:1}
+                        user.listAgency = await UsersService.getByBelongTo(userId)
+                        user.listAgency.forEach(async (agency1)=>{
+                            let agency2 = await UsersService.getByBelongTo(agency1._id)
+                            user.listAgency.push(agency2)
+                        })
+                    }else if(role==2){
+                        var user = {role:2}
+                        user.listAgency = await UsersService.getByBelongTo(userId)
+                    }else if(role == 3){
+                        var user = {role:3,listAgency:userId}
+    
+                    }
+                }else var user = agency
+               
                 if (dateBegin == '') {
                     dateBegin = 0
                 }
@@ -59,11 +74,12 @@ router.get('/report', async (req, res, next) => {
                 if (status == '') {
                     status = { $ne: null }
                 }
-                const result = await ReportService.getReport(typeReport, agency, actionBy, 
+             
+                const result = await ReportService.getReport(typeReport, user, 
                     dateBegin, dateEnd, status, services)
                 return  res.json(result)
             } else {
-                const result = await ReportService.getReport(typeReport, agency, actionBy, 
+                const result = await ReportService.getReport(typeReport, user, 
                     dateBegin, dateEnd, status, services)
                 return res.json(result)
             }

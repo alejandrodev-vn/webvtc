@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../stylesheets/organization.css">
         <link rel="stylesheet" href="../stylesheets/adminhome.css">
+        <script src="../vendor/table2excel.js"></script>
 
     </head>
 
@@ -41,8 +42,9 @@
                                     <div class="col-sm-8">
                                       <select  class="form-control" name="typeReport" id="typeReport">
                                         <option selected value="">Chọn loại báo cáo</option>
-                                        <option value="0">Báo cáo cấp phát chứng thư số</option>
+                                        <option value="0">Báo cáo danh sách yêu cầu</option>
                                         <option value="1">Báo cáo lịch sử</option>
+                                        <option value="2">Báo cáo cấp phát chứng thư số</option>
                             
                                       </select>
                                     </div>
@@ -55,12 +57,7 @@
                                       </select>
                                     </div>
                                   </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Người thực hiện</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" name="actionBy" id="actionBy" class="form-control">
-                                    </div>
-                                  </div>
+                               
                                   <div class="form-group row">
                                     <label for="inputState" class="col-sm-4 col-form-label">Serial Number</label>
                                     <div class="col-sm-8">
@@ -68,9 +65,15 @@
                                       </div>
                                   </div>
                                   <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Ngày YC Từ ngày:</label>
+                                    <label class="col-sm-4 col-form-label">Ngày YC từ ngày:</label>
                                     <div class="col-sm-8">
                                       <input type="date" name="dateBegin" id="dateBegin"  class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
+                                    <div class="col-sm-8">
+                                      <input type="date" name="dateEnd" id="dateEnd" class="form-control">
                                     </div>
                                   </div>
                             </div>
@@ -109,17 +112,11 @@
                                           </select>
                                       </div>
                                   </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
-                                    <div class="col-sm-8">
-                                      <input type="date" name="dateEnd" id="dateEnd" class="form-control">
-                                    </div>
-                                  </div>
+                                
                             </div>
                         </div>
-                        <div style="margin: 0 auto; width: 20%; margin-top:30px;display: flex" class="search">
+                        <div style="margin: 0 auto; width: 13%; margin-top:30px;display: flex" class="search">
                             <input  type="submit" class="btn btn-primary" id="getFind" value="Tìm kiếm" style="margin-right:5px">
-                            <input  type="button" class="btn btn-primary" value="Xuất báo cáo">
                         </div>
                         
                     </form>
@@ -141,25 +138,37 @@
                 <div class="tab-content">
                   <div id="CTSCaNhan" class="container tab-pane active"><br>
                     <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="tableCTSCaNhan">
                             <thead class="thead-default">
                                 <tr>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">STT</th>
-                                <th scope="col">Mã yêu cầu</th>
-                                <th scope="col">Họ Tên</th>
-                                <th scope="col">Gói</th>
-                                <th scope="col">Mã số thuế</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái hồ sơ</th>
-                                <th scope="col">TokenId</th>
-                                <th scope="col">Serial</th>            
+                                  <th scope="col">STT</th>
+                                  <th scope="col">Trạng thái</th>
+                                  <th scope="col">Mã YC</th>
+                                  <th scope="col">Đối tượng</th>
+                                  <th scope="col">Họ tên</th>
+                                  <th scope="col">Mã số thuế</th>
+                                  <th scope="col">Số CMT</th>
+                                  <th scope="col">Địa chỉ</th>
+                                  <th scope="col">Email</th>
+                                  <th scope="col">Điện thoại</th>
+                                  <th scope="col">Gói CTS</th>
+                                  <th scope="col">Giá</th>
+                                  <th scope="col">Số Serial USB Token</th>
+                                  <th scope="col">Đại lý</th>
+                                  <th scope="col">Ngày cấp</th>
+                                  <th scope="col">Thời hạn</th>
+                                  <th scope="col">Serial CTS</th>
+                                  <th scope="col">Tình trạng hồ sơ</th>
+                                  
                                 </tr>
                             </thead>
                             <tbody id="resultPersonal">
                             </tbody>
                         </table>
+                        <div style="display:flex;margin:10px">
+                          <input  type="button" class="btn btn-primary" id="btnExportCTSCaNhan" value="Xuất báo cáo">
+                        </div>
+
 
                     </div>
                     <div class="pagin-wrapper"  id="paginPersonal"></div>
@@ -168,26 +177,36 @@
                   </div>
                   <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
                     <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="tableCTSDoanhNghiep">
                             <thead class="thead-default">
                                 <tr>
-                                <th scope="col">Xử lý</th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">STT</th>
-                                <th scope="col">Mã yêu cầu</th>
-                                <th scope="col">Tên GD</th>
-                                <th scope="col">Gói</th>
-                                <th scope="col">Mã số thuế</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái hồ sơ</th>
-                                <th scope="col">TokenId</th>
-                                <th scope="col">Serial</th>
+                                  <th scope="col">STT</th>
+                                  <th scope="col">Trạng thái</th>
+                                  <th scope="col">Mã YC</th>
+                                  <th scope="col">Đối tượng</th>
+                                  <th scope="col">Tên giao dịch</th>
+                                  <th scope="col">Mã số thuế</th>
+                                  <th scope="col">Giấy phép DKKD</th>
+                                  <th scope="col">Địa chỉ</th>
+                                  <th scope="col">Email</th>
+                                  <th scope="col">Điện thoại</th>
+                                  <th scope="col">Gói CTS</th>
+                                  <th scope="col">Giá</th>
+                                  <th scope="col">Số Serial USB Token</th>
+                                  <th scope="col">Đại lý</th>
+                                  <th scope="col">Ngày cấp</th>
+                                  <th scope="col">Thời hạn</th>
+                                  <th scope="col">Serial CTS</th>
+                                  <th scope="col">Tình trạng hồ sơ</th>
                                 </tr>
                             </thead>
                             <tbody id="resultOrganization">
                             </tbody>
                         </table>
+                        <div style="display:flex;margin:10px">
+                          <input  type="button" class="btn btn-primary" id="btnExportCTSDoanhNghiep" value="Xuất báo cáo">
+                        </div>
+
                     </div>
                     <div class="pagin-wrapper" id="paginOrganization"></div>
 
@@ -201,7 +220,7 @@
                     <!-- Tab panes -->
                       <div id="HistoryCTS"><br>
                         <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="tableHistory">
                                 <thead class="thead-default">
                                     <tr>
                                     <th scope="col">STT</th>
@@ -219,6 +238,9 @@
                                 <tbody id="history">
                                 </tbody>
                             </table>
+                            <div style="display:flex;margin:10px">
+                              <input  type="button" class="btn btn-primary" id="btnExportHistory" value="Xuất báo cáo">
+                            </div>
 
                         </div>
                         <div class="pagin-wrapper"  id="paginHistory"></div>
@@ -232,5 +254,6 @@
 
     </body>
     <script src="../javascripts/report.js" type="module"></script>
+    <script src="../javascripts/exportExcel.js"></script>
     <script src="../vendor/pagination.js"></script>
 </html>
