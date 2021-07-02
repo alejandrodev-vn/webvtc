@@ -5,6 +5,8 @@ const mongooseDelete = require('mongoose-delete');
 
 
 const CTSCaNhanSchema = new Schema({
+  tokenId:{type: String},
+  serialNumber:{type: String},
   loaiCTS: {type: String, default: 'Cá Nhân'},
   email: {type: String, required: true, lowercase:true},
   soDienThoai: {type: String, required: true},
@@ -13,7 +15,7 @@ const CTSCaNhanSchema = new Schema({
   noiCapCMT: {type: String, required: true},
   ngayCapCMT: {type: Date, required: true},
   diaChi: {type: String, required: true},
-  MSTCaNhan: {type: String},
+  MSTCaNhan: {type: String,required: true},
   MSTCongTy: {type: String},
   nganhNghe: {type: String},
   tenCongTy: {type: String},
@@ -29,7 +31,24 @@ const CTSCaNhanSchema = new Schema({
   trangThai:{type: Number, required: true, default:0},
   createdBy: {type: String},
   yKienDaiLy: {type: String},
-  yKienVina: {type: String}
+  yKienVina: {type: String},
+  action1: {type:Date},
+  action1By: {type:String},
+  action2: {type:Date},
+  action2By: {type:String},
+  action3: {type:Date},
+  action3By: {type:String},
+  action4: {type:Date},
+  action4By: {type:String},
+  action5: {type:Date},
+  action5By: {type:String},
+  action6: {type:Date},
+  action6By: {type:String},
+  action7: {type:Date},
+  action7By: {type:String},
+  isRefuse:{type:Boolean, default:false},
+  refuse:{type:Date},
+  refuseBy:{type: String}
   
 }, {timestamps: true});
 //add plugin

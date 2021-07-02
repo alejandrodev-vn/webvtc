@@ -502,10 +502,10 @@
             <!-- </form> -->
             </form>
             <div style="margin: 0 auto; width: 13%;" class="search">
-                <button class="btn btn-primary" id="getFind">Tim kiem</button>
+                <button class="btn btn-primary" id="getFind">Tìm kiếm</button>
             </div>
             <div>
-                <h3>Kết quả tiềm kiếm
+                <h3>Kết quả tìm kiếm
                 </h3>
                 <div class="container">
                     <br>
@@ -697,89 +697,76 @@
                     </div>
                 </div>
             </div>
-            <!-- Đã Phê Duyệt -->
-            <h3>Đã phê duyệt</h3>
-            <div class="container">
-                <br>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanApproved">Cá Nhân</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepApproved">Doanh Nghiệp</a>
-                    </li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <div id="CTSCaNhan" class="container tab-pane active"><br>
-                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/personal/handle-form-actions" id="formPersonal" method="POST" style="padding: 0;">
-                        <table class="table table-bordered" >
-                            <thead class="thead-default">
-                              <tr>
-                                <th scope="col"><label for="selectAll">Chọn </label> <input type="checkbox" id="selectAll" onclick="checkAll()"></th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">Chỉnh sửa</th>
-                                <th scope="col">STT</th>
-                                <th scope="col">Mã yêu cầu</th>
-                                <th scope="col">Họ Tên</th>
-                                <th scope="col">CMND</th>
-                                <th scope="col">MST</th>
-                                <th scope="col">Gói CTS</th>
-                                <th scope="col">Thời hạn (năm)</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái hồ sơ</th>
-                              </tr>
-                            </thead>
-                            <tbody id="pendingStatus">
+            <!-- Approved -->
+         <h3 class="pl-3">Đã phê duyệt</h3>
+         <div class="container">
+             <br>
+             <!-- Nav tabs -->
+             <ul class="nav nav-tabs" role="tablist">
+               <li class="nav-item">
+                 <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanApproved">Cá Nhân</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepApproved">Doanh Nghiệp</a>
+               </li>
+             </ul>
+           
+             <!-- Tab panes -->
+             <div class="tab-content">
+               <div id="CTSCaNhanApproved" class="container tab-pane active"><br>
+                 <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                     <table class="table table-bordered">
+                         <thead class="thead-default">
+                             <tr>
+                                 <th scope="col">Chi tiết</th>
+                                 <th scope="col">STT</th>
+                                 <th scope="col">Trạng thái</th>
+                                 <th scope="col">Cấp CTS</th>
+                                 <th scope="col">Mã yêu cầu</th>
+                                 <th scope="col">Họ Tên</th>
+                                 <th scope="col">CMND</th>
+                                 <th scope="col">MST</th>
+                                 <th scope="col">Gói CTS</th>
+                                 <th scope="col">Thời hạn (năm)</th>
+                                 <th scope="col">Ngày tạo</th>
+                                 <th scope="col">Người tạo</th>
                              
-                            </tbody>
-                        </table>
-                        <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
-                            <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete" disabled value="Xóa" />
-                            <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit" disabled value="Gửi SmartSign" />
-                            <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
-                        </div>
-                        <div class="pagin-wrapper" id="paginPersonalApproved"></div>
-                    </div>
-                    <div class="pagin-wrapper"  id="paginPersonal"></div>
-                     
-                  </div>
-                  <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
-                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
-                        <form action="/digital-certificate/organization/handle-form-actions" id="formOrganization" method="POST" style="padding: 0;">
-                        <table class="table table-bordered" >
-                            <thead class="thead-default">
-                              <tr>
-                                <th scope="col"><label for="selectAllDN">Chọn </label><input type="checkbox" id="selectAllDN" onclick="checkAllDN()"></th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">Chỉnh sửa</th>
-                                <th scope="col">STT</th>
-                                <th scope="col">Mã yêu cầu</th>
-                                <th scope="col">Tên Doanh Ngiệp</th>
-                                <th scope="col">Giấy Phép KD</th>
-                                <th scope="col">MST</th>
-                                <th scope="col">Gói CTS</th>
-                                <th scope="col">Thời hạn (năm)</th>
-                                <th scope="col">Ngày tạo</th>
-                                <th scope="col">Người tạo</th>
-                                <th scope="col">Trạng thái hồ sơ</th>
-                              </tr>
-                            </thead>
-                            <tbody  id="pendingStatusDN">
-                             
-                            </tbody>
-                        </table>
-                        <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
-                            <input type="submit" name="deleteOrganization" class="btn btn-primary btn-delete1" disabled value="Xóa"/>
-                            <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1" disabled value="Gửi SmartSign">
-                            <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
-                        </div>
-                        <div class="pagin-wrapper" id="paginOrgApproved"></div>
-                    </div>
-                </div>
+                             </tr>
+                         </thead>
+                         <tbody id="approvedStatus">
+                         </tbody>
+                     </table>
+
+                 </div>
+                 <div class="pagin-wrapper" id="paginPersonalApproved"></div>
+               </div>
+               <div id="CTSDoanhNghiepApproved" class="container tab-pane fade"><br>
+                 <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                     <table class="table table-bordered">
+                         <thead class="thead-default">
+                             <tr>
+                                 <th scope="col">Chi tiết</th>
+                                 <th scope="col">STT</th>
+                                 <th scope="col">Trạng thái</th>
+                                 <th scope="col">Cấp CTS</th>
+                                 <th scope="col">Mã yêu cầu</th>
+                                 <th scope="col">Tên GD</th>
+                                 <th scope="col">CMND</th>
+                                 <th scope="col">MST</th>
+                                 <th scope="col">Gói CTS</th>
+                                 <th scope="col">Thời hạn (năm)</th>
+                                 <th scope="col">Ngày tạo</th>
+                                 <th scope="col">Người tạo</th>
+                               </tr>
+                             </thead>
+                             <tbody id="approvedStatusDN">
+                             </tbody>
+                     </table>
+                 </div>
+                 <div class="pagin-wrapper" id="paginOrgApproved"></div>
+               </div> 
+             </div>
+         </div>
             </div>
         </div>
         <div id='status' style="display:none; visibility:hidden"><%= message %></div>

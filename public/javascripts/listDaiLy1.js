@@ -23,12 +23,16 @@ async function getFind() {
         var CMTND = document.querySelector('#findCMTND').value
         var tinhThanh = document.querySelector('#findTinhThanh').value
         var trangThai = document.querySelector('#findTrangThai').value
+        if(TenGD.length==0 && NgayTN.length==0 && NgayKT.length==0 
+            && CMTND.length==0 && tinhThanh.length==0 && trangThai.length==0){
+                return
+            }
         const urlListFind = url + `api/digital-certificate/find?findMYC=&findMKH=&findCMTND=${CMTND}&findTinhThanh=${tinhThanh}&findDateTN=${NgayTN}&findTrangThai=${trangThai}&findTenGD=${TenGD}&findGiayPhepDKKD=&findCTS=canhan&findDateKT=${NgayKT}`
         const options = {
             method: 'GET'
         }
         const data = await fetchAPI(urlListFind, options)
-        if(data.length!=0){
+        if(data && data.length!=0){
             $('#paginFindPersonal').pagination({
                 dataSource: data,
                 callback: function(data, pagination) {
@@ -90,7 +94,7 @@ async function showFindCTSCaNhan(data){
          
         })
         openEdit()
-        getSendMailFindPersonal()
+        getSendMailPersonal()
     }else {
         pendingFindStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
     }

@@ -99,10 +99,12 @@ module.exports.handleFormActions = async (req, res, next) => {
         }else if(sendOrganization != 'undefined'){ 
             if(Array.isArray(selectItem1)){
                 for(let i=0; i<selectItem1.length; i++){
-                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {trangThai: 1});
+                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {
+                        trangThai: 1,action1:Date.now(),action1By:`${req.session.username} - ${req.session.hoTen}`});
                 }
             }else {
-                await CTSDoanhNghiepService.sendRequest(selectItem1, {trangThai: 1});
+                await CTSDoanhNghiepService.sendRequest(selectItem1, {
+                    trangThai: 1,action1:Date.now(),action1By:`${req.session.username} - ${req.session.hoTen}`});
             }
             res.redirect('/')
         }else{
@@ -128,19 +130,29 @@ module.exports.delete = async (req, res, next) => {
 }
 module.exports.sendResponse = async (req, res, next) => {
     try{
-        const { idOrg, acceptOrg, declineOrg } = req.body
-        if(acceptOrg == 'Duyệt' && acceptOrg != 'undefined'){
-            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 2});
-            res.redirect('/')
-        }else if(declineOrg == 'Từ Chối Duyệt' && declineOrg != 'undefined'){
-            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 0});
-            res.redirect('/')
+        const { id, accept, decline, yKienDaiLy, yKienVina } = req.body
+        const cts = await CTSDoanhNghiepService.getById(id)
+        if(accept == 'Duyệt' && accept != undefined){
+            if(cts.trangThai==1){
+                await CTSDoanhNghiepService.sendResponse(id, {
+                    trangThai: 2,action2:Date.now(),action2By:`${req.session.username} - ${req.session.hoTen}` 
+                });
+                return res.redirect('/')
+            }else if(cts.trangThai==4){
+                await CTSDoanhNghiepService.sendResponse(id, {
+                    trangThai: 5,action5:Date.now(),action5By:`${req.session.username} - ${req.session.hoTen}` });
+                return res.redirect('/')
+            }
+        }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
+            await CTSDoanhNghiepService.sendResponse(id, {trangThai: 0, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
+            return res.redirect('/')
 
 
         }else{
-            res.redirect('/')
+            return res.redirect('/')
 
         }
+     
      
     }
     catch(err){
@@ -154,7 +166,7 @@ module.exports.sendMail =  async (req, res, next) => {
     const nodemailer = require('nodemailer')
     const jwt = require('jsonwebtoken')
     let token = jwt.sign({ soDienThoai: cts.soDienThoaiCongTy, idCer: cts._id }, process.env.KEY,{
-        expiresIn: '5m' /*<---- this is 5 minutes ♥*/
+        expiresIn: '5m' /*<---- this is 5 minutes */
     }, (err, token) => {
         if (err) {
             console.log('Token sign failed');
@@ -162,8 +174,8 @@ module.exports.sendMail =  async (req, res, next) => {
             var transporter =  nodemailer.createTransport({ // config mail server
                 service:"gmail",
                 auth: {
-                    user: 'namdtps12220@fpt.edu.vn',
-                    pass: 'nam180201'
+                    user: 'huytrafpt@gmail.com',
+                    pass: 'Huytra264'
                 },
                 tls: {rejectUnauthorized:false}
         
@@ -183,7 +195,7 @@ module.exports.sendMail =  async (req, res, next) => {
                     + Điện thoại: ${cts.soDienThoaiCongTy}
                 <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
                 <a href="http://localhost:3000/digital-certificate/organization/get-otp/${token}">
-                http://localhost:3000/digital-certificate/organization/get-otp/${token}
+                http://localhost:3000/digital-certificate/organization/get-otp/${token} 
                 </a>
                 `
             }
@@ -196,7 +208,7 @@ module.exports.sendMail =  async (req, res, next) => {
                     console.log('Message sent: ' +  info.response);
                     if(cts.trangThai == 2){ 
                         await 
-                        CTSDoanhNghiepService.update(id, { trangThai:3 }) 
+                        CTSDoanhNghiepService.update(id, { trangThai:3,action3:Date.now(),action3By:`${req.session.username} - ${req.session.hoTen}` }) 
                     }
                     res.redirect('/');
                 }

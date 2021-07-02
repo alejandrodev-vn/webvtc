@@ -34,6 +34,7 @@ const trashRouter = require('./routes/trash.route')
 // const findRouter = require('./routes/find.route')
 const otpRouter = require('./routes/otp.route')
 const downloadFileRouter = require('./routes/downloadFile.route');
+const reportRouter = require('./routes/report.route');
 
 //api
 const giaoDichAPI = require('./routes/api/giaodich.api');
@@ -45,6 +46,7 @@ const CTSCaNhanAPI = require('./routes/api/ctscanhan.api');
 const CTSDoanhNghiepAPI = require('./routes/api/ctsdoanhnghiep.api');
 const usersAPI = require('./routes/api/users.api');
 const trashAPI = require('./routes/api/trash.api');
+const reportAPI = require('./routes/api/report.api');
 const findAPI = require('./routes/api/find.api');
 
 const cors = require('cors')
@@ -85,6 +87,7 @@ app.use(trashRouter);
 // app.use(findRouter);
 app.use(otpRouter);
 app.use(downloadFileRouter);
+app.use(reportRouter);
 //api
 app.use('/api', districtsAPI);
 app.use('/api', usersAPI);
@@ -95,6 +98,8 @@ app.use('/api', goiDichVuAPI);
 app.use('/api', CTSCaNhanAPI);
 app.use('/api', CTSDoanhNghiepAPI);
 app.use('/api', trashAPI);
+app.use('/api', reportAPI);
+
 app.use('/api', findAPI);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

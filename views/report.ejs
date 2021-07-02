@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('header') %> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../stylesheets/organization.css">
+        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="box">
+                <%- include('menuAdmin')  %> 
+            </div>
+            <div class="container">
+                <div class="row">
+                       <!-- search -->
+                       <form action="/report" method="GET" style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
+                        <style>
+                            .form-control {
+                                height: calc(0.75em + .75rem + 2px);
+                                padding: 0;
+                            }
+                            .form-group{
+                                margin-bottom: 0;
+                            }
+                        </style>
+                        <div>
+                            <h3>Thông tin tìm kiếm
+                            </h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Loại báo cáo</label>
+                                    <div class="col-sm-8">
+                                      <select  class="form-control" name="typeReport" id="typeReport">
+                                        <option selected value="">Chọn loại báo cáo</option>
+                                        <option value="0">Báo cáo cấp phát chứng thư số</option>
+                                        <option value="1">Báo cáo lịch sử</option>
+                            
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Đại lý</label>
+                                    <div class="col-sm-8">
+                                      <select name="agency" id="agency" class="agency form-control">
+                                        <option selected value="">Chọn đại lý</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Người thực hiện</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" name="actionBy" id="actionBy" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputState" class="col-sm-4 col-form-label">Serial Number</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" name="serialNumber" id="serialNumber" class="form-control">
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Ngày YC Từ ngày:</label>
+                                    <div class="col-sm-8">
+                                      <input type="date" name="dateBegin" id="dateBegin"  class="form-control">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Mã số thuế</label>
+                                  <div class="col-sm-8">
+                                    <input type="text" name="mst" id="mst" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label  class="col-sm-4 col-form-label">Trạng thái</label>
+                                    <div class="col-sm-8">
+                                        <select  class="form-control" name="trangThai" id="trangThai">
+                                            <option value="">--Chọn tất cả--</option>
+                                            <option value="1">Chờ duyệt lần 1</option>
+                                            <option value="4">Chờ duyệt lần 2</option>
+                                            <option value="7">Đã cấp CTS</option>
+                                            <option value="8">Đã hủy</option>
+                                            <option value="9">Từ chối duyệt</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                           
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Token Id</label>
+                                    <div class="col-sm-8">
+                                      <input type="text" name="tokenId" id="tokenId" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Gói chứng thư</label>
+                                    <div class="col-sm-8">
+                                        <select name="goiCTSId" id="goiCTSId" class="form-control">
+                                            <option selected value="">Chọn loại yêu cầu</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
+                                    <div class="col-sm-8">
+                                      <input type="date" name="dateEnd" id="dateEnd" class="form-control">
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div style="margin: 0 auto; width: 20%; margin-top:30px;display: flex" class="search">
+                            <input  type="submit" class="btn btn-primary" id="getFind" value="Tìm kiếm" style="margin-right:5px">
+                            <input  type="button" class="btn btn-primary" value="Xuất báo cáo">
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="container" style="display:none">
+              <h3 class="pl-3">Kết quả</h3>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#CTSCaNhan">Cá Nhân</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiep">Doanh Nghiệp</a>
+                  </li>
+                </ul>
+              
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div id="CTSCaNhan" class="container tab-pane active"><br>
+                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                        <table class="table table-bordered">
+                            <thead class="thead-default">
+                                <tr>
+                                <th scope="col">Xử lý</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">STT</th>
+                                <th scope="col">Mã yêu cầu</th>
+                                <th scope="col">Họ Tên</th>
+                                <th scope="col">Gói</th>
+                                <th scope="col">Mã số thuế</th>
+                                <th scope="col">Ngày tạo</th>
+                                <th scope="col">Người tạo</th>
+                                <th scope="col">Trạng thái hồ sơ</th>
+                                <th scope="col">TokenId</th>
+                                <th scope="col">Serial</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingStatus">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="pagin-wrapper"  id="paginPersonal"></div>
+
+
+                  </div>
+                  <div id="CTSDoanhNghiep" class="container tab-pane fade"><br>
+                    <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                        <table class="table table-bordered">
+                            <thead class="thead-default">
+                                <tr>
+                                <th scope="col">Xử lý</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">STT</th>
+                                <th scope="col">Mã yêu cầu</th>
+                                <th scope="col">Tên GD</th>
+                                <th scope="col">Gói</th>
+                                <th scope="col">Mã số thuế</th>
+                                <th scope="col">Ngày tạo</th>
+                                <th scope="col">Người tạo</th>
+                                <th scope="col">Trạng thái hồ sơ</th>
+                                <th scope="col">TokenId</th>
+                                <th scope="col">Serial</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pendingStatusDN">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagin-wrapper" id="paginOrganization"></div>
+
+
+                  </div> 
+                </div>
+            </div>
+                <div class="container" id="historyWrapper" style="display:none">
+                  <h3 class="pl-3">Lịch sử</h3>
+                  
+                    <!-- Tab panes -->
+                      <div id="HistoryCTS"><br>
+                        <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                            <table class="table table-bordered">
+                                <thead class="thead-default">
+                                    <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Người thao tác</th>
+                                    <th scope="col">Mã hành động</th>
+                                    <th scope="col">Hành động</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Mã số thuế</th>
+                                    <th scope="col">TokenId</th>
+                                    <th scope="col">Serial Number</th>
+                                    <th scope="col">Gói</th>
+                            
+                                    </tr>
+                                </thead>
+                                <tbody id="history">
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="pagin-wrapper"  id="paginHistory"></div>
+
+                      </div>
+                
+                </div>
+               
+        </div>
+        <div id='status' style="display:none; visibility:hidden"><%= message %></div>
+
+    </body>
+    <script src="../javascripts/report.js" type="module"></script>
+    <script src="../vendor/pagination.js"></script>
+</html>

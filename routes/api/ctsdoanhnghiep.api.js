@@ -6,7 +6,7 @@ const usersService = require('../../services/users.service')
 router.get('/digital-certificate/organization', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getAll()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -15,7 +15,7 @@ router.get('/digital-certificate/organization', async (req, res, next) => {
 router.get('/digital-certificate/organization-pending', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getAllPending()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -24,7 +24,7 @@ router.get('/digital-certificate/organization-pending', async (req, res, next) =
 router.get('/admin/digital-certificate/organization', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getForAdmin1()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -33,7 +33,7 @@ router.get('/admin/digital-certificate/organization', async (req, res, next) => 
 router.get('/admin/digital-certificate/organization-approved', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedForAdmin1()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -44,7 +44,7 @@ router.get('/digital-certificate/organization/getPendingByUserId', async (req, r
     try{
         const { userId } = req.session
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getPendingByUserId(userId)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -54,7 +54,7 @@ router.get('/digital-certificate/organization/getApprovedByUserId', async (req, 
     try{
         const { userId } = req.session
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(userId)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -99,7 +99,7 @@ router.get('/digital-certificate/organization/byAgency', async (req, res, next)=
             })
 
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -113,12 +113,12 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
         for(let i=0; i<agencyList.length; i++){
             let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agencyList[i]._id)
             if(CTSDoanhNghiep.length==1){
-                if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6){
+                if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6 || CTSDoanhNghiep[0].trangThai==7){
                     result.push(...CTSDoanhNghiep)
                 }
             }else if(CTSDoanhNghiep.length!=0){
                 CTSDoanhNghiep.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })
@@ -130,13 +130,13 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
             agency2.forEach( async agency => {
                 let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agency._id)
                 if(CTSDoanhNghiep.length==1){
-                    if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6){
+                    if(CTSDoanhNghiep[0].trangThai==5 || CTSDoanhNghiep[0].trangThai==6 || CTSDoanhNghiep[0].trangThai==7){
                         result.push(...CTSDoanhNghiep)
     
                     }
                 }else if(CTSDoanhNghiep.length!=0){
                     CTSDoanhNghiep.map(cts=>{
-                        if(cts.trangThai==5 || cts.trangThai==6){
+                        if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                             result.push(cts)
                         }
                     })
@@ -144,7 +144,7 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
             })
 
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -166,7 +166,7 @@ router.get('/digital-certificate/organization/agency1', async (req, res, next)=>
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -180,18 +180,18 @@ router.get('/digital-certificate/organization/approved-agency1', async (req, res
         for(let i=0; i<agencyList.length; i++){
             let CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(agencyList[i]._id)
             if(CTSDoanhNghiep.length==1){
-                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6){
+                if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6 || CTSCaNhan[0].trangThai==7){
                     result.push(...CTSDoanhNghiep)
                 }
             }else if(CTSDoanhNghiep.length!=0){
                 CTSDoanhNghiep.map(cts=>{
-                    if(cts.trangThai==5 || cts.trangThai==6){
+                    if(cts.trangThai==5 || cts.trangThai==6 || cts.trangThai==7){
                         result.push(cts)
                     }
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -201,7 +201,7 @@ router.get('/digital-certificate/organization/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getById(id)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)

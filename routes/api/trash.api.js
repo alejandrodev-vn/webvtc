@@ -18,7 +18,7 @@ router.get('/digital-certificate/personal/trash/agency1', async (req, res, next)
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -28,7 +28,7 @@ router.get('/digital-certificate/personal/trash/byUserId', async (req, res, next
     try{
         const { userId } = req.session
         const CTSCaNhan = await trashService.getByTrashUserId(userId)
-        res.json(CTSCaNhan)
+        return res.json(CTSCaNhan)
     }   
     catch(err){
         console.log(err)
@@ -50,7 +50,7 @@ router.get('/digital-certificate/organization/trash/agency1', async (req, res, n
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -60,7 +60,7 @@ router.get('/digital-certificate/organization/trash/byUserId', async (req, res, 
     try{
         const { userId } = req.session
         const CTSDoanhNghiep = await trashService.getByTrashUserIdOrg(userId)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)

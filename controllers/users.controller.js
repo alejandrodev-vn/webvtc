@@ -8,7 +8,6 @@ module.exports.authencation = async (req, res, next)=> {
 module.exports.add = async (req, res, next)=> {
     try{
        let values = req.body
-       console.log(values)
        await usersService.createNew(values)
        res.status(200).redirect('/')
     }
@@ -68,6 +67,8 @@ module.exports.login = async (req, res, next) => {
                     req.session.token = token
                     req.session.userId = user._id
                     req.session.role = user.role
+                    req.session.hoTen = user.hoTen
+                    req.session.username = user.username
                     res.redirect('/')
                 }
             }) 

@@ -99,14 +99,14 @@ module.exports.checkAgency2 = function(req, res, next){
                 if(role==3){
                     next()
                 }else{
-                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+                    return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+                return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
 
             }
         }else{
-            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+            return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
 
         }
     }catch(err){
@@ -124,18 +124,18 @@ module.exports.checkIsAdmin = function(req, res, next){
                 if(role==0 || role == 1){
                     next()
                 }else{
-                    res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+                    return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
                 }
             }else {
-                res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+                return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
 
             }
         }else{
-            res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
+            return res.render('/',{ title: 'Trang chủ', message: 'Bạn không đủ thẩm quyền' })
 
         }
     }catch(err){
         console.log('Token verify failed')
-        res.redirect('/users/login')
+        return res.redirect('/users/login')
     }
 }
