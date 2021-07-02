@@ -18,6 +18,38 @@ exports.reportByMST = async (mst) => {
         console.log(err)
     }
 }
+exports.reportByTokenId = async (tokenId) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({tokenId:tokenId});
+        if(CTSCaNhan.length!=0){
+            return CTSCaNhan
+        }
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({tokenId:tokenId});
+        if(CTSDoanhNghiep.length!=0){
+            return CTSDoanhNghiep
+        }
+        return []
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+exports.reportBySerialNumber = async (serialNumber) => {
+    try{
+        const CTSCaNhan = await CTSCaNhanModel.find({serialNumber:serialNumber});
+        if(CTSCaNhan.length!=0){
+            return CTSCaNhan
+        }
+        const CTSDoanhNghiep = await CTSDoanhNghiepModel.find({serialNumber:serialNumber});
+        if(CTSDoanhNghiep.length!=0){
+            return CTSDoanhNghiep
+        }
+        return []
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 exports.getReport = async (
             typeReport, agency, actionBy, 
             dateBegin, dateEnd, status, services
