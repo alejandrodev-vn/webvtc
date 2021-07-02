@@ -14,9 +14,12 @@ router.get('/digital-certificate/find', async (req, res, next) => {
         var tenGD = req.query.findTenGD
         var giayPhepKD = req.query.findGiayPhepDKKD
         var CTS = req.query.findCTS
-        var dateKT = req.query.findDateKT
-
-        if (tinhThanh == '' | CMTND == '' | trangThai == '' | dateTN == '' | dateKT == '') {
+        var getDateKT = req.query.findDateKT
+        if(getDateKT!=''){
+            let temp = new Date(getDateKT)
+            var dateKT = temp.setDate(temp.getDate() + 1);
+        }else dateKT = ''
+                if (tinhThanh == '' | CMTND == '' | trangThai == '' | dateTN == '' | dateKT == '') {
             if (tinhThanh == '') {
                 tinhThanh = { $ne: null }
             }
@@ -36,12 +39,10 @@ router.get('/digital-certificate/find', async (req, res, next) => {
                 dateKT = hienTai - date0
             }
             const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepKD, CTS, dateKT)
-            console.log("if:" + dateTN + "cc" + dateKT)
-            res.json(find)
+            return  res.json(find)
         } else {
             const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepKD, CTS, dateKT)
-            console.log("else:" + tinhThanh)
-            res.json(find)
+            return res.json(find)
         }
 
 

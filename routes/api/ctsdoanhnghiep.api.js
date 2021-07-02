@@ -6,7 +6,7 @@ const usersService = require('../../services/users.service')
 router.get('/digital-certificate/organization', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getAll()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -15,7 +15,7 @@ router.get('/digital-certificate/organization', async (req, res, next) => {
 router.get('/digital-certificate/organization-pending', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getAllPending()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -24,7 +24,7 @@ router.get('/digital-certificate/organization-pending', async (req, res, next) =
 router.get('/admin/digital-certificate/organization', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getForAdmin1()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -33,7 +33,7 @@ router.get('/admin/digital-certificate/organization', async (req, res, next) => 
 router.get('/admin/digital-certificate/organization-approved', async (req, res, next) => {
     try{
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedForAdmin1()
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -44,7 +44,7 @@ router.get('/digital-certificate/organization/getPendingByUserId', async (req, r
     try{
         const { userId } = req.session
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getPendingByUserId(userId)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -54,7 +54,7 @@ router.get('/digital-certificate/organization/getApprovedByUserId', async (req, 
     try{
         const { userId } = req.session
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getApprovedByUserId(userId)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)
@@ -99,7 +99,7 @@ router.get('/digital-certificate/organization/byAgency', async (req, res, next)=
             })
 
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -144,7 +144,7 @@ router.get('/digital-certificate/organization/approved-by-agency', async (req, r
             })
 
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -166,7 +166,7 @@ router.get('/digital-certificate/organization/agency1', async (req, res, next)=>
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -191,7 +191,7 @@ router.get('/digital-certificate/organization/approved-agency1', async (req, res
                 })
             }
         }
-        res.json(result)
+        return res.json(result)
     }   
     catch(err){
         console.log(err)
@@ -201,7 +201,7 @@ router.get('/digital-certificate/organization/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
         const CTSDoanhNghiep = await CTSDoanhNghiepService.getById(id)
-        res.json(CTSDoanhNghiep)
+        return res.json(CTSDoanhNghiep)
     }   
     catch(err){
         console.log(err)

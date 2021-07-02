@@ -1,7 +1,10 @@
 const CTSCaNhanModel = require('../models/ctscanhan.model')
 const CTSDoanhNghiepModel = require('../models/ctsdoanhnghiep.model')
 
-exports.getFindByUserId = async (maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepKD, CTS, dateKT) => {
+exports.getFindByUserId = async (
+                            maYC, maKH, CMTND, tinhThanh, dateTN, 
+                            trangThai, tenGD, giayPhepKD, CTS, dateKT,userId
+                        ) => {
     try {
         if (CTS == 'canhan') {
             const find = await CTSCaNhanModel.find(

@@ -6,7 +6,7 @@ const userService = require('../../services/users.service');
 router.get('/giaodich', async (req, res, next) => {
     try{
         const giaoDich = await giaoDichService.getAll()
-        res.json(giaoDich)
+        return res.json(giaoDich)
     }   
     catch(err){
         console.log(err)
@@ -19,11 +19,11 @@ router.get('/giaodich/get-by-user', async (req, res, next) => {
         let token = auth.split(' ')[1]
         jwt.verify(token, process.env.KEY, async (err, decode)=>{
             if(!err){
-                res.json({success:false, msg:'Unauthorized'})
+                return  res.json({success:false, msg:'Unauthorized'})
             }else{
                 const user = await userService.getUserByUsername(decode.username)
                 const giaoDich = await giaoDichService.getByUser(id)
-                res.json(giaoDich)
+                return res.json(giaoDich)
             }
         })
        

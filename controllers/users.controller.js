@@ -67,6 +67,8 @@ module.exports.login = async (req, res, next) => {
                     req.session.token = token
                     req.session.userId = user._id
                     req.session.role = user.role
+                    req.session.hoTen = user.hoTen
+                    req.session.username = user.username
                     res.redirect('/')
                 }
             }) 
