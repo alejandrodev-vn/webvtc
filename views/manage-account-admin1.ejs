@@ -43,11 +43,11 @@
                             </div>
                             <div class="form-group">
                               <label class="input-group-text col-md-3"><span style="color: red;">*</span> Mật khẩu: </label>
-                              <input type="password" name="password" id="password" class="form-control">
+                              <input type="password" id="password" class="form-control">
                             </div>
                             <div class="form-group">
                               <label class="input-group-text col-md-3"><span style="color: red;">*</span> Nhập lại mật khẩu: </label>
-                              <input type="password" id="passwordAgain" class="form-control">
+                              <input type="password" id="confirmPassword" name="password" class="form-control">
                             </div>
                             <div class="form-group">
                               <label class="input-group-text col-md-3"><span style="color: red;">*</span> Loại tài khoản: </label>
@@ -59,16 +59,16 @@
                               </select>
                             </div>
                             <small>Chú thích: (<span style="color: red;">*</span>) là bắt buộc</small>
-                            <button type="submit" class="btn-primary">Ghi lại</button>
+                            <button type="submit" id="btnAddAccount" class="btn-primary">Ghi lại</button>
                             <button type="reset" class="btn-secondary">Reset</button>   
                         </div>
                         <div class="form-right">
                             <div class="form-group">
-                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Địa chỉ: </label>
+                                <label class="input-group-text col-md-3"> Địa chỉ: </label>
                                 <input type="diaChi" name="diaChi" id="diaChi" class="form-control">
                               </div>
                             <div class="form-group">
-                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Trạng thái: </label>
+                                <label class="input-group-text col-md-3"> Trạng thái: </label>
                                 <select name="isActive">
                                     <option value="0">Không hoạt động</option>
                                     <option value="1" selected>Hoạt động</option>
@@ -76,7 +76,7 @@
                               </div>
                             <div class="form-group">
                                 <label class="input-group-text col-md-3"><span style="color: red;">*</span> Tỉnh/TP: </label>
-                                <select name="tinhThanhID" class="tinhThanh">
+                                <select name="tinhThanhID" class="tinhThanh" id="tinhThanh">
 
                                 </select>
                               </div>
@@ -91,7 +91,7 @@
               </div>
   
             </div>
-        <form action="/users/find" method="GET" style="margin-top: 1vw;">
+        <form style="margin-top: 1vw;" id="formFindUser">
             <div id="form">
                 <div class="info-user">
                     <div>
@@ -102,13 +102,9 @@
                         <div class="if-fm">
                             <div class="if-fm ck">
                                 <label>Tên đăng nhập</label>
-                                <input type="text" name="username">
+                                <input type="text" name="username" id="usernameFind">
                             </div>
-                            <div class="if-fm ck">
-                                <label>Tỉnh/TP</label>
-                                <select name="tinhThanhFilter" class="tinhThanh" style="width: 70%;">
-                                </select>
-                            </div>
+                     
                         </div>
         
               
@@ -117,7 +113,7 @@
                     </div>
                     <div id="register">
                         <div class="rg-btn">
-                            <input type="submit" value="Tìm Kiếm" class="btn btn-primary">
+                            <input type="submit" id="btnFindUser" value="Tìm Kiếm" class="btn btn-primary">
                             <input type="button" value="Thêm Mới" class="btn btn-primary btn-modal">
                         </div>
                     </div>
@@ -125,11 +121,28 @@
               
         </form>
 
-        <div id="form">
+        <div id="findUserWrapper" style="display:none">
             <div class="info-user">
                 <div>
                     <h3>Kết Quả Tìm Kiếm</h3>
                 </div>
+                <table class="table table-bordered">
+                    <thead class="thead-default">
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Chọn</th>
+                            <th scope="col">Tên đăng nhập</th>
+                            <th scope="col">Tên đầy đủ</th>
+                            <th scope="col">Tỉnh/ TP</th>
+                            <th scope="col">Quyền người dùng</th>
+                            <th scope="col">Trạng thái</th>    
+                        </tr>
+                        </thead>
+                        <tbody id="resultFindUser">
+                        </tbody>
+                </table>
+                <button type="submit" id="notActive" name="notActiveFind" class="btn btn-primary" disabled style="margin:10px">Vô hiệu hóa</button>
+                <button type="submit" id="isActive" name="isActiveFind" class="btn btn-primary" disabled style="margin:10px">Kích hoạt</button>
             </div>
         </div>
         <h3 class="pl-3">Danh sách Admin</h3>
@@ -160,34 +173,41 @@
         <h3 class="pl-3">Danh sách đại lý</h3>
         <div class="container">
             <div class="row">
-                <table class="table table-bordered">
-                    <thead class="thead-default">
-                      <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Chọn</th>
-                        <th scope="col">Tên đăng nhập</th>
-                        <th scope="col">Tên đầy đủ</th>
-                        <th scope="col">Tỉnh/ TP</th>
-                        <th scope="col">Quyền người dùng</th>
-                        <th scope="col">Trạng thái</th>    
-                      </tr>
-                    </thead>
-                    <tbody id="listAccountAgency">
-                        <td colspan="7"><h6>Hiện chưa có tài khoản nào</h6></td>
-                    </tbody>
-                </table>
-                <div class="action col-md-3 col-md-push-2">
-                    <button class="btn btn-primary" style="margin: 10px;">Vô hiệu hóa</button>
-                </div>
+                <form action="/manage-account/change-status" method="POST" style="width:100%">
+                    <table class="table table-bordered">
+                        <thead class="thead-default">
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Chọn</th>
+                            <th scope="col">Tên đăng nhập</th>
+                            <th scope="col">Tên đầy đủ</th>
+                            <th scope="col">Tỉnh/ TP</th>
+                            <th scope="col">Quyền người dùng</th>
+                            <th scope="col">Trạng thái</th>    
+                        </tr>
+                        </thead>
+                        <tbody id="listAccount">
+                            <td><h6>Hiện chưa có tài khoản nào</h6></td>
+                        </tbody>
+                    </table>
+                    
+                    <div class="action col-md-3 col-md-push-2">
+                        <button type="submit" id="notActive" name="notActive" class="btn btn-primary" disabled style="margin:10px">Vô hiệu hóa</button>
+                        <button type="submit" id="isActive" name="isActive" class="btn btn-primary" disabled style="margin:10px">Kích hoạt</button>
+                    </div>
+                </form>
             </div>
             <div class="pagin-wrapper" id="paginAgency"></div>
         </div>
     </div>
     <div id='status' style="display:none; visibility:hidden"><%= message %></div>
+    <div id='redirect' style="display:none; visibility:hidden"><%= urlRedirect %></div>
 </body>
 <script src="/javascripts/modalBox.js"></script>
 <script src="/javascripts/init.js"></script>
 <script src="/javascripts/listAccountAdmin1.js" type="module"></script>
+<script src="/javascripts/selectAccount.js"></script>
 <script src="/vendor/pagination.js"></script>
+
 
 </html>

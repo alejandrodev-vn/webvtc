@@ -171,7 +171,37 @@ const onSubmitDoanhNghiep = () =>{
 
     }
 }
+const validateNewAccount = ()=>{
+
+    const formNewAccount = document.querySelector('#formNewAccount')
+    const btnAddAccount = document.querySelector('#btnAddAccount')
+    btnAddAccount.onclick = (e)=>{
+        e.preventDefault()
+        const hoTen = document.querySelector('#hoTen').value
+        const username = document.querySelector('#username').value
+        const password = document.querySelector('#password').value
+        const confirmPassword = document.querySelector('#confirmPassword')
+        const tinhThanh = document.querySelector('#tinhThanh').value
+        if(hoTen.length==0) return alert('Vui lòng nhập Họ tên!')
+        if(username.length==0) return alert('Vui lòng nhập tên tài khoản')
+        if(password.length==0) return alert('Vui lòng nhập mật khẩu')
+        if(confirmPassword.length==0) return alert('Vui lòng nhập xác nhận mật khẩu')
+        if(confirmPassword.value.length==0){
+            alert('Vui lòng xác nhận mật khẩu')
+            }else if(confirmPassword.value != password){
+                return alert('Mật khẩu xác nhận không khớp')
+            }
+        
+        if(tinhThanh.length==0) return alert('Vui lòng chọn Tỉnh thành')
+        formNewAccount.submit()
+
+    }
+    
+}
+
 export {
     onSubmitCaNhan,
-    onSubmitDoanhNghiep
+    onSubmitDoanhNghiep,
+    validateNewAccount
+
 }

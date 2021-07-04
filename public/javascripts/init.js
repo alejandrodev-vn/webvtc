@@ -120,9 +120,15 @@ function checkCamKet(){
     (checkbox.checked) ? checkbox.setAttribute('value', true) : checkbox.setAttribute('value', false)  
 }
 function popupAlert(){
-    const message = document.getElementById('status').textContent
-    if(message.length!=0){
-        // alert(message)
+    const message = document.getElementById('status')
+    const urlRedirect = document.getElementById('redirect')
+    if(message){
+        if(message.textContent.trim().length!=0 && message.textContent) {
+            alert(message.textContent)
+            if(urlRedirect){
+                if(urlRedirect.textContent.trim().length!=0 && urlRedirect.textContent) window.location.href=`/${urlRedirect.textContent}`
+            }
+        }
     }
 }
 popupAlert()

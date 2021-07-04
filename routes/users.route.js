@@ -11,14 +11,15 @@ router.get('/users/logout', controllerUsers.logout)
 router.get('/manage-account',middlewares.checkAuthencation, function(req, res,next){
     const { role } = req.session
     if(role===0){
-        res.render('manage-account-admin1',{message:null})
+        res.render('manage-account-admin1',{message:null,urlRedirect:null})
     }else if(role===1 || role ===2){
-        res.render('manage-account',{message:null})
+        res.render('manage-account',{message:null,urlRedirect:null})
     }else{
         res.redirect('/')
     }
 })
 router.post('/users/add',middlewares.checkAuthencation, controllerUsers.add)
+router.post('/manage-account/change-status',middlewares.checkAuthencation, controllerUsers.changeStatusAccount)
 router.post('/users/edit/:id', middlewares.checkAuthencation, controllerUsers.update)
 router.post('/users/change-password/:id', middlewares.checkAuthencation, controllerUsers.changePassword)
 
