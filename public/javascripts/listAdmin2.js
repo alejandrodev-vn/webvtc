@@ -102,8 +102,9 @@ async function showFindCTSCaNhan(data) {
             <td scope="row">${index+1}</td>
             <td>${cts._id}</td>
             <td>${cts.hoTenNguoiDK}</td>
-            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td>${cts.soCMT}</td>
             <td style="color:firebrick">${cts.MSTCaNhan}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
             <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td style="color:firebrick">${cts.nguoiThucHien}</td>
             <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>

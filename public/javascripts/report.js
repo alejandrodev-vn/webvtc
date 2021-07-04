@@ -88,7 +88,10 @@ async function getFind() {
         const dateBegin = document.getElementById('dateBegin').value
         const dateEnd = document.getElementById('dateEnd').value
         const services = document.getElementById('goiCTSId').value
-        const agency = document.getElementById('agency').value
+        var agency = document.getElementById('agency')
+        if(agency){
+            agency = agency.value
+        }
         const tokenId = document.getElementById('tokenId').value
         const serialNumber = document.getElementById('serialNumber').value
         const status = document.getElementById('trangThai').value
@@ -193,7 +196,7 @@ async function showFindHistory(data){
                 <td>${cts.nguoiThucHien}</td>
                 <td>0</td>
                 <td>Tạo yêu cầu mới</td>
-                <td>${cts.ngayTao}</td>
+                <td>${(cts.ngayTao) ? cts.ngayTao : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -207,7 +210,7 @@ async function showFindHistory(data){
                 <td>${(cts.action1By) ? cts.action1By : ''}</td>
                 <td>1</td>
                 <td>Gửi YC duyệt lần 1</td>
-                <td>${cts.action1}</td>
+                <td>${(cts.action1) ? cts.action1 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -221,7 +224,7 @@ async function showFindHistory(data){
                 <td>${(cts.action2By) ? cts.action2By : ''}</td>
                 <td>2</td>
                 <td>Phê duyệt lần 1</td>
-                <td>${cts.action2}</td>
+                <td>${(cts.action2) ? cts.action2 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -235,7 +238,7 @@ async function showFindHistory(data){
                 <td>${(cts.action3By) ? cts.action3By : ''}</td>
                 <td>3</td>
                 <td>Gửi thông tin thuê bao</td>
-                <td>${cts.action3}</td>
+                <td>${(cts.action3) ? cts.action3 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -250,7 +253,7 @@ async function showFindHistory(data){
                 <td>${(cts.action4By) ? cts.action4By : ''}</td>
                 <td>4</td>
                 <td>Người dùng xác nhận</td>
-                <td>${cts.action4}</td>
+                <td>${(cts.action4) ? cts.action4 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -264,7 +267,7 @@ async function showFindHistory(data){
                 <td>${(cts.action5By) ? cts.action5By : ''}</td>
                 <td>5</td>
                 <td>Phê duyệt lần 2</td>
-                <td>${cts.action5}</td>
+                <td>${(cts.action5) ? cts.action5 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -278,7 +281,7 @@ async function showFindHistory(data){
                 <td>${(cts.action6By) ? cts.action6By : ''}</td>
                 <td>6</td>
                 <td>Đã ký HĐ</td>
-                <td>${cts.action6}</td>
+                <td>${(cts.action6) ? cts.action6 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td></td>
                 <td></td>
@@ -292,7 +295,7 @@ async function showFindHistory(data){
                 <td>${(cts.action7By) ? cts.action7By : ''}</td>
                 <td>7</td>
                 <td>Đã tạo chứng thư số</td>
-                <td>${cts.action7}</td>
+                <td>${(cts.action7) ? cts.action7 : ''}</td>
                 ${(cts.MSTCaNhan) ? `<td>${cts.MSTCaNhan}</td>` : `<td>${cts.MST}</td>`}
                 <td>${cts.tokenId}</td>
                 <td>${cts.serialNumber}</td>

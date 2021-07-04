@@ -25,7 +25,7 @@ exports.creatNew = async (name,idprovinces) => {
     try{
         let districtsMoi = new districtsModel({
             TenQuanHuyen: name,
-            tinhThanhId: idprovinces
+            tinhThanhID: idprovinces
         })
     
         return await districtsMoi.save((err) => {

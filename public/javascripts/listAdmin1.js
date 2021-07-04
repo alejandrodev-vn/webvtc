@@ -137,7 +137,7 @@ async function showPending(data){
                                     data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                     padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                     <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                     data-id="${cts._id}">
@@ -184,7 +184,7 @@ async function showPendingDN(data){
                                     data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                     padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                     <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
                                     data-id="${cts._id}">

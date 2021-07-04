@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   username: {type: String, required: true, unique: true, lowercase:true},
   password: {type: String, required: true},
   soDienThoai: {type: String},
-  tinhThanhId: {type: mongoose.Schema.Types.ObjectId, ref:'Province'},
+  tinhThanhID: {type: mongoose.Schema.Types.ObjectId, ref:'Province'},
   diaChi: {type: String},
   gender: {type: Number,default:0},
   role: {type: Number, default:4},
