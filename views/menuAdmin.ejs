@@ -16,7 +16,8 @@
         <a href="/users/logout">Đăng Xuất</a>   
     </div>
 </div>
-
+<% if(locals.user.role == 0){ %> 
 <div class="scrollmenu2">
     <a href="/services">Quản Lí CTS Server</a>
 </div>
+<% } %> 

@@ -13,7 +13,7 @@ module.exports.profile = async (req, res, next)=> {
         if(user.role==1) { role = 'Admin 2' }
         if(user.role==2) { role = 'Đại lý 1' }
         if(user.role==3) { role = 'Đại lý 2' }
-        const tinhThanh = await TinhThanhService.getById(user.tinhThanhId)
+        const tinhThanh = await TinhThanhService.getById(user.tinhThanhID)
         return res.render('profile',{ 
             title: 'Thông tin cá nhân',
             user,
@@ -30,6 +30,17 @@ module.exports.profile = async (req, res, next)=> {
 module.exports.add = async (req, res, next)=> {
     try{
        let values = req.body
+       const user = await usersService.getByUsername(values.username)
+       if(user){
+        const { role } = req.session
+            if(role===0){
+                return res.render('manage-account-admin1',{message:'Tài khoản đã tồn tại!'})
+            }else if(role===1 || role ===2){
+                return res.render('manage-account',{message:'Tài khoản đã tồn tại!'})
+            }else{
+                return res.redirect('/')
+            }
+       }
        await usersService.createNew(values)
        res.status(200).redirect('/')
     }

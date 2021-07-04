@@ -62,7 +62,7 @@ async function showListAccountAdmin(data){
     const provinces = await fetchAPI(urlProvinces, options)
     data.forEach((user, index)=> {
         provinces.forEach(province => {
-            if(user.tinhThanhId == province._id){
+            if(user.tinhThanhID == province._id){
                 user.TenTinhThanh = province.TenTinhThanh
             }
         })   
@@ -91,7 +91,7 @@ async function showListAccountAgency(data){
     const provinces = await fetchAPI(urlProvinces, options)
     data.forEach((user, index)=> {
         provinces.forEach(province => {
-            if(user.tinhThanhId == province._id){
+            if(user.tinhThanhID == province._id){
                 user.TenTinhThanh = province.TenTinhThanh
             }
         })   
