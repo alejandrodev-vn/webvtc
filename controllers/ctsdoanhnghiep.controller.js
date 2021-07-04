@@ -86,24 +86,24 @@ module.exports.update = async (req, res, next) => {
 
 module.exports.handleFormActions = async (req, res, next) => {
     try{
-        let { selectItem1, deleteOrganization, sendOrganization } = req.body;
+        let { selectItemOrg, deleteOrganization, sendOrganization } = req.body;
         if(deleteOrganization == 'Xóa' && deleteOrganization != 'undefined'){
-            if(Array.isArray(selectItem1)){
-                for(let i=0; i<selectItem1.length; i++){
-                    await CTSDoanhNghiepService.delete(selectItem1[i]);
+            if(Array.isArray(selectItemOrg)){
+                for(let i=0; i<selectItemOrg.length; i++){
+                    await CTSDoanhNghiepService.delete(selectItemOrg[i]);
                 }
             }else {
-                await CTSDoanhNghiepService.delete(selectItem1);
+                await CTSDoanhNghiepService.delete(selectItemOrg);
             }
             res.redirect('/')
         }else if(sendOrganization != 'undefined'){ 
-            if(Array.isArray(selectItem1)){
-                for(let i=0; i<selectItem1.length; i++){
-                    await CTSDoanhNghiepService.sendRequest(selectItem1[i], {
+            if(Array.isArray(selectItemOrg)){
+                for(let i=0; i<selectItemOrg.length; i++){
+                    await CTSDoanhNghiepService.sendRequest(selectItemOrg[i], {
                         trangThai: 1,action1:Date.now(),action1By:`${req.session.username} - ${req.session.hoTen}`});
                 }
             }else {
-                await CTSDoanhNghiepService.sendRequest(selectItem1, {
+                await CTSDoanhNghiepService.sendRequest(selectItemOrg, {
                     trangThai: 1,action1:Date.now(),action1By:`${req.session.username} - ${req.session.hoTen}`});
             }
             res.redirect('/')

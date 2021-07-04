@@ -122,7 +122,7 @@ function checkCamKet(){
 function popupAlert(){
     const message = document.getElementById('status').textContent
     if(message.length!=0){
-        alert(message)
+        // alert(message)
     }
 }
 popupAlert()
