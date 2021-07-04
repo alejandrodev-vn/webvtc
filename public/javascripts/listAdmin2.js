@@ -87,18 +87,18 @@ async function showFindCTSCaNhan(data) {
             html += `<tr style="background:#cfebff">
             <td>${(cts.trangThai==1 || cts.trangThai==4)
                 ? `<button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                    data-id="${cts._id}">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-                                    <button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                    data-id="${cts._id}">
-                                    Gửi lại
-                                    </button>`
-            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>
+            <td style="color:firebrick">${(cts.trangThai == 0) ? 'Dự thảo'
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `
+                                Gửi thông tin thuê bao`
+                    : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>`
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần <2/p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                                    : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                        : ''}</td>
             <td scope="row">${index+1}</td>
             <td>${cts._id}</td>
             <td>${cts.hoTenNguoiDK}</td>
@@ -136,18 +136,18 @@ async function showFindCTSDoanhNghiep(data) {
             html+=`<tr style="background:#cfebff">
             <td>${(cts.trangThai == 1 || cts.trangThai == 4) 
                 ? `<button class="btn btn-action btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
-            <td style="color:firebrick">${(cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-            : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                    padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-                                    <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
-                                    data-id="${cts._id}">
-                                    Gửi lại
-                                    </button>`
-            : (cts.trangThai == 4) ? 'Chờ duyệt lần 2' : ''}</td>   
+            <td style="color:firebrick">${(cts.trangThai == 0) ? 'Dự thảo'
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `
+                                Gửi thông tin thuê bao`
+                    : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>`
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần <2/p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                                    : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                        : ''}</td>   
             <td scope="row">${index+1}</td>
             <td>${cts._id}</td>
             <td>${cts.tenGD}</td>

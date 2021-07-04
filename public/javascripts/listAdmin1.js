@@ -7,8 +7,180 @@ const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
 const approvedStatus = document.querySelector('#approvedStatus')
 const approvedStatusDN = document.querySelector('#approvedStatusDN')
+const pendingFindStatus = document.querySelector('#pendingFindStatus')
+const pendingFindStatusDN = document.querySelector('#pendingFindStatusDN')
+
 const url = 'http://localhost:3000/'
 
+
+async function getFind() {
+    try {
+        const btn = document.getElementById("getFind")
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault()
+            var loaiCTS = document.querySelector('#findCTS').value
+            var TenGD = document.querySelector('#findTenGD').value
+            var NgayKT = document.querySelector('#findDateKT').value
+            var NgayTN = document.querySelector('#findDateTN').value
+            var CMTND = document.querySelector('#findCMTND').value
+            var tinhThanh = document.querySelector('#findTinhThanh').value
+            var trangThai = document.querySelector('#findTrangThai').value
+            if (TenGD.length == 0 && NgayTN.length == 0 && NgayKT.length == 0
+                && CMTND.length == 0 && tinhThanh.length == 0 && trangThai.length == 0) {
+                alert('vui lòng nhập yêu cầu tìm kiếm...')
+                return
+            }
+            if (loaiCTS == 'canhan') {
+                const urlListFind = url + `api/digital-certificate/find?findMYC=&findMKH=&findCMTND=${CMTND}&findTinhThanh=${tinhThanh}&findDateTN=${NgayTN}&findTrangThai=${trangThai}&findTenGD=${TenGD}&findGiayPhepDKKD=&findCTS=canhan&findDateKT=${NgayKT}`
+                const options = {
+                    method: 'GET'
+                }
+                const data = await fetchAPI(urlListFind, options)
+                if (data && data.length != 0) {
+                    $('#paginFindPersonal').pagination({
+                        dataSource: data,
+                        callback: function (data, pagination) {
+                            // template method of yourself
+                            showFindCTSCaNhan(data);
+                        },
+                        pageSize: 5
+                    })
+                } else {
+                    showFindCTSCaNhan(data)
+                }
+            } else {
+                const urlListFind = url + `api/digital-certificate/find?findMYC=&findMKH=&findCMTND=${CMTND}&findTinhThanh=${tinhThanh}&findDateTN=${NgayTN}&findTrangThai=${trangThai}&findTenGD=${TenGD}&findGiayPhepDKKD=&findCTS=doanhnghiep&findDateKT=${NgayKT}`
+                const options = {
+                    method: 'GET'
+                }
+                const data = await fetchAPI(urlListFind, options)
+                if (data && data.length != 0) {
+                    $('#paginFindOrganization').pagination({
+                        dataSource: data,
+                        callback: function (data, pagination) {
+                            // template method of yourself
+                            showFindCTSDoanhNghiep(data);
+                        },
+                        pageSize: 5
+                    })
+                } else {
+                    showFindCTSDoanhNghiep(data)
+                }
+            }
+        })
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+getFind()
+async function showFindCTSCaNhan(data) {
+    let html = ''
+    const services = await getServices()
+    if (data.length != 0) {
+        data.forEach((cts, index) => {
+            services.forEach(service => {
+                if (cts.goiCTSId == service._id) {
+                    cts = { ...service, ...cts }
+                }
+            })
+            html += `<tr style="background:#cfebff">
+            <td>${(cts.trangThai==1 || cts.trangThai==4)
+                ? `<button class="btn btn-action btn-info btn-handle-personal" data-id="${cts._id}">Xử lý</button>` : ''}</td>
+            <td style="color:firebrick">${(cts.trangThai == 0) ? 'Dự thảo'
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                            data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                                Gửi thông tin thuê bao
+                            </button>`
+                    : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                data-id="${cts._id}">
+                                    Gửi lại
+                                </button>`
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                                    : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                        : ''}</td>
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.hoTenNguoiDK}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MSTCaNhan}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            <td></td>
+            <td></td>
+         </tr>`
+            pendingFindStatus.innerHTML = html
+            handleRequest()
+            getSendMailPersonal()
+
+        })
+    } else {
+        pendingFindStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+
+
+}
+async function showFindCTSDoanhNghiep(data) {
+    let html = ''
+    
+    const services = await getServices()
+    if (data.length != 0) {
+        data.forEach((cts, index) => {
+            services.forEach(service => {
+                if (cts.goiCTSId == service._id) {
+                    cts = { ...service, ...cts }
+                }
+            })
+            html+=`<tr style="background:#cfebff">
+            <td>${(cts.trangThai == 1 || cts.trangThai == 4) 
+                ? `<button class="btn btn-action btn-info btn-handle-organization" data-id="${cts._id}">Xử lý</button>` : ''}</td>
+            <td style="color:firebrick">${(cts.trangThai == 0) ? 'Dự thảo'
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                            data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                                Gửi thông tin thuê bao
+                            </button>`
+                    : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                                padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                                <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                                data-id="${cts._id}">
+                                    Gửi lại
+                                </button>`
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần <2/p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                                    : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                        : ''}</td>   
+            <td scope="row">${index+1}</td>
+            <td>${cts._id}</td>
+            <td>${cts.tenGD}</td>
+            <td style="color:firebrick">${cts.tenGoiDichVu}</td>
+            <td style="color:firebrick">${cts.MST}</td>
+            <td style="color:firebrick">${convertToDDMMYYYY(cts.ngayTao)}</td>
+            <td style="color:firebrick">${cts.nguoiThucHien}</td>
+            <td style="color:firebrick">${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+            <td></td>
+            <td></td>
+         </tr>`
+
+            pendingFindStatusDN.innerHTML = html
+            handleRequestDN()
+            getSendMailOrganization()
+        })
+    } else {
+        pendingFindStatusDN.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
+    }
+
+
+}
 async function getCTSCaNhan(){
     try{
         const urlList = url + `api/admin/digital-certificate/personal`
