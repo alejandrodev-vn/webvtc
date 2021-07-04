@@ -130,21 +130,21 @@ module.exports.delete = async (req, res, next) => {
 }
 module.exports.sendResponse = async (req, res, next) => {
     try{
-        const { id, accept, decline, yKienDaiLy, yKienVina } = req.body
-        const cts = await CTSDoanhNghiepService.getById(id)
-        if(accept == 'Duyệt' && accept != undefined){
+        const { idOrg, acceptOrg, declineOrg, yKienDaiLy, yKienVina } = req.body
+        const cts = await CTSDoanhNghiepService.getById(idOrg)
+        if(acceptOrg == 'Duyệt' && acceptOrg != undefined){
             if(cts.trangThai==1){
-                await CTSDoanhNghiepService.sendResponse(id, {
+                await CTSDoanhNghiepService.sendResponse(idOrg, {
                     trangThai: 2,isRefuse:false,action2:Date.now(),action2By:`${req.session.username} - ${req.session.hoTen}` 
                 });
                 return res.redirect('/')
             }else if(cts.trangThai==4){
-                await CTSDoanhNghiepService.sendResponse(id, {
+                await CTSDoanhNghiepService.sendResponse(idOrg, {
                     trangThai: 5,isRefuse:false,action5:Date.now(),action5By:`${req.session.username} - ${req.session.hoTen}` });
                 return res.redirect('/')
             }
-        }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
-            await CTSDoanhNghiepService.sendResponse(id, {trangThai: 9, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
+        }else if(declineOrg == 'Từ Chối Duyệt' && decline != 'undefined'){
+            await CTSDoanhNghiepService.sendResponse(idOrg, {trangThai: 9, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
             return res.redirect('/')
 
 

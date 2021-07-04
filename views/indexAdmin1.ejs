@@ -402,104 +402,180 @@
             <div class="container">
                 <div class="row">
                        <!-- search -->
-                       <form action="" style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;border: solid 0.25px #ccc;">
-                        <style>
-                            .form-control {
-                                height: calc(0.75em + .75rem + 2px);
-                                padding: 0;
-                            }
-                            .form-group{
-                                margin-bottom: 0;
-                            }
-                        </style>
-                        <div>
-                            <h3>Thông tin tìm kiếm
-                            </h3>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Mã phiếu yêu cầu</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
+                       <form action="api/digital-certificate/find" method="GET" id="theForm"
+                      style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;">
+                      <style>
+                          .form-control {
+                              height: calc(0.75em + .75rem + 2px);
+                              padding: 0;
+                          }
+  
+                          .form-group {
+                              margin-bottom: 0;
+                          }
+                      </style>
+                      <div>
+                          <h3>Thông tin tìm kiếm
+                          </h3>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Mã phiếu yêu cầu</label>
+                                  <div class="col-sm-8">
+                                      <input type="text" name="findMYC" class="form-control">
                                   </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Mã khách hàng</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Mã khách hàng</label>
+                                  <div class="col-sm-8">
+                                      <input type="text" name="findMKH" class="form-control">
                                   </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Số CMTND/HC</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Số CMTND/HC</label>
+                                  <div class="col-sm-8">
+                                      <input type="text" name="findCMTND" id="findCMTND" class="form-control">
                                   </div>
-                                  <div class="form-group row">
-                                    <label for="inputState" class="col-sm-4 col-form-label">Tỉnh/Thành phố</label>
-                                    <div class="col-sm-8">
-                                        <select name="tinhThanh" class="tinhThanh form-control">
-                                            <option selected>Chọn tỉnh thành</option>
-                                          </select>
-                                      </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Tỉnh/Thành phố</label>
+                                  <div class="col-sm-8">
+                                      <select name="findTinhThanh" id="findTinhThanh" class="tinhThanh form-control">
+                                          <option selected value="">Chọn tỉnh thành</option>
+                                      </select>
                                   </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Ngày YC&emsp;Từ ngày:</label>
-                                    <div class="col-sm-8">
-                                      <input type="date" class="form-control">
-                                    </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Ngày YC&emsp;Từ ngày:</label>
+                                  <div class="col-sm-8">
+                                      <input type="date" name="findDateTN" id="findDateTN" class="form-control">
                                   </div>
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Trạng thái</label>
+                                  <div class="col-sm-8">
+                                      <select name="findTrangThai" id="findTrangThai" class="form-control">
+                                          <option selected value="">Chọn trạng thái</option>
+                                          <option value="0">Dự thảo</option>
+                                          <option value="1">Chờ duyệt lần 1</option>
+                                          <option value="2">Gửi thông tin thuê bao</option>
+                                          <option value="3">Đã gửi thông tin thuê bao</option>
+                                          <option value="4">Chờ duyệt lần 2</option>
+                                          <option value="5">Chưa cấp CTS</option>
+                                          <option value="6">Đã cấp CTS</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Tên giao dịch</label>
+                                  <div class="col-sm-8">
+                                      <input type="text" id="findTenGD" name="findTenGD" class="form-control">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Giấy phép ĐKKD</label>
+                                  <div class="col-sm-8">
+                                      <input type="text" name="findGiayPhepDKKD" id="findGiayPhepDKKD"
+                                          class="form-control">
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Loại yêu cầu</label>
+                                  <div class="col-sm-8">
+                                      <select name="findCTS" id="findCTS" class="form-control">
+                                          <option value="canhan">CTS cá nhân</option>
+                                          <option value="doanhnghiep">CTS doanh nghiệp</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Đến ngày:</label>
+                                  <div class="col-sm-8">
+                                      <input type="date" name="findDateKT" id="findDateKT" class="form-control">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+              <!-- </form> -->
+              </form>
+              <div style="margin: 0 auto; width: 13%;" class="search">
+                  <button class="btn btn-primary" id="getFind">Tìm kiếm</button>
+              </div>
+              <div>
+                <h3>Kết quả tìm kiếm
+                </h3>
+                <div class="container">
+                    <br>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#CTSCaNhanFind">Cá Nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#CTSDoanhNghiepFind">Doanh Nghiệp</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="CTSCaNhanFind" class="container tab-pane active"><br>
+                            <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th scope="col">Xử lý</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Mã yêu cầu</th>
+                                                <th scope="col">Họ Tên</th>
+                                                <th scope="col">Gói CTS</th>
+                                                <th scope="col">MST</th>
+                                                <th scope="col">Ngày tạo</th>
+                                                <th scope="col">Người tạo</th>
+                                                <th scope="col">Trạng thái hồ sơ</th>
+                                                <th scope="col">TokenId</th>
+                                                <th scope="col">Serial</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="pendingFindStatus">
+
+                                        </tbody>
+                                    </table>
                             </div>
-                            <div class="col">
-                                <div class="form-group row">
-                                    <label  class="col-sm-4 col-form-label">Trạng thái</label>
-                                    <div class="col-sm-8">
-                                        <select  class="form-control">
-                                            <option selected>Chọn trạng thái</option>
-                                            <option value="0">Dự thảo</option>
-                                            <option value="1">Chờ duyệt lần 1</option>
-                                            <option value="2">Gửi thông tin thuê bao</option>
-                                            <option value="3">Đã gửi thông tin thuê bao</option>
-                                            <option value="4">Chờ duyệt lần 2</option>
-                                            <option value="5">Chưa cấp CTS</option>
-                                            <option value="6">Đã cấp CTS</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Tên giao dịch</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Giấy phép ĐKKD</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control">
-                                    </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Loại yêu cầu</label>
-                                    <div class="col-sm-8">
-                                        <select name="goiCTSId" id="servicesFind" class="form-control">
-                                            <option selected >Chọn loại yêu cầu</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Đến ngày:</label>
-                                    <div class="col-sm-8">
-                                      <input type="date" class="form-control">
-                                    </div>
-                                  </div>
+                            <div class="pagin-wrapper" id="paginFindPersonal"></div>
+                        </div>
+                        <div id="CTSDoanhNghiepFind" class="container tab-pane fade"><br>
+                            <div class="row table-wrapper" style="border: 1px solid #aaaaaa;">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th scope="col">Xử lý</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Mã yêu cầu</th>
+                                                <th scope="col">Họ Tên</th>
+                                                <th scope="col">Gói CTS</th>
+                                                <th scope="col">MST</th>
+                                                <th scope="col">Ngày tạo</th>
+                                                <th scope="col">Người tạo</th>
+                                                <th scope="col">Trạng thái hồ sơ</th>
+                                                <th scope="col">TokenId</th>
+                                                <th scope="col">Serial</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="pendingFindStatusDN">
+
+                                        </tbody>
+                                    </table>
                             </div>
+                            <div class="pagin-wrapper" id="paginFindOrganization"></div>
                         </div>
-                        <div style="margin: 0 auto; width: 13%; margin-top:30px" class="search">
-                            <input  type="submit" class="btn btn-primary" value="Tìm kiếm">
-                        </div>
-                        
-                    </form>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
     <!-- Pending -->

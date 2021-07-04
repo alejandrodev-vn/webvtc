@@ -100,6 +100,8 @@ async function showFindCTSCaNhan(data) {
                                             Gửi lại
                                         </button>`
                                  : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                 : (cts.trangThai == 5) ? 'Chưa cấp CTS'
+                                 : (cts.trangThai == 6) ? 'Đã cấp CTS'
                                      : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                          : ''}</td></td>
             ${(cts.trangThai == 0 || cts.trangThai == 9) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
@@ -154,6 +156,8 @@ async function showFindCTSDoanhNghiep(data) {
                                             Gửi lại
                                         </button>`
                                  : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                 : (cts.trangThai == 5) ? 'Chưa cấp CTS'
+                                 : (cts.trangThai == 6) ? 'Đã cấp CTS'
                                      : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                          : ''}</td></td>
             ${(cts.trangThai == 0 || cts.trangThai == 9) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-organization">Sửa</button></td>` : '<td></td>'}
