@@ -12,7 +12,7 @@ router.get('/digital-certificate/find', async (req, res, next) => {
         var dateTN = req.query.findDateTN
         var trangThai = req.query.findTrangThai
         var tenGD = req.query.findTenGD
-        var giayPhepKD = req.query.findGiayPhepDKKD
+        var giayPhepDKKD = req.query.findGiayPhepDKKD
         var CTS = req.query.findCTS
         var getDateKT = req.query.findDateKT
         if(getDateKT!=''){
@@ -26,6 +26,9 @@ router.get('/digital-certificate/find', async (req, res, next) => {
             if (CMTND == '') {
                 CMTND = { $ne: null }
             }
+            if (giayPhepDKKD == '') {
+                giayPhepDKKD = { $ne: null }
+            }
             if (trangThai == '') {
                 trangThai = { $ne: null }
             }
@@ -38,10 +41,10 @@ router.get('/digital-certificate/find', async (req, res, next) => {
 
                 dateKT = hienTai - date0
             }
-            const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepKD, CTS, dateKT)
+            const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepDKKD, CTS, dateKT)
             return  res.json(find)
         } else {
-            const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepKD, CTS, dateKT)
+            const find = await findService.getFindByUserId(maYC, maKH, CMTND, tinhThanh, dateTN, trangThai, tenGD, giayPhepDKKD, CTS, dateKT)
             return res.json(find)
         }
 

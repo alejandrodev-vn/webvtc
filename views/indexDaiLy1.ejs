@@ -402,7 +402,6 @@
                 <!-- edit -->
                 <form action="api/digital-certificate/find" method="GET" id="theForm"
                     style="width:100%; margin: 5px;padding:25px;margin-top: 2vw;">
-                    <!-- <form action="/digital-certificate/organization/find" method="POST"> -->
                     <style>
                         .form-control {
                             height: calc(0.75em + .75rem + 2px);
@@ -528,8 +527,8 @@
                                     <table class="table table-bordered">
                                         <thead class="thead-default">
                                             <tr>
-                                                <th scope="col"><label for="selectAll">Chọn </label> <input
-                                                        type="checkbox" id="selectAll" onclick="checkAll()"></th>
+                                                <th scope="col"><label for="selectAllFind">Chọn </label> <input
+                                                        type="checkbox" id="selectAllFind" onclick="checkAllFind()"></th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Chỉnh sửa</th>
                                                 <th scope="col">STT</th>
@@ -549,9 +548,9 @@
                                         </tbody>
                                     </table>
                                     <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
-                                        <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete"
+                                        <input type="submit" name="deletePersonal" class="btn btn-primary btn-delete-Find"
                                             disabled value="Xóa" />
-                                        <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit"
+                                        <input type="submit" name="sendPersonal" class="btn btn-primary btn-submit-Find"
                                             disabled value="Gửi SmartSign" />
                                         <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                                     </div>
@@ -567,8 +566,8 @@
                                     <table class="table table-bordered">
                                         <thead class="thead-default">
                                             <tr>
-                                                <th scope="col"><label for="selectAllDN">Chọn </label><input
-                                                        type="checkbox" id="selectAllDN" onclick="checkAllDN()">
+                                                <th scope="col"><label for="selectAllOrgFind">Chọn </label><input
+                                                        type="checkbox" id="selectAllOrgFind" onclick="checkAllOrgFind()">
                                                 </th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Chỉnh sửa</th>
@@ -590,8 +589,8 @@
                                     </table>
                                     <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
                                         <input type="submit" name="deleteOrganization"
-                                            class="btn btn-primary btn-delete1" disabled value="Xóa" />
-                                        <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1"
+                                            class="btn btn-primary btn-delete-Org-Find" disabled value="Xóa" />
+                                        <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit-Org-Find"
                                             disabled value="Gửi SmartSign">
                                         <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                                     </div>
@@ -663,8 +662,8 @@
                                 <table class="table table-bordered">
                                     <thead class="thead-default">
                                         <tr>
-                                            <th scope="col"><label for="selectAllDN">Chọn </label><input type="checkbox"
-                                                    id="selectAllDN" onclick="checkAllDN()">
+                                            <th scope="col"><label for="selectAllOrg">Chọn </label><input type="checkbox"
+                                                    id="selectAllOrg" onclick="checkAllOrg()">
                                             </th>
                                             <th scope="col">Trạng thái</th>
                                             <th scope="col">Chỉnh sửa</th>
@@ -684,9 +683,9 @@
                                     </tbody>
                                 </table>
                                 <div class="action col-md-4 col-md-push-2 pt-1 pb-1">
-                                    <input type="submit" name="deleteOrganization" class="btn btn-primary btn-delete1"
+                                    <input type="submit" name="deleteOrganization" class="btn btn-primary btn-delete-Org"
                                         disabled value="Xóa" />
-                                    <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit1"
+                                    <input type="submit" name="sendOrganization" class="btn btn-primary btn-submit-Org"
                                         disabled value="Gửi SmartSign">
                                     <a href="/digital-certificate/trash" class="btn btn-dark">Thùng rác</a>
                                 </div>
