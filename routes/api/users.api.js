@@ -29,7 +29,35 @@ router.get('/users/agency', async (req, res, next) => {
         console.log(err)
     }
 });
-
+router.get('/manage-account/find-by-username', async (req, res, next) => {
+    try{
+        const { username } = req.query
+        const { role,userId } = req.session
+        if(role==0){
+            let listAgency=[]
+            const users = await usersService.getByUsername(username,role,userId,listAgency)
+            return res.json(users)
+        }else if(role==1){
+            let listAgency = await usersService.getByBelongTo(userId)
+            listAgency.forEach(async (agency1)=>{
+                let agency2 = await usersService.getByBelongTo(agency1._id)
+                listAgency.push(agency2)
+            })
+            const users = await usersService.getByUsername(username,role,userId,listAgency)
+            return res.json(users)
+        }else if(role==2){
+            let listAgency = await usersService.getByBelongTo(userId)
+            const users = await usersService.getByUsername(username,role,userId,listAgency)
+            res.json(users)
+        }else{
+            res.redirect('/')
+        }
+       
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 
 router.get('/users/byBelongTo', async (req, res, next)=> {
     try{

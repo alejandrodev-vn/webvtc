@@ -41,8 +41,27 @@ exports.getById = async (id) => {
     }
 }
 
-exports.getByUsername = async (username) => {
-    return await usersModel.findOne({username: username})
+exports.getByUsername = async (username, role, userId, listAgency) => {
+    if(role==0){
+        const user = await usersModel.find({username: username})
+        if(user.length==0) return []
+        return user
+    }else if(role==1){
+        let listUser = []
+        listAgency.forEach(user=>{
+            let temp = { belongTo: user._id }
+            listUser.push(temp)
+        })
+        listUser.push({ belongTo: userId})
+        const user = await usersModel.find({username: username,$or:listUser})
+        if(user.length==0) return []
+        return user
+    }else if(role==2){
+        const user = await usersModel.find({username: username,belongTo: userId})
+        if(user.length==0) return []
+        return user
+
+    }else return []
 }
 exports.getByBelongTo = async (userId) => {
     try{
@@ -111,6 +130,14 @@ exports.update = async (id, inputValues) => {
         }else console.log('Update success!')
     })
 }
+exports.changeStatus = async (id, inputValues) => {
+
+    return await usersModel.findByIdAndUpdate({_id:id},inputValues, function(err){
+        if(err){
+            console.log('Update failed!')
+        }else console.log('Update success!')
+    })
+}
 module.exports.changePassword = async (id, inputValues) =>{
     const bcrypt = require("bcrypt");      
     var salt = bcrypt.genSaltSync(10);
@@ -137,8 +164,10 @@ module.exports.login = async (values) =>{
             const password_db = user.password
             const passwordCompared = bcrypt.compareSync(password, password_db)
             if(!passwordCompared){
-                return {success: false, error:'Password error !!!'}
-            }else {
+                return {success: false, error:'Password error'}
+            }else if(user.isActive==false){
+                return {success: false, error:'Account is not active'}
+            }else{
                 return user
             }
         }

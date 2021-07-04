@@ -1,6 +1,7 @@
 import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
+import { validateNewAccount } from './validate.js'
 const url = 'http://localhost:3000/'
 
 async function getListAccountAdmin(){
@@ -98,7 +99,7 @@ async function showListAccountAgency(data){
         html+=`
         <tr>
         <th scope="col">${index+1}</th>
-        <th scope="col"><input type="radio" name="selectItem" value="${user._id}"></th>
+        <th scope="col"><input type="radio" name="selectItem" onchange="checkSelectAccount()" value="${user._id}"></th>
         <th scope="col">${user.username}</th>
         <th scope="col">${user.hoTen}</th>
         <th scope="col">${user.TenTinhThanh}</th>
@@ -109,5 +110,48 @@ async function showListAccountAgency(data){
       </tr>`
     })
     document.querySelector('#listAccountAgency').innerHTML = html
-
+    validateNewAccount()
 }
+async function findUser(){
+
+    const btnFindUser = document.querySelector('#btnFindUser')
+    btnFindUser.onclick = async (e) =>{
+        e.preventDefault()
+        const username = document.querySelector('#usernameFind').value
+        if(username.length==0) return alert('Vui lòng nhập username muốn tìm')
+        let urlFind = url + `api/manage-account/find-by-username?username=${username}`
+        let options = {
+            method: 'GET'
+        }
+        const user = await fetchAPI(urlFind, options)
+        const urlProvinces = url + 'api/provinces'
+        const provinces = await fetchAPI(urlProvinces, options)
+        if(user.length!=0){
+            provinces.forEach(province => {
+                if(user[0].tinhThanhID == province._id){
+                    user[0].TenTinhThanh = province.TenTinhThanh
+                }
+            })  
+            document.querySelector('#resultFindUser').innerHTML = 
+            `<tr>
+                <td>1</td>
+                <th scope="col"><input type="radio" name="selectAccountFind" onchange="checkSelectAccountFind()" value="${user[0]._id}"></th>
+                <th scope="col">${user[0].username}</th>
+                <th scope="col">${user[0].hoTen}</th>
+                <th scope="col">${user[0].TenTinhThanh}</th>
+                <th scope="col">${(user[0].role==2) ? 'Đại lý cấp 1' : 'Đại lý cấp 2'}</th>
+                <th scope="col">${(user[0].isActive) ? 'Hoạt động' : 'Không hoạt động'}</th>    
+            </tr>
+            `
+            document.querySelector('#findUserWrapper').style.display =" block"
+
+        }else{
+            document.querySelector('#resultFindUser').innerHTML = `
+            <th colspan="7"><h4>Không tìm thấy</h4></th>    
+            `
+            document.querySelector('#findUserWrapper').style.display="block"
+
+        }
+    }
+}
+findUser()

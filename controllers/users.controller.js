@@ -31,18 +31,19 @@ module.exports.add = async (req, res, next)=> {
     try{
        let values = req.body
        const user = await usersService.getByUsername(values.username)
+       values.belongTo = values.belongTo.trim()
        if(user){
         const { role } = req.session
             if(role===0){
-                return res.render('manage-account-admin1',{message:'Tài khoản đã tồn tại!'})
+                return res.render('manage-account-admin1',{message:'Tài khoản đã tồn tại!',urlRedirect:'manage-account'})
             }else if(role===1 || role ===2){
-                return res.render('manage-account',{message:'Tài khoản đã tồn tại!'})
+                return res.render('manage-account',{message:'Tài khoản đã tồn tại!',urlRedirect:'manage-account'})
             }else{
                 return res.redirect('/')
             }
        }
        await usersService.createNew(values)
-       res.status(200).redirect('/')
+       res.status(200).redirect('/manage-account')
     }
     catch(err){
         console.log(err)
@@ -61,6 +62,23 @@ module.exports.update = async (req, res, next) => {
         console.log(err)
     }
 
+}
+module.exports.changeStatusAccount = async (req, res, next) => {
+    try{
+        let { selectAccount, notActive, isActive } = req.body;
+        if(notActive != undefined){
+            await usersService.changeStatus(selectAccount, {isActive:false});
+            return res.redirect('/manage-account')
+        }else if(isActive != undefined){ 
+            await usersService.changeStatus(selectAccount, {isActive:true});
+            return res.redirect('/manage-account')
+        }else{
+            res.redirect('/')
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
 }
 module.exports.changePassword = async (req, res, next) => {
     try{
@@ -86,8 +104,11 @@ module.exports.login = async (req, res, next) => {
         if(user.error === 'User not found'){
             req.session.message = 'Tài khoản không tồn tại!'
             return res.redirect('/users/login')
-        }else if(user.error === 'Password error !!!'){
+        }else if(user.error === 'Password error'){
             req.session.message = 'Sai mật khẩu!'
+            return res.redirect('/users/login')
+        }else if(user.error === "Account is not active"){
+            req.session.message = 'Tài khoản đã bị vô hiệu hóa!'
             return res.redirect('/users/login')
         }else{
             const jwt = require('jsonwebtoken')
