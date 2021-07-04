@@ -4,6 +4,7 @@ import {
     fetchAndShowData
 } from './fetch.js'
 import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
+import { onSubmitCaNhan, onSubmitDoanhNghiep } from './validate.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
 const approvedStatus = document.querySelector('#approvedStatus')
@@ -88,22 +89,23 @@ async function showFindCTSCaNhan(data) {
             html += `<tr ${(cts.trangThai == 0 || cts.trangThai == 9) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
             ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItem" class="select-smart-sign-Find" value="${cts._id}" onchange="checkSelectAllFind()"></td>` : '<td></td>'}
             <td>${(cts.trangThai == 0) ? 'Dự thảo'
-                     : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-                         : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-                             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                        data-id="${cts._id}">
-                                            Gửi lại
-                                        </button>`
-                                 : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                                 : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                 : (cts.trangThai == 6) ? 'Đã cấp CTS'
-                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
-                                         : ''}</td></td>
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                           data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                               Gửi thông tin thuê bao
+                           </button>`
+                    : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
+                               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                               data-id="${cts._id}">
+                                   Gửi lại
+                               </button>`
+                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                        : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                        : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                        : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                            : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                : ''}</td></td>
             ${(cts.trangThai == 0 || cts.trangThai == 9) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-personal">Sửa</button></td>` : '<td></td>'}
             <td scope="row">${index + 1}</td>
             <td><p>${cts._id}</p></td>
@@ -115,7 +117,8 @@ async function showFindCTSCaNhan(data) {
             <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td>${cts.nguoiThucHien}</td>
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-     
+            <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+            <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
           </tr>`
 
             pendingFindStatus.innerHTML = html
@@ -144,22 +147,23 @@ async function showFindCTSDoanhNghiep(data) {
             html += `<tr ${(cts.trangThai == 0 || cts.trangThai == 9) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
             ${(cts.trangThai == 0) ? `<td><input type="checkbox" name="selectItemOrg" class="select-smart-sign-Org-Find" value="${cts._id}" onchange="checkSelectAllOrgFind()"></td>` : '<td></td>'}
             <td>${(cts.trangThai == 0) ? 'Dự thảo'
-                     : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
-                         : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
-                                        Gửi thông tin thuê bao
-                                    </button>`
-                             : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
-                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
-                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
-                                        data-id="${cts._id}">
-                                            Gửi lại
-                                        </button>`
-                                 : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                                 : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                 : (cts.trangThai == 6) ? 'Đã cấp CTS'
-                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
-                                         : ''}</td></td>
+            : (cts.trangThai == 1) ? 'Chờ duyệt lần 1'
+                : (cts.trangThai == 2) ? `<button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                           data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
+                               Gửi thông tin thuê bao
+                           </button>`
+                    : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
+                               padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
+                               <button type="button" class="btn btn-action btn-primary btn-sendMail" 
+                               data-id="${cts._id}">
+                                   Gửi lại
+                               </button>`
+                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                        : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                        : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                        : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
+                            : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
+                                : ''}</td></td>
             ${(cts.trangThai == 0 || cts.trangThai == 9) ? `<td><button type="button" data-id="${cts._id}" class="btn btn-action btn-info btn-edit-organization">Sửa</button></td>` : '<td></td>'}
             <td scope="row">${index + 1}</td>
             <td><p>${cts._id}</p></td>
@@ -171,7 +175,8 @@ async function showFindCTSDoanhNghiep(data) {
             <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td>${cts.nguoiThucHien}</td>
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-     
+            <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+            <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
           </tr>`
 
             pendingFindStatusDN.innerHTML = html
@@ -237,7 +242,7 @@ async function showPending(data) {
                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                        Gửi thông tin thuê bao
                                    </button>`
-                            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                        data-id="${cts._id}">
@@ -257,7 +262,8 @@ async function showPending(data) {
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-    
+           <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+           <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
          </tr>`
             pendingStatus.innerHTML = html
 
@@ -313,9 +319,10 @@ async function openEdit() {
             document.querySelector('#nganhNghe').value = cts.nganhNghe
             document.querySelector('#chucVu').value = cts.chucVu
             document.querySelector('#MSTCongTy').value = cts.MSTCongTy
-            document.querySelector('#tinhThanh').childNodes.forEach(province => {
-                if (cts.tinhThanh == province.value) {
-                    province.setAttribute('selected', true)
+            document.querySelector('#nguoiThucHien').value = cts.nguoiThucHien
+            document.querySelector('#tinhThanh').childNodes.forEach(province=>{
+                if(cts.tinhThanh == province.value) {
+                    province.setAttribute('selected',true)
                 }
             })
             await getQuanHuyen(cts.tinhThanh)
@@ -338,10 +345,11 @@ async function openEdit() {
             } else {
                 document.querySelector('#documentOrganization').innerHTML = `<p>Chưa đủ</p>`
             }
-
+        
 
             modal.style.opacity = "1";
             modal.style.display = "block"
+            onSubmitCaNhan()
         })
     })
     // When the user clicks on <span> (x), close the modal
@@ -406,7 +414,7 @@ async function showPendingDN(data) {
                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                        Gửi thông tin thuê bao
                                    </button>`
-                            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+                            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                        data-id="${cts._id}">
@@ -426,7 +434,8 @@ async function showPendingDN(data) {
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-    
+           <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+           <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
          </tr>`
             pendingStatusDN.innerHTML = html
 
@@ -474,10 +483,12 @@ async function openEditDN() {
             document.querySelector('#soDienThoaiChuDoanhNghiep').value = cts.soDienThoaiCongTy
             document.querySelector('#congTyMe').value = cts.congTyMe
             document.querySelector('#chucVuDN').value = cts.chucVu
-            if (cts.camKet == true) { document.querySelector('#camKet').setAttribute('checked', true) }
-            document.querySelector('#tinhThanhDN').childNodes.forEach(province => {
-                if (cts.tinhThanh == province.value) {
-                    province.setAttribute('selected', true)
+            document.querySelector('#nguoiThucHienDN').value = cts.nguoiThucHien
+
+            if(cts.camKet == true){document.querySelector('#camKet').setAttribute('checked',true)}
+            document.querySelector('#tinhThanhDN').childNodes.forEach(province=>{
+                if(cts.tinhThanh == province.value) {
+                    province.setAttribute('selected',true)
                 }
             })
             await getQuanHuyen(cts.tinhThanh)
@@ -502,6 +513,7 @@ async function openEditDN() {
             }
             modal.style.opacity = "1";
             modal.style.display = "block"
+            onSubmitDoanhNghiep()
         })
     })
     // When the user clicks on <span> (x), close the modal
@@ -652,14 +664,12 @@ async function getQuanHuyen(id) {
         const res = await fetch('http://localhost:3000/api/districts')
         const data = await res.json()
         let quanHuyenHtml = ''
-        data.forEach(district => {
-            if (district.tinhThanhId == id) {
-                quanHuyenHtml += `<option value="${district._id}">${district.TenQuanHuyen}</option>`
-            }
-        })
-        quanHuyenEl.innerHTML = quanHuyenHtml
-        quanHuyenDNEl.innerHTML = quanHuyenHtml
-    } catch (err) {
+        data.forEach(district => { if(district.tinhThanhID == id){
+            quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
+        }})
+        quanHuyenEl.innerHTML += quanHuyenHtml
+        quanHuyenDNEl.innerHTML += quanHuyenHtml
+    }catch(err){
         console.log(err)
     }
 

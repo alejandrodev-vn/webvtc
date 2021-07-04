@@ -6,8 +6,8 @@
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%- include('header') %> 
-        <link rel="stylesheet" href="../stylesheets/organization.css">
-        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+        <link rel="stylesheet" href="/stylesheets/organization.css">
+        <link rel="stylesheet" href="/stylesheets/adminhome.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
                                 <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Cá nhân</h2>
                                 <span class="close btn-cancel">&times;</span>
                             </div>
-                              <form action="/digital-certificate/personal/edit" method="POST" enctype="multipart/form-data">
+                              <form action="/digital-certificate/personal/edit" method="POST" id="formEditCaNhan" enctype="multipart/form-data">
                                 <div id="form">
                                     <div class="info-user">
                                         <div>
@@ -63,7 +63,7 @@
                                                     <input type="text" id="noiCapCMT" name="noiCapCMT">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Mã số thuế</label>
+                                                    <label>Mã số thuế</label><span class="note">*</span></label>
                                                     <input type="text" id="MSTCaNhan" name="MSTCaNhan">
                                                 </div>
                                             </div>
@@ -150,23 +150,13 @@
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Người thực hiện <span class="note">*</span></label>
-                                                    <input type="text" name="nguoiThucHien" readonly="true"
-                                                        value="<%= locals.user.hoTen %>" style="background:#eee">
+                                                    <input type="text" name="nguoiThucHien" id="nguoiThucHien" readonly="true"
+                                                        style="background:#eee">
                                                 </div>
                                                 <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                             </div>
                                         </div>
-                                        <% if(typeof errors !='undefined' ) { errors.forEach(msg=> {
-                                            %>
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                <%= msg.msg %>
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-
-                                            <% }) }%>
+                                       
                                     </div>
                                 </div>
 
@@ -186,10 +176,11 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <p>*Chú ý: Nén tất cả hồ sơ khách hàng thành 1 tệp rar(zip). Tên tệp không để tiếng Việt</p>
+                                <p>Dấu (<span style="color:tomato">*</span>):Các trường không được trống</p>
                                 <div id="register">
                                     <div class="rg-btn">
-                                        <input type="submit" value="Ghi lại" class="btn btn-primary">
+                                        <input type="submit" value="Ghi lại" id="submitEditCaNhan" class="btn btn-primary">
                                         <input type="button" value="Đóng" class="btn btn-secondary btn-cancel">
                                         <input type="hidden" name="idEdit" id="id">
                                     </div>
@@ -208,7 +199,7 @@
                                 <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa yêu cầu CTS Doanh Nghiệp</h2>
                                 <span class="close btn-cancelDN">&times;</span>
                               </div>
-                            <form action="/digital-certificate/organization/edit" method="POST" enctype="multipart/form-data">
+                            <form action="/digital-certificate/organization/edit" id="formEditDoanhNghiep" method="POST" enctype="multipart/form-data">
                                 <div id="form">
                                     <div class="info-user">
                                         <div>
@@ -228,7 +219,7 @@
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Ngày cấp <span class="note">*</span></label>
-                                                    <input type="date" id="ngayCapGiayPhepDKKD"
+                                                    <input type="date" style="width:100%" id="ngayCapGiayPhepDKKD"
                                                         name="ngayCapGiayPhepDKKD">
                                                 </div>
                                             </div>
@@ -251,12 +242,7 @@
                                                 </label>
                                                 <input type="text" id="congTyMe" name="congTyMe">
                                             </div>
-                                            <div class="if-fm mn">
-                                                <label>
-                                                    Chức vụ
-                                                </label>
-                                                <input type="text" id="chucVuDN" name="chucVu">
-                                            </div>
+                                       
                                             <div class="if-fm">
                                                 <div class="if-fm ck">
                                                     <label>Tỉnh/ Thành Phố <span class="note">*</span></label>
@@ -290,34 +276,40 @@
                                             </div>
                                             </div>
                                           
-                                            <h3>Thông tin chủ doanh nghiệp</h3>
+                                            <h3>Thông tin chủ doanh nghiệp (Giám đốc/ Chủ tịch HĐQT)</h3>
                                             <div class="if-ck">
                                                 <div class="if-fm ck">
-                                                    <label>Ho Ten chu Doanh Nghiep <span class="note">*</span></label>
+                                                    <label>Họ tên chủ Doanh Nghiệp <span class="note">*</span></label>
                                                     <input type="text" id="hoTenChuDoanhNghiepDN"
                                                         name="hoTenChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Email cá nhân <span class="note">*</span></label>
+                                                    <label>
+                                                        Chức vụ
+                                                    </label>
+                                                    <input type="text" id="chucVuDN" name="chucVu">
+                                                </div>
+                                                <div class="if-fm ck">
+                                                    <label>Email cá nhân</label>
                                                     <input type="text" id="emailChuDoanhNghiep"
                                                         name="emailChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Số điện thoại <span class="note">*</span></label>
+                                                    <label>Số điện thoại</label>
                                                     <input type="text" id="soDienThoaiChuDoanhNghiep"
                                                         name="soDienThoaiChuDoanhNghiep">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Số CMTND/HC</label>
+                                                    <label>Số CMTND/HC<span class="note">*</span></label>
                                                     <input type="text" id="soCMTDN" name="soCMT">
                                                 </div>
-                                                <div class="if-fm ck" width="70%">
-                                                    <label>Ngày Cấp CMT</label>
-                                                    <input style="width:70%" type="date" id="ngayCapCMTDN"
+                                                <div class="if-fm ck" >
+                                                    <label>Ngày Cấp CMT<span class="note">*</span></label>
+                                                    <input type="date" style="width:100%" id="ngayCapCMTDN"
                                                         name="ngayCapCMT">
                                                 </div>
                                                 <div class="if-fm ck">
-                                                    <label>Nơi Cấp CMT</label>
+                                                    <label>Nơi Cấp CMT<span class="note">*</span></label>
                                                     <input type="text" id="noiCapCMTDN" name="noiCapCMT">
                                                 </div>
                                             </div>
@@ -351,23 +343,12 @@
                                                 </div>
                                                 <div class="if-fm ck">
                                                     <label>Người thực hiện <span class="note">*</span></label>
-                                                    <input type="text" name="nguoiThucHien" readonly="true"
-                                                        value="<%= locals.user.hoTen %>" style="background:#eee">
+                                                    <input type="text" name="nguoiThucHien" id="nguoiThucHienDN" readonly="true"
+                                                         style="background:#eee">
                                                 </div>
-                                                <input type="hidden" name="createdBy" value="<%= locals.user._id %>">
                                             </div>
                                         </div>
-                                        <% if(typeof errors !='undefined' ) { errors.forEach(msg=> {
-                                            %>
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                <%= msg.msg %>
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-
-                                            <% }) }%>
+                                       
                                     </div>
                                 </div>
 
@@ -386,10 +367,11 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <p>*Chú ý: Nén tất cả hồ sơ khách hàng thành 1 tệp rar(zip). Tên tệp không để tiếng Việt</p>
+                                <p>Dấu (<span style="color:tomato">*</span>):Các trường không được trống</p>
                                 <div id="register">
                                     <div class="rg-btn">
-                                        <input type="submit" value="Ghi lại" class="btn btn-primary">
+                                        <input type="submit" value="Ghi lại" id="submitEditDoanhNghiep" class="btn btn-primary">
                                         <input type="button" value="Đóng" class="btn btn-secondary btn-cancelDN">
                                         <input type="hidden" name="idEdit" id="idDN">
                                     </div>
@@ -462,8 +444,11 @@
                                         <option value="2">Gửi thông tin thuê bao</option>
                                         <option value="3">Đã gửi thông tin thuê bao</option>
                                         <option value="4">Chờ duyệt lần 2</option>
-                                        <option value="5">Chưa cấp CTS</option>
-                                        <option value="6">Đã cấp CTS</option>
+                                        <option value="5">Đã duyệt lần 2</option>
+                                        <option value="6">Đã ký hợp đồng</option>
+                                        <option value="7">Đã cấp CTS</option>
+                                        <option value="8">Đã hủy</option>
+                                        <option value="9">Đã từ chối duyệt</option>
                                     </select>
                                 </div>
                             </div>
@@ -541,6 +526,8 @@
                                                 <th scope="col">Ngày tạo</th>
                                                 <th scope="col">Người tạo</th>
                                                 <th scope="col">Trạng thái hồ sơ</th>
+                                                <th scope="col">Ý kiến đại lý</th>
+                                                <th scope="col">Ý kiến Vina</th>
                                             </tr>
                                         </thead>
                                         <tbody id="pendingFindStatus">
@@ -581,6 +568,8 @@
                                                 <th scope="col">Ngày tạo</th>
                                                 <th scope="col">Người tạo</th>
                                                 <th scope="col">Trạng thái hồ sơ</th>
+                                                <th scope="col">Ý kiến đại lý</th>
+                                                <th scope="col">Ý kiến Vina</th>
                                             </tr>
                                         </thead>
                                         <tbody id="pendingFindStatusDN">
@@ -638,6 +627,8 @@
                                             <th scope="col">Ngày tạo</th>
                                             <th scope="col">Người tạo</th>
                                             <th scope="col">Trạng thái hồ sơ</th>
+                                            <th scope="col">Ý kiến đại lý</th>
+                                            <th scope="col">Ý kiến Vina</th>
                                         </tr>
                                     </thead>
                                     <tbody id="pendingStatus">
@@ -677,6 +668,8 @@
                                             <th scope="col">Ngày tạo</th>
                                             <th scope="col">Người tạo</th>
                                             <th scope="col">Trạng thái hồ sơ</th>
+                                            <th scope="col">Ý kiến đại lý</th>
+                                            <th scope="col">Ý kiến Vina</th>
                                         </tr>
                                     </thead>
                                     <tbody id="pendingStatusDN">
@@ -729,7 +722,7 @@
                                  <th scope="col">Thời hạn (năm)</th>
                                  <th scope="col">Ngày tạo</th>
                                  <th scope="col">Người tạo</th>
-                             
+                      
                              </tr>
                          </thead>
                          <tbody id="approvedStatus">
@@ -756,6 +749,7 @@
                                  <th scope="col">Thời hạn (năm)</th>
                                  <th scope="col">Ngày tạo</th>
                                  <th scope="col">Người tạo</th>
+                          
                                </tr>
                              </thead>
                              <tbody id="approvedStatusDN">
@@ -773,8 +767,8 @@
 
     </body>
 
-    <script src="../javascripts/listDaiLy1.js" type="module"></script>
-    <script src="../javascripts/init.js"></script>
-    <script src="../javascripts/selectSmartSign.js"></script>
-    <script src="../vendor/pagination.js"></script>
+    <script src="/javascripts/listDaiLy1.js" type="module"></script>
+    <script src="/javascripts/init.js"></script>
+    <script src="/javascripts/selectSmartSign.js"></script>
+    <script src="/vendor/pagination.js"></script>
 </html>

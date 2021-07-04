@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('header') %> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/organization.css">
+        <link rel="stylesheet" href="/stylesheets/adminhome.css">
+    </head>
 
 <head>
   <title>
@@ -162,6 +172,8 @@
                           <th scope="col">Ngày tạo</th>
                           <th scope="col">Người tạo</th>
                           <th scope="col">Trạng thái hồ sơ</th>
+                          <th scope="col">Ý kiến đại lý</th>
+                          <th scope="col">Ý kiến Vina</th>
                         </tr>
                       </thead>
                       <tbody id="pendingFindStatus">
@@ -187,6 +199,9 @@
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Người tạo</th>
                         <th scope="col">Trạng thái hồ sơ</th>
+                        <th scope="col">Ý kiến đại lý</th>
+                        <th scope="col">Ý kiến Vina</th>
+                        
                       </tr>
                     </thead>
                     <tbody id="pendingFindStatusDN">
@@ -233,6 +248,8 @@
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Người tạo</th>
                   <th scope="col">Trạng thái hồ sơ</th>
+                  <th scope="col">Ý kiến đại lý</th>
+                  <th scope="col">Ý kiến Vina</th>
                 </tr>
               </thead>
               <tbody id="pendingStatus">
@@ -261,6 +278,8 @@
                   <th scope="col">Ngày tạo</th>
                   <th scope="col">Người tạo</th>
                   <th scope="col">Trạng thái hồ sơ</th>
+                  <th scope="col">Ý kiến đại lý</th>
+                  <th scope="col">Ý kiến Vina</th>
                 </tr>
               </thead>
               <tbody id="pendingStatusDN">

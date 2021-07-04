@@ -40,7 +40,7 @@ async function getQuanHuyen(id){
         const res = await fetch('http://localhost:3000/api/districts')
         const data = await res.json()
         let quanHuyenHtml = ''
-        data.forEach(district => { if(district.tinhThanhId == id){
+        data.forEach(district => { if(district.tinhThanhID == id){
             quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
         }})
         if(quanHuyenEl){

@@ -91,9 +91,10 @@ async function showFindCTSCaNhan(data) {
                                 Gửi thông tin thuê bao`
                     : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
                                 padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>`
-                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                            : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                : (cts.trangThai == 6) ? 'Đã cấp CTS'
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                         : ''}</td></td>
             <td scope="row">${index + 1}</td>
@@ -106,7 +107,9 @@ async function showFindCTSCaNhan(data) {
             <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td>${cts.nguoiThucHien}</td>
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-     
+            <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+            <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
+
           </tr>`
 
             pendingFindStatus.innerHTML = html
@@ -136,9 +139,10 @@ async function showFindCTSDoanhNghiep(data) {
                                 Gửi thông tin thuê bao`
                     : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
                                 padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>`
-                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                            : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                : (cts.trangThai == 6) ? 'Đã cấp CTS'
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                         : ''}</td></td>
             
@@ -152,7 +156,8 @@ async function showFindCTSDoanhNghiep(data) {
             <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
             <td>${cts.nguoiThucHien}</td>
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-     
+            <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+            <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
           </tr>`
 
             pendingFindStatusDN.innerHTML = html
@@ -210,7 +215,7 @@ async function showPending(data){
                                    data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                        Gửi thông tin thuê bao
                                    </button>`
-           : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+           : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                        padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                        <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                        data-id="${cts._id}">
@@ -229,6 +234,8 @@ async function showPending(data){
            <td>${convertToDDMMYYYY(cts.ngayTao)}</td>
            <td>${cts.nguoiThucHien}</td>
            <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
+           <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+           <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
          </tr>`
          pendingStatus.innerHTML = html
         })
@@ -282,7 +289,7 @@ async function showPendingDN(data){
                                     data-id="${cts._id}" style="font-size: 10px;padding: 5px 2px;">
                                         Gửi thông tin thuê bao
                                     </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                         padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                         <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                         data-id="${cts._id}">
@@ -302,7 +309,8 @@ async function showPendingDN(data){
             <td>${cts.nguoiThucHien}</td>
            
             <td>${(cts.fileHoSo.length == 0) ? 'Chưa đủ' : 'Đủ'}</td>
-     
+            <td>${(cts.yKienDaiLy) ? cts.yKienDaiLy : ''}</td>
+            <td>${(cts.yKienVina) ? cts.yKienVina : ''}</td>
           </tr>`
           pendingStatusDN.innerHTML = html
     

@@ -99,9 +99,10 @@ async function showFindCTSCaNhan(data) {
                                 data-id="${cts._id}">
                                     Gửi lại
                                 </button>`
-                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                            : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                : (cts.trangThai == 6) ? 'Đã cấp CTS'
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần 2</p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                         : ''}</td>
             <td scope="row">${index+1}</td>
@@ -152,9 +153,10 @@ async function showFindCTSDoanhNghiep(data) {
                                 data-id="${cts._id}">
                                     Gửi lại
                                 </button>`
-                        : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
-                            : (cts.trangThai == 5) ? 'Chưa cấp CTS'
-                                : (cts.trangThai == 6) ? 'Đã cấp CTS'
+                                : (cts.trangThai == 4) ? 'Chờ duyệt lần 2'
+                                : (cts.trangThai == 5) ? '<p style="color:green;">Đã duyệt lần <2/p>'
+                                : (cts.trangThai == 6) ? '<p style="color:green;">Đã ký HĐ</p>'
+                                : (cts.trangThai == 7) ? '<p style="color:green;">Đã cấp CTS</p>'
                                     : (cts.trangThai == 9) ? '<p style="color:tomato;">Đã từ chối duyệt</p>'
                                         : ''}</td>   
             <td scope="row">${index+1}</td>
@@ -307,7 +309,7 @@ async function showPending(data){
                                     data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                     padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                     <button type="button" class="btn btn-action btn-primary btn-sendMail" 
                                     data-id="${cts._id}">
@@ -354,7 +356,7 @@ async function showPendingDN(data){
                                     data-id="${cts._id}">
                                         Gửi thông tin thuê bao
                                     </button>`
-            : (cts.trangThai == 3) ? `<p style="color:tomato;font-size:13px;line-height: 15px;
+            : (cts.trangThai == 3) ? `<p style="color:green;font-size:13px;line-height: 15px;
                                     padding-bottom: 9px;">Đã gửi thông tin thuê bao </p>
                                     <button type="button" class="btn btn-action btn-primary btn-sendMailOrg" 
                                     data-id="${cts._id}">

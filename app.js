@@ -101,6 +101,9 @@ app.use('/api', trashAPI);
 app.use('/api', reportAPI);
 
 app.use('/api', findAPI);
+app.get('*',function(req, res, next){
+  return res.status(404).render('404')
+})  
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -109,7 +112,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = process.env.NODE_ENV === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);

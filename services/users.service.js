@@ -41,7 +41,7 @@ exports.getById = async (id) => {
     }
 }
 
-exports.getUserByUsername = async (username) => {
+exports.getByUsername = async (username) => {
     return await usersModel.findOne({username: username})
 }
 exports.getByBelongTo = async (userId) => {
@@ -64,7 +64,7 @@ exports.createNew = async (values) => {
         const password = values.password
         const soDienThoai = values.soDienThoai
         const diaChi = values.diaChi
-        const tinhThanhId = values.tinhThanhId
+        const tinhThanhID = values.tinhThanhID
         const role = values.role
         const tenDaiLy = values.tenDaiLy
         const belongTo = values.belongTo
@@ -77,7 +77,7 @@ exports.createNew = async (values) => {
                 password:passwordHashed,
                 soDienThoai,
                 diaChi,
-                tinhThanhId,
+                tinhThanhID,
                 role,
                 tenDaiLy,
                 belongTo
@@ -101,9 +101,9 @@ exports.update = async (id, inputValues) => {
     const email = inputValues.email
     const soDienThoai = inputValues.soDienThoai
     const gender = inputValues.gender
-    const avatar = inputValues.avatar
+    const diaChi = inputValues.diaChi
 
-    const values = { hoTen, email, soDienThoai, gender, avatar }
+    const values = { hoTen, email, soDienThoai, gender, diaChi }
     
     return await usersModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
