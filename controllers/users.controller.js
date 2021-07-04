@@ -1,7 +1,29 @@
 const usersService = require('../services/users.service');
+const TinhThanhService = require('../services/provinces.service');
 
 module.exports.authencation = async (req, res, next)=> {
     res.render('authentication',{ title: 'Đăng nhập', message:req.session.message })
+}
+module.exports.profile = async (req, res, next)=> {
+    try{
+        const {userId} = req.session
+        const user = await usersService.getById(userId)
+        let role = ''
+        if(user.role==0) { role = 'Admin 1' }
+        if(user.role==1) { role = 'Admin 2' }
+        if(user.role==2) { role = 'Đại lý 1' }
+        if(user.role==3) { role = 'Đại lý 2' }
+        const tinhThanh = await TinhThanhService.getById(user.tinhThanhId)
+        return res.render('profile',{ 
+            title: 'Thông tin cá nhân',
+            user,
+            role,
+            tinhThanh:tinhThanh.TenTinhThanh, 
+            message:null 
+        })
+    }catch(err){
+        console.log(err)
+    }
 }
 
 
@@ -33,9 +55,9 @@ module.exports.changePassword = async (req, res, next) => {
     try{
         const id = req.params.id;
         let values = req.body;
-       
         await usersService.changePassword(id, values);
-        res.redirect('/users')
+        req.session.destroy();
+        return res.redirect('/users')
     }
     catch(err){
         console.log(err)

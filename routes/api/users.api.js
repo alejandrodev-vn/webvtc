@@ -44,6 +44,25 @@ router.get('/users/byBelongTo', async (req, res, next)=> {
         console.log(err)
     }
 });
+router.get('/users/for-admin-2', async (req, res, next)=> {
+    try{
+        const { userId } = req.session
+        if(!userId){
+            return res.json([])
+        }
+        const agency1List = await usersService.getByBelongTo(userId)
+        for(let i=0; i<agency1List.length; i++){
+            let agency2 = await usersService.getByBelongTo(agency1List[i]._id)
+            if(agency2.length!==0){
+                agency1List.push(...agency2)
+            }
+        }
+        return res.json(agency1List)
+    }   
+    catch(err){
+        console.log(err)
+    }
+});
 router.get('/users/:id', async (req, res, next)=> {
     try{
         const id = req.params.id

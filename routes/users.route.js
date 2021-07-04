@@ -4,8 +4,8 @@ const router = express.Router();
 const controllerUsers = require('../controllers/users.controller')
 const middlewares = require('../middlewares/authencation')
 
-
-router.get('/users/login', controllerUsers.authencation)
+router.get('/users',middlewares.checkAuthencation, controllerUsers.profile)
+router.get('/users/login',middlewares.redirectProfile, controllerUsers.authencation)
 router.post('/users/login', controllerUsers.login)
 router.get('/users/logout', controllerUsers.logout)
 router.get('/manage-account',middlewares.checkAuthencation, function(req, res,next){
@@ -19,7 +19,7 @@ router.get('/manage-account',middlewares.checkAuthencation, function(req, res,ne
     }
 })
 router.post('/users/add',middlewares.checkAuthencation, controllerUsers.add)
-router.put('/users/edit/:id', middlewares.checkAuthencation, controllerUsers.update)
-router.put('/users/change-password/:id', middlewares.checkAuthencation, controllerUsers.changePassword)
+router.post('/users/edit/:id', middlewares.checkAuthencation, controllerUsers.update)
+router.post('/users/change-password/:id', middlewares.checkAuthencation, controllerUsers.changePassword)
 
 module.exports = router;

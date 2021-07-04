@@ -101,9 +101,9 @@ exports.update = async (id, inputValues) => {
     const email = inputValues.email
     const soDienThoai = inputValues.soDienThoai
     const gender = inputValues.gender
-    const avatar = inputValues.avatar
+    const diaChi = inputValues.diaChi
 
-    const values = { hoTen, email, soDienThoai, gender, avatar }
+    const values = { hoTen, email, soDienThoai, gender, diaChi }
     
     return await usersModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){

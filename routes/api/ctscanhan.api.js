@@ -53,7 +53,6 @@ router.get('/digital-certificate/personal/getPendingByUserId', async (req, res, 
 router.get('/digital-certificate/personal/getFindByUserId', async (req, res, next)=> {
     try{
         const CTSCaNhan = await findService.getFindByUserId()
-        console.log(CTSCaNhan)
         return res.json(CTSCaNhan)
     }   
     catch(err){
@@ -200,7 +199,6 @@ router.get('/digital-certificate/personal/approved-agency1', async (req, res, ne
         const result = []
         for(let i=0; i<agencyList.length; i++){
             let CTSCaNhan = await CTSCaNhanService.getApprovedByUserId(agencyList[i]._id)
-            console.log(CTSCaNhan)
             if(CTSCaNhan.length==1){
                 if(CTSCaNhan[0].trangThai==5 || CTSCaNhan[0].trangThai==6 || CTSCaNhan[0].trangThai==7){
                     result.push(...CTSCaNhan)

@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../stylesheets/addmi-add.css">
-        <link rel="stylesheet" href="../stylesheets/adminhome.css">
+        <link rel="stylesheet" href="/stylesheets/addmi-add.css">
+        <link rel="stylesheet" href="/stylesheets/adminhome.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
             <% } %> 
         </div>
            <!-- The Modal -->
-           <div id="myModal" class="modal">
+           <div id="modal" class="modal">
 
             <!-- Modal content -->
               <div class="modal-content">
@@ -172,14 +172,24 @@
                         <td><h6>Hiện chưa có tài khoản nào</h6></td>
                     </tbody>
                 </table>
+                
                 <div class="action col-md-3 col-md-push-2">
-                    <button class="btn btn-primary">Vô hiệu hóa</button>
+                    <button class="btn btn-primary" style="margin:10px">Vô hiệu hóa</button>
                 </div>
             </div>
+            <div class="pagin-wrapper" id="paginUsers"></div>
+
         </div>
         <div id='status' style="display:none; visibility:hidden"><%= message %></div>
 
 </body>
-<script src="../javascripts/modalBox.js"></script>
-<script src="../javascripts/init.js"></script>
-<script src="../javascripts/listAccountAdmin2.js" type="module"></script>
+<script src="/javascripts/modalBox.js"></script>
+<script src="/javascripts/init.js"></script>
+<% if(locals.user.role == 1){ %> 
+    <script src="/javascripts/listAccountAdmin2.js" type="module"></script>
+<% }else{ %> 
+<script src="/javascripts/listAccount.js" type="module"></script>
+<% } %> 
+<script src="/vendor/pagination.js"></script>
+
+</html>

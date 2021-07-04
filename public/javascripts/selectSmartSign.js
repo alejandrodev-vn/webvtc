@@ -45,13 +45,13 @@ function checkAllDN(){
 }
 function checkSelectAllDN() {  
     const selectItem = document.querySelectorAll('.select-smart-sign-DN')
-    let isCheckAll = selectItem.length === document.querySelectorAll('input[name="selectItem1"]:checked').length
+    let isCheckAll = selectItem.length === document.querySelectorAll('input[name="selectItemDN"]:checked').length
     selectAllDN.checked = isCheckAll;   
     validateSendRequestDN()
 }
 
 function validateSendRequestDN(){
-    const countItem = document.querySelectorAll('input[name="selectItem1"]:checked').length
+    const countItem = document.querySelectorAll('input[name="selectItemDN"]:checked').length
     if(countItem==0){
         btnSubmitDN.setAttribute('disabled',true)
         btnDeleteDN.setAttribute('disabled',true)

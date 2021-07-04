@@ -3,6 +3,7 @@ import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
 import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
+import { onSubmitCaNhan, onSubmitDoanhNghiep } from './validate.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
 const approvedStatus = document.querySelector('#approvedStatus')
@@ -228,6 +229,7 @@ async function openEdit(){
             document.querySelector('#nganhNghe').value = cts.nganhNghe
             document.querySelector('#chucVu').value = cts.chucVu 
             document.querySelector('#MSTCongTy').value = cts.MSTCongTy
+            document.querySelector('#nguoiThucHien').value = cts.nguoiThucHien
             document.querySelector('#tinhThanh').childNodes.forEach(province=>{
                 if(cts.tinhThanh == province.value) {
                     province.setAttribute('selected',true)
@@ -253,10 +255,11 @@ async function openEdit(){
             }else{
                 document.querySelector('#documentOrganization').innerHTML = `<p>Chưa đủ</p>`
             }
-       
+        
 
             modal.style.opacity = "1";
             modal.style.display = "block"
+            onSubmitCaNhan()
         })
     })
          // When the user clicks on <span> (x), close the modal
@@ -387,6 +390,8 @@ async function openEditDN(){
             document.querySelector('#soDienThoaiChuDoanhNghiep').value = cts.soDienThoaiCongTy
             document.querySelector('#congTyMe').value = cts.congTyMe
             document.querySelector('#chucVuDN').value = cts.chucVu
+            document.querySelector('#nguoiThucHienDN').value = cts.nguoiThucHien
+
             if(cts.camKet == true){document.querySelector('#camKet').setAttribute('checked',true)}
             document.querySelector('#tinhThanhDN').childNodes.forEach(province=>{
                 if(cts.tinhThanh == province.value) {
@@ -415,6 +420,7 @@ async function openEditDN(){
             }
             modal.style.opacity = "1";
             modal.style.display = "block"
+            onSubmitDoanhNghiep()
         })
     })
          // When the user clicks on <span> (x), close the modal
@@ -567,8 +573,8 @@ async function getQuanHuyen(id){
         data.forEach(district => { if(district.tinhThanhId == id){
             quanHuyenHtml +=`<option value="${district._id}">${district.TenQuanHuyen}</option>`
         }})
-        quanHuyenEl.innerHTML = quanHuyenHtml
-        quanHuyenDNEl.innerHTML = quanHuyenHtml
+        quanHuyenEl.innerHTML += quanHuyenHtml
+        quanHuyenDNEl.innerHTML += quanHuyenHtml
     }catch(err){
         console.log(err)
     }

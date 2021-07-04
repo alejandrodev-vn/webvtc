@@ -3,9 +3,9 @@ import { fetchAPI,
 } from './fetch.js'
 const url = 'http://localhost:3000/'
 
-async function getListAccount(){
+const getListAccount = async () => {
     try{
-        const urlList = url + `api/users/for-admin-2`
+        const urlList = url + `api/users/byBelongTo`
         const options = {
             method: 'GET'
         }

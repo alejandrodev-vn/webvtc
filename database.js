@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const urlDB = 'mongodb+srv://huytra264:Huytra264@cluster1.2wruq.mongodb.net/vtc-cts?retryWrites=true&w=majority'
+const urlDB = process.env.MONGO_URL
 
 mongoose.connect(urlDB, {
   useNewUrlParser: true,

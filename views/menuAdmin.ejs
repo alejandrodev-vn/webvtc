@@ -9,17 +9,14 @@
     </div>
     <div class="right">
         <% if(locals.user) { %> 
-        <a href="#"><%= locals.user.hoTen %></a>
+        <a href="/users"><%= locals.user.hoTen %></a>
         <% }else{ %>
         <a href="/users/login">Đăng Nhập</a>
         <% } %> 
         <a href="/users/logout">Đăng Xuất</a>   
     </div>
 </div>
-<!-- 
+
 <div class="scrollmenu2">
-    <a href="#home">Sửa Thông Tin</a>
-    <a href="#news">Phê Duyệt YC Đại Lí</a>
-    <a href="#contact">Phê Duyệt YC Gia Hạn</a>
-    <a href="#about">Quản Lí CTS Server</a>
-</div> -->
+    <a href="/services">Quản Lí CTS Server</a>
+</div>

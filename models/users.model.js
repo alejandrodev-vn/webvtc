@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   soDienThoai: {type: String},
   tinhThanhId: {type: mongoose.Schema.Types.ObjectId, ref:'Province'},
   diaChi: {type: String},
-  gender: {type: String},
+  gender: {type: Number,default:0},
   role: {type: Number, default:4},
   isActive: {type: Boolean, default:true},
   tenDaiLy: {type: String},
