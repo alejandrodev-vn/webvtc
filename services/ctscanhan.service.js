@@ -71,7 +71,6 @@ exports.getPendingByUserId = async (userId) => {
         const CTSCaNhan = await CTSCaNhanModel.find({createdBy:userId,$or: [
             {trangThai: 0},{trangThai: 1},{trangThai: 2},{trangThai: 3},{trangThai: 4},{trangThai: 9}
         ]});
-        // console.log(values)
         return CTSCaNhan
     }
     catch(err){

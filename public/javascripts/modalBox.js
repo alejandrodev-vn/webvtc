@@ -1,5 +1,5 @@
     // Get the modal
-    const modal = document.getElementById("myModal");
+    const modal = document.getElementById("modal");
 
     // Get the button that opens the modal
     const btn = document.querySelector(".btn-modal");
@@ -21,11 +21,3 @@
             },450)
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-        modal.style.opacity = "0"
-        setTimeout(()=>{modal.style.display = "none";
-            },450)
-        }
-    }

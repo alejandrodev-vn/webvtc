@@ -36,30 +36,10 @@ async function getServices(){
         console.log(err)
     }
 }
-async function getProvinces(){
-    try{
-        const res = await fetch('http://localhost:3000/api/provinces')
-        const provinces = await res.json()
-        return provinces
-    }catch(err){
-        console.log(err)
-    }
-}
-
-async function getDistricts(){
-    try{
-        const res = await fetch('http://localhost:3000/api/districts')
-        const districts = await res.json()
-        return districts
-    }catch(err){
-        console.log(err)
-    }
-}
-
 
 async function getListAccount(){
     try{
-        const urlList = url + `api/users/byBelongTo`
+        const urlList = url + `api/users/agency`
         const options = {
             method: 'GET'
         }
@@ -85,13 +65,13 @@ async function getFind() {
          e.preventDefault()
         const mst = document.getElementById('mst').value
         const typeReport = document.getElementById('typeReport').value
-        const dateBegin = document.getElementById('dateBegin').value
-        const dateEnd = document.getElementById('dateEnd').value
-        const services = document.getElementById('goiCTSId').value
-        const agency = document.getElementById('agency').value
-        const tokenId = document.getElementById('tokenId').value
-        const serialNumber = document.getElementById('serialNumber').value
-        const status = document.getElementById('trangThai').value
+           const dateBegin = document.getElementById('dateBegin').value
+            const dateEnd = document.getElementById('dateEnd').value
+            const services = document.getElementById('goiCTSId').value
+            const agency = document.getElementById('agency').value
+            const tokenId = document.getElementById('tokenId').value
+            const serialNumber = document.getElementById('serialNumber').value
+            const status = document.getElementById('trangThai').value
         if(typeReport == '1'){
             if(mst){
                 var urlFind = url + `api/report?typeReport=${typeReport}&mst=${mst}`
@@ -119,12 +99,12 @@ async function getFind() {
                     dataSource: data,
                     callback: function(data, pagination) {
                         // template method of yourself
-                        showFindHistory(data);
+                        showFindByMST(data);
                     },
                     pageSize: 5    
                 })
                 }else{
-                    showFindHistory(data)
+                    showFindByMST(data)
                 }
             
         }else {
@@ -175,7 +155,7 @@ async function getFind() {
     }
 }
 getFind()
-async function showFindHistory(data){
+async function showFindByMST(data){
     let html = ''
     if(data.length!=0){
        
@@ -315,23 +295,11 @@ async function showFindHistory(data){
 async function showFindCTSCaNhan(data){
     let html = ''
     const services = await getServices()
-    const provinces = await getProvinces()
-    const districts = await getDistricts()
     if(data && data.length!=0){
         data.forEach((cts, index)=> {   
             services.forEach(service => {
                 if(cts.goiCTSId == service._id){
                     cts = { ...service, ...cts }
-                }
-            })
-            provinces.forEach(province => {
-                if(cts.tinhThanh == province._id){
-                    cts = { ...province, ...cts }
-                }
-            })
-            districts.forEach(district => {
-                if(cts.quanHuyen == district._id){
-                    cts = { ...district, ...cts }
                 }
             })
            html+=`<tr ${(index % 2 == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
@@ -352,7 +320,7 @@ async function showFindCTSCaNhan(data){
            <td>${cts.hoTenNguoiDK}</td>
            <td>${cts.MSTCaNhan}</td>
            <td>${cts.soCMT}</td>
-           <td>${cts.diaChi}, ${cts.TenQuanHuyen}, ${cts.TenTinhThanh}</td>
+           <td>${cts.diaChi}</td>
            <td>${cts.email}</td>
            <td>${cts.soDienThoai}</td>
            <td>${cts.tenGoiDichVu}</td>
@@ -381,24 +349,12 @@ async function showFindCTSCaNhan(data){
 }
 async function showFindCTSDoanhNghiep(data){
     let html = ''
-    const services = await getServices()    
-    const provinces = await getProvinces()
-    const districts = await getDistricts()
+    const services = await getServices()
     if(data && data.length!=0){
         data.forEach((cts, index)=> {   
             services.forEach(service => {
                 if(cts.goiCTSId == service._id){
                     cts = { ...service, ...cts }
-                }
-            })
-            provinces.forEach(province => {
-                if(cts.tinhThanh == province._id){
-                    cts = { ...province, ...cts }
-                }
-            })
-            districts.forEach(district => {
-                if(cts.quanHuyen == district._id){
-                    cts = { ...district, ...cts }
                 }
             })
            html+=`<tr ${(cts.trangThai == 0) ? `style="background:#cfebff"` : 'style="background:cornsilk"'}>
@@ -419,7 +375,7 @@ async function showFindCTSDoanhNghiep(data){
            <td>${cts.tenGD}</td>
            <td>${cts.MST}</td>
            <td>${cts.giayPhepDKKD}</td>
-           <td>${cts.diaChi}, ${cts.TenQuanHuyen}, ${cts.TenTinhThanh}</td>
+           <td>${cts.diaChi}</td>
            <td>${cts.emailGD}</td>
            <td>${cts.soDienThoaiCongTy}</td>
            <td>${cts.tenGoiDichVu}</td>

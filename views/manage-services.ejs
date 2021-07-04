@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Quản lý CTS
+    </title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <%- include('header') %>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/addmi-add.css">
+        <link rel="stylesheet" href="/stylesheets/adminhome.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <%- include('menuAdmin') %>
+        </div>
+           <!-- The Modal -->
+           <div id="modal" class="modal">
+
+            <!-- Modal content -->
+              <div class="modal-content">
+                
+                  <div class="form-area">
+                      <div class="top-modal">
+                        <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Thêm mới gói dịch vụ</h2>
+                        <span class="close">&times;</span>
+                      </div>
+                      <form action="/services" method="POST" id="formNewService">
+                        <div class="form-left">
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Tên gói dịch vụ: </label>
+                                <input type="text" name="tenGoiDichVu" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Giá cước </label>
+                              <input type="number" name="gia" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Thời hạn: </label>
+                              <input type="text" name="thoiHan" class="form-control">
+                            </div>
+                            <small>Chú thích: (<span style="color: red;">*</span>) là bắt buộc</small>
+                            <button type="submit" class="btn-primary">Thêm</button>
+                        </div>
+                      
+                 
+  
+                        
+                    
+                      </form>
+                  </div>
+              </div>
+  
+            </div>
+              <!-- The Modal -->
+           <div id="modalEdit" class="modal">
+
+            <!-- Modal content -->
+              <div class="modal-content">
+                
+                  <div class="form-area">
+                      <div class="top-modal">
+                        <h2 style="margin-bottom:15px; color:firebrick;" class="title-modal">Chỉnh sửa gói dịch vụ</h2>
+                        <span class="closeEdit">&times;</span>
+                      </div>
+                      <form action="/services/edit" method="POST" id="formEditService">
+                        <div class="form-left">
+                            <div class="form-group">
+                                <label class="input-group-text col-md-3"><span style="color: red;">*</span> Tên gói dịch vụ: </label>
+                                <input type="text" name="tenGoiDichVu" id="tenGoiDichVu" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Giá cước </label>
+                              <input type="number" name="gia" id="gia" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label class="input-group-text col-md-3"><span style="color: red;">*</span> Thời hạn: </label>
+                              <input type="text" name="thoiHan" id="thoiHan" class="form-control">
+                            </div>
+                            <small>Chú thích: (<span style="color: red;">*</span>) là bắt buộc</small>
+                            <input type="hidden" name="id" id="id">
+                            <button type="submit" class="btn-primary">Cập nhật</button>
+                        </div>
+                      
+                 
+  
+                        
+                    
+                      </form>
+                  </div>
+              </div>
+  
+            </div>
+      
+      
+    
+        <h3 class="pl-3" style="margin: 5px;">Danh sách Gói dịch vụ</h3>
+        <div class="container">
+            <div class="row">
+              <button type="button"  class="btn btn-action btn-primary btn-modal mb-2">Thêm mới</button>
+                <table class="table table-bordered">
+                    <thead class="thead-default">
+                      <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên gói</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Thời hạn</th>
+                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Xóa</th>
+               
+                      </tr>
+                    </thead>
+                    <tbody id="listServices">
+                        <% if(services.length!=0){ 
+                            for (let service in services){ 
+                        %> <tr>
+                                <td><%= parseInt(service)+1  %></td>
+                                <td><%= services[service].tenGoiDichVu  %></td>
+                                <td class="price"><%= services[service].gia %></td>
+                                <td><%= services[service].thoiHan  %></td>
+                                <td><button type="button" data-id="<%= services[service]._id %>" class="btn btn-action btn-info btn-edit-service">Sửa</button></td>
+                                <td><button type="button" data-id="<%= services[service]._id %>" class="btn btn-action btn-danger btn-delete-service">Xóa</button></td>
+                            </tr>
+                        <% }}else{ %> 
+                        <td><h6>Hiện chưa có gói nào</h6></td>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagin-wrapper" id="paginServices"></div>
+
+        </div>
+        <form style="display:none;visibility: hidden;" id="formDeleteService" method="POST"></form>
+        <div id="modalDelete" class="modal">
+            <div class="modal-content" >
+                <div class="container">
+                <h1>Xóa bản ghi này</h1>
+                <p>Hành động này sẽ xóa vĩnh viễn bản ghi, bạn có chắc chứ?</p>
+                
+                <div class="clearfix">
+                    <button type="button" class="deletebtn btn-danger">Xóa</button>
+                    <button type="button" class="cancelbtn btn-secondary">Đóng</button>
+                </div>
+
+                </div>
+
+            </div>
+          </div>
+        <div id='status' style="display:none; visibility:hidden"><%= message %></div>
+
+</body>
+<script src="/javascripts/modalBox.js"></script>
+<script src="/javascripts/init.js"></script>
+<script src="/javascripts/manageServices.js" type="module"></script>
+<script src="/vendor/pagination.js"></script>
+
+</html>

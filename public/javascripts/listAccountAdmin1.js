@@ -9,8 +9,19 @@ async function getListAccountAdmin(){
         const options = {
             method: 'GET'
         }
-        const users = await fetchAndShowData(urlList, options, showListAccountAdmin)
-        return users
+        const users = await fetchAPI(urlList, options)
+        if(users && users.length!=0){
+            $('#paginAdmin').pagination({
+                dataSource: users,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showListAccountAdmin(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showListAccount(data)
+        }
        
     }catch(err){
         console.log(err)
@@ -22,8 +33,19 @@ async function getListAccountAgency(){
         const options = {
             method: 'GET'
         }
-        const users = await fetchAndShowData(urlList, options, showListAccountAgency)
-        return users
+        const users = await fetchAPI(urlList, options)
+        if(users && users.length!=0){
+            $('#paginAgency').pagination({
+                dataSource: users,
+                callback: function(data, pagination) {
+                    // template method of yourself
+                    showListAccountAgency(data);
+                },
+                pageSize: 5    
+            })
+        }else{
+            showListAccountAgency(data)
+        }
        
     }catch(err){
         console.log(err)

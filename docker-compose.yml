@@ -1,0 +1,30 @@
+version: '3.7'
+
+services: 
+    webvtc:
+        container_name: webvtc
+        image: webvtc
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        ports: 
+            - 3000:3000
+        volumes:
+            - .:/app
+        command: npm start
+        networks:
+            - common
+        environment:
+            PORT: 3000
+            MONGO_URL: 'mongodb+srv://huytra264:Huytra264@cluster1.2wruq.mongodb.net/vtc-cts?retryWrites=true&w=majority'
+    mongodb:
+        container_name: mongo
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes: 
+            - ./data:/data/db
+        networks:
+            - common
+networks:
+    common:
