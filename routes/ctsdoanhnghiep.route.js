@@ -14,6 +14,7 @@ router.post('/digital-certificate/organization/edit',middlewares.checkAuthencati
 router.post('/digital-certificate/organization/send-mailOrg/:id',middlewares.checkAuthencation, controllerCTSDoanhNghiep.sendMail);
 router.post('/digital-certificate/organization/send-response', controllerCTSDoanhNghiep.sendResponse);
 router.post('/digital-certificate/organization/handle-form-actions', controllerCTSDoanhNghiep.handleFormActions);
-
+router.get('/digital-certificate/personal/confirm/:token', controllerCTSDoanhNghiep.renderConfirm);
+router.post('/digital-certificate/personal/confirm/:token', controllerCTSDoanhNghiep.confirm);
 
 module.exports = router;

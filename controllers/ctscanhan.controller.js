@@ -75,6 +75,31 @@ module.exports.update = async (req, res, next) => {
         console.log(err)
     }
 }
+module.exports.renderConfirm = async (req, res, next) => {
+    const {token} = req.params
+    return res.render('otp/confirm-personal',{token:token})
+}
+module.exports.confirm = async (req, res, next) => {
+    const { token } = req.params
+    const { btnConfirm, btnRefuse } = req.body
+    const jwt = require('jsonwebtoken');
+    jwt.verify(token, process.env.KEY, async (err, decode)=>{
+        if(err){
+            return res.render('otp/confirm-personal', {  message: 'Quá thời hạn xác thực' })
+
+        }else{
+            if(btnConfirm != 'undefined'){
+                await CTSCaNhanService.update(decode.idCer, {trangThai:4,action4:Date.now()});
+                return res.redirect('/')
+            }else if(btnRefuse != 'undefined'){
+                await CTSCaNhanService.update(decode.idCer, {trangThai:9,isRefuse:true,refuse:Date.now(),refuseBy:'Khách hàng từ chối'});
+                return res.redirect('/')
+            }
+
+        }
+    })
+
+}
 
 module.exports.sendResponse = async (req, res, next) => {
     try{
@@ -93,7 +118,7 @@ module.exports.sendResponse = async (req, res, next) => {
             }
         }else if(decline == 'Từ Chối Duyệt' && decline != 'undefined'){
             await CTSCaNhanService.sendResponse(id, {
-                trangThai: 9, yKienDaiLy, yKienVina,isRefuse:true,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
+                trangThai: 9, yKienDaiLy, yKienVina,refuse:Date.now(),refuseBy:`${req.session.username} - ${req.session.hoTen}`});
             return res.redirect('/')
 
 
@@ -143,11 +168,11 @@ module.exports.handleFormActions = async (req, res, next) => {
 }
 module.exports.sendMail =  async (req, res, next) => {
     const { id } = req.params 
-    const cts = await CTSCaNhanService.getById({_id:id})
+    const cts = await CTSCaNhanService.getById(id)
     const nodemailer = require('nodemailer')
     const jwt = require('jsonwebtoken')
     let token = jwt.sign({ soDienThoai: cts.soDienThoai, idCer: cts._id }, process.env.KEY,{
-        expiresIn: '5m' /*<---- this is 5 minutes */
+        expiresIn: '30m' /*<---- this is 30 minutes */
     }, (err, token) => {
         if (err) {
             console.log('Token sign failed');
@@ -156,7 +181,7 @@ module.exports.sendMail =  async (req, res, next) => {
                 service:"gmail",
                 auth: {
                     user: 'huytrafpt@gmail.com',
-                    pass: 'Huytra264'
+                    pass: 'Huytra2642001'
                 },
                 tls: {rejectUnauthorized:false}
         

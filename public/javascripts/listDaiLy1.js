@@ -3,7 +3,8 @@ import {
     fetchAPI,
     fetchAndShowData
 } from './fetch.js'
-import { getSendMailPersonal, getSendMailOrganization } from './sendMail.js'
+import { getSendMailPersonal, getSendMailOrganization, 
+    getSendMailFindPersonal, getSendMailFindOrganization } from './sendMail.js'
 import { onSubmitCaNhan, onSubmitDoanhNghiep } from './validate.js'
 const pendingStatus = document.querySelector('#pendingStatus')
 const pendingStatusDN = document.querySelector('#pendingStatusDN')
@@ -126,7 +127,7 @@ async function showFindCTSCaNhan(data) {
         })
 
         openEdit()
-        getSendMailPersonal()
+        getSendMailFindOrganization()
     } else {
         pendingFindStatus.innerHTML = '<td colspan="13"><h4>Hiện không có dữ liệu</h4></td>'
     }

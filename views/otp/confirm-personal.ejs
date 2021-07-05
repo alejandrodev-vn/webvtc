@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Xác nhận
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <%- include('../header') %> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/stylesheets/organization.css">
+        <link rel="stylesheet" href="/stylesheets/adminhome.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="box">
+                <div class="header">
+                    <a href=""><img src="/images/logo.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    
+                    <% if(typeof message == 'undefined' ){ %> 
+                        <h2 style="text-align:center;width:100%">Xác nhận</h2>
+                        <form action="/digital-certificate/personal/confirm/<%= token %>" method="POST" class="text-md-center" style="width: 50%;margin:0 auto">
+                            <div style="display:flex">
+                                <input type="submit" style="margin-right:5px" value="Xác nhận" name="btnConfirm" class="btn btn-primary col-md-6" />
+                                <input type="submit" value="Không xác nhận" name="btnRefuse" class="btn btn-primary col-md-6" />
+                            </div>
+                          
+                        </form>
+                    <% }else{ %> 
+                        <h2><%= message %></h2>
+                    <% } %> 
+                    
+                </div>
+            </div>
+
+        </div>
+        
+
+    </body>
+  
+</html>

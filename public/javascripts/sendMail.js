@@ -5,10 +5,11 @@ function getSendMailPersonal(){
         btn.onclick = (e) => {
             e.preventDefault()
             formSendMailPersonal.action = `/digital-certificate/personal/send-mail/${btn.dataset.id}`
-            formSendMailPersonal.submit()
             setTimeout(()=>{
                 alert('Gửi thành công')
-            },5000)
+            },2000)
+            formSendMailPersonal.submit()
+          
         }
     })
 }
@@ -19,6 +20,9 @@ function getSendMailFindPersonal(){
         btn.onclick = (e) => {
             e.preventDefault()
             formSendMailPersonal.action = `/digital-certificate/personal/send-mail/${btn.dataset.id}`
+            setTimeout(()=>{
+                alert('Gửi thành công')
+            },2000)
             formSendMailPersonal.submit()
         }
     })
@@ -30,10 +34,11 @@ function getSendMailOrganization(){
         btn.onclick = (e) => {
             e.preventDefault()
             formSendMailOrganization.action = `/digital-certificate/organization/send-mailOrg/${btn.dataset.id}`
-            formSendMailOrganization.submit()
             setTimeout(()=>{
                 alert('Gửi thành công')
-            },5000)
+            },2000)
+            formSendMailOrganization.submit()
+           
         }
     })
 }
@@ -44,6 +49,9 @@ function getSendMailFindOrganization(){
         btn.onclick = (e) => {
             e.preventDefault()
             formSendMailOrganization.action = `/digital-certificate/organization/send-mailOrg/${btn.dataset.id}`
+            setTimeout(()=>{
+                alert('Gửi thành công')
+            },2000)
             formSendMailOrganization.submit()
         }
     })
@@ -52,4 +60,6 @@ function getSendMailFindOrganization(){
 export { 
     getSendMailPersonal,
     getSendMailOrganization,
+    getSendMailFindPersonal,
+    getSendMailFindOrganization
 }

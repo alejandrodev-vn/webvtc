@@ -120,29 +120,32 @@
         </form>
 
         <div id="findUserWrapper" style="display:none">
-            <div class="info-user">
-                <div>
-                    <h3>Kết Quả Tìm Kiếm</h3>
+            <form action="/manage-account/change-status" method="POST" style="width:100%">
+
+                <div class="info-user">
+                    <div>
+                        <h3>Kết Quả Tìm Kiếm</h3>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead class="thead-default">
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Chọn</th>
+                                <th scope="col">Tên đăng nhập</th>
+                                <th scope="col">Tên đầy đủ</th>
+                                <th scope="col">Tỉnh/ TP</th>
+                                <th scope="col">Quyền người dùng</th>
+                                <th scope="col">Trạng thái</th>    
+                            </tr>
+                            </thead>
+                            <tbody id="resultFindUser">
+                            </tbody>
+                            
+                    </table>
+                    <button type="submit" id="notActiveFind" name="notActive" class="btn btn-primary" disabled style="margin:10px">Vô hiệu hóa</button>
+                    <button type="submit" id="isActiveFind" name="isActive" class="btn btn-primary" disabled style="margin:10px">Kích hoạt</button>
                 </div>
-                <table class="table table-bordered">
-                    <thead class="thead-default">
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Chọn</th>
-                            <th scope="col">Tên đăng nhập</th>
-                            <th scope="col">Tên đầy đủ</th>
-                            <th scope="col">Tỉnh/ TP</th>
-                            <th scope="col">Quyền người dùng</th>
-                            <th scope="col">Trạng thái</th>    
-                        </tr>
-                        </thead>
-                        <tbody id="resultFindUser">
-                        </tbody>
-                        
-                </table>
-                <button type="submit" id="notActive" name="notActiveFind" class="btn btn-primary" disabled style="margin:10px">Vô hiệu hóa</button>
-                <button type="submit" id="isActive" name="isActiveFind" class="btn btn-primary" disabled style="margin:10px">Kích hoạt</button>
-            </div>
+            </form>
         </div>
         <h3 class="pl-3">Danh sách đại lý</h3>
         <div class="container">

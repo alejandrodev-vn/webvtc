@@ -20,6 +20,10 @@ router.get('/manage-account',middlewares.checkAuthencation, function(req, res,ne
 })
 router.post('/users/add',middlewares.checkAuthencation, controllerUsers.add)
 router.post('/manage-account/change-status',middlewares.checkAuthencation, controllerUsers.changeStatusAccount)
+router.get('/users/forgot', controllerUsers.renderForgot)
+router.post('/users/forgot', controllerUsers.postForgotPassword)
+router.get('/users/reset/:token', controllerUsers.resetPassword)
+router.post('/users/reset/:token', controllerUsers.postNewPassword)
 router.post('/users/edit/:id', middlewares.checkAuthencation, controllerUsers.update)
 router.post('/users/change-password/:id', middlewares.checkAuthencation, controllerUsers.changePassword)
 
