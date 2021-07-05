@@ -41,7 +41,7 @@ exports.getById = async (id) => {
     }
 }
 
-exports.getByUsername = async (username, role, userId, listAgency) => {
+exports.findByUsername = async (username, role, userId, listAgency) => {
     if(role==0){
         const user = await usersModel.find({username: username})
         if(user.length==0) return []
@@ -62,6 +62,15 @@ exports.getByUsername = async (username, role, userId, listAgency) => {
         return user
 
     }else return []
+}
+exports.getByUsername = async (username) => {
+    try{
+        const user = await usersModel.find({username:username});
+        return user
+    }
+    catch(err){
+        console.log(err)
+    }
 }
 exports.getByBelongTo = async (userId) => {
     try{
