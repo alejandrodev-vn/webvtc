@@ -136,7 +136,7 @@ router.post('/users/login', async (req, res, next) => {
             return res.status(401).json({success: false, msg: user.error})
         }else{
             const jwt = require('jsonwebtoken')
-            let token = jwt.sign({ username: user.username }, process.env.KEY)
+            let token = jwt.sign({ user }, process.env.KEY)
             return res.json({success: true, token: token})
         }
     }catch(err){
