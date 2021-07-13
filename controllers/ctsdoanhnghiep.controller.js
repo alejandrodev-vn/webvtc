@@ -218,8 +218,8 @@ module.exports.sendMail =  async (req, res, next) => {
                     + Giấy phép ĐKKD: ${cts.giayPhepDKKD} <br>
                     + Điện thoại: ${cts.soDienThoaiCongTy}
                 <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-                <a href="http://localhost:3000/digital-certificate/organization/get-otp/${token}">
-                http://localhost:3000/digital-certificate/organization/get-otp/${token} 
+                <a href="${process.env.DOMAIN}digital-certificate/organization/get-otp/${token}">
+                ${process.env.DOMAIN}digital-certificate/organization/get-otp/${token} 
                 </a>
                 `
             }
