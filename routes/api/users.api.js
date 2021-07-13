@@ -91,6 +91,29 @@ router.get('/users/for-admin-2', async (req, res, next)=> {
         console.log(err)
     }
 });
+router.post('/users/cmnd/:id', async (req, res, next) => {
+    try{
+        const { id } = req.params
+        if(req.file){
+            const fs = require('fs')
+            const data = await usersService.getById(idEdit)
+            if(data.fileHoSo.length!=0){
+                const path = `public/uploads/cmnd/${data.fileHoSo}`
+                if(fs.existsSync(path)){
+                    fs.unlinkSync(path)
+                }
+            }
+            values.CMNDFront = req.file[0].originalname
+            values.CMNDAfter = req.file[1].originalname
+            
+        }
+        await usersService.update(id, values);
+        return res.redirect('/')
+
+    }catch(err){
+        console.log(err)
+    }
+})
 router.get('/users/:id', async (req, res, next)=> {
     try{
         const id = req.params.id

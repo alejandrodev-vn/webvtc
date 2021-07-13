@@ -198,8 +198,8 @@ module.exports.sendMail =  async (req, res, next) => {
                     <p>+ CMND/HC: ${cts.soCMT}</p>
                     <p>+ Điện thoại: ${cts.soDienThoai}</p>
                 <h2>Quý khách hàng vui lòng truy cập đường link để xác nhận thông tin:</h2>
-                <a href="http://localhost:3000/digital-certificate/personal/get-otp/${token}">
-                http://localhost:3000/digital-certificate/personal/get-otp/${token}
+                <a href="${process.env.DOMAIN}digital-certificate/personal/get-otp/${token}">
+                ${process.env.DOMAIN}digital-certificate/personal/get-otp/${token}
                 </a>
                 `
             }

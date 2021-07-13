@@ -14,7 +14,9 @@ const UserSchema = new Schema({
   role: {type: Number, default:4},
   isActive: {type: Boolean, default:true},
   tenDaiLy: {type: String},
-  belongTo: {type: String}
+  belongTo: {type: String},
+  CMNDFront: {type: String},
+  CMNDAfter: {type: String},
  
 
 }, {timestamps: true});

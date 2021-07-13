@@ -9,13 +9,14 @@ const giaEl = document.querySelector('#gia')
 const servicesDNEl = document.querySelector('#servicesDN')
 const thoiHanDNEl = document.querySelector('#thoiHanDN')
 const giaDNEl = document.querySelector('#giaDN')
+const url = 'http://localhost:3000/'
 
 async function getTinhThanh(){
     try{
         if(!tinhThanhEl){
             return
         }
-        await fetch('http://localhost:3000/api/provinces')
+        await fetch(`${url}api/provinces`)
         .then(res=>res.json())
         .then(provinces=>{
             let provinceHtml = ''
@@ -37,7 +38,7 @@ async function getQuanHuyen(id){
         if(!quanHuyenEl){
             return
         }
-        const res = await fetch('http://localhost:3000/api/districts')
+        const res = await fetch(`${url}api/districts`)
         const data = await res.json()
         let quanHuyenHtml = ''
         data.forEach(district => { if(district.tinhThanhID == id){
@@ -60,7 +61,7 @@ async function getServices(){
         if(!servicesEl){
             return
         }
-        const services = await fetch('http://localhost:3000/api/services')
+        const services = await fetch(`${url}api/services`)
         .then(res=>res.json())
         .then(services=>services)
         let serviceHtml = ''
@@ -84,7 +85,7 @@ async function getServicesfind(){
         if(!servicesFindEl){
             return
         }
-        await fetch('http://localhost:3000/api/services')
+        await fetch(`${url}api/services`)
         .then(res=>res.json())
         .then(services=>{
             let serviceHtml = ''
@@ -103,7 +104,7 @@ async function getServicesfind(){
 getServicesfind()
 async function chooseService(id){
     try{
-        const res = await fetch('http://localhost:3000/api/services/'+ id)
+        const res = await fetch(`${url}api/services/`+ id)
         const service = await res.json()
         thoiHanEl.value = service.thoiHan
         giaEl.value = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(service.gia)
