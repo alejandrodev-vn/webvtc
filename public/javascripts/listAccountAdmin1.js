@@ -35,6 +35,7 @@ async function getListAccountAgency(){
             method: 'GET'
         }
         const users = await fetchAPI(urlList, options)
+        console.log(users)
         if(users && users.length!=0){
             $('#paginAgency').pagination({
                 dataSource: users,
