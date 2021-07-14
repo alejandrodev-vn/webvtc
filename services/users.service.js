@@ -136,9 +136,40 @@ exports.update = async (id, inputValues) => {
     return await usersModel.findByIdAndUpdate({_id:id},values, function(err){
         if(err){
             console.log('Update failed!')
-        }else console.log('Update success!')
+            return false
+        }else {
+            console.log('Update success!')
+            return true
+        }
     })
 }
+
+exports.updateCMNDFront = async (id, img) => {
+    return await usersModel.findByIdAndUpdate({_id:id}, {CMNDFront: img}, function(err){
+        if(err){
+            console.log('Update failed!')
+            return {success: false}
+        }else {
+            console.log('Update success!')
+            return {success: true, img: img}
+        }
+    })
+}
+exports.getCMND = async (id) => {
+    return await usersModel.findByIdAndUpdate({_id:id})
+}
+exports.updateCMNDBack = async (id, img) => {
+    return await usersModel.findByIdAndUpdate({_id:id}, {CMNDAfter: img}, function(err){
+        if(err){
+            console.log('Update failed!')
+            return {success: false}
+        }else {
+            console.log('Update success!')
+            return {success: true, img: img}
+        }
+    })
+}
+
 exports.changeStatus = async (id, inputValues) => {
 
     return await usersModel.findByIdAndUpdate({_id:id},inputValues, function(err){
@@ -159,7 +190,11 @@ module.exports.changePassword = async (id, inputValues) =>{
     return await usersModel.findByIdAndUpdate({_id:id}, {password: newPassword}, function(err){
         if(err){
             console.log('Update failed!')
-        }else console.log('Update success!')
+            return false
+        }else {
+            console.log('Update success!')
+            return true
+        }
     })
 }
 module.exports.login = async (values) =>{

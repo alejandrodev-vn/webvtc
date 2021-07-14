@@ -100,6 +100,7 @@ module.exports.changePassword = async (req, res, next) => {
     try{
         const id = req.params.id;
         let values = req.body;
+        console.log(values);
         await usersService.changePassword(id, values);
         req.session.destroy();
         return res.redirect('/users')

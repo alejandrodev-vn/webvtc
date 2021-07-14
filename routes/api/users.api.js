@@ -91,29 +91,20 @@ router.get('/users/for-admin-2', async (req, res, next)=> {
         console.log(err)
     }
 });
-router.post('/users/cmnd/:id', async (req, res, next) => {
-    try{
-        const { id } = req.params
-        if(req.file){
-            const fs = require('fs')
-            const data = await usersService.getById(idEdit)
-            if(data.fileHoSo.length!=0){
-                const path = `public/uploads/cmnd/${data.fileHoSo}`
-                if(fs.existsSync(path)){
-                    fs.unlinkSync(path)
-                }
-            }
-            values.CMNDFront = req.file[0].originalname
-            values.CMNDAfter = req.file[1].originalname
-            
-        }
-        await usersService.update(id, values);
-        return res.redirect('/')
-
-    }catch(err){
-        console.log(err)
-    }
+router.post('/users/cmnd-front/:id', async (req, res, next) => {
+    const { id } = req.params
+    const {image} = req.body;
+    let r = await usersService.updateCMNDFront(id, image)
+    res.json(r)
 })
+
+router.post('/users/cmnd-back/:id', async (req, res, next) => {
+    const { id } = req.params
+    const {image} = req.body;
+    let r = await usersService.updateCMNDBack(id, image)
+    res.json(r)
+})
+
 router.get('/users/:id', async (req, res, next)=> {
     try{
         const id = req.params.id
@@ -132,16 +123,50 @@ router.post('/users/login', async (req, res, next) => {
         const user = await usersService.login(values);
         if(user.error === 'User not found'){
             return res.status(404).json({success: false, msg: user.error})
-        }else if(user.error === 'Password error !!!'){
+        }else if(user.error === 'Password error'){
             return res.status(401).json({success: false, msg: user.error})
         }else{
             const jwt = require('jsonwebtoken')
-            let token = jwt.sign({ user }, process.env.KEY)
+            let token = jwt.sign({_id: user._id, username: user.username, hoTen: user.hoTen, gender: user.gender, soDienThoai: user.soDienThoai, diaChi: user.diaChi }, process.env.KEY)
             return res.json({success: true, token: token})
         }
     }catch(err){
         console.log(err)
     }
+})
+
+var auth = require('./authMobile.api');
+
+router.post('/users/info', auth.checkAuthencation, async (req, res, next) => {
+    
+})
+
+router.post('/users/change-password/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let values = req.body;
+    let r = usersService.changePassword(id, values);
+    if(r){
+        res.json({success: true, msg: "change password done!"})
+    }else{
+        res.json({success: false, msg: "change password fail!"})
+    }
+})
+
+router.post('/users/update-info/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let values = req.body;
+    let r = usersService.update(id, values);
+    if(r){
+        res.json({success: true, msg: "change info done!"})
+    }else{
+        res.json({success: false, msg: "change info fail!"})
+    }
+})
+
+router.get('/users/cmnd-info/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let u = await usersService.getCMND(id);
+    res.json({CMNDFront: u.CMNDFront, CMNDAfter: u.CMNDAfter})
 })
 
 module.exports = router;
