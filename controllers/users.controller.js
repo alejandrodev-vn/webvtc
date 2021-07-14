@@ -114,7 +114,7 @@ module.exports.postForgotPassword = async (req, res, next) => {
     const { username } = req.body 
     const user = await usersService.getByUsername(username)
     if(user.length==0) return res.render('forgot-password',{ title:"Quên mật khẩu", message:"Tài khoản không tồn tại"})
-    if(user[0].email.length==0) return res.render('reset-password',{ title:"Quên mật khẩu" })
+    if(!user[0].email) return res.render('reset-password',{ title:"Quên mật khẩu", message:"Tài không tồn tại email! Vui lòng liên hệ nhà cung cấp"})
     const nodemailer = require('nodemailer')
     const jwt = require('jsonwebtoken')
     let token = jwt.sign({ username: user[0].username, userId: user[0]._id }, process.env.KEY,{
