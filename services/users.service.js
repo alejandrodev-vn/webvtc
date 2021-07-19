@@ -169,7 +169,17 @@ exports.updateCMNDBack = async (id, img) => {
         }
     })
 }
-
+exports.updateCMNDInfo = async (id, values) => {
+    return await usersModel.findByIdAndUpdate({_id:id}, values, function(err){
+        if(err){
+            console.log('Update failed!')
+            return {success: false}
+        }else {
+            console.log('Update success!')
+            return {success: true}
+        }
+    })
+}
 exports.changeStatus = async (id, inputValues) => {
 
     return await usersModel.findByIdAndUpdate({_id:id},inputValues, function(err){
