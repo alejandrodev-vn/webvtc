@@ -17,7 +17,10 @@ const UserSchema = new Schema({
   belongTo: {type: String},
   CMNDFront: {type: String},
   CMNDAfter: {type: String},
- 
+  soCMT: {type: String},
+  ngayCapCMT: {type: Date}, 
+  noiCapCMT: {type: String}, 
+  hoTenCMT: {type: String},
 
 }, {timestamps: true});
 // a setter

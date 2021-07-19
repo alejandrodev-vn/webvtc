@@ -140,7 +140,6 @@ var auth = require('./authMobile.api');
 router.post('/users/info', auth.checkAuthencation, async (req, res, next) => {
     
 })
-
 router.post('/users/change-password/:id', async (req, res, next) => {
     let id = req.params.id;
     let values = req.body;
@@ -162,7 +161,16 @@ router.post('/users/update-info/:id', async (req, res, next) => {
         res.json({success: false, msg: "change info fail!"})
     }
 })
-
+router.post('/users/cmnd/:id', async (req, res, next) => {
+    let id = req.params.id;
+    let values = req.body
+    let r = usersService.changePassword(id, values);
+    if(r){
+        res.json({success: true, msg: "update done!"})
+    }else{
+        res.json({success: false, msg: "update fail!"})
+    }
+})
 router.get('/users/cmnd-info/:id', async (req, res, next) => {
     let id = req.params.id;
     let u = await usersService.getCMND(id);
