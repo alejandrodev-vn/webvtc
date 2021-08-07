@@ -9,7 +9,7 @@ const giaEl = document.querySelector('#gia')
 const servicesDNEl = document.querySelector('#servicesDN')
 const thoiHanDNEl = document.querySelector('#thoiHanDN')
 const giaDNEl = document.querySelector('#giaDN')
-const url = 'http://localhost:3000/'
+import { url } from './constants'
 
 async function getTinhThanh(){
     try{
