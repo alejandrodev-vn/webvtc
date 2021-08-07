@@ -662,7 +662,7 @@ async function getQuanHuyen(id) {
         if (!quanHuyenEl) {
             return
         }
-        const res = await fetch('http://localhost:3000/api/districts')
+        const res = await fetch(`${url}api/districts`)
         const data = await res.json()
         let quanHuyenHtml = ''
         data.forEach(district => { if(district.tinhThanhID == id){
