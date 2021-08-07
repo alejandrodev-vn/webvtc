@@ -10,7 +10,7 @@ const approvedStatusDN = document.querySelector('#approvedStatusDN')
 const pendingFindStatus = document.querySelector('#pendingFindStatus')
 const pendingFindStatusDN = document.querySelector('#pendingFindStatusDN')
 
-import { url } from './constants'
+import { url } from './constants.js'
 
 
 async function getFind() {
