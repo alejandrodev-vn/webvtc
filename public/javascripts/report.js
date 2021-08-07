@@ -7,7 +7,7 @@ const resultOrganization = document.querySelector('#resultOrganization')
 const resultHistory = document.querySelector('#history')
 const ctsEl = document.querySelector('#CTSWrapper')
 const historyEl = document.querySelector('#historyWrapper')
-import { url } from './constants'
+import { url } from './constants.js'
 async function processServices(){
     const servicesEl = document.querySelector('#goiCTSId')
     if(!servicesEl){
