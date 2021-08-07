@@ -441,7 +441,7 @@ async function showApprovedOrg(data){
 }
 async function getServices(){
     try{
-        const res = await fetch('http://localhost:3000/api/services')
+        const res = await fetch(`${url}api/services`)
         const services = await res.json()
         return services
     }catch(err){
