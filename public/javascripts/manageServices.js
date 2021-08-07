@@ -1,5 +1,5 @@
 import { fetchAPI } from './fetch.js'
-import { url } from './constants'
+import { url } from './constants.js'
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'VND',
