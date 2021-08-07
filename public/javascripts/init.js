@@ -9,8 +9,7 @@ const giaEl = document.querySelector('#gia')
 const servicesDNEl = document.querySelector('#servicesDN')
 const thoiHanDNEl = document.querySelector('#thoiHanDN')
 const giaDNEl = document.querySelector('#giaDN')
-import { url } from './constants'
-
+const url = 'http://113.161.84.91:8081/'
 async function getTinhThanh(){
     try{
         if(!tinhThanhEl){
