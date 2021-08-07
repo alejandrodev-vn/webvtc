@@ -13,7 +13,7 @@ const approvedStatusDN = document.querySelector('#approvedStatusDN')
 const pendingFindStatus = document.querySelector('#pendingFindStatus')
 const pendingFindStatusDN = document.querySelector('#pendingFindStatusDN')
 
-const url = 'http://localhost:3000/'
+import { url } from './constants'
 
 
 async function getFind() {
