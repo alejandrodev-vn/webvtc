@@ -9,7 +9,7 @@ const formDestroyPersonal = document.querySelector('#formDestroyPersonal')
 const formRestoreOrganization = document.querySelector('#formRestoreOrganization')
 const formDestroyOrganization = document.querySelector('#formDestroyOrganization')
 
-const url = 'http://localhost:3000/'
+import { url } from './constants'
 
 async function getTrashCTSCaNhan(){
     try{
