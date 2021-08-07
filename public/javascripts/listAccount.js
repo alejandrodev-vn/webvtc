@@ -2,7 +2,7 @@ import { fetchAPI,
     fetchAndShowData 
 } from './fetch.js'
 import { validateNewAccount } from './validate.js'
-import { url } from './constants'
+import { url } from './constants.js'
 
 const getListAccount = async () => {
     try{
